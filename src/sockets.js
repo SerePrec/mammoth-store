@@ -43,7 +43,7 @@ export default io => {
 
     socket.on("newMessage", async message => {
       try {
-        const fyh = new Date().toLocaleString();
+        const fyh = Date.now();
         const newMessage = { ...message, fyh };
         await messagesModel.save(newMessage);
         const messages = await messagesModel.getAll();
