@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>Carga de productos</title>
+</head>
+
+<body>
+  <main class="cargar">
+    <div class="form-wrapper">
+      <h2>CARGAR PRODUCTO</h2>
+      <form id="productForm">
+        <div class="mb-3">
+          <label for="inputTitle" class="form-label">Título</label>
+          <input type="text" class="form-control" id="inputTitle" name="title">
+        </div>
+        <div class="mb-3">
+          <label for="inputPrice" class="form-label">Precio</label>
+          <input type="text" class="form-control" id="inputPrice" name="price">
+        </div>
+        <div class="mb-3">
+          <label for="inputThumbnail" class="form-label">URL de la imágen</label>
+          <input type="text" class="form-control" id="inputThumbnail" name="thumbnail">
+        </div>
+        <button type="submit" class="btn btn-danger">CARGAR</button>
+      </form>
+    </div>
+    <div id="tableErrors"></div>
+    <div id="productsTable"></div>
+
+  </main>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/index.js"></script>
+</body>
+
+</html>
