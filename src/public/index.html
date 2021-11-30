@@ -33,7 +33,23 @@
     </div>
     <div id="tableErrors"></div>
     <div id="productsTable"></div>
-
+    <div class="chatZone">
+      <h2>CENTRO DE MENSAJES</h2>
+      <div id="usersQty"></div>
+      <form id="userForm" class="input-group my-3">
+        <span class="input-group-text">@</span>
+        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Ingrese su e-mail"
+          required />
+        <button id="btn-log" type="submit" class="btn btn-danger">Login</button>
+      </form>
+      <div id="messages-wrapper"></div>
+      <form id="messageForm" class="input-group my-3">
+        <input type="text" class="form-control" id="inputMessage" name="message" placeholder="Escriba un mensaje..."
+          required disabled />
+        <button id="btn-send" type="submit" class="btn btn-danger" disabled>Enviar</button>
+      </form>
+      <div id="messageErrors"></div>
+    </div>
   </main>
 
   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

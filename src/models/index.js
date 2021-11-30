@@ -1,4 +1,4 @@
 import ContenedorFS from "./ContenedorFS.js";
 const productosModel = new ContenedorFS("productos.json");
-
-export { productosModel };
+const messagesModel = new ContenedorFS("mensajes.json");
+export { productosModel, messagesModel };

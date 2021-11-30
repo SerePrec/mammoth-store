@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { productosModel } from "../models/productos.js";
+import { productosModel } from "../models/index.js";
 import { validatePostBody } from "../middelwares/validateData.js";
 
 const router = Router();

@@ -22,11 +22,17 @@ class ContenedorFS {
           0
         );
         this.nextId = lastId + 1;
-        console.log("Contenedor inicializado con archivo preexistente");
+        console.log(
+          `Contenedor inicializado con archivo preexistente '${path.basename(
+            this.path
+          )}'`
+        );
       } catch (error) {
         await fs.writeFile(this.path, JSON.stringify([]));
         this.nextId = 1;
-        console.log("Contenedor inicializado vacío");
+        console.log(
+          `Contenedor inicializado vacío '${path.basename(this.path)}'`
+        );
       }
     } catch (error) {
       throw new Error(`Error al inicializar: ${error}`);

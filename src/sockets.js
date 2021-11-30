@@ -1,4 +1,4 @@
-import { productosModel } from "./models/productos.js";
+import { productosModel, messagesModel } from "./models/index.js";
 
 //Configuración de sockets
 export default io => {
@@ -7,13 +7,24 @@ export default io => {
       `Cliente socket conectado con el id: ${socket.id}\n** Conexiones websocket activas: ${io.engine.clientsCount} **`
     );
 
-    //Obtiene listado con cada conexión entrante y lo envía al socket
+    //Obtiene listado de productos con cada conexión entrante y lo envía al socket
     try {
       const list = await productosModel.getAll();
       socket.emit("allProducts", list);
     } catch (error) {
       console.log(error);
-      socket.emit("tableErrors", "No se pudo recuperar archivo de datos");
+      socket.emit("tableErrors", "No se pudo recuperar archivo de productos");
+    }
+
+    io.sockets.emit("usersCount", io.engine.clientsCount);
+
+    //Obtiene listado de mensajes con cada conexión entrante y lo envía al socket
+    try {
+      const messages = await messagesModel.getAll();
+      socket.emit("allMessages", messages);
+    } catch (error) {
+      console.log(error);
+      socket.emit("messageErrors", "No se pudo recuperar archivo de mensajes");
     }
 
     socket.on("loadProduct", async product => {
@@ -30,11 +41,25 @@ export default io => {
       }
     });
 
-    socket.on("disconnect", () =>
+    socket.on("newMessage", async message => {
+      try {
+        const fyh = new Date().toLocaleString();
+        const newMessage = { ...message, fyh };
+        await messagesModel.save(newMessage);
+        const messages = await messagesModel.getAll();
+        io.sockets.emit("allMessages", messages);
+      } catch (error) {
+        console.log(error);
+        socket.emit("messageErrors", "Error al procesar el mensaje enviado");
+      }
+    });
+
+    socket.on("disconnect", () => {
       console.log(
         `** Conexiones websocket activas: ${io.engine.clientsCount} **`
-      )
-    );
+      );
+      io.sockets.emit("usersCount", io.engine.clientsCount);
+    });
 
     //Valida los datos del producto que se va a cargar
     function validateLoadData(data) {
