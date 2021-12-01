@@ -76,10 +76,10 @@ socket.on("usersCount", async usersQty => {
 });
 
 socket.on("allMessages", async messages => {
-  console.log(messages);
   $messagesWrapper.innerHTML = renderMessages({
     messages
   });
+  $messagesWrapper.scrollTo(0, $messagesWrapper.scrollHeight);
 });
 
 socket.on("messageErrors", error => {

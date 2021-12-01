@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "user": "prellezose@gmail.com",
+    "text": "Hola!",
+    "fyh": 1638381024755
+  },
+  {
+    "id": 2,
+    "user": "pepo@gmail.com",
+    "text": "Hola, que bueno este chat!",
+    "fyh": 1638381065335
+  },
+  {
+    "id": 3,
+    "user": "andrespipo@gmail.com",
+    "text": "Vamos a probar una frase maś larga para ver como se acomoda a la vista de los mensajes. Que bueno que está esto de los web sockets!!!  🤓🤓🤓",
+    "fyh": 1638381217278
+  },
+  {
+    "id": 4,
+    "user": "prellezose@gmail.com",
+    "text": "Ajusté el formato de la hora para que se guarde como time stamp",
+    "fyh": 1638381262867
+  },
+  {
+    "id": 5,
+    "user": "prellezose@gmail.com",
+    "text": "Así al recuperarla cada usuario lo ajusta a su hora local!",
+    "fyh": 1638381286195
+  },
+  {
+    "id": 6,
+    "user": "pepo@gmail.com",
+    "text": "ahhhh esta bueno eso!",
+    "fyh": 1638381295163
+  },
+  {
+    "id": 7,
+    "user": "andrespipo@gmail.com",
+    "text": "claro.....",
+    "fyh": 1638381312443
+  },
+  {
+    "id": 8,
+    "user": "pepo@gmail.com",
+    "text": "Me gusta el tema dark de la página,jajaj",
+    "fyh": 1638381345930
+  },
+  {
+    "id": 9,
+    "user": "prellezose@gmail.com",
+    "text": "Sí, a mí también",
+    "fyh": 1638381366170
+  }
+]

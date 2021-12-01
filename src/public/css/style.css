@@ -104,7 +104,15 @@ div.bg-yellow {
   max-width: 28rem;
   margin: auto;
 }
-
+#messages-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  background-color: #343c42;
+  border-radius: 0.5rem;
+}
 #messages-wrapper .message {
   text-align: left;
   background-color: #212529c0;
