@@ -99,6 +99,7 @@ $productForm.addEventListener("submit", e => {
     thumbnail: data.get("thumbnail")
   };
   socket.emit("loadProduct", product);
+  $productForm.reset();
 });
 
 $userForm.addEventListener("submit", e => {
@@ -106,7 +107,9 @@ $userForm.addEventListener("submit", e => {
   if (user) {
     user = null;
     $inputEmail.disabled = false;
+    $inputEmail.classList.remove("logged");
     $btnLog.innerText = "Login";
+    $btnLog.classList.remove("logged");
     $userForm.reset();
     $inputMessage.disabled = true;
     $btnSend.disabled = true;
@@ -116,7 +119,9 @@ $userForm.addEventListener("submit", e => {
   if (/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/.test(inputValue)) {
     user = inputValue;
     $inputEmail.disabled = true;
+    $inputEmail.classList.add("logged");
     $btnLog.innerText = "Logout";
+    $btnLog.classList.add("logged");
     $inputMessage.disabled = false;
     $btnSend.disabled = !$inputMessage.value.trim();
   }
@@ -133,6 +138,7 @@ $messageForm.addEventListener("submit", e => {
     const text = inputValue;
     socket.emit("newMessage", { user, text });
     $messageForm.reset();
+    $inputMessage.focus();
     $btnSend.disabled = !$inputMessage.value.trim();
   }
 });

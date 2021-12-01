@@ -93,8 +93,7 @@ div.bg-yellow {
   width: 95%;
   max-width: 60rem;
   margin: 3rem auto;
-  padding: 2rem;
-  padding-bottom: 0.25rem;
+  padding: 2rem 2rem 0.25rem 2rem;
   background-color: #2c3034;
   border-radius: 1rem;
 }
@@ -103,6 +102,27 @@ div.bg-yellow {
   width: 95%;
   max-width: 28rem;
   margin: auto;
+}
+#inputEmail.logged {
+  color: rgb(50, 50, 233);
+  background-color: #212529c0;
+  font-weight: bolder;
+}
+#btn-log,
+#btn-send {
+  transition: all 0.5s ease-in-out;
+}
+#btn-log.logged {
+  background-color: #dc354578;
+}
+#btn-send:disabled {
+  background-color: transparent;
+}
+#inputMessage {
+  transition: all 0.75s ease-in-out;
+}
+#inputMessage:disabled {
+  background-color: transparent;
 }
 #messages-wrapper {
   display: flex;
@@ -121,7 +141,7 @@ div.bg-yellow {
   border-radius: 0.5rem;
 }
 #messages-wrapper .message b {
-  color: blue;
+  color: rgb(50, 50, 233);
   display: block;
   text-align: left;
 }
@@ -130,4 +150,10 @@ div.bg-yellow {
 }
 #messages-wrapper .message i {
   color: green;
+}
+
+@media (max-width: 576px) {
+  .chatZone {
+    padding: 2rem 0.5rem 0.25rem 0.5rem;
+  }
 }
