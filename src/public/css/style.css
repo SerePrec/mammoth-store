@@ -70,7 +70,7 @@ main.listado h2 {
 div.bg-yellow {
   background-color: #ffc107d6;
 }
-#tableErrors,
+#productErrors,
 #messageErrors {
   display: flex;
   justify-content: center;
@@ -85,7 +85,7 @@ div.bg-yellow {
   opacity: 0;
   transition: 0.5s all ease-in-out;
 }
-#tableErrors.show,
+#productErrors.show,
 #messageErrors.show {
   opacity: 1;
 }

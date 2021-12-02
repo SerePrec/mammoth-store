@@ -1,28 +1,19 @@
 const $productForm = document.getElementById("productForm");
+const $productsTable = document.getElementById("productsTable");
+const $productErrors = document.getElementById("productErrors");
 const $userForm = document.getElementById("userForm");
 const $messageForm = document.getElementById("messageForm");
-const $productsTable = document.getElementById("productsTable");
 const $usersQty = document.getElementById("usersQty");
 const $inputEmail = document.getElementById("inputEmail");
 const $inputMessage = document.getElementById("inputMessage");
 const $btnLog = document.getElementById("btn-log");
 const $btnSend = document.getElementById("btn-send");
 const $messagesWrapper = document.getElementById("messages-wrapper");
-const $tableErrors = document.getElementById("tableErrors");
 const $messageErrors = document.getElementById("messageErrors");
 let user = null;
 const socket = io();
 
-// (async function generateTemplates() {
-//   let responseTable = fetch("/templates/table.hbs");
-//   let responseChat = fetch("/templates/chats.hbs");
-//   responseTable = await responseTable;
-//   const templateTable = await responseTable.text();
-//   responseChat = await responseChat;
-//   const templateChat = await responseChat.text();
-
-// })();
-
+// Renderiza la tabla de productos utilizando template de hbs
 async function renderTable(file, data) {
   let response = await fetch(file);
   const templateFile = await response.text();
@@ -31,6 +22,7 @@ async function renderTable(file, data) {
   return html;
 }
 
+// Renderiza vista de cantidad de usuarios
 function renderUsers(data) {
   const { usersQty } = data;
   return usersQty === 1
@@ -38,6 +30,7 @@ function renderUsers(data) {
     : `<b>${usersQty} Usuarios Conectados</b>`;
 }
 
+// renderiza vista de mensajes
 function renderMessages(data) {
   const { messages } = data;
   let html = "";
@@ -55,26 +48,30 @@ function renderMessages(data) {
   return html;
 }
 
+// Escucha evento del envío del listado de productos
 socket.on("allProducts", async products => {
   $productsTable.innerHTML = await renderTable("/templates/table.hbs", {
     list: products
   });
 });
 
-socket.on("tableErrors", error => {
-  $tableErrors.innerText = error;
-  $tableErrors.classList.add("show");
+// Escucha evento de errores personalizados asociados a productos
+socket.on("productErrors", error => {
+  $productErrors.innerText = error;
+  $productErrors.classList.add("show");
   setTimeout(() => {
-    $tableErrors.classList.remove("show");
+    $productErrors.classList.remove("show");
   }, 4000);
 });
 
+// Escucha evento de cantidad de usuarios conectados
 socket.on("usersCount", async usersQty => {
   $usersQty.innerHTML = renderUsers({
     usersQty
   });
 });
 
+// Escucha evento del envío de listado de mensajes
 socket.on("allMessages", async messages => {
   $messagesWrapper.innerHTML = renderMessages({
     messages
@@ -82,6 +79,7 @@ socket.on("allMessages", async messages => {
   $messagesWrapper.scrollTo(0, $messagesWrapper.scrollHeight);
 });
 
+// Escucha evento de errores personalizados asociados a mensajes
 socket.on("messageErrors", error => {
   $messageErrors.innerText = error;
   $messageErrors.classList.add("show");
@@ -90,6 +88,7 @@ socket.on("messageErrors", error => {
   }, 4000);
 });
 
+// Acciones al enviar el formulario de productos
 $productForm.addEventListener("submit", e => {
   e.preventDefault();
   const data = new FormData($productForm);
@@ -98,10 +97,11 @@ $productForm.addEventListener("submit", e => {
     price: data.get("price"),
     thumbnail: data.get("thumbnail")
   };
-  socket.emit("loadProduct", product);
+  socket.emit("saveProduct", product);
   $productForm.reset();
 });
 
+// Acciones al loguearse
 $userForm.addEventListener("submit", e => {
   e.preventDefault();
   if (user) {
@@ -123,14 +123,17 @@ $userForm.addEventListener("submit", e => {
     $btnLog.innerText = "Logout";
     $btnLog.classList.add("logged");
     $inputMessage.disabled = false;
+    $inputMessage.focus();
     $btnSend.disabled = !$inputMessage.value.trim();
   }
 });
 
+// Acciones al tipear mensaje
 $inputMessage.addEventListener("input", e => {
   $btnSend.disabled = !$inputMessage.value.trim();
 });
 
+// Acciones al enviar el mensaje
 $messageForm.addEventListener("submit", e => {
   e.preventDefault();
   const inputValue = $inputMessage.value;

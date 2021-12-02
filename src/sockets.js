@@ -13,9 +13,10 @@ export default io => {
       socket.emit("allProducts", list);
     } catch (error) {
       console.log(error);
-      socket.emit("tableErrors", "No se pudo recuperar archivo de productos");
+      socket.emit("productErrors", "No se pudo recuperar archivo de productos");
     }
 
+    // Envio a todos los sockets la cantidad de usuarios conectados con cada conexión
     io.sockets.emit("usersCount", io.engine.clientsCount);
 
     //Obtiene listado de mensajes con cada conexión entrante y lo envía al socket
@@ -27,9 +28,10 @@ export default io => {
       socket.emit("messageErrors", "No se pudo recuperar archivo de mensajes");
     }
 
-    socket.on("loadProduct", async product => {
+    //Escucha el evento de guardar un nuevo producto
+    socket.on("saveProduct", async product => {
       try {
-        const newProduct = validateLoadData(product);
+        const newProduct = validateProductData(product);
         if (newProduct) {
           await productosModel.save(newProduct);
           const list = await productosModel.getAll();
@@ -37,10 +39,11 @@ export default io => {
         }
       } catch (error) {
         console.log(error);
-        socket.emit("tableErrors", "No se pudo agregar el producto");
+        socket.emit("productErrors", "No se pudo agregar el producto");
       }
     });
 
+    //Escucha el evento de un nuevo mensaje enviado
     socket.on("newMessage", async message => {
       try {
         const fyh = Date.now();
@@ -54,6 +57,7 @@ export default io => {
       }
     });
 
+    // Actualizo la cantidad de usuarios conectados con cada desconexión y la envío a todos los sockets
     socket.on("disconnect", () => {
       console.log(
         `** Conexiones websocket activas: ${io.engine.clientsCount} **`
@@ -62,7 +66,7 @@ export default io => {
     });
 
     //Valida los datos del producto que se va a cargar
-    function validateLoadData(data) {
+    function validateProductData(data) {
       let { title, price, thumbnail } = data;
       if (
         !(typeof title == "string" && /\w+/.test(title)) ||
@@ -75,7 +79,7 @@ export default io => {
           /^(ftp|http|https):\/\/[^ "]+$/.test(thumbnail)
         )
       ) {
-        socket.emit("tableErrors", "Los valores enviados no son válidos");
+        socket.emit("productErrors", "Los valores enviados no son válidos");
         return false;
       } else {
         title = title.trim();
