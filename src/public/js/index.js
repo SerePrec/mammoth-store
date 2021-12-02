@@ -137,7 +137,7 @@ $inputMessage.addEventListener("input", e => {
 $messageForm.addEventListener("submit", e => {
   e.preventDefault();
   const inputValue = $inputMessage.value;
-  if (inputValue.trim()) {
+  if (user && inputValue.trim()) {
     const text = inputValue;
     socket.emit("newMessage", { user, text });
     $messageForm.reset();

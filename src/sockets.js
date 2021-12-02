@@ -46,6 +46,8 @@ export default io => {
     //Escucha el evento de un nuevo mensaje enviado
     socket.on("newMessage", async message => {
       try {
+        if (!message.user || !message.text.trim())
+          throw new Error("Mensaje inválido");
         const fyh = Date.now();
         const newMessage = { ...message, fyh };
         await messagesModel.save(newMessage);
