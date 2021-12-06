@@ -5,25 +5,54 @@ import {
   validatePostBody,
   validatePutBody
 } from "../middlewares/validateData.js";
+import { isAdmin } from "../middlewares/auth.js";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
-  try {
-    const lista = await productosModel.getAll();
-    res.json(lista);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      error: "No se pudo recuperar la infomación"
-    });
+router.get(
+  "/:id?",
+  async (req, res, next) => {
+    if (req.params.id !== undefined) return next();
+    try {
+      const lista = await productosModel.getAll();
+      res.json(lista);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "No se pudo recuperar la infomación"
+      });
+    }
+  },
+  validateId,
+  async (req, res) => {
+    try {
+      const producto = await productosModel.getById(req.params.id);
+      producto !== null
+        ? res.json(producto)
+        : res.json({ error: "Producto no encontrado" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "No se pudo recuperar la infomación"
+      });
+    }
   }
-});
+);
 
-router.post("/", validatePostBody, async (req, res) => {
+router.post("/", isAdmin, validatePostBody, async (req, res) => {
   try {
-    let { title, price, thumbnail } = req.body;
-    let newProduct = { title, price, thumbnail };
+    let { title, detail, code, brand, category, price, stock, thumbnail } =
+      req.body;
+    let newProduct = {
+      title,
+      detail,
+      code,
+      brand,
+      category,
+      price,
+      stock,
+      thumbnail
+    };
     newProduct = await productosModel.save(newProduct);
     res.json({ result: "ok", newProduct });
   } catch (error) {
@@ -34,25 +63,21 @@ router.post("/", validatePostBody, async (req, res) => {
   }
 });
 
-router.get("/:id", validateId, async (req, res) => {
+router.put("/:id", isAdmin, validateId, validatePutBody, async (req, res) => {
   try {
-    const producto = await productosModel.getById(req.params.id);
-    producto !== null
-      ? res.json(producto)
-      : res.json({ error: "Producto no encontrado" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      error: "No se pudo recuperar la infomación"
-    });
-  }
-});
-
-router.put("/:id", validateId, validatePutBody, async (req, res) => {
-  try {
-    const { title, price, thumbnail } = req.body;
+    const { title, detail, code, brand, category, price, stock, thumbnail } =
+      req.body;
     const { id } = req.params;
-    let updateProduct = { title, price, thumbnail };
+    let updateProduct = {
+      title,
+      detail,
+      code,
+      brand,
+      category,
+      price,
+      stock,
+      thumbnail
+    };
     updateProduct = await productosModel.updateById(id, updateProduct);
     updateProduct !== null
       ? res.json({ result: "ok", updateProduct })
@@ -65,7 +90,7 @@ router.put("/:id", validateId, validatePutBody, async (req, res) => {
   }
 });
 
-router.delete("/:id", validateId, async (req, res) => {
+router.delete("/:id", isAdmin, validateId, async (req, res) => {
   try {
     const deletedId = await productosModel.deleteById(req.params.id);
     deletedId !== null

@@ -39,7 +39,7 @@ function renderMessages(data) {
     <div class="message">
       <b>${message.user}</b>
       [ <span style="color:brown;">${new Date(
-        message.fyh
+        message.timestamp
       ).toLocaleString()}</span> ] :
       <i style="color:green;">${message.text}</i>
     </div>

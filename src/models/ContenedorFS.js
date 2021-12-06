@@ -43,7 +43,8 @@ class ContenedorFS {
   async save(data) {
     try {
       const id = this.nextId;
-      const elemento = { id, ...data };
+      const timestamp = Date.now();
+      const elemento = { id, timestamp, ...data };
       const content = await this.getAll();
       content.push(elemento);
       await fs.writeFile(this.path, JSON.stringify(content, null, 2));

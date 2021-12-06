@@ -1,3 +1,10 @@
+import {
+  isTextRequired,
+  isPrice,
+  isInteger,
+  isURL
+} from "../../utils/validations.js";
+
 // Valida que sea un id numérico
 const validateId = (req, res, next) => {
   const id = req.params.id;
@@ -10,52 +17,89 @@ const validateId = (req, res, next) => {
 
 //Valida que el formato de datos a guardar sea válido
 const validatePostBody = (req, res, next) => {
-  let { title, price, thumbnail } = req.body;
+  let { title, detail, code, brand, category, price, stock, thumbnail } =
+    req.body;
   if (
-    !(typeof title == "string" && /\w+/.test(title)) ||
-    !(
-      (typeof price == "string" || typeof price == "number") &&
-      /^\d+(\.\d+)?$/.test(price)
-    ) ||
-    !(
-      typeof thumbnail == "string" &&
-      /^(ftp|http|https):\/\/[^ "]+$/.test(thumbnail)
-    )
+    !isTextRequired(title) ||
+    !isTextRequired(detail) ||
+    !isTextRequired(code) ||
+    !isTextRequired(brand) ||
+    !isTextRequired(category) ||
+    !isPrice(price) ||
+    !isInteger(stock) ||
+    !isURL(thumbnail)
   )
     res.status(400).json({ error: "Los valores enviados no son válidos" });
   else {
     title = title.trim();
+    detail = detail.trim();
+    code = code.trim();
+    brand = brand.trim();
+    category = category.trim();
     price = Math.round(parseFloat(price) * 100) / 100;
+    stock = parseInt(price);
     thumbnail = thumbnail.trim();
-    req.body = { ...req.body, title, price, thumbnail };
+    req.body = {
+      ...req.body,
+      title,
+      detail,
+      code,
+      brand,
+      category,
+      price,
+      stock,
+      thumbnail
+    };
     next();
   }
 };
 
 //Valida que el formato de datos a actualizar sea válido
 const validatePutBody = (req, res, next) => {
-  let { title, price, thumbnail } = req.body;
+  let { title, detail, code, brand, category, price, stock, thumbnail } =
+    req.body;
   if (
-    (title !== undefined && !(typeof title == "string" && /\w+/.test(title))) ||
-    (price !== undefined &&
-      !(
-        (typeof price == "string" || typeof price == "number") &&
-        /^\d+(\.\d+)?$/.test(price)
-      )) ||
-    (thumbnail !== undefined &&
-      !(
-        typeof thumbnail == "string" &&
-        /^(ftp|http|https):\/\/[^ "]+$/.test(thumbnail)
-      ))
+    (title !== undefined && !isTextRequired(title)) ||
+    (detail !== undefined && !isTextRequired(detail)) ||
+    (code !== undefined && !isTextRequired(code)) ||
+    (brand !== undefined && !isTextRequired(brand)) ||
+    (category !== undefined && !isTextRequired(category)) ||
+    (price !== undefined && !isPrice(price)) ||
+    (stock !== undefined && !isInteger(stock)) ||
+    (thumbnail !== undefined && !isURL(thumbnail))
   )
     res.status(400).json({ error: "Los valores enviados no son válidos" });
-  else if (title === undefined && price === undefined && thumbnail == undefined)
+  else if (
+    title === undefined &&
+    detail === undefined &&
+    code === undefined &&
+    brand === undefined &&
+    category === undefined &&
+    price === undefined &&
+    stock === undefined &&
+    thumbnail == undefined
+  )
     res.status(400).json({ error: "No hay campos válidos para actualizar" });
   else {
     title = title?.trim();
+    detail = detail?.trim();
+    code = code?.trim();
+    brand = brand?.trim();
+    category = category?.trim();
     price = price && Math.round(parseFloat(price) * 100) / 100;
+    stock = stock && parseInt(stock);
     thumbnail = thumbnail?.trim();
-    req.body = { ...req.body, title, price, thumbnail };
+    req.body = {
+      ...req.body,
+      title,
+      detail,
+      code,
+      brand,
+      category,
+      price,
+      stock,
+      thumbnail
+    };
     next();
   }
 };

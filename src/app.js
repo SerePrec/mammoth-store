@@ -18,8 +18,12 @@ app.use("/api/productos", productosRouter);
 
 // error 404
 app.use((req, res, next) => {
-  res.status(404).send(`
-  <h2 style="color:red;text-align:center;width:100%;">⚠️ Error 404: no existe el recurso</h2>`);
+  res.status(404).json({
+    error: -2,
+    descripcion: `ruta '${req.baseUrl + req.path}' método '${
+      req.method
+    }' no implementada`
+  });
 });
 
 export default app;
