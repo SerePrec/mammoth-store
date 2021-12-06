@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { productosModel } from "../models/index.js";
+import { productosModel } from "../../models/index.js";
 import {
   validateId,
   validatePostBody,
   validatePutBody
-} from "../middelwares/validateData.js";
+} from "../middlewares/validateData.js";
 
 const router = Router();
 

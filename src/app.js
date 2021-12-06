@@ -1,8 +1,8 @@
 import express from "express";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import webServerRouter from "./routes/webServerRouter.js";
-import productosRouter from "./routes/productosRouter.js";
+import webServerRouter from "./api/routes/webServerRouter.js";
+import productosRouter from "./api/routes/productosRouter.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
