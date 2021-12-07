@@ -1,10 +1,13 @@
 import { productosModel, messagesModel } from "./models/index.js";
+import { escapeHtml } from "./utils/messageTools.js";
 
 //Configuración de sockets
 export default io => {
   io.on("connection", async socket => {
+    const socketId = socket.id;
+    let now = new Date().toLocaleTimeString();
     console.log(
-      `Cliente socket conectado con el id: ${socket.id}\n** Conexiones websocket activas: ${io.engine.clientsCount} **`
+      `[${now}] Cliente socket conectado con el id: ${socketId}\n** Conexiones websocket activas: ${io.engine.clientsCount} **`
     );
 
     //Obtiene listado de productos con cada conexión entrante y lo envía al socket
@@ -48,6 +51,7 @@ export default io => {
       try {
         if (!message.user || !message.text.trim())
           throw new Error("Mensaje inválido");
+        message.text = escapeHtml(message.text);
         const newMessage = { ...message };
         await messagesModel.save(newMessage);
         const messages = await messagesModel.getAll();
@@ -60,8 +64,9 @@ export default io => {
 
     // Actualizo la cantidad de usuarios conectados con cada desconexión y la envío a todos los sockets
     socket.on("disconnect", () => {
+      now = new Date().toLocaleTimeString();
       console.log(
-        `** Conexiones websocket activas: ${io.engine.clientsCount} **`
+        `[${now}] ** Conexiones websocket activas: ${io.engine.clientsCount} **`
       );
       io.sockets.emit("usersCount", io.engine.clientsCount);
     });

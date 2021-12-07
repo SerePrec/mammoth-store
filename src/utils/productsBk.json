@@ -1,7 +1,5 @@
 [
   {
-    "id": 1,
-    "timestamp": 1638898220899,
     "category": "accesorios",
     "code": "00001-B3",
     "brand": "PODIUM",
@@ -12,8 +10,6 @@
     "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto1.jpg?alt=media&token=9b4b16a4-e2ec-46bb-b705-2b4538b316d9"
   },
   {
-    "id": 2,
-    "timestamp": 1638898220899,
     "category": "componentes",
     "code": "M-MTB-0345",
     "brand": "MAXXIS",
@@ -24,8 +20,6 @@
     "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto2.jpg?alt=media&token=732eaa6f-68f6-40a1-a953-9729cb3689e1"
   },
   {
-    "id": 3,
-    "timestamp": 1638898220900,
     "category": "equipamiento",
     "code": "N-CA-CI-50",
     "brand": "NUTRISPORT",
@@ -36,8 +30,6 @@
     "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto3.jpg?alt=media&token=472f605e-b947-4066-922a-35dd1e20463f"
   },
   {
-    "id": 4,
-    "timestamp": 1638898220900,
     "category": "equipamiento",
     "code": "S-H-PREV.075-BC/RED/SM",
     "brand": "SPECIALIZED",
@@ -48,8 +40,6 @@
     "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto4.jpg?alt=media&token=c319469b-9ce8-40ad-b757-4366875c3d87"
   },
   {
-    "id": 5,
-    "timestamp": 1638898220901,
     "category": "accesorios",
     "code": "Velo.St.12",
     "brand": "CATEYE",
@@ -60,8 +50,6 @@
     "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto5.jpg?alt=media&token=ca98d5b5-eb8d-4135-83bd-8df816373772"
   },
   {
-    "id": 6,
-    "timestamp": 1638898220901,
     "category": "componentes",
     "code": "TUBOLITO.C.29/1.75-SP",
     "brand": "TUBOLITO",
@@ -72,8 +60,6 @@
     "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto6.jpg?alt=media&token=b7515ed0-9b64-4fb2-97d9-9c64e9f26db6"
   },
   {
-    "id": 7,
-    "timestamp": 1638898220901,
     "category": "indumentaria",
     "code": "S-S-SWOR.018-WT/42",
     "brand": "SPECIALIZED",
@@ -84,8 +70,6 @@
     "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto7.jpg?alt=media&token=ba7bc862-6955-41ed-93d0-35c710474aba"
   },
   {
-    "id": 8,
-    "timestamp": 1638898220902,
     "category": "bicicletas",
     "code": "CODIGO",
     "brand": "GIANT",
@@ -96,8 +80,6 @@
     "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto8.jpg?alt=media&token=292632d0-02a6-40d3-8c8d-67edfb578f3e"
   },
   {
-    "id": 9,
-    "timestamp": 1638898220902,
     "category": "bicicletas",
     "code": "CODIGO",
     "brand": "ORBEA",
@@ -108,8 +90,6 @@
     "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto9.jpg?alt=media&token=8d05581d-a5db-4c36-88ff-319d8124ee60"
   },
   {
-    "id": 10,
-    "timestamp": 1638898220903,
     "category": "bicicletas",
     "code": "CODIGO",
     "brand": "SPECIALIZED",

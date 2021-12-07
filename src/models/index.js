@@ -1,4 +1,17 @@
 import ContenedorFS from "./ContenedorFS.js";
-const productosModel = new ContenedorFS("productos.json");
-const messagesModel = new ContenedorFS("mensajes.json");
+
+class ProductosModelFS extends ContenedorFS {
+  constructor() {
+    super("productos.json");
+  }
+}
+const productosModel = new ProductosModelFS();
+
+class MessagesModelFS extends ContenedorFS {
+  constructor() {
+    super("mensajes.json");
+  }
+}
+const messagesModel = new MessagesModelFS();
+
 export { productosModel, messagesModel };
