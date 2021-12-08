@@ -1,22 +1,24 @@
 import {
   isTextRequired,
+  isNumericId,
   isPrice,
   isInteger,
+  isPositiveInteger,
   isURL
 } from "../../utils/validations.js";
 
 // Valida que sea un id numérico
-const validateId = (req, res, next) => {
-  const id = req.params.id;
-  if (isNaN(id)) res.status(400).json({ error: "El parámetro no es válido" });
+const validateNumericId = (req, res, next) => {
+  const { id } = req.params;
+  if (!isNumericId(id))
+    res.status(400).json({ error: "El parámetro no es válido" });
   else {
-    req.params.id = parseInt(id);
     next();
   }
 };
 
-//Valida que el formato de datos a guardar sea válido
-const validatePostBody = (req, res, next) => {
+//Valida que el formato de datos del producto a guardar sea válido
+const validateProductPostBody = (req, res, next) => {
   let { title, detail, code, brand, category, price, stock, thumbnail } =
     req.body;
   if (
@@ -31,31 +33,20 @@ const validatePostBody = (req, res, next) => {
   )
     res.status(400).json({ error: "Los valores enviados no son válidos" });
   else {
-    title = title.trim();
-    detail = detail.trim();
-    code = code.trim();
-    brand = brand.trim();
-    category = category.trim();
-    price = Math.round(parseFloat(price) * 100) / 100;
-    stock = parseInt(price);
-    thumbnail = thumbnail.trim();
-    req.body = {
-      ...req.body,
-      title,
-      detail,
-      code,
-      brand,
-      category,
-      price,
-      stock,
-      thumbnail
-    };
+    req.body.title = title.trim();
+    req.body.detail = detail.trim();
+    req.body.code = code.trim();
+    req.body.brand = brand.trim();
+    req.body.category = category.trim();
+    req.body.price = Math.round(parseFloat(price) * 100) / 100;
+    req.body.stock = parseInt(price);
+    req.body.thumbnail = thumbnail.trim();
     next();
   }
 };
 
-//Valida que el formato de datos a actualizar sea válido
-const validatePutBody = (req, res, next) => {
+//Valida que el formato de datos del producto a actualizar sea válido
+const validateProductPutBody = (req, res, next) => {
   let { title, detail, code, brand, category, price, stock, thumbnail } =
     req.body;
   if (
@@ -81,27 +72,32 @@ const validatePutBody = (req, res, next) => {
   )
     res.status(400).json({ error: "No hay campos válidos para actualizar" });
   else {
-    title = title?.trim();
-    detail = detail?.trim();
-    code = code?.trim();
-    brand = brand?.trim();
-    category = category?.trim();
-    price = price && Math.round(parseFloat(price) * 100) / 100;
-    stock = stock && parseInt(stock);
-    thumbnail = thumbnail?.trim();
-    req.body = {
-      ...req.body,
-      title,
-      detail,
-      code,
-      brand,
-      category,
-      price,
-      stock,
-      thumbnail
-    };
+    req.body.title = title?.trim();
+    req.body.detail = detail?.trim();
+    req.body.code = code?.trim();
+    req.body.brand = brand?.trim();
+    req.body.category = category?.trim();
+    req.body.price = price && Math.round(parseFloat(price) * 100) / 100;
+    req.body.stock = stock && parseInt(stock);
+    req.body.thumbnail = thumbnail?.trim();
     next();
   }
 };
 
-export { validateId, validatePostBody, validatePutBody };
+//Valida que el formato de datos del producto a incorporar o modificar al carrito sea válido
+const validateCartProductBody = (req, res, next) => {
+  let { id, quantity } = req.body;
+  if (!isNumericId(id) || !isPositiveInteger(quantity))
+    res.status(400).json({ error: "Los valores enviados no son válidos" });
+  else {
+    req.body.quantity = parseInt(quantity);
+    next();
+  }
+};
+
+export {
+  validateNumericId,
+  validateProductPostBody,
+  validateProductPutBody,
+  validateCartProductBody
+};

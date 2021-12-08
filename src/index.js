@@ -8,8 +8,11 @@ const PORT = process.env.PORT || 8080;
 async function startServer() {
   //Inicializo mi "storage"
   try {
-    const { productosModel, messagesModel } = await import("./models/index.js");
-    await productosModel.init();
+    const { productsModel, cartsModel, messagesModel } = await import(
+      "./models/index.js"
+    );
+    await productsModel.init();
+    await cartsModel.init();
     await messagesModel.init();
   } catch (error) {
     console.log(error);

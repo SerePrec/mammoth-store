@@ -69,6 +69,7 @@ class ContenedorFS {
   //Obtengo un elemento por su id
   async getById(id) {
     try {
+      id = parseInt(id);
       const content = await this.getAll();
       const match = content.find(elem => elem.id === id);
       return match ? match : null;
@@ -80,6 +81,7 @@ class ContenedorFS {
   //actualizo un elemento por su id
   async updateById(id, data) {
     try {
+      id = parseInt(id);
       const content = await this.getAll();
       const match = content.find(elem => elem.id === id);
       if (match) {
@@ -118,6 +120,7 @@ class ContenedorFS {
   //borro un elemento por su id
   async deleteById(id) {
     try {
+      id = parseInt(id);
       const content = await this.getAll();
       const match = content.find(elem => elem.id === id);
       if (match) {

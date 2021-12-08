@@ -1,11 +1,21 @@
 import ContenedorFS from "./ContenedorFS.js";
 
-class ProductosModelFS extends ContenedorFS {
+class ProductsModelFS extends ContenedorFS {
   constructor() {
     super("productos.json");
   }
 }
-const productosModel = new ProductosModelFS();
+const productsModel = new ProductsModelFS();
+
+class cartsModelFS extends ContenedorFS {
+  constructor() {
+    super("carritos.json");
+  }
+  async save(cart = { products: [] }) {
+    return super.save(cart);
+  }
+}
+const cartsModel = new cartsModelFS();
 
 class MessagesModelFS extends ContenedorFS {
   constructor() {
@@ -14,4 +24,4 @@ class MessagesModelFS extends ContenedorFS {
 }
 const messagesModel = new MessagesModelFS();
 
-export { productosModel, messagesModel };
+export { productsModel, cartsModel, messagesModel };

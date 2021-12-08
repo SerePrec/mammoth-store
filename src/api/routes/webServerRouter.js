@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { productosModel } from "../../models/index.js";
+import { productsModel } from "../../models/index.js";
 
 const router = Router();
 
 router.get("/productos", async (req, res) => {
   try {
-    const list = await productosModel.getAll();
+    const list = await productsModel.getAll();
     res.render("pages/listaProductos", { title: "Productos Cargados", list });
   } catch (error) {
     console.log(error);

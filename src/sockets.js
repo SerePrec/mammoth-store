@@ -1,4 +1,4 @@
-import { productosModel, messagesModel } from "./models/index.js";
+import { productsModel, messagesModel } from "./models/index.js";
 import { escapeHtml } from "./utils/messageTools.js";
 
 //Configuración de sockets
@@ -12,7 +12,7 @@ export default io => {
 
     //Obtiene listado de productos con cada conexión entrante y lo envía al socket
     try {
-      const list = await productosModel.getAll();
+      const list = await productsModel.getAll();
       socket.emit("allProducts", list);
     } catch (error) {
       console.log(error);
@@ -36,8 +36,8 @@ export default io => {
       try {
         const newProduct = validateProductData(product);
         if (newProduct) {
-          await productosModel.save(newProduct);
-          const list = await productosModel.getAll();
+          await productsModel.save(newProduct);
+          const list = await productsModel.getAll();
           io.sockets.emit("allProducts", list);
         }
       } catch (error) {

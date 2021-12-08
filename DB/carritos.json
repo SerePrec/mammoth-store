@@ -1,0 +1,99 @@
+[
+  {
+    "id": 1,
+    "timestamp": 1638917673022,
+    "products": [
+      {
+        "product": {
+          "id": 3,
+          "timestamp": 1638898220900,
+          "category": "equipamiento",
+          "code": "N-CA-CI-50",
+          "brand": "NUTRISPORT",
+          "title": "Gel Energizante Nutrisport Con Cafeína 50g. Express.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "price": 125,
+          "stock": 200,
+          "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto3.jpg?alt=media&token=472f605e-b947-4066-922a-35dd1e20463f"
+        },
+        "quantity": 5
+      },
+      {
+        "product": {
+          "id": 7,
+          "timestamp": 1638898220901,
+          "category": "indumentaria",
+          "code": "S-S-SWOR.018-WT/42",
+          "brand": "SPECIALIZED",
+          "title": "Zapatillas Specialized S-Works De Ruta. Blanco. Talle: 42.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "price": 14910,
+          "stock": 3,
+          "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto7.jpg?alt=media&token=ba7bc862-6955-41ed-93d0-35c710474aba"
+        },
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "timestamp": 1638917673765,
+    "products": [
+      {
+        "product": {
+          "id": 3,
+          "timestamp": 1638898220900,
+          "category": "equipamiento",
+          "code": "N-CA-CI-50",
+          "brand": "NUTRISPORT",
+          "title": "Gel Energizante Nutrisport Con Cafeína 50g. Express.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "price": 125,
+          "stock": 200,
+          "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto3.jpg?alt=media&token=472f605e-b947-4066-922a-35dd1e20463f"
+        },
+        "quantity": 9
+      },
+      {
+        "product": {
+          "id": 5,
+          "timestamp": 1638898220901,
+          "category": "accesorios",
+          "code": "Velo.St.12",
+          "brand": "CATEYE",
+          "title": "Velocimetro Cateye Inalámbrico ST-12.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "price": 3560,
+          "stock": 0,
+          "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto5.jpg?alt=media&token=ca98d5b5-eb8d-4135-83bd-8df816373772"
+        },
+        "quantity": 7
+      },
+      {
+        "product": {
+          "id": 7,
+          "timestamp": 1638898220901,
+          "category": "indumentaria",
+          "code": "S-S-SWOR.018-WT/42",
+          "brand": "SPECIALIZED",
+          "title": "Zapatillas Specialized S-Works De Ruta. Blanco. Talle: 42.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "price": 14910,
+          "stock": 3,
+          "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto7.jpg?alt=media&token=ba7bc862-6955-41ed-93d0-35c710474aba"
+        },
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "timestamp": 1638917674848,
+    "products": []
+  },
+  {
+    "id": 5,
+    "timestamp": 1638917675344,
+    "products": []
+  }
+]

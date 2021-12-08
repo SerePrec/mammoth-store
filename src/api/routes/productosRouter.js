@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { productosModel } from "../../models/index.js";
+import { productsModel } from "../../models/index.js";
 import {
-  validateId,
-  validatePostBody,
-  validatePutBody
+  validateNumericId,
+  validateProductPostBody,
+  validateProductPutBody
 } from "../middlewares/validateData.js";
 import { isAdmin } from "../middlewares/auth.js";
 
@@ -14,7 +14,7 @@ router.get(
   async (req, res, next) => {
     if (req.params.id !== undefined) return next();
     try {
-      const lista = await productosModel.getAll();
+      const lista = await productsModel.getAll();
       res.json(lista);
     } catch (error) {
       console.log(error);
@@ -23,10 +23,10 @@ router.get(
       });
     }
   },
-  validateId,
+  validateNumericId,
   async (req, res) => {
     try {
-      const producto = await productosModel.getById(req.params.id);
+      const producto = await productsModel.getById(req.params.id);
       producto !== null
         ? res.json(producto)
         : res.json({ error: "Producto no encontrado" });
@@ -39,7 +39,7 @@ router.get(
   }
 );
 
-router.post("/", isAdmin, validatePostBody, async (req, res) => {
+router.post("/", isAdmin, validateProductPostBody, async (req, res) => {
   try {
     let { title, detail, code, brand, category, price, stock, thumbnail } =
       req.body;
@@ -53,7 +53,7 @@ router.post("/", isAdmin, validatePostBody, async (req, res) => {
       stock,
       thumbnail
     };
-    newProduct = await productosModel.save(newProduct);
+    newProduct = await productsModel.save(newProduct);
     res.json({ result: "ok", newProduct });
   } catch (error) {
     console.log(error);
@@ -63,36 +63,42 @@ router.post("/", isAdmin, validatePostBody, async (req, res) => {
   }
 });
 
-router.put("/:id", isAdmin, validateId, validatePutBody, async (req, res) => {
-  try {
-    const { title, detail, code, brand, category, price, stock, thumbnail } =
-      req.body;
-    const { id } = req.params;
-    let updateProduct = {
-      title,
-      detail,
-      code,
-      brand,
-      category,
-      price,
-      stock,
-      thumbnail
-    };
-    updateProduct = await productosModel.updateById(id, updateProduct);
-    updateProduct !== null
-      ? res.json({ result: "ok", updateProduct })
-      : res.json({ error: "Producto no encontrado" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      error: "No se pudo actualizar el producto"
-    });
+router.put(
+  "/:id",
+  isAdmin,
+  validateNumericId,
+  validateProductPutBody,
+  async (req, res) => {
+    try {
+      const { title, detail, code, brand, category, price, stock, thumbnail } =
+        req.body;
+      const { id } = req.params;
+      let updateProduct = {
+        title,
+        detail,
+        code,
+        brand,
+        category,
+        price,
+        stock,
+        thumbnail
+      };
+      updateProduct = await productsModel.updateById(id, updateProduct);
+      updateProduct !== null
+        ? res.json({ result: "ok", updateProduct })
+        : res.json({ error: "Producto no encontrado" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "No se pudo actualizar el producto"
+      });
+    }
   }
-});
+);
 
-router.delete("/:id", isAdmin, validateId, async (req, res) => {
+router.delete("/:id", isAdmin, validateNumericId, async (req, res) => {
   try {
-    const deletedId = await productosModel.deleteById(req.params.id);
+    const deletedId = await productsModel.deleteById(req.params.id);
     deletedId !== null
       ? res.json({ result: "ok", deletedId })
       : res.json({ error: "Producto no encontrado" });
