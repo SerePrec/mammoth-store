@@ -7,10 +7,20 @@ import {
   isURL
 } from "../../utils/validations.js";
 
-// Valida que sea un id numérico
+// Valida que sea el id numérico
 const validateNumericId = (req, res, next) => {
   const { id } = req.params;
   if (!isNumericId(id))
+    res.status(400).json({ error: "El parámetro no es válido" });
+  else {
+    next();
+  }
+};
+
+// Valida que ambos ids sean numérico
+const validateNumericIdId_prod = (req, res, next) => {
+  const { id, id_prod } = req.params;
+  if (!isNumericId(id) || !isNumericId(id_prod))
     res.status(400).json({ error: "El parámetro no es válido" });
   else {
     next();
@@ -97,6 +107,7 @@ const validateCartProductBody = (req, res, next) => {
 
 export {
   validateNumericId,
+  validateNumericIdId_prod,
   validateProductPostBody,
   validateProductPutBody,
   validateCartProductBody

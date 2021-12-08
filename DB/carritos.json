@@ -16,7 +16,7 @@
           "stock": 200,
           "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto3.jpg?alt=media&token=472f605e-b947-4066-922a-35dd1e20463f"
         },
-        "quantity": 5
+        "quantity": 11
       },
       {
         "product": {
@@ -39,21 +39,6 @@
     "id": 2,
     "timestamp": 1638917673765,
     "products": [
-      {
-        "product": {
-          "id": 3,
-          "timestamp": 1638898220900,
-          "category": "equipamiento",
-          "code": "N-CA-CI-50",
-          "brand": "NUTRISPORT",
-          "title": "Gel Energizante Nutrisport Con Cafeína 50g. Express.",
-          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-          "price": 125,
-          "stock": 200,
-          "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto3.jpg?alt=media&token=472f605e-b947-4066-922a-35dd1e20463f"
-        },
-        "quantity": 9
-      },
       {
         "product": {
           "id": 5,
