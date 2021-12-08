@@ -1,6 +1,6 @@
 const $productForm = document.getElementById("productForm");
 const $productsTable = document.getElementById("productsTable");
-const $productErrors = document.getElementById("productErrors");
+const $productInfoMessages = document.getElementById("productInfoMessages");
 const $userForm = document.getElementById("userForm");
 const $messageForm = document.getElementById("messageForm");
 const $usersQty = document.getElementById("usersQty");
@@ -57,10 +57,10 @@ socket.on("allProducts", async products => {
 
 // Escucha evento de errores personalizados asociados a productos
 socket.on("productErrors", error => {
-  $productErrors.innerText = error;
-  $productErrors.classList.add("show");
+  $productInfoMessages.innerText = error;
+  $productInfoMessages.classList.add("show");
   setTimeout(() => {
-    $productErrors.classList.remove("show");
+    $productInfoMessages.classList.remove("show");
   }, 4000);
 });
 

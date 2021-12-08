@@ -38,6 +38,31 @@ p {
       margin: auto;
       padding: 0.5rem 2rem; }
 
+#productInfoMessages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 95%;
+  max-width: 30rem;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  opacity: 0;
+  transition: 0.5s all ease-in-out; }
+
+#productInfoMessages.show {
+  opacity: 1; }
+
+#productInfoMessages.warning {
+  background-color: #ff8a47; }
+
+#productInfoMessages.info {
+  background-color: #2f5777; }
+
+#productsTable {
+  text-align: center; }
+
 .table {
   width: 95%;
   max-width: 50rem;
@@ -66,20 +91,3 @@ p {
 
 div.bg-yellow {
   background-color: #ffc107d6; }
-
-#productErrors {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2rem;
-  width: 95%;
-  max-width: 30rem;
-  margin: 1rem auto;
-  background-color: #ff8a47;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  opacity: 0;
-  transition: 0.5s all ease-in-out; }
-
-#productErrors.show {
-  opacity: 1; }

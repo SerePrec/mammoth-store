@@ -15,7 +15,7 @@
   <main>
     <div class="form-wrapper">
       <h2>CARGAR PRODUCTO</h2>
-      <form id="productForm" action="/api/productos" method="post">
+      <form id="productForm">
         <div class="mb-3">
           <label for="inputTitle" class="form-label">Título</label>
           <input type="text" class="form-control" id="inputTitle" name="title" required>
@@ -53,13 +53,13 @@
           <input type="url" class="form-control" id="inputThumbnail" name="thumbnail">
         </div>
         <div class="mb-3">
-          <label for="inputFile" class="form-label">Subir imágen</label>
+          <label for="inputFile" class="form-label">Subir imagen</label>
           <input type="file" class="form-control" id="inputFile" name="imageFile">
         </div>
         <button type="submit" class="btn btn-danger">CARGAR</button>
       </form>
     </div>
-    <div id="productErrors"></div>
+    <div id="productInfoMessages"></div>
     <div id="productsTable"></div>
   </main>
 
