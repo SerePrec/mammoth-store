@@ -143,9 +143,7 @@ router.delete(
       const cart = await cartsModel.getById(id);
       if (cart === null) return res.json({ error: "Carrito no encontrado" });
       const { products } = cart;
-      let index = products.findIndex(
-        item => item.product.id === parseInt(id_prod)
-      );
+      let index = products.findIndex(item => item.product.id == id_prod);
       if (index === -1) {
         return res.json({ error: "Producto no encontrado" });
       } else {

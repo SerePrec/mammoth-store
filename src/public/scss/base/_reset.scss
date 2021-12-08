@@ -1,0 +1,25 @@
+/********************* Reseteo general CSS *********************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #212529;
+  color: white;
+}
+
+.max-w {
+  max-width: $max-width;
+  margin: auto;
+}
+
+// para pisar a Bootstrap
+p {
+  margin-bottom: 0;
+}
+.form-control:focus {
+  border-color: #b30404;
+  box-shadow: 0 0 0 0.2rem rgba(94, 24, 15, 0.452);
+}

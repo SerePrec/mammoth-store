@@ -1,4 +1,7 @@
 import { Router } from "express";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+import multer from "multer";
 import { productsModel } from "../../models/index.js";
 import {
   validateNumericId,
@@ -6,6 +9,19 @@ import {
   validateProductPutBody
 } from "../middlewares/validateData.js";
 import { isAdmin } from "../middlewares/auth.js";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const storage = multer.diskStorage({
+  destination: function (req, fulie, cb) {
+    cb(null, path.join(__dirname, "..", "..", "public", "img", "productos"));
+  },
+  filename: function (req, file, cb) {
+    const prefix = Date.now();
+    cb(null, prefix + "-" + file.originalname);
+  }
+});
+const upload = multer({ storage });
 
 const router = Router();
 
@@ -39,33 +55,40 @@ router.get(
   }
 );
 
-router.post("/", isAdmin, validateProductPostBody, async (req, res) => {
-  try {
-    let { title, detail, code, brand, category, price, stock, thumbnail } =
-      req.body;
-    let newProduct = {
-      title,
-      detail,
-      code,
-      brand,
-      category,
-      price,
-      stock,
-      thumbnail
-    };
-    newProduct = await productsModel.save(newProduct);
-    res.json({ result: "ok", newProduct });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      error: "No se pudo agregar el producto"
-    });
+router.post(
+  "/",
+  isAdmin,
+  upload.single("imageFile"),
+  validateProductPostBody,
+  async (req, res) => {
+    try {
+      let { title, detail, code, brand, category, price, stock, thumbnail } =
+        req.body;
+      let newProduct = {
+        title,
+        detail,
+        code,
+        brand,
+        category,
+        price,
+        stock,
+        thumbnail
+      };
+      newProduct = await productsModel.save(newProduct);
+      res.json({ result: "ok", newProduct });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "No se pudo agregar el producto"
+      });
+    }
   }
-});
+);
 
 router.put(
   "/:id",
   isAdmin,
+  upload.single("imageFile"),
   validateNumericId,
   validateProductPutBody,
   async (req, res) => {

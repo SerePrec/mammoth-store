@@ -20,4 +20,4 @@ export const isPositiveInteger = data =>
   parseInt(data) > 0;
 
 export const isURL = data =>
-  typeof data == "string" && /^(ftp|http|https):\/\/[^ "]+$/.test(data);
+  typeof data == "string" && /^((ftp|http|https):\/\/|\/)[^ "]+$/.test(data);

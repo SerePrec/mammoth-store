@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="37px" height="23px" viewBox="0 0 37 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_carrito</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Cabecera-Desktop-Copy" transform="translate(-1358.000000, -78.000000)" fill="#000000">
+            <g id="icon_carrito" transform="translate(1358.000000, 70.000000)">
+                <g id="icon_cart" transform="translate(0.000000, 8.000000)">
+                    <rect id="Rectangle-11" x="13" y="13" width="17" height="3"></rect>
+                    <rect id="Rectangle-11" x="0.700012207" y="0" width="6" height="3"></rect>
+                    <polyline id="Rectangle-11" points="14.3110255 12.8918955 6.71040324 -1.77635684e-15 4.35998535 1.32889742 11.9462219 14.1963925 12.9424406 15.8861419 13.0095675 16 13.6229245 15.6532155 15.3599854 14.6711026 14.3110255 12.8918955 6.02423096 0.17010498"></polyline>
+                    <polygon id="Rectangle-11" points="27.6499939 14.6304763 29.9993826 16 34.8046127 7.59669512 36.6499939 4.36952371 34.3006052 3 30.539595 9.5771908"></polygon>
+                    <path d="M17.5,23 C18.8807119,23 20,21.8807119 20,20.5 C20,19.1192881 18.8807119,18 17.5,18 C16.1192881,18 15,19.1192881 15,20.5 C15,21.8807119 16.1192881,23 17.5,23 Z" id="Oval"></path>
+                    <circle id="Oval" cx="26.5" cy="20.5" r="2.5"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

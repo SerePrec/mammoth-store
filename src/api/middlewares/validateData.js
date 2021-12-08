@@ -31,6 +31,8 @@ const validateNumericIdId_prod = (req, res, next) => {
 const validateProductPostBody = (req, res, next) => {
   let { title, detail, code, brand, category, price, stock, thumbnail } =
     req.body;
+  const filename = req.file?.filename;
+  thumbnail = filename ? `/img/productos/${filename}` : thumbnail;
   if (
     !isTextRequired(title) ||
     !isTextRequired(detail) ||
@@ -57,28 +59,31 @@ const validateProductPostBody = (req, res, next) => {
 
 //Valida que el formato de datos del producto a actualizar sea válido
 const validateProductPutBody = (req, res, next) => {
+  console.log(req.body);
   let { title, detail, code, brand, category, price, stock, thumbnail } =
     req.body;
+  const filename = req.file?.filename;
+  thumbnail = filename ? `/img/productos/${filename}` : thumbnail;
   if (
-    (title !== undefined && !isTextRequired(title)) ||
-    (detail !== undefined && !isTextRequired(detail)) ||
-    (code !== undefined && !isTextRequired(code)) ||
-    (brand !== undefined && !isTextRequired(brand)) ||
-    (category !== undefined && !isTextRequired(category)) ||
-    (price !== undefined && !isPrice(price)) ||
-    (stock !== undefined && !isInteger(stock)) ||
-    (thumbnail !== undefined && !isURL(thumbnail))
+    (title && !isTextRequired(title)) ||
+    (detail && !isTextRequired(detail)) ||
+    (code && !isTextRequired(code)) ||
+    (brand && !isTextRequired(brand)) ||
+    (category && !isTextRequired(category)) ||
+    (price && !isPrice(price)) ||
+    (stock && !isInteger(stock)) ||
+    (thumbnail && !isURL(thumbnail))
   )
     res.status(400).json({ error: "Los valores enviados no son válidos" });
   else if (
-    title === undefined &&
-    detail === undefined &&
-    code === undefined &&
-    brand === undefined &&
-    category === undefined &&
-    price === undefined &&
-    stock === undefined &&
-    thumbnail == undefined
+    !title &&
+    !detail &&
+    !code &&
+    !brand &&
+    !category &&
+    !price &&
+    !stock &&
+    !thumbnail
   )
     res.status(400).json({ error: "No hay campos válidos para actualizar" });
   else {
