@@ -1,4 +1,5 @@
 /********************* Reseteo general CSS *********************/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,700;0,800;1,500;1,700;1,800&family=Roboto+Condensed:wght@300;400;700&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -19,6 +20,24 @@ p {
   border-color: #b30404;
   box-shadow: 0 0 0 0.2rem rgba(94, 24, 15, 0.452); }
 
+html {
+  font-size: 16px; }
+  html h1,
+  html h2,
+  html h3,
+  html h4 {
+    font-family: "Montserrat", Helvetica, sans-serif; }
+  html p,
+  html nav,
+  html label {
+    font-family: "Roboto Condensed", Helvetica, sans-serif; }
+  @media (max-width: 1300px) {
+    html {
+      font-size: 14px; } }
+  @media (max-width: 575px) {
+    html {
+      font-size: 14px; } }
+
 .form-wrapper {
   width: 95%;
   max-width: 60rem;
@@ -33,6 +52,8 @@ p {
   .form-wrapper form {
     margin-top: 1rem;
     color: white; }
+    .form-wrapper form textarea {
+      resize: none; }
     .form-wrapper form button[type="submit"] {
       display: block;
       margin: auto;
@@ -91,3 +112,237 @@ p {
 
 div.bg-yellow {
   background-color: #ffc107d6; }
+
+.showRoom {
+  color: black; }
+  .showRoom #filtros {
+    position: relative;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem; }
+    .showRoom #filtros h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0;
+      height: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .showRoom #filtros h3 span {
+        padding-left: 1rem; }
+    .showRoom #filtros #cantProductosEncontrados {
+      margin-bottom: 0.5rem;
+      text-align: center;
+      font-weight: 300;
+      border: 1px solid #545454;
+      border-radius: 0.25rem;
+      background-color: #545454;
+      color: white; }
+    .showRoom #filtros h4 {
+      text-align: center;
+      font-size: 1.1rem; }
+    .showRoom #filtros .btn {
+      display: block;
+      width: 100%;
+      margin: auto; }
+      .showRoom #filtros .btn.ocultar {
+        display: none; }
+    .showRoom #filtros #verMarcas,
+    .showRoom #filtros #volverMarcas {
+      background-color: #b30404; }
+      .showRoom #filtros #verMarcas i,
+      .showRoom #filtros #volverMarcas i {
+        font-size: 1.15rem;
+        margin-left: 0.5rem;
+        vertical-align: text-bottom; }
+    .showRoom #filtros .row label {
+      font-weight: 500; }
+    .showRoom #filtros .row .form-check {
+      transition: all 0.4s; }
+      .showRoom #filtros .row .form-check label {
+        width: 100%;
+        padding-left: 0.25rem; }
+      .showRoom #filtros .row .form-check.seleccionado {
+        background-color: #b30404a3;
+        color: white;
+        border-radius: 0.25rem;
+        padding-left: 2rem; }
+      .showRoom #filtros .row .form-check:not(.seleccionado):not(:nth-of-type(7)):hover {
+        padding-left: 2rem;
+        color: #b30404; }
+    .showRoom #filtros .row .form-group {
+      text-align: center; }
+      .showRoom #filtros .row .form-group label {
+        margin-bottom: 0; }
+      .showRoom #filtros .row .form-group input[type="text"] {
+        height: 1.7rem;
+        max-width: 8rem;
+        margin: auto;
+        background-color: #545454;
+        color: white; }
+    .showRoom #filtros #marcas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 1rem 0.5rem;
+      background-color: #545454;
+      color: white;
+      font-size: 0.9rem;
+      height: 100%;
+      width: 100%;
+      border-radius: 0.25rem;
+      border: 3px solid #545454;
+      z-index: 1000;
+      display: none;
+      overflow-y: auto; }
+      .showRoom #filtros #marcas .form-check {
+        margin-bottom: 0.5rem; }
+        .showRoom #filtros #marcas .form-check label {
+          vertical-align: middle; }
+    @media (max-width: 575px) {
+      .showRoom #filtros h3 {
+        cursor: pointer; }
+      .showRoom #filtros #contenedorFiltros {
+        display: none; }
+        .showRoom #filtros #contenedorFiltros .form-check {
+          width: 70%;
+          margin: auto; }
+          .showRoom #filtros #contenedorFiltros .form-check label {
+            padding-left: 0.5rem; }
+        .showRoom #filtros #contenedorFiltros .btn {
+          width: 70%; }
+      .showRoom #filtros #marcas .form-check {
+        margin-bottom: 0.5rem; }
+        .showRoom #filtros #marcas .form-check label {
+          vertical-align: sub; } }
+  .showRoom .colProductos .buscarOrdenar {
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem; }
+    .showRoom .colProductos .buscarOrdenar .form-inline #inputBuscar {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0; }
+    .showRoom .colProductos .buscarOrdenar .form-inline #btnBuscar {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0; }
+      .showRoom .colProductos .buscarOrdenar .form-inline #btnBuscar img {
+        width: 1.1rem; }
+    .showRoom .colProductos .buscarOrdenar .form-inline #selectOrdenar {
+      width: 25%; }
+      @media (max-width: 767px) {
+        .showRoom .colProductos .buscarOrdenar .form-inline #selectOrdenar {
+          width: 35%; } }
+  .showRoom .colProductos #contenedorProductos {
+    max-height: 75vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #e9ecef;
+    margin: 1rem 0 1.5rem 0;
+    padding-top: 0.5rem;
+    border: 3px solid #e9ecef;
+    border-radius: 0.25rem;
+    min-height: 33rem; }
+    .showRoom .colProductos #contenedorProductos .loader {
+      height: 33rem;
+      background-image: url("../img/puff.svg");
+      background-size: 50%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #e9ecef;
+      border-radius: 0.25rem;
+      margin: 1.5rem 0;
+      padding: 2rem;
+      text-align: center;
+      margin: auto;
+      flex: 0 0 80%;
+      max-width: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      font-size: 2rem; }
+      .showRoom .colProductos #contenedorProductos .loader h3 {
+        width: 100%;
+        margin-bottom: 2rem; }
+      .showRoom .colProductos #contenedorProductos .loader p {
+        font-size: 1.25rem;
+        width: 100%;
+        margin-bottom: 0.5rem; }
+    .showRoom .colProductos #contenedorProductos .card .descuento {
+      position: absolute;
+      width: 3.5rem;
+      height: 3rem;
+      top: 0;
+      right: 0;
+      background-color: #b30404;
+      border-radius: 40% 0% 40% 0%;
+      color: white;
+      font-weight: 700;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    .showRoom .colProductos #contenedorProductos .card .card-img-top {
+      width: 70%;
+      margin: auto; }
+    .showRoom .colProductos #contenedorProductos .card .card-body p:nth-of-type(1) {
+      padding-bottom: 6.25rem; }
+    .showRoom .colProductos #contenedorProductos .card .card-body p:nth-of-type(2) {
+      position: absolute;
+      bottom: 5rem; }
+      .showRoom .colProductos #contenedorProductos .card .card-body p:nth-of-type(2) b {
+        font-size: 1.1rem;
+        color: #b30404; }
+      .showRoom .colProductos #contenedorProductos .card .card-body p:nth-of-type(2) del {
+        color: #545454;
+        margin-left: 0.1rem;
+        font-size: 0.95rem; }
+    .showRoom .colProductos #contenedorProductos .card .card-body p:nth-of-type(3) {
+      position: absolute;
+      width: 100%;
+      bottom: 3.5rem; }
+    .showRoom .colProductos #contenedorProductos .card .card-body > *:last-child {
+      position: absolute;
+      width: 100%;
+      bottom: 1.25rem; }
+    .showRoom .colProductos #contenedorProductos .card .btn {
+      font-weight: 500;
+      transition: all 0.3s; }
+      .showRoom .colProductos #contenedorProductos .card .btn:hover:not([disabled]) {
+        transform: scale(1.04, 1.04); }
+      .showRoom .colProductos #contenedorProductos .card .btn[disabled] {
+        width: 88%;
+        left: 6%;
+        right: 6%;
+        background-color: #545454;
+        border-color: #545454; }
+    .showRoom .colProductos #contenedorProductos .card .inputCantidad {
+      width: 40%;
+      max-width: 4.5rem; }
+    .showRoom .colProductos #contenedorProductos .errorResultadoBuscar {
+      background-color: #e9ecef;
+      border-radius: 0.25rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      margin: auto;
+      flex: 0 0 80%;
+      max-width: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: center; }
+      .showRoom .colProductos #contenedorProductos .errorResultadoBuscar i {
+        color: red;
+        display: block;
+        margin-bottom: 1rem; }
+      .showRoom .colProductos #contenedorProductos .errorResultadoBuscar i,
+      .showRoom .colProductos #contenedorProductos .errorResultadoBuscar h3,
+      .showRoom .colProductos #contenedorProductos .errorResultadoBuscar p {
+        width: 100%; }
+  @media (max-width: 575px) {
+    .showRoom .colProductos {
+      padding-left: 0;
+      padding-right: 0; }
+      .showRoom .colProductos #contenedorProductos {
+        margin-left: 1rem;
+        margin-right: 1rem; } }

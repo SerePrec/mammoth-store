@@ -5,14 +5,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font Awesome -->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Mi CSS -->
   <link rel="stylesheet" href="./css/styles.css">
   <title>Carga de productos</title>
 </head>
 
 <body>
-  <main>
+  <main class="productos">
     <div class="form-wrapper">
       <h2>CARGAR PRODUCTO</h2>
       <form id="productForm">
@@ -22,7 +27,7 @@
         </div>
         <div class="mb-3">
           <label for="inputDetail" class="form-label">Detalle</label>
-          <input type="text" class="form-control" id="inputDetail" name="detail" required>
+          <textarea class="form-control" id="inputDetail" name="detail" rows="3" required></textarea>
         </div>
         <div class="row">
           <div class="col-md mb-3">
@@ -60,12 +65,130 @@
       </form>
     </div>
     <div id="productInfoMessages"></div>
-    <div id="productsTable"></div>
-  </main>
+    <div class="container-xl">
+      <h2 class="text-center pb-3">PRODUCTOS CARGADOS</h2>
 
+      <!---------------------- Show Room - Inicio ------------------------>
+      <div class="row mx-0 mr-sm-n3 showRoom">
+
+        <!---------------------- Columna filtros - Inicio ------------------------>
+        <div id="filtros" class="col-sm-3 col-xl-2 mb-4">
+          <h3>Filtros <span><img src="./img/filtros.png" alt=""></span></h3>
+          <div id="contenedorFiltros">
+            <div id="cantProductosEncontrados">() producto/s</div>
+
+            <button type="button" id="filtroBuscar" class="btn btn-sm btn-outline-secondary ocultar mb-2">BUSQUEDA
+              <span>[&times;]</span>
+            </button>
+
+            <div class="row">
+              <div class="col-sm-12">
+                <h4>Categorías</h4>
+                <div class="form-check mb-2 seleccionado">
+                  <input class="form-check-input" type="radio" name="categoria" id="catTodas" value="todas" checked>
+                  <label class="form-check-label" for="catTodas">
+                    TODAS
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="categoria" id="catBicicletas" value="bicicletas">
+                  <label class="form-check-label" for="catBicicletas">
+                    Bicicletas
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="categoria" id="catComponentes" value="componentes">
+                  <label class="form-check-label" for="catComponentes">
+                    Componentes
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="categoria" id="catAccesorios" value="accesorios">
+                  <label class="form-check-label" for="catAccesorios">
+                    Accesorios
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="categoria" id="catEquipamiento"
+                    value="equipamiento">
+                  <label class="form-check-label" for="catEquipamiento">
+                    Equipamiento
+                  </label>
+                </div>
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="radio" name="categoria" id="catIndumentaria"
+                    value="indumentaria">
+                  <label class="form-check-label" for="catIndumentaria">
+                    Indumentaria
+                  </label>
+                </div>
+                <button type="button" id="verMarcas" class="btn btn-sm btn-danger mb-3">MARCAS<i
+                    class="fa fa-toggle-off"></i></button>
+                <div class="form-group">
+                  <label for="inputPrecioMin">Precio Mínimo $</label>
+                  <input type="range" class="form-control-range w-100" id="rangoPrecioMin" min="0" max="100" step=".5">
+                  <input type="text" id="inputPrecioMin" class="form-control form-control-sm text-center"
+                    placeholder="$ Min" disabled>
+                </div>
+                <div class="form-group">
+                  <label for="inputPrecioMax">Precio Máximo $</label>
+                  <input type="range" class="form-control-range w-100" id="rangoPrecioMax" min="0" max="100" step=".5">
+                  <input type="text" id="inputPrecioMax" class="form-control form-control-sm text-center"
+                    placeholder="$ Máx" disabled>
+                </div>
+              </div>
+            </div>
+            <div id="marcas">
+              <button type="button" id="volverMarcas" class="btn btn-sm btn-danger mb-3">Volver</button>
+              <div id="contenedorMarcas"></div>
+            </div>
+          </div>
+        </div>
+        <!---------------------- Columna filtros - Fin ------------------------>
+
+        <!---------------------- Columna Productos - inicio ------------------------>
+        <div class="col-sm-9 col-xl-10 colProductos">
+
+          <!---------------------- Zona buscar / ordenar ------------------------>
+          <div class="col-12 mb-3 buscarOrdenar">
+            <div class="row">
+              <div class="col-6 g-0">
+                <input type="search" id="inputBuscar" class="form-control mr-0"
+                  placeholder="Descripción, marca, tipo, ..." aria-label="Search" name="buscar">
+              </div>
+              <div class="col-1 g-0">
+                <button id="btnBuscar" class="btn btn-dark my-sm-0"><img src="./img/icon_search_w.png" alt=""></button>
+              </div>
+              <div class="col-5">
+                <select id="selectOrdenar" class="form-select ml-auto" name="orden">
+                  <option value="a">Marca A-Z</option>
+                  <option value="z">Marca Z-A</option>
+                  <option value="-">Menor precio</option>
+                  <option value="+">Mayor precio</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+          <!---------------------- Contenedor de tarjeta productos ------------------------>
+          <div id="contenedorProductos" class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
+            <div class="loader">Cargando ...</div>
+          </div>
+        </div>
+        <!---------------------- Columna Productos - Fin ------------------------>
+
+      </div>
+    </div>
+    <!---------------------- Show Room - Fin ------------------------>
+
+  </main>
+  <!-- jQuery y Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
+  <!-- Mi JS -->
   <script src="/js/productos.js"></script>
 </body>
 

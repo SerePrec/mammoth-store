@@ -1,25 +1,8 @@
-// **************************************************************************//
-// ************************ Uso de archivos externos ************************//
-// **************************************************************************//
-
-// Funciones para formateo de los precios**************************************
-// Ver archivo base.js **************
-
-// Obtención y Generación del array "productos" a partir de un JSON ***********
-// Obtención de la cotización del dólar ***************************************
-// Ver data.js ************************
-
-// **************************************************************************//
-// ************* Declaración de variables y constantes globales *************//
-// **************************************************************************//
-
 //Generales ***************************
 let acumulado = 0;
-let auxCarritoGuardado;
-let auxCarritosGuardados;
+
 let busqueda = false;
-let carritoAbierto = false;
-let carritoUsuario = {};
+
 let checkDestacado = false;
 let filtroPrecioAplicado = false;
 let filtroMarcaAplicado = false;
@@ -29,33 +12,6 @@ let precioMinimo, precioMaximo, precioMinSel, precioMaxSel;
 let productosFiltradosCliente;
 let tempEmergente; // Variable que almacena el temporizador de los mensajes emergentes para poder quitarlos antes de que se ejecuten
 let usuario = "";
-let outerWidthPrevio = window.outerWidth;
-const links = [
-  {
-    path: "/",
-    categoria: "Todas"
-  },
-  {
-    path: "bi",
-    categoria: "Bicicletas"
-  },
-  {
-    path: "co",
-    categoria: "Componentes"
-  },
-  {
-    path: "ac",
-    categoria: "Accesorios"
-  },
-  {
-    path: "eq",
-    categoria: "Equipamiento"
-  },
-  {
-    path: "in",
-    categoria: "Indumentaria"
-  }
-];
 
 //DOM *********************************
 const $btnBuscar = $("#btnBuscar");
@@ -96,20 +52,8 @@ const iniciar = () => {
   productosFiltradosCliente = [...productos];
 
   // Carga inicial de productos en la página
-  direccionarCategoria(); // cada vez que se da inicio al simulador direcciona a la categoría según el # de la url
   ordenarProductos(productosFiltradosCliente);
   seteoRangoPrecios(productosFiltradosCliente);
-
-  validarUsuario();
-  load = true;
-
-  // esto lo hago para que no se pierda el carrito si el usuario anónimo vuelve hacia atrás en el porceso.
-  // comp definí que los carritos no se cargan automáticamente si no hay usuario cargado, al volver y
-  // recargarse la página no lo cargaría y se perdería la selección. De esta manera al almacenar en el sessionStorage
-  // esta clave, doy por entendido que ya estuvo en esta página y está regresando al sector de showroom.
-  sessionStorage.setItem("estuvoEnCompra", true);
-
-  console.log(carritoUsuario); // Información de control interno
 };
 
 function validarUsuario() {
@@ -120,125 +64,6 @@ function validarUsuario() {
     $inputUsuario.val(user);
     $inputUsuario.attr("disabled", true);
     usuario = user;
-  }
-  asignarCarrito(usuario);
-}
-
-function asignarCarrito(user) {
-  // Si esta logueado, carga el carrito de compra según el caso (uno activo o uno guardado voluntariamente)
-  let miSelecc = [];
-  let estuvoEnCompra = sessionStorage.getItem("estuvoEnCompra"); // es para ver si proviene de la pagina de compra y permitir cargar un carrito anónimo, cosa que por defecto no lo permito
-  if (user || estuvoEnCompra) {
-    // si no hay usuario, genera carrito vacio. Sino siguen otras verificaciones
-
-    if (!load) {
-      // si es durante la fase de carga inicial y hay un carrito activo no vacio, lo carga automaticamente
-      let carritoGuardado = localStorage.getItem("carritoUsuario");
-      carritoGuardado = JSON.parse(carritoGuardado);
-
-      if (
-        carritoGuardado &&
-        carritoGuardado.usuario == user &&
-        carritoGuardado.miSeleccion.length != 0
-      ) {
-        validarCarritoGuardado(user, carritoGuardado);
-        actualizarIconoCarrito();
-        ordenarProductos(productosFiltradosCliente);
-        actualizarCarritoEnStorage();
-        return;
-      }
-    } else if (user) {
-      // si el ususario se logue posterior a la carga de la página verifica si este usuario posee un carrito guardado. Solo si hay usuario!!
-      let carritosGuardados = localStorage.getItem("carritosGuardados");
-      carritosGuardados = JSON.parse(carritosGuardados);
-      let carritoGuardado;
-      // si hay un carrito guardado con el nombre del usuario, pregunta si lo desea cargar
-      if (
-        carritosGuardados &&
-        (carritoGuardado = carritosGuardados.find(
-          carr => carr.usuario == user
-        )) &&
-        carritoGuardado.miSeleccion.length != 0
-      ) {
-        mostrarModalConfirm(
-          user + ", tienes un carrito guardado.<br>¿Deseas cargarlo?",
-          "siCargarCarrito",
-          "noCargarCarrito"
-        );
-        auxCarritosGuardados = carritosGuardados;
-        auxCarritoGuardado = carritoGuardado;
-        return;
-      }
-
-      // si no hay carrito guardado se genera un carrito con el nombre de usuario y la seleccion
-      // que lleva en el momento de loguearse
-      miSelecc = carritoUsuario.miSeleccion;
-    }
-  }
-
-  carritoUsuario = new CarritoUsuario(user, miSelecc);
-  actualizarCarritoEnStorage();
-}
-
-function siCargarCarritoGuardado() {
-  // Se llama cuando el usuario decide cargar un carrito que tenía guardado
-  // Se devuelven los productos que pudiese tener seleccionados al momento de loguearse
-  if (carritoUsuario.miSeleccion && carritoUsuario.miSeleccion.length)
-    vaciarCarrito();
-  // Se procede a la carga del carrito guardado y todas las actualizaciones necesarias
-  validarCarritoGuardado(usuario, auxCarritoGuardado);
-  animarIconoCarritoIn();
-  actualizarInfoTarjetas();
-  actualizarCarritoEnStorage();
-  removerCarritoGuardado(auxCarritoGuardado, auxCarritosGuardados);
-}
-
-function noCargarCarritoGuardado() {
-  // Se llama si decide no cargar el carrito guardado
-  removerCarritoGuardado(auxCarritoGuardado, auxCarritosGuardados); // Se elimina del storage el carrito guardado a nombre del usuario
-  // Se continua con la seleccion que tenía pero generando un carrito con su nombre, en lugar de anónimo
-  let miSelecc = carritoUsuario.miSeleccion;
-  carritoUsuario = new CarritoUsuario(usuario, miSelecc);
-  actualizarCarritoEnStorage();
-}
-
-function validarCarritoGuardado(user, carritoGuard) {
-  // Valida las cantidades del carrito de compra guardado y filtra lo que se puede vender
-  let productoItem;
-  // recorre el carrito tomado y se fija si al momento actual todos los productos se encuentran
-  // en stock en las cantidades solicitadas, generando un carrito validado solo con los
-  // productos posibles de vender. (Es por si luego de un tiempo se carga un carrito y ese producto ya no tiene stock)
-  let miSeleccionValidada = carritoGuard.miSeleccion.filter(item => {
-    productoItem = productos.find(producto => producto.id == item.id);
-    if (productoItem.vender(item.cant)) {
-      console.log(
-        "%cComprando",
-        "color: white; background-color: green; padding: 3px",
-        productoItem.title,
-        "// Cant:",
-        item.cant
-      );
-      return true;
-    }
-  });
-
-  carritoUsuario = new CarritoUsuario(user, miSeleccionValidada);
-  //si hubo que quitar productos de la selección del carrito guardado, lo advierte, sino muestra un mensaje de que todo resulto OK
-  if (carritoUsuario.miSeleccion.length < carritoGuard.miSeleccion.length) {
-    mostrarEmergente(
-      `
-            Atención:<br>
-            Alguno de los productos de su carrito guardado fueron removidos porque la cantidad solicitada no se encuentra actualmente disponible.<br>
-            Sepa disculpar las molestias.<br>
-            Muchas gracias.`,
-      10000,
-      true
-    );
-  } else if (load) {
-    mostrarEmergente(
-      "Todos los productos de su carrito guardado fueron añadidos con éxito",
-      4000
-    );
   }
 }
 
@@ -388,14 +213,6 @@ function filtrarCategoria(vectorAFiltrar) {
     productosFiltradosCliente = vectorAFiltrar.filter(
       prod => prod.category.toLowerCase() == categoria
     );
-  }
-}
-
-function filtrarDestacados(vectorAFiltrar) {
-  // Filtra al vector pasado por si es o no un producto destacado
-  checkDestacado = $listadoFitros.find(":checkbox").prop("checked");
-  if (checkDestacado) {
-    productosFiltradosCliente = vectorAFiltrar.filter(prod => prod.highlight);
   }
 }
 
@@ -694,437 +511,6 @@ function actualizarInfoTarjetas() {
   });
 }
 
-// Funciones relacionadas a agregar o sacar productos del carrito *************
-//*****************************************************************************
-
-function validarCantidad(prodId, cant) {
-  //valida la cantidad del producto a agregar ingresada por el cliente
-  let producto = productos.find(prod => prod.id == prodId);
-
-  if (!(cant >= 1)) {
-    // si el valor no es lógico, lo avisa
-    mostrarEmergente(
-      `Cantidad NO válida.<br>Reingrese la cantidad.`,
-      4000,
-      true
-    ); // gerero un mensaje destacado que se cierra a los 4 segundos
-    return false;
-  } else if (!producto.consultaVenta(cant)) {
-    // Si el valor es lógico, pero la cantidad solicitada es mayor al stock lo avisa.
-    mostrarEmergente(
-      `
-            No se puede comprar esa cantidad, stock insuficiente.<br>
-            Disponible: ${producto.stock} unidades.<br>
-            Verifique la disponibilidad y reingrese la cantidad.`,
-      10000,
-      true
-    ); // genero un mensaje destacado que se cierra a los 10 segundos para dar más importancia
-
-    return false;
-  } else {
-    // si la cantidad es válida pasa
-    return true;
-  }
-}
-
-function agregarCarrito(prodId, cant) {
-  //agrega los productos al carrito y los agrupa si son del mismo tipo. También actualiza la página y el stock
-  let producto = productos.find(prod => prod.id == prodId);
-  producto.vender(cant);
-  let coincidencia = carritoUsuario.miSeleccion.find(item => item.id == prodId);
-  if (coincidencia) {
-    // si ya existía el producto en el carrito, le suma la cantidad ingresada
-    coincidencia.cant += cant;
-  } else {
-    // sino, agrega el item completo
-    const miItem = new ItemCarrito(producto, cant);
-    carritoUsuario.miSeleccion.push(miItem);
-  }
-
-  let mensajeEmergente = `Agregado: ${producto.title}<br>Cantidad: ${cant} unidades.`;
-  mostrarEmergente(mensajeEmergente, 4000); // genero mensaje normal por 4 segundos
-
-  console.log(
-    "%cComprando",
-    "color: white; background-color: green; padding: 3px",
-    producto.title,
-    "// Cant:",
-    cant
-  ); // simulando un control interno de la operación
-
-  // hago las actualizaciones correspondientes
-  animarIconoCarritoIn();
-  actualizarCarritoEnStorage();
-  actualizarInfoTarjetas();
-}
-
-function restarUnidadCarrito(prodId) {
-  // resta una unidad del ítem del carrito elegido
-  let itemCarrito = carritoUsuario.miSeleccion.find(item => item.id == prodId);
-  let productoItem = productos.find(prod => prod.id == prodId);
-
-  productoItem.ingresar(1); // devuelvo esa unidad al stock
-  itemCarrito.cant--;
-
-  console.log(
-    "%cRestando",
-    "color: white; background-color: orange; padding:3px",
-    itemCarrito.prod,
-    "// Cant:",
-    1
-  ); // Infomación de control interno
-
-  if (itemCarrito.cant == 0) {
-    // si el item del carrito quedo en cero unidades, lo elimino
-    let indice = carritoUsuario.miSeleccion.indexOf(itemCarrito);
-    carritoUsuario.miSeleccion.splice(indice, 1);
-    eliminarElemCarritoFade(prodId, 350);
-  } else {
-    mostrarCarrito();
-  }
-
-  // hago las actualizaciones correspondientes
-  animarIconoCarritoOut();
-  actualizarCarritoEnStorage();
-  actualizarInfoTarjetas();
-}
-
-function eliminarProductoCarrito(prodId) {
-  // elimina un item completo del carrito
-  let itemCarrito = carritoUsuario.miSeleccion.find(item => item.id == prodId);
-  let productoItem = productos.find(prod => prod.id == prodId);
-
-  productoItem.ingresar(itemCarrito.cant); // devuelvo la cantidad de ese item al stock
-
-  console.log(
-    "%cEliminando",
-    "color: white; background-color: red; padding:3px",
-    itemCarrito.prod,
-    "// Cant:",
-    itemCarrito.cant
-  ); // Infomación de control interno
-
-  let indice = carritoUsuario.miSeleccion.indexOf(itemCarrito);
-  carritoUsuario.miSeleccion.splice(indice, 1); // elimino del array miSeleccion, el objeto item correspondiente
-
-  eliminarElemCarritoFade(prodId, 350);
-  // hago las actualizaciones correspondientes
-  animarIconoCarritoOut();
-  actualizarCarritoEnStorage();
-  actualizarInfoTarjetas();
-}
-
-function vaciarCarrito() {
-  // vacía el carrito activo del usuario
-  let productoItem;
-  let cont = 0;
-
-  for (let item of carritoUsuario.miSeleccion) {
-    // devuelvo al stock las cantidades del los productos que se eliminan del carrito
-    cont++;
-    productoItem = productos.find(producto => producto.id == item.id);
-    productoItem.ingresar(item.cant);
-    $contenedorItemsCarrito
-      .find(`button[data-producto-id='${item.id}']`)
-      .parent()
-      .parent()
-      .css("backgroundColor", "#b30404ba")
-      .fadeOut(750 * (1 + cont * 0.05));
-  }
-  $contenedorItemsCarrito
-    .parent()
-    .next()
-    .fadeOut(750 * (1 + cont * 0.05), () => {
-      mostrarCarrito();
-      $contenedorItemsCarrito.parent().next().show();
-    });
-
-  carritoUsuario.miSeleccion = [];
-  // hago las actualizaciones correspondientes
-  animarIconoCarritoOut();
-  actualizarCarritoEnStorage();
-  actualizarInfoTarjetas();
-
-  console.log(
-    "%c----- Carrito vaciado -----",
-    "color:white; background-color: red; padding: 3px"
-  ); // Infomación de control interno
-}
-
-// Funciones para mostrar y/o actualizar la información del carrito ***********
-//*****************************************************************************
-
-function mostrarCarrito() {
-  //genera el HTML para la ventana modal del carrito
-  // En el modal ya tengo dos secciones pre-confeccionadas con formatos distintos
-  // para un carrito vacío o uno con contenido. La sección vacía ya tiene todo
-  // el código necesario para mostrarse.
-  // Lo hice de esta manera distinta, para probar distintas opciones de manejo del DOM.
-  let $htmlCarritoNoVacio = $("#modalCarrito .carritoNoVacio");
-  let $htmlCarritoVacio = $("#modalCarrito .carritoVacio");
-
-  if (carritoUsuario.miSeleccion.length == 0) {
-    // si el carrito esta vacio, manejo display:none para mostrar la sección correspondiente
-    $htmlCarritoNoVacio.hide();
-    $htmlCarritoVacio.show();
-  } else {
-    // Si tiene productos, manejo display:none para mostrar la sección correspondinte
-    // si esta abierto no lo oculto para no generar una nueva animación. De lo contrario,
-    // lo oculto para habilitar la animación final del slideDown
-    if (!carritoAbierto) $htmlCarritoNoVacio.hide();
-    $htmlCarritoVacio.hide();
-
-    //genero un array donde almaceno todo el HTML necesario así lo inserto en el DOM en una unica vez
-    const arrayFilas = [];
-    let total = 0;
-    for (const item of carritoUsuario.miSeleccion) {
-      // genero las filas de la tabla del carrito dinámicamente con los datos del producto
-      let productoItem = productos.find(prod => prod.id == item.id);
-      let fila = `
-                <tr>
-                    <td><img src="${
-                      productoItem.thumbnail
-                    }" class="card-img-top" alt=""></td>
-                    <td>${productoItem.title}</td>
-                    <td class="text-center">${item.cant}x</td>
-                    <td class="text-right font-weight-bold">$${formatoPrecio(
-                      productoItem.price
-                    )}</td>
-                    <td class="text-right font-weight-bold">
-                        <button class="menos" type="button" data-producto-id="${
-                          productoItem.id
-                        }">-</button>
-                        <button class="eliminar" type="button" data-producto-id="${
-                          productoItem.id
-                        }">x</button>
-                    </td>
-                </tr>`;
-      arrayFilas.push(fila);
-      total += productoItem.price * item.cant;
-    }
-    $contenedorItemsCarrito.empty();
-    $contenedorItemsCarrito.append(arrayFilas);
-
-    acumulado = total;
-    $totalCarrito.text("$" + formatoPrecio(total)); // inserto el importe total acumulado en la respectiva seccion del HTML
-    $htmlCarritoNoVacio.delay(500).slideDown(1200); // Genero la animación desplegable con un delay previo para dar lugar a que el html generado este cargado
-    carritoAbierto = true;
-  }
-}
-
-function eliminarElemCarritoFade(prodId, tiempo) {
-  $contenedorItemsCarrito
-    .find(`button[data-producto-id='${prodId}']`)
-    .parent()
-    .parent()
-    .css("backgroundColor", "#b30404ba")
-    .fadeOut(tiempo, function () {
-      // hago las actualizaciones correspondientes
-      mostrarCarrito();
-    });
-}
-
-function animarIconoCarritoIn() {
-  // animacion encadenada del icono del carrito
-  $numItems.stop(true);
-  $numItems
-    .css({
-      top: "-55px",
-      opacity: "0"
-    })
-    .animate(
-      {
-        top: "-10px",
-        opacity: ".3"
-      },
-      600
-    )
-    .animate(
-      {
-        opacity: "1"
-      },
-      250
-    );
-  actualizarIconoCarrito();
-}
-
-function animarIconoCarritoOut() {
-  // animacion encadenada del icono del carrito
-  $numItems.stop(true);
-  $numItems
-    .animate(
-      {
-        top: "-55px",
-        opacity: "0"
-      },
-      600,
-      () => {
-        $numItems.css("top", "-10px");
-        actualizarIconoCarrito();
-      }
-    )
-    .animate(
-      {
-        opacity: "1"
-      },
-      250
-    );
-}
-
-function actualizarIconoCarrito() {
-  //refresca el contador del ícono carrito
-  let contador = 0;
-  for (const producto of carritoUsuario.miSeleccion) {
-    contador += producto.cant;
-  }
-  $numItems.text(contador);
-}
-
-// Funciones de Login Logout del usuario **************************************
-//*****************************************************************************
-
-function loguearUsuario() {
-  // Se ejecuta al tocar en el boton I/O de logueo
-  if (!usuario) {
-    // si no hay usuario, porcede al login
-    if (logInUsuario()) {
-      validarUsuario();
-    }
-  } else {
-    // sino al logout
-    logOutUsuario();
-  }
-}
-
-function logInUsuario() {
-  // Genera al usuario en caso de no tener una sesion abierta (login)
-  let user;
-
-  user = $inputUsuario.val();
-
-  // si el valor ingresado no cumple los requisitos, genero un HTML para mostrar un mensaje de
-  // error debajo del input de login/out
-  let $errorInputUsuario = $("#errorInputUsuario");
-  if (
-    user.trim().length < 5 ||
-    user.trim().length > 20 ||
-    !isNaN(parseInt(user))
-  ) {
-    // acá inpongo los requisitos a cumplir en el nombre de usuario (para practicar)
-    // paro todas las animaciones que puedan estar ejecutandose sobre el elmento. Por ejemplo si tecleo rápido usuarios erroneos
-    $errorInputUsuario.stop(true);
-    // El mensaje aparece en 0.3s, dura 4 segundos visible y se oculta en 0.3s
-    $errorInputUsuario.slideDown(300, () => {
-      // paso un callback a la animación para encadenarlas
-      $errorInputUsuario.delay(4000).slideUp(300);
-    });
-
-    $inputUsuario.val(""); // reseteo el valor del input para que vuelva a ingresar
-    return false;
-  } else {
-    // si cumple los requisitos, seteo el usuario y guardo en storage
-    $errorInputUsuario.stop(true).slideUp(300); // encadeno primero las paradas de animaciones y luego ejecuto la animacion de ocultar
-
-    usuario = user;
-    localStorage.setItem("usuario", user);
-    return true;
-  }
-}
-
-function logOutUsuario() {
-  // hace el logOut del usuario
-  // remueve el "usuario" del localStorage y setea los valores a vacíos
-  localStorage.removeItem("usuario");
-  usuario = "";
-  $inputUsuario.val("");
-  $inputUsuario.attr("disabled", false); // habilita la interaccion con el el input usuario
-
-  // si el carrito actual contiene productos, pregunto si quiere guardarlos
-  if (carritoUsuario.miSeleccion && carritoUsuario.miSeleccion.length != 0) {
-    mostrarModalConfirm(
-      `
-            Has salido de tu usuario y tienes productos seleccionados en tu carrito!<br>
-            ¿Deseas guardarlos para poderlos recuperar más adelante?`,
-      "siGuardarCarrito",
-      "noGuardarCarrito"
-    ); // genero modal de confirmación preguntando si gurada carrito
-  } else {
-    carritoUsuario.usuario = "";
-    actualizarCarritoEnStorage();
-  }
-}
-
-function siGuardarCarrito() {
-  // función que llama el boton "Si" del modal generado por la funcion logOutUsuario() si hay un carrito para guardar
-  guardarCarritoEnStorage(); // guardo el carrito en el localStorage
-  let mensaje = `${
-    carritoUsuario.usuario
-  }, tu carrito fue guardado.<br><br>Has guardado ${$numItems.text()} producto/s`;
-  mostrarModalInfo(mensaje); // muestro modal informativo
-
-  // hago las actualizaciones correspondientes
-  vaciarCarrito();
-  carritoUsuario.usuario = "";
-  actualizarCarritoEnStorage();
-}
-
-function noGuardarCarrito() {
-  // función que llama el boton "No" del modal generado por la funcion logOutUsuario() si hay un carrito para guardar
-  vaciarCarrito();
-  carritoUsuario.usuario = "";
-  actualizarCarritoEnStorage();
-}
-
-function actualizarCarritoEnStorage() {
-  // almacena el carrito del usuario actual en el localStorage como carrito actual ("carritoUsuario")
-  localStorage.setItem("carritoUsuario", JSON.stringify(carritoUsuario));
-}
-
-function guardarCarritoEnStorage() {
-  // guarda el carrito del usuario actual en el localStorage dentro de un array que contiene los carritos guardados
-  // por distintos usuarios de la computadora ("carritosGuardados")
-
-  if (localStorage.getItem("carritosGuardados")) {
-    // si ya existe la variable en el localStorage, verifica si ya hay algún carrito de ese mismo usuario guardado anteriormente
-    let carritosGuardados = JSON.parse(
-      localStorage.getItem("carritosGuardados")
-    );
-    let coincidencia = carritosGuardados.find(
-      carr => carr.usuario == carritoUsuario.usuario
-    );
-    if (coincidencia) {
-      // si ya habia un guardado un carrito con ese usuario, reemplaza su contenido, lo parsea y guarda
-      coincidencia.miSeleccion = carritoUsuario.miSeleccion;
-      localStorage.setItem(
-        "carritosGuardados",
-        JSON.stringify(carritosGuardados)
-      );
-    } else {
-      // si no, agrega el carrito al array, para posteriormente parsearlo y guardarlo
-      carritosGuardados.push(carritoUsuario);
-      localStorage.setItem(
-        "carritosGuardados",
-        JSON.stringify(carritosGuardados)
-      );
-    }
-  } else {
-    // si no existe la variable en el storage, la crea y guarda el carrito de ese usuario
-    let carritosGuardados = [];
-    carritosGuardados.push(carritoUsuario);
-    localStorage.setItem(
-      "carritosGuardados",
-      JSON.stringify(carritosGuardados)
-    );
-  }
-}
-
-function removerCarritoGuardado(carritoGuardado, carritosGuardados) {
-  // remueve un carrito guardado en el localStorage dentro del array parseado "carritosGuardados"
-  let indice = carritosGuardados.indexOf(carritoGuardado);
-  carritosGuardados.splice(indice, 1); // elimina el elemento del array y luego parsea y guarda nuevamente en storage
-  localStorage.setItem("carritosGuardados", JSON.stringify(carritosGuardados));
-}
-
 // Funciones para mensajes emergentes *****************************************
 //*****************************************************************************
 
@@ -1187,81 +573,13 @@ function cerrarModalMensaje() {
   $divModalMensajes.find(".modal-footer").html("");
 }
 
-// Funciones para procesar la url por el cambio de linkeo # *******************
-//*****************************************************************************
-
-//Obtener el linkeo actual (Se usa el objeto Location y su propiedad hash)
-const parseLocation = () => location.hash.slice(1).toLowerCase() || "/";
-
-//Busca la categoría en el array links que corresponde al linkeo actual
-const buscarCategoriaLinkeo = (path, links) => {
-  const linkeo = links.find(l => l.path == path);
-  if (linkeo) {
-    return linkeo.categoria;
-  } else {
-    return false;
-  }
-};
-
-function direccionarCategoria() {
-  // direcciona ala categoría de producto según el linkeo actual de la url
-  const path = parseLocation(); //Obtiene linkeo actual
-  const categoria = buscarCategoriaLinkeo(path, links);
-
-  if (categoria) {
-    // si encuentra una categoría válida, simula un click en la misma
-    $(`#cat${categoria}`).trigger("click");
-  }
-}
-
-// **************************************************************************//
-// ******************************** Eventos *********************************//
-// **************************************************************************//
-
-// Los eventos sobre el DOM, se pusieron dentro de la función cargaOk(), ya que si
-// la carga de la página no es correcta por fallar alguna de las solicitudes AJAX
-// no tiene sentido asignar esos eventos, es más causarían errores
-
-let clickear = new MouseEvent("click", {
-  // defino un evento "click" para simularlo desde JS
-  bubbles: true,
-  cancelable: true
-});
-
-$(window).resize(function () {
-  // Evento por si el usuario cambia posición de dispositivo
-  // para que siempre los filtros en vista xs empiecen ocultos y en mayores anchos
-  // empiecen visibles. Esto se da por defecto al cargar la página, pero si el usuario
-  // interactua con el toggle de filtros y lo oculta, puede llegar a verse vacio si pasa
-  // a una vista de ancho mayor en donde los filtros van en una columna izquierda
-  if (window.outerWidth != outerWidthPrevio) {
-    // Esta comparación la hago porque en los celulares
-    //al hacer scroll, se reacomoda el ALTO de la ventana y dispara el evento resize, cerrando el
-    //desplegable. entonces de esta maner pregunto si el outerwidth es el mismo y no hago nada
-    //de lo contrario ejecuto el código y almaceno el nuevo valor como previo
-    if (
-      $("#contenedorFiltros").css("display") == "none" &&
-      window.innerWidth >= 576
-    ) {
-      $("#contenedorFiltros").css("display", "block");
-    }
-    if (
-      $("#contenedorFiltros").css("display") == "block" &&
-      window.innerWidth < 576
-    ) {
-      $("#contenedorFiltros").css("display", "none");
-    }
-    outerWidthPrevio = window.outerWidth;
-  }
-});
-
 // **************************************************************************//
 // ******************************* Ejecución ********************************//
 // **************************************************************************//
 
 // Evalúo ambas solicitudes AJAX y ejecuto las funciones según se resuelvan
 // ambas exitosamente o no.
-$.when(productosAjax(), dolarAjax()).then(cargaOk, cargaError);
+$.when(Promise.reject()).then(cargaOk, cargaError);
 
 function cargaOk() {
   $("#contenedorProductos .loader").hide();
@@ -1592,6 +910,50 @@ function cargaOk() {
   iniciar();
 }
 
+function formatoPrecio(num) {
+  // Función para dar formato de precio con separadores de miles (.) y decimales (,)
+  num = num.toFixed(2);
+  let entero, decimales;
+  if (num.indexOf(".") >= 0) {
+    entero = num.slice(0, num.indexOf("."));
+    decimales = num.slice(num.indexOf(".")).replace(".", ",");
+  }
+  let enteroFormateado = "";
+  for (let i = 1; i <= entero.length; i++) {
+    if (i % 3 == 0) {
+      if (i == entero.length) {
+        enteroFormateado =
+          entero.substr(entero.length - i, 3) + enteroFormateado;
+        break;
+      }
+      enteroFormateado =
+        ".".concat(entero.substr(entero.length - i, 3)) + enteroFormateado;
+    }
+  }
+  enteroFormateado = entero.slice(0, entero.length % 3) + enteroFormateado;
+  num = enteroFormateado.concat(decimales);
+  return num;
+}
+
+function quitarDecimales(string) {
+  // Quita los decimales del string pasado por formatoPrecio
+  string = string.slice(0, string.indexOf(","));
+  return string;
+}
+
+//********************************************************************* */
+/********************************************************************* */
+/********************************************************************* */
+/********************************************************************* */
+/********************************************************************* */
+/********************************************************************* */
+/********************************************************************* */
+/********************************************************************* */
+/********************************************************************* */
+/********************************************************************* */
+/********************************************************************* */
+/********************************************************************* */
+
 function cargaError() {
   // si no se cumple alguna de las solicitudes, genero un cartel
   // avisando del error y dando lugar a que el usuario vuelva a intentarlo
@@ -1601,3 +963,136 @@ function cargaError() {
                 <p>Disculpe las molestias.</p>
                 `);
 }
+
+let productos = [
+  {
+    id: 1,
+    timestamp: 1638976507527,
+    category: "accesorios",
+    code: "00001-B3",
+    brand: "PODIUM",
+    title: "Caramagnola Plástica Podium 0.5L. Versión Eco. Color A Granel.",
+    detail:
+      "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    price: 450,
+    stock: 50,
+    thumbnail: "/img/productos/1638992489389-producto1.jpg"
+  },
+  {
+    id: 2,
+    timestamp: 1638976507528,
+    category: "componentes",
+    code: "M-MTB-0345",
+    brand: "MAXXIS",
+    title: "Cubierta De Kevlar Maxxis Race King 29 X 2,15.",
+    detail:
+      "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    price: 4750,
+    stock: 15,
+    thumbnail: "/img/productos/1638993090558-producto2.jpg"
+  },
+  {
+    id: 3,
+    timestamp: 1638976507528,
+    category: "equipamiento",
+    code: "N-CA-CI-50",
+    brand: "NUTRISPORT",
+    title: "Gel Energizante Nutrisport Con Cafeína 50g. Express.",
+    detail:
+      "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    price: 125,
+    stock: 200,
+    thumbnail: "/img/productos/1638993097205-producto3.jpg"
+  },
+  {
+    id: 4,
+    timestamp: 1638976507528,
+    category: "equipamiento",
+    code: "S-H-PREV.075-BC/RED/SM",
+    brand: "SPECIALIZED",
+    title: "Casco Specialized Echelon II Ruta. Verde FL / Small.",
+    detail:
+      "Casco de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    price: 15480,
+    stock: 5,
+    thumbnail: "/img/productos/1638993102340-producto4.jpg"
+  },
+  {
+    id: 5,
+    timestamp: 1638976507529,
+    category: "accesorios",
+    code: "Velo.St.12",
+    brand: "CATEYE",
+    title: "Velocimetro Cateye Inalámbrico ST-12.",
+    detail:
+      "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    price: 3560,
+    stock: 0,
+    thumbnail: "/img/productos/1638993106811-producto5.jpg"
+  },
+  {
+    id: 6,
+    timestamp: 1638976507529,
+    category: "componentes",
+    code: "TUBOLITO.C.29/1.75-SP",
+    brand: "TUBOLITO",
+    title: "Cámara Tubolito MTB 29 X 1.75.",
+    detail:
+      "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    price: 473,
+    stock: 18,
+    thumbnail: "/img/productos/1638993111629-producto6.jpg"
+  },
+  {
+    id: 7,
+    timestamp: 1638976507530,
+    category: "indumentaria",
+    code: "S-S-SWOR.018-WT/42",
+    brand: "SPECIALIZED",
+    title: "Zapatillas Specialized S-Works De Ruta. Blanco. Talle: 42.",
+    detail:
+      "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    price: 14910,
+    stock: 3,
+    thumbnail: "/img/productos/1638993117221-producto7.jpg"
+  },
+  {
+    id: 8,
+    timestamp: 1638976507531,
+    category: "bicicletas",
+    code: "CODIGO",
+    brand: "GIANT",
+    title: "Bicicleta Ruta Giant Propel Advanced Sl 0 Disc 2020",
+    detail:
+      "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    price: 510000,
+    stock: 2,
+    thumbnail: "/img/productos/1638993121872-producto8.jpg"
+  },
+  {
+    id: 9,
+    timestamp: 1638976507531,
+    category: "bicicletas",
+    code: "CODIGO",
+    brand: "ORBEA",
+    title: "Bicicleta Ruta Orbea Gain M10 2019",
+    detail:
+      "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    price: 374000,
+    stock: 2,
+    thumbnail: "/img/productos/1638993127327-producto9.jpg"
+  },
+  {
+    id: 10,
+    timestamp: 1638976507532,
+    category: "bicicletas",
+    code: "CODIGO",
+    brand: "SPECIALIZED",
+    title: "Bicicleta Ruta Specialized Creo Sl E5 Comp 2020",
+    detail:
+      "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    price: 412000,
+    stock: 3,
+    thumbnail: "/img/productos/1638993132332-producto10.jpg"
+  }
+];

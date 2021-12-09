@@ -13,6 +13,9 @@
   form {
     margin-top: 1rem;
     color: white;
+    textarea {
+      resize: none;
+    }
     button[type="submit"] {
       display: block;
       margin: auto;
