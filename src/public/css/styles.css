@@ -287,6 +287,8 @@ div.bg-yellow {
       align-items: center; }
     .showRoom .colProductos #contenedorProductos .card .card-img-top {
       width: 70%;
+      height: 100%;
+      object-fit: contain;
       margin: auto; }
     .showRoom .colProductos #contenedorProductos .card .card-body p:nth-of-type(1) {
       padding-bottom: 6.25rem; }
