@@ -3,7 +3,6 @@
 let busqueda = false;
 let filtroPrecioAplicado = false;
 let filtroMarcaAplicado = false;
-let formToUpdate = false;
 let primerCarga = true;
 let marcasAFiltrar = [];
 let precioMinimo, precioMaximo, precioMinSel, precioMaxSel;
@@ -20,11 +19,11 @@ const $inputBuscar = $("#inputBuscar");
 const $inputPrecioMaximo = $("#inputPrecioMax");
 const $inputPrecioMinimo = $("#inputPrecioMin");
 const $listadoFitros = $("#filtros");
-const $productForm = document.getElementById("productForm");
-const $productInfoMessages = document.getElementById("productInfoMessages");
+const $cartInfoMessages = document.getElementById("cartInfoMessages");
 const $rangoPrecioMaximo = $("#rangoPrecioMax");
 const $rangoPrecioMinimo = $("#rangoPrecioMin");
 const $selectOrdenar = $("#selectOrdenar");
+const $selectCart = document.getElementById("selectCart");
 
 // **************************************************************************//
 // *********************** Definiciones de funciones ************************//
@@ -39,30 +38,41 @@ class ItemMarca {
   }
 }
 
+// Funciones para inetractuar con la api de carritos
+const cartsApi = {
+  getCarts: async () => {
+    return fetch(`/api/carrito`).then(data => data.json());
+  },
+  getCartProducts: async id => {
+    return fetch(`/api/carrito/${id}/productos`).then(data => data.json());
+  },
+  createCart: async () => {
+    return fetch(`/api/carrito`, {
+      method: "POST"
+    }).then(data => data.json());
+  },
+  deleteCart: async id => {
+    return fetch(`/api/carrito/${id}`, {
+      method: "DELETE"
+    }).then(data => data.json());
+  },
+  addProductToCart: async (id, id_prod, quantity) => {
+    return fetch(`/api/carrito/${id}/productos`, {
+      method: "POST",
+      body: { id: id_prod, quantity }
+    }).then(data => data.json());
+  },
+  deleteProductFromCart: async (id, id_prod) => {
+    return fetch(`/api/carrito/${id}/productos/${id_prod}`, {
+      method: "DELETE"
+    }).then(data => data.json());
+  }
+};
+
 // Funciones para inetractuar con la api de productos
 const productsApi = {
   getProducts: async () => {
     return fetch(`/api/productos`).then(data => data.json());
-  },
-  getProduct: async id => {
-    return fetch(`/api/productos/${id}`).then(data => data.json());
-  },
-  saveProduct: async productData => {
-    return fetch(`/api/productos`, {
-      method: "POST",
-      body: productData
-    }).then(data => data.json());
-  },
-  updateProduct: async (id, productData) => {
-    return fetch(`/api/productos/${id}`, {
-      method: "PUT",
-      body: productData
-    }).then(data => data.json());
-  },
-  deleteProduct: async id => {
-    return fetch(`/api/productos/${id}`, {
-      method: "DELETE"
-    }).then(data => data.json());
   }
 };
 
@@ -368,17 +378,24 @@ function mostrarProductos(vectorProductos) {
                       <p class="my-2"><b>Precio: $${formatoPrecio(
                         producto.price
                       )}</b> ${precioSinDescuento}</p>
-                      <p class="my-2">Stock: ${producto.stock}u</p>
-                      <div class="row justify-content-around">
-                        <button type="button" class="btn btn-warning col-6 btnUpdate"  data-producto-id="${
-                          producto.id
-                        }">Actualizar</button>
-                       <button type="button" class="btn btn-danger col-4 btnDelete"  data-producto-id="${
-                         producto.id
-                       }">Eliminar</button>
-                      </div>
+                      <p class="my-2">Disponible: ${producto.stock}u</p>`;
+
+      if (producto.stock > 0) {
+        // Si se puede vender genera los botones de agregar y el input de cantidad
+        // setea el atributo "data-" con el valor del id del producto.
+        // seteo el atributo del input "max" en el actual valor de stock para tener un control extra sobre el rango.
+        codigoHTML += `
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-danger w-50 btnAgregar" data-producto-id="${producto.id}">Agregar</button>
+                            <input type="number" class="form-control ml-2 inputCantidad" value="1" min="1" max="${producto.stock}">
+                        </div>`;
+      } else {
+        // Si el producto no tiene stock genera una tarjeta con un boton "disbled" que notifica "Agotado"
+        codigoHTML += `<button type="button" class="btn btn-danger" data-producto-id="${producto.id}" disabled>Agotado</button>`;
+      }
+      codigoHTML += `
                     </div>
-                  </div>`;
+                </div>`;
 
       $contenedorTarjeta.html(codigoHTML);
       arrayTarjetas.push($contenedorTarjeta);
@@ -388,40 +405,19 @@ function mostrarProductos(vectorProductos) {
     $contenedorProductos.append(arrayTarjetas);
   }
 
-  $("#contenedorProductos .btnUpdate").click(function (e) {
-    let id = $(this).data("productoId");
-    window.scrollTo(0, 0);
-    formToUpdate = true;
-    productsApi
-      .getProduct(id)
-      .then(processResponse(`Se cargó la infomación para actualizar`))
-      .then(formForUpdate)
-      .catch(error => {
-        console.log(error);
-      });
-  });
-
-  $("#contenedorProductos .btnDelete").click(function (e) {
-    const title = $(this)
-      .closest(".card-body")
-      .find(".card-title")
-      .text()
-      .trim();
+  $("#contenedorProductos .btnAgregar").click(function (e) {
+    // genero los eventos para todos los botones agregar
+    // para luego pasar los valores del producto correspondiente a la funcion de agregar al carrito,
     // tomo esos valores del atributo "data-" mediante el metodo data()
     let id = $(this).data("productoId");
-
-    const isOk = confirm(
-      `Esta seguro de eliminar el producto:\nid: ${id}\n${title}`
-    );
-
-    if (isOk) {
-      productsApi
-        .deleteProduct(id)
-        .then(processResponse(`Producto eliminado con éxito`))
-        .catch(error => {
-          console.log(error);
-        });
-    }
+    let $inputCantidad = $(this).next();
+    let cant = parseInt($inputCantidad.val());
+    //TODO::TODO: primero verifico si la cantidad es valida entes de agregar al carrito. Si bien setee el
+    // atributo "max" en el input, puede que el usuario manualmente fuerce un valor no admisible
+    // if (validarCantidad(id, cant)) {
+    //   agregarCarrito(id, cant);
+    // }
+    $inputCantidad.val(1); // devuelve el valor del input a 1
   });
 }
 
@@ -714,19 +710,19 @@ function cargaInicialOk() {
 function processResponse(okText) {
   return data => {
     if (data.error) {
-      $productInfoMessages.innerText = data.error;
-      $productInfoMessages.classList.add("show", "warning");
+      $cartInfoMessages.innerText = data.error;
+      $cartInfoMessages.classList.add("show", "warning");
       setTimeout(() => {
-        $productInfoMessages.classList.remove("show", "warning");
+        $cartInfoMessages.classList.remove("show", "warning");
       }, 4000);
       return;
     }
     if (data.result === "ok" || data.id) {
       $productForm.reset();
-      $productInfoMessages.innerText = okText;
-      $productInfoMessages.classList.add("show", "info");
+      $cartInfoMessages.innerText = okText;
+      $cartInfoMessages.classList.add("show", "info");
       setTimeout(() => {
-        $productInfoMessages.classList.remove("show", "info");
+        $cartInfoMessages.classList.remove("show", "info");
       }, 4000);
       return !formToUpdate ? updateTable() : data;
     }
@@ -759,62 +755,33 @@ function triggerRenderTable() {
   $filtroBuscar.trigger("click");
 }
 
-function formForUpdate(data) {
-  $("#form-title").text("ACTUALIZAR / CARGAR PRODUCTO");
-  $("#formBtnUpdate").css("display", "block");
-  for (const key in data) {
-    if (key === "timestamp") continue;
-    $productForm[key].value = data[key];
-  }
-}
-
-function formForSave() {
-  $("#form-title").text("CARGAR PRODUCTO");
-  $("#formBtnUpdate").css("display", "none");
-  $productForm.reset();
-}
-
 // **********************************************************************//
 // ****************** Eventos Formulario Productos **********************//
 // **********************************************************************//
 
-// Acciones al enviar el formulario de productos
-$productForm.addEventListener("submit", e => e.preventDefault());
+(() => {
+  updateTable();
+  updateCartsList();
+})();
 
-document.getElementById("formBtnSave").addEventListener("click", e => {
-  e.preventDefault();
-  // Simulo un click en submit para lanzar y ver
-  // validaciones html. si se cumplen continúo
-  $("#hideSubmit").trigger("click");
-  if ($productForm.checkValidity()) {
-    const formData = new FormData($productForm);
-    formData.delete("id");
-    formToUpdate = false;
-    productsApi
-      .saveProduct(formData)
-      .then(processResponse(`Producto cargado con éxito`))
-      .then(formForSave)
-      .catch(error => {
-        console.log(error);
-      });
-  }
-});
+function updateCartsList() {
+  cartsApi.getCarts().then(cartsId => {
+    htmlCode = `<option value="" selected>Seleccionar carrito</option>`;
+    const options = cartsId.map(
+      cartId => `<option value="${cartId}">ID ${cartId}</option>`
+    );
+    htmlCode += options.join("");
+    $selectCart.innerHTML = htmlCode;
+  });
+}
 
-document.getElementById("formBtnUpdate").addEventListener("click", e => {
-  e.preventDefault();
-  // En el update no es necesario validar porque pueden
-  // ir vacíos también
-  const formData = new FormData($productForm);
-  const id = formData.get("id");
-  formData.delete("id");
-  formToUpdate = false;
-  productsApi
-    .updateProduct(id, formData)
-    .then(processResponse(`Producto actualizado con éxito`))
-    .then(formForSave)
-    .catch(error => {
-      console.log(error);
-    });
-});
-
-updateTable();
+function createCart() {
+  cartsApi.createCart().then(cartsId => {
+    htmlCode = `<option value="" selected>Seleccionar carrito</option>`;
+    const options = cartsId.map(
+      cartId => `<option value="${cartId}">ID ${cartId}</option>`
+    );
+    htmlCode += options.join("");
+    $selectCart.innerHTML = htmlCode;
+  });
+}

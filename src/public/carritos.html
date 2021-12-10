@@ -14,72 +14,30 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <!-- Mi CSS -->
   <link rel="stylesheet" href="./css/styles.css">
-  <title>Panel de productos</title>
+  <title>Simulador carritos</title>
 </head>
 
 <body>
-  <main class="productos">
-    <div class="form-wrapper">
-      <h2 id="form-title">CARGAR PRODUCTO</h2>
-      <form id="productForm">
-        <input type="hidden" id="inputId" name="id">
-        <div class="mb-3">
-          <label for="inputTitle" class="form-label">Título</label>
-          <input type="text" class="form-control" id="inputTitle" name="title" required>
-        </div>
-        <div class="mb-3">
-          <label for="inputDetail" class="form-label">Detalle</label>
-          <textarea class="form-control" id="inputDetail" name="detail" rows="3" required></textarea>
-        </div>
-        <div class="row">
-          <div class="col-md mb-3">
-            <label for="inputBrand" class="form-label">Marca</label>
-            <input type="text" class="form-control" id="inputBrand" name="brand" required>
-          </div>
-          <div class="col-md mb-3">
-            <label for="inputCode" class="form-label">Código</label>
-            <input type="text" class="form-control" id="inputCode" name="code" required>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="inputCategory" class="form-label">Categoría</label>
-            <select class="form-select" id="inputCategory" name="category" required>
-              <option value="bicicletas" selected>Bicicletas</option>
-              <option value="componentes">Componentes</option>
-              <option value="accesorios">Accesorios</option>
-              <option value="equipamiento">Equipamiento</option>
-              <option value="indumentaria">Indumentaria</option>
-            </select>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="inputPrice" class="form-label">Precio</label>
-            <input type="number" step="0.01" class="form-control" id="inputPrice" name="price" required>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for=" inputStock" class="form-label">Stock</label>
-            <input type="number" step="1" class="form-control" id="inputStock" name="stock" required>
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="inputThumbnail" class="form-label">URL de la imágen</label>
-          <input type="url" class="form-control" id="inputThumbnail" name="thumbnail">
-        </div>
-        <div class="mb-3">
-          <label for="inputFile" class="form-label">Subir imagen</label>
-          <input type="file" class="form-control" id="inputFile" name="imageFile">
-        </div>
-        <button type="submit" id="hideSubmit" style="display: none;"></button>
-        <div class="d-flex justify-content-evenly">
-          <button type="reset" class="btn btn-secondary">LIMPIAR</button>
-          <button id="formBtnUpdate" class="btn btn-warning">ACTUALIZAR</button>
-          <button id="formBtnSave" class="btn btn-danger">CARGAR</button>
-        </div>
-      </form>
+  <main class="carritos">
+    <div class="cartManage">
+      <h2>ADMINISTRAR CARRITOS</h2>
+      <button id="btnCreateCart" class="btn btn-danger">NUEVO CARRITO +</button>
+      <div class="col mb-3 select-wrapper">
+        <select class="form-select" id="selectCart" name="cartId" required>
+          <option value="" selected>Seleccionar carrito</option>
+          <option value="componentes">Componentes</option>
+          <option value="accesorios">Accesorios</option>
+          <option value="equipamiento">Equipamiento</option>
+          <option value="indumentaria">Indumentaria</option>
+        </select>
+        <button id="btnDeleteCart" class="btn btn-secondary">ELIMINAR CARRITO</button>
+      </div>
     </div>
-    <div id="productInfoMessages"></div>
+    <div id="cartInfoMessages"></div>
+    <div id="cartProducts"></div>
+
     <div class="container-xl">
-      <h2 class="text-center pb-3">PRODUCTOS CARGADOS</h2>
+      <h2 class="text-center pb-3">CATALOGO DE PRODUCTOS</h2>
 
       <!---------------------- Show Room - Inicio ------------------------>
       <div class="row mx-0 mr-sm-n3 showRoom">
@@ -202,7 +160,7 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
   <!-- Mi JS -->
-  <script src="/js/productos.js"></script>
+  <script src="/js/carritos.js"></script>
 </body>
 
 </html>

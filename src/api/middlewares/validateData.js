@@ -51,7 +51,7 @@ const validateProductPostBody = (req, res, next) => {
     req.body.brand = brand.trim();
     req.body.category = category.trim();
     req.body.price = Math.round(parseFloat(price) * 100) / 100;
-    req.body.stock = parseInt(price);
+    req.body.stock = parseInt(stock);
     req.body.thumbnail = thumbnail.trim();
     next();
   }

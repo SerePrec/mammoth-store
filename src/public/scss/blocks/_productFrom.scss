@@ -49,38 +49,3 @@
 #productInfoMessages.info {
   background-color: #2f5777;
 }
-
-//***********************
-//***************************
-#productsTable {
-  text-align: center;
-}
-.table {
-  width: 95%;
-  max-width: 50rem;
-  margin: 1rem auto;
-  vertical-align: middle;
-  text-align: center;
-}
-.table thead th:first-child {
-  width: 10%;
-}
-.table thead th:nth-child(2) {
-  width: 50%;
-  text-align: left;
-}
-.table thead th:nth-child(3) {
-  width: 20%;
-}
-.table thead th:last-child {
-  width: 20%;
-}
-.table tbody td:nth-child(2) {
-  text-align: left;
-}
-.table .table__image {
-  width: 50%;
-}
-div.bg-yellow {
-  background-color: #ffc107d6;
-}

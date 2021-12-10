@@ -83,38 +83,6 @@ html {
 #productInfoMessages.info {
   background-color: #2f5777; }
 
-#productsTable {
-  text-align: center; }
-
-.table {
-  width: 95%;
-  max-width: 50rem;
-  margin: 1rem auto;
-  vertical-align: middle;
-  text-align: center; }
-
-.table thead th:first-child {
-  width: 10%; }
-
-.table thead th:nth-child(2) {
-  width: 50%;
-  text-align: left; }
-
-.table thead th:nth-child(3) {
-  width: 20%; }
-
-.table thead th:last-child {
-  width: 20%; }
-
-.table tbody td:nth-child(2) {
-  text-align: left; }
-
-.table .table__image {
-  width: 50%; }
-
-div.bg-yellow {
-  background-color: #ffc107d6; }
-
 .showRoom {
   color: black; }
   .showRoom #filtros {
@@ -323,7 +291,7 @@ div.bg-yellow {
         border-color: #545454; }
     .showRoom .colProductos #contenedorProductos .card .inputCantidad {
       width: 40%;
-      max-width: 4.5rem; }
+      max-width: 5rem; }
     .showRoom .colProductos #contenedorProductos .errorResultadoBuscar {
       color: white;
       background-color: #2c3034;
@@ -352,3 +320,77 @@ div.bg-yellow {
       .showRoom .colProductos #contenedorProductos {
         margin-left: 1rem;
         margin-right: 1rem; } }
+
+.cartManage {
+  width: 95%;
+  max-width: 60rem;
+  margin: 1rem auto;
+  padding: 2rem;
+  background-color: #2c3034;
+  border-radius: 1rem;
+  text-align: center; }
+  .cartManage h2 {
+    margin-top: 1rem; }
+  .cartManage #btnCreateCart {
+    margin-top: 1rem; }
+  .cartManage .select-wrapper {
+    margin-top: 2rem; }
+    .cartManage .select-wrapper .form-select {
+      display: inline-block;
+      width: 45%;
+      max-width: 15rem;
+      margin-right: 1rem; }
+
+#cartInfoMessages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 95%;
+  max-width: 30rem;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  opacity: 0;
+  transition: 0.5s all ease-in-out; }
+
+#cartInfoMessages.show {
+  opacity: 1; }
+
+#cartInfoMessages.warning {
+  background-color: #ff8a47; }
+
+#cartInfoMessages.info {
+  background-color: #2f5777; }
+
+#productsTable {
+  text-align: center; }
+
+.table {
+  width: 95%;
+  max-width: 50rem;
+  margin: 1rem auto;
+  vertical-align: middle;
+  text-align: center; }
+
+.table thead th:first-child {
+  width: 10%; }
+
+.table thead th:nth-child(2) {
+  width: 50%;
+  text-align: left; }
+
+.table thead th:nth-child(3) {
+  width: 20%; }
+
+.table thead th:last-child {
+  width: 20%; }
+
+.table tbody td:nth-child(2) {
+  text-align: left; }
+
+.table .table__image {
+  width: 50%; }
+
+div.bg-yellow {
+  background-color: #ffc107d6; }
