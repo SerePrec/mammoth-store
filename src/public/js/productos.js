@@ -3,6 +3,7 @@
 let busqueda = false;
 let filtroPrecioAplicado = false;
 let filtroMarcaAplicado = false;
+let formToUpdate = false;
 let primerCarga = false;
 let marcasAFiltrar = [];
 let precioMinimo, precioMaximo, precioMinSel, precioMaxSel;
@@ -39,25 +40,25 @@ class ItemMarca {
 }
 
 const productsApi = {
-  getProducts: () => {
+  getProducts: async () => {
     return fetch(`/api/productos`).then(data => data.json());
   },
-  getProduct: id => {
+  getProduct: async id => {
     return fetch(`/api/productos/${id}`).then(data => data.json());
   },
-  saveProduct: productData => {
+  saveProduct: async productData => {
     return fetch(`/api/productos`, {
       method: "POST",
       body: productData
     }).then(data => data.json());
   },
-  updateProduct: productData => {
+  updateProduct: async (id, productData) => {
     return fetch(`/api/productos/${id}`, {
       method: "PUT",
       body: productData
     }).then(data => data.json());
   },
-  deleteProduct: id => {
+  deleteProduct: async id => {
     return fetch(`/api/productos/${id}`, {
       method: "DELETE"
     }).then(data => data.json());
@@ -387,35 +388,41 @@ function mostrarProductos(vectorProductos) {
   }
 
   $("#contenedorProductos .btnUpdate").click(function (e) {
-    // TODO:TODO:genero los eventos para todos los botones agregar
-    // para luego pasar los valores del producto correspondiente a la funcion de agregar al carrito,
-    alert("update");
+    // TODO:TODO:
     // tomo esos valores del atributo "data-" mediante el metodo data()
     let id = $(this).data("productoId");
-    let $inputCantidad = $(this).next();
-    let cant = parseInt($inputCantidad.val());
-    // primero verifico si la cantidad es valida entes de agregar al carrito. Si bien setee el
-    // atributo "max" en el input, puede que el usuario manualmente fuerce un valor no admisible
-    if (validarCantidad(id, cant)) {
-      agregarCarrito(id, cant);
-    }
-    $inputCantidad.val(1); // devuelve el valor del input a 1
+    window.scrollTo(0, 0);
+    formToUpdate = true;
+    productsApi
+      .getProduct(id)
+      .then(processResponse(`Se cargó la infomación para actualizar`))
+      .then(formForUpdate)
+      .catch(error => {
+        console.log(error);
+      });
   });
 
   $("#contenedorProductos .btnDelete").click(function (e) {
-    // TODO:TODO:genero los eventos para todos los botones agregar
-    // para luego pasar los valores del producto correspondiente a la funcion de agregar al carrito,
-    alert("delete");
+    const title = $(this)
+      .closest(".card-body")
+      .find(".card-title")
+      .text()
+      .trim();
     // tomo esos valores del atributo "data-" mediante el metodo data()
     let id = $(this).data("productoId");
-    let $inputCantidad = $(this).next();
-    let cant = parseInt($inputCantidad.val());
-    // primero verifico si la cantidad es valida entes de agregar al carrito. Si bien setee el
-    // atributo "max" en el input, puede que el usuario manualmente fuerce un valor no admisible
-    if (validarCantidad(id, cant)) {
-      agregarCarrito(id, cant);
+
+    const isOk = confirm(
+      `Esta seguro de eliminar el producto:\nid: ${id}\n${title}`
+    );
+
+    if (isOk) {
+      productsApi
+        .deleteProduct(id)
+        .then(processResponse(`Producto eliminado con éxito`))
+        .catch(error => {
+          console.log(error);
+        });
     }
-    $inputCantidad.val(1); // devuelve el valor del input a 1
   });
 }
 
@@ -451,30 +458,39 @@ function quitarDecimales(string) {
 }
 
 // Acciones al enviar el formulario de productos
-$productForm.addEventListener("submit", e => {
+$productForm.addEventListener("submit", e => e.preventDefault());
+
+document.getElementById("formBtnSave").addEventListener("click", e => {
   e.preventDefault();
+  // Simulo un click en submit para lanzar y ver
+  // validaciones html. si se cumplen continúo
+  $("#hideSubmit").trigger("click");
+  if ($productForm.checkValidity()) {
+    const formData = new FormData($productForm);
+    formData.delete("id");
+    formToUpdate = false;
+    productsApi
+      .saveProduct(formData)
+      .then(processResponse(`Producto cargado con éxito`))
+      .then(formForSave)
+      .catch(error => {
+        console.log(error);
+      });
+  }
+});
+
+document.getElementById("formBtnUpdate").addEventListener("click", e => {
+  e.preventDefault();
+  // En el update no es necesario validar porque pueden
+  // ir vacíos también
   const formData = new FormData($productForm);
+  const id = formData.get("id");
+  formData.delete("id");
+  formToUpdate = false;
   productsApi
-    .saveProduct(formData)
-    .then(data => {
-      if (data.error) {
-        $productInfoMessages.innerText = data.error;
-        $productInfoMessages.classList.add("show", "warning");
-        setTimeout(() => {
-          $productInfoMessages.classList.remove("show", "warning");
-        }, 4000);
-        return;
-      }
-      if (data.result === "ok") {
-        $productForm.reset();
-        $productInfoMessages.innerText = `Producto cargado con éxito`;
-        $productInfoMessages.classList.add("show", "info");
-        setTimeout(() => {
-          $productInfoMessages.classList.remove("show", "info");
-        }, 4000);
-        updateTable();
-      }
-    })
+    .updateProduct(id, formData)
+    .then(processResponse(`Producto actualizado con éxito`))
+    .then(formForSave)
     .catch(error => {
       console.log(error);
     });
@@ -490,7 +506,6 @@ function loadError(error) {
 }
 
 function cargaInicialOk() {
-  console.log("Inicializando listeners");
   $("#contenedorProductos .loader").hide();
 
   // Si los productos cargan correctamente entonces asigno los
@@ -727,13 +742,39 @@ function cargaInicialOk() {
     mostrarProductos(vectorAOrdenar);
     actCantProductosEncontrados(vectorAOrdenar);
   });
+
+  $("#inputBrand").on("input", function (e) {
+    $("#inputBrand").val($("#inputBrand").val().toUpperCase());
+  });
+}
+
+function processResponse(okText) {
+  return data => {
+    if (data.error) {
+      $productInfoMessages.innerText = data.error;
+      $productInfoMessages.classList.add("show", "warning");
+      setTimeout(() => {
+        $productInfoMessages.classList.remove("show", "warning");
+      }, 4000);
+      return;
+    }
+    if (data.result === "ok" || data.id) {
+      $productForm.reset();
+      $productInfoMessages.innerText = okText;
+      $productInfoMessages.classList.add("show", "info");
+      setTimeout(() => {
+        $productInfoMessages.classList.remove("show", "info");
+      }, 4000);
+      return !formToUpdate ? updateTable() : data;
+    }
+  };
 }
 
 function updateTable() {
   productsApi
     .getProducts()
     .then(isResponseOk)
-    .then(renderTable)
+    .then(triggerRenderTable)
     .catch(loadError);
 }
 
@@ -745,17 +786,29 @@ function isResponseOk(data) {
       primerCarga = true;
       cargaInicialOk();
     }
-    return Promise.resolve(productosFiltradosCliente);
+    return Promise.resolve();
   } else {
     return Promise.reject("Error de datos");
   }
 }
 
-function renderTable(data) {
-  ordenarProductos(data);
-  mostrarProductos(data);
-  actCantProductosEncontrados(data);
-  seteoRangoPrecios(data);
+function triggerRenderTable() {
+  $filtroBuscar.trigger("click");
+}
+
+function formForUpdate(data) {
+  $("#form-title").text("ACTUALIZAR / CARGAR PRODUCTO");
+  $("#formBtnUpdate").css("display", "block");
+  for (const key in data) {
+    if (key === "timestamp") continue;
+    $productForm[key].value = data[key];
+  }
+}
+
+function formForSave() {
+  $("#form-title").text("CARGAR PRODUCTO");
+  $("#formBtnUpdate").css("display", "none");
+  $productForm.reset();
 }
 
 updateTable();

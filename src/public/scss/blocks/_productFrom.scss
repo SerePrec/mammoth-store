@@ -17,9 +17,13 @@
       resize: none;
     }
     button[type="submit"] {
-      display: block;
-      margin: auto;
+      display: none;
+    }
+    button:not([type="submit"]) {
       padding: 0.5rem 2rem;
+      &#formBtnUpdate {
+        display: none;
+      }
     }
   }
 }

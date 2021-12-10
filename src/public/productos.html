@@ -19,8 +19,9 @@
 <body>
   <main class="productos">
     <div class="form-wrapper">
-      <h2>CARGAR PRODUCTO</h2>
+      <h2 id="form-title">CARGAR PRODUCTO</h2>
       <form id="productForm">
+        <input type="hidden" id="inputId" name="id">
         <div class="mb-3">
           <label for="inputTitle" class="form-label">Título</label>
           <input type="text" class="form-control" id="inputTitle" name="title" required>
@@ -42,7 +43,13 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="inputCategory" class="form-label">Categoría</label>
-            <input type="text" class="form-control" id="inputCategory" name="category" required>
+            <select class="form-select" id="inputCategory" name="category" required>
+              <option value="bicicletas" selected>Bicicletas</option>
+              <option value="componentes">Componentes</option>
+              <option value="accesorios">Accesorios</option>
+              <option value="equipamiento">Equipamiento</option>
+              <option value="indumentaria">Indumentaria</option>
+            </select>
           </div>
           <div class="col-md-3 mb-3">
             <label for="inputPrice" class="form-label">Precio</label>
@@ -61,7 +68,12 @@
           <label for="inputFile" class="form-label">Subir imagen</label>
           <input type="file" class="form-control" id="inputFile" name="imageFile">
         </div>
-        <button type="submit" class="btn btn-danger">CARGAR</button>
+        <button type="submit" id="hideSubmit" style="display: none;"></button>
+        <div class="d-flex justify-content-evenly">
+          <button type="reset" class="btn btn-secondary">LIMPIAR</button>
+          <button id="formBtnUpdate" class="btn btn-warning">ACTUALIZAR</button>
+          <button id="formBtnSave" class="btn btn-danger">CARGAR</button>
+        </div>
       </form>
     </div>
     <div id="productInfoMessages"></div>

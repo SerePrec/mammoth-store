@@ -3,7 +3,7 @@
 
   #filtros {
     position: relative;
-    background-color: #e9ecef;
+    background-color: #929aa1;
     border-radius: 0.25rem;
     padding: 0.5rem 1rem;
 
@@ -160,7 +160,7 @@
 
   .colProductos {
     .buscarOrdenar {
-      background-color: #e9ecef;
+      background-color: #929aa1;
       border-radius: 0.25rem;
       padding: 0.5rem 1rem;
 
@@ -193,10 +193,10 @@
       max-height: 75vh;
       overflow-y: scroll;
       overflow-x: hidden;
-      background-color: #e9ecef;
+      background-color: #2c3034;
       margin: 1rem 0 1.5rem 0;
       padding-top: 0.5rem;
-      border: 3px solid #e9ecef;
+      border: 3px solid #2c3034;
       border-radius: 0.25rem;
       min-height: 33rem;
 
@@ -206,7 +206,8 @@
         background-size: 50%;
         background-repeat: no-repeat;
         background-position: center;
-        background-color: #e9ecef;
+        background-color: #2c3034;
+        color: white;
         border-radius: 0.25rem;
         margin: 1.5rem 0;
         padding: 2rem;
@@ -311,7 +312,8 @@
       }
 
       .errorResultadoBuscar {
-        background-color: #e9ecef;
+        color: white;
+        background-color: #2c3034;
         border-radius: 0.25rem;
         margin: 1.5rem 0;
         text-align: center;
