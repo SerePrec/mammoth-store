@@ -396,9 +396,7 @@ function mostrarProductos(vectorProductos) {
       .getProduct(id)
       .then(processResponse(`Se cargó la infomación para actualizar`))
       .then(formForUpdate)
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(console.log);
   });
 
   $("#contenedorProductos .btnDelete").click(function (e) {
@@ -418,9 +416,7 @@ function mostrarProductos(vectorProductos) {
       productsApi
         .deleteProduct(id)
         .then(processResponse(`Producto eliminado con éxito`))
-        .catch(error => {
-          console.log(error);
-        });
+        .catch(console.log);
     }
   });
 }
@@ -794,9 +790,7 @@ document.getElementById("formBtnSave").addEventListener("click", e => {
       .saveProduct(formData)
       .then(processResponse(`Producto cargado con éxito`))
       .then(formForSave)
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(console.log);
   }
 });
 
@@ -812,9 +806,7 @@ document.getElementById("formBtnUpdate").addEventListener("click", e => {
     .updateProduct(id, formData)
     .then(processResponse(`Producto actualizado con éxito`))
     .then(formForSave)
-    .catch(error => {
-      console.log(error);
-    });
+    .catch(console.log);
 });
 
 updateTable();

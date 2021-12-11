@@ -99,6 +99,8 @@ html {
       justify-content: center; }
       .showRoom #filtros h3 span {
         padding-left: 1rem; }
+        .showRoom #filtros h3 span img {
+          filter: brightness(0.25); }
     .showRoom #filtros #cantProductosEncontrados {
       margin-bottom: 0.5rem;
       text-align: center;
@@ -340,6 +342,12 @@ html {
       width: 45%;
       max-width: 15rem;
       margin-right: 1rem; }
+    .cartManage .select-wrapper #btnDeleteCart {
+      opacity: 1;
+      transition: 0.5s all ease-in-out; }
+      .cartManage .select-wrapper #btnDeleteCart.hidden {
+        opacity: 0;
+        pointer-events: none; }
 
 #cartInfoMessages {
   display: flex;
@@ -363,34 +371,36 @@ html {
 #cartInfoMessages.info {
   background-color: #2f5777; }
 
-#productsTable {
-  text-align: center; }
-
-.table {
-  width: 95%;
-  max-width: 50rem;
-  margin: 1rem auto;
-  vertical-align: middle;
-  text-align: center; }
-
-.table thead th:first-child {
-  width: 10%; }
-
-.table thead th:nth-child(2) {
-  width: 50%;
-  text-align: left; }
-
-.table thead th:nth-child(3) {
-  width: 20%; }
-
-.table thead th:last-child {
-  width: 20%; }
-
-.table tbody td:nth-child(2) {
-  text-align: left; }
-
-.table .table__image {
-  width: 50%; }
-
-div.bg-yellow {
-  background-color: #ffc107d6; }
+#cartProducts {
+  text-align: center;
+  margin-bottom: 2rem; }
+  #cartProducts .table {
+    width: 95%;
+    max-width: 50rem;
+    margin: 1rem auto;
+    vertical-align: middle;
+    text-align: center; }
+    #cartProducts .table thead th:first-child {
+      width: 5%; }
+    #cartProducts .table thead th:nth-child(2) {
+      width: 17%;
+      text-align: left; }
+    #cartProducts .table thead th:nth-child(3) {
+      width: 40%;
+      text-align: left; }
+    #cartProducts .table thead th:nth-child(4) {
+      width: 15%; }
+    #cartProducts .table thead th:nth-child(5) {
+      width: 15%; }
+    #cartProducts .table thead th:last-child {
+      width: 8%; }
+    #cartProducts .table tbody td:nth-child(2) {
+      padding: 1rem 0; }
+      #cartProducts .table tbody td:nth-child(2) .table__image {
+        width: 60%; }
+    #cartProducts .table tbody td:nth-child(3) {
+      text-align: left; }
+    #cartProducts .table tbody td:last-child img {
+      max-width: 2rem; }
+  #cartProducts div.bg-yellow {
+    background-color: #ffc107d6; }

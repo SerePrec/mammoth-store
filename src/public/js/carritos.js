@@ -24,6 +24,9 @@ const $rangoPrecioMaximo = $("#rangoPrecioMax");
 const $rangoPrecioMinimo = $("#rangoPrecioMin");
 const $selectOrdenar = $("#selectOrdenar");
 const $selectCart = document.getElementById("selectCart");
+const $btnCreateCart = document.getElementById("btnCreateCart");
+const $btnDeleteCart = document.getElementById("btnDeleteCart");
+const $cartProducts = document.getElementById("cartProducts");
 
 // **************************************************************************//
 // *********************** Definiciones de funciones ************************//
@@ -717,14 +720,13 @@ function processResponse(okText) {
       }, 4000);
       return;
     }
-    if (data.result === "ok" || data.id) {
-      $productForm.reset();
+    if (data.result === "ok" || data.id || Array.isArray(data)) {
       $cartInfoMessages.innerText = okText;
       $cartInfoMessages.classList.add("show", "info");
       setTimeout(() => {
         $cartInfoMessages.classList.remove("show", "info");
       }, 4000);
-      return !formToUpdate ? updateTable() : data;
+      return data;
     }
   };
 }
@@ -756,7 +758,7 @@ function triggerRenderTable() {
 }
 
 // **********************************************************************//
-// ****************** Eventos Formulario Productos **********************//
+// ******************                              **********************//
 // **********************************************************************//
 
 (() => {
@@ -765,23 +767,137 @@ function triggerRenderTable() {
 })();
 
 function updateCartsList() {
-  cartsApi.getCarts().then(cartsId => {
-    htmlCode = `<option value="" selected>Seleccionar carrito</option>`;
-    const options = cartsId.map(
-      cartId => `<option value="${cartId}">ID ${cartId}</option>`
-    );
-    htmlCode += options.join("");
-    $selectCart.innerHTML = htmlCode;
-  });
+  cartsApi
+    .getCarts()
+    .then(data => {
+      if (Array.isArray(data)) {
+        return Promise.resolve(data);
+      } else {
+        return Promise.reject("Error de datos");
+      }
+    })
+    .then(cartsId => {
+      htmlCode = `<option value="" selected>Seleccionar carrito</option>`;
+      const options = cartsId.map(
+        cartId => `<option value="${cartId}">ID ${cartId}</option>`
+      );
+      htmlCode += options.join("");
+      $selectCart.innerHTML = htmlCode;
+      hiddenButton();
+    })
+    .catch(error => {
+      $cartInfoMessages.innerText =
+        "Error. No se pudo cargar el listado de carritos";
+      $cartInfoMessages.classList.add("show", "warning");
+      setTimeout(() => {
+        $cartInfoMessages.classList.remove("show", "warning");
+      }, 4000);
+    });
 }
 
 function createCart() {
-  cartsApi.createCart().then(cartsId => {
-    htmlCode = `<option value="" selected>Seleccionar carrito</option>`;
-    const options = cartsId.map(
-      cartId => `<option value="${cartId}">ID ${cartId}</option>`
+  cartsApi
+    .createCart()
+    .then(processResponse("Carrito creado con éxito"))
+    .then(data => {
+      if (data) {
+        updateCartsList();
+      }
+    })
+    .catch(console.log);
+}
+
+function deleteCart() {
+  const id = $selectCart.value;
+  cartsApi
+    .deleteCart(id)
+    .then(processResponse("Carrito eliminado con éxito"))
+    .then(data => {
+      if (data) {
+        updateCartsList();
+      }
+    })
+    .catch(console.log);
+}
+
+function hiddenButton() {
+  if (!$selectCart.value) {
+    $btnDeleteCart.classList.add("hidden");
+  } else {
+    $btnDeleteCart.classList.remove("hidden");
+  }
+}
+
+$btnCreateCart.addEventListener("click", createCart);
+
+$btnDeleteCart.addEventListener("click", () => {
+  deleteCart();
+});
+
+$selectCart.addEventListener("change", () => {
+  updateCartTable();
+  hiddenButton();
+});
+
+// Renderiza la tabla de productos utilizando template
+function renderCartTable(id, data) {
+  let html = `
+    <div class="listado">
+      <h3>PRODUCTOS EN CARRITO ID ${id}</h3>`;
+  if (data.length > 0) {
+    html += `
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col"></th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Cant.</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>`;
+    data.forEach(
+      ({ product, quantity }) =>
+        (html += `
+        <tr>
+          <td>${product.id}</td>
+          <td><img class="table__image" src="${product.thumbnail}" alt="producto" /></td>
+          <td>${product.title}</td>
+          <td>$${product.price}</td>
+           <td>${quantity}</td>
+           <td><img class="table-trash" src="/img/trash.svg" alt="borrar"/></td>
+        </tr>`)
     );
-    htmlCode += options.join("");
-    $selectCart.innerHTML = htmlCode;
-  });
+    html += `
+        </tbody>
+      </table>`;
+  } else {
+    html += `
+      <div class="container p-5 mb-4 bg-yellow rounded-3">
+        <div class="py-5">
+          <h3 class="display-6 fw-bold">¡Oops!, carrito vacío</h1>
+          <p>No se encontraron productos cargados.</p>
+        </div>
+      </div>`;
+  }
+  return html;
+}
+
+function updateCartTable() {
+  const id = $selectCart.value;
+  if (id) {
+    cartsApi
+      .getCartProducts(id)
+      .then(processResponse("Carrito cargado con éxito"))
+      .then(data => {
+        if (data) {
+          $cartProducts.innerHTML = renderCartTable(id, data);
+        }
+      })
+      .catch(console.log);
+  } else {
+    $cartProducts.innerHTML = "";
+  }
 }

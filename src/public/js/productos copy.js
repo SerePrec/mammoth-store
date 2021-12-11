@@ -33,7 +33,7 @@ const productsApi = {
   }
 };
 
-// Renderiza la tabla de productos utilizando template de hbs
+// Renderiza la tabla de productos utilizando template
 function renderTable(data) {
   let html = `
     <div class="listado">
