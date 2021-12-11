@@ -128,7 +128,7 @@
     "brand": "LIV",
     "category": "bicicletas",
     "price": 437000,
-    "stock": 437000,
+    "stock": 3,
     "thumbnail": "/img/productos/1639175527746-producto11.jpg"
   },
   {
@@ -140,7 +140,19 @@
     "brand": "SCOTT",
     "category": "bicicletas",
     "price": 628000,
-    "stock": 3,
+    "stock": 2,
     "thumbnail": "/img/productos/1639175575420-producto12.jpg"
+  },
+  {
+    "id": 13,
+    "timestamp": 1639250150157,
+    "title": "Bicicleta Ruta Giant TCR Advanced SL 1 Disc 2021",
+    "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "code": "CODIGO",
+    "brand": "GIANT",
+    "category": "bicicletas",
+    "price": 475000,
+    "stock": 2,
+    "thumbnail": "/img/productos/1639250150155-producto13.jpg"
   }
 ]

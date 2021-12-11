@@ -1,63 +1,27 @@
 [
   {
-    "id": 1,
-    "timestamp": 1638917673022,
-    "products": [
-      {
-        "product": {
-          "id": 3,
-          "timestamp": 1638898220900,
-          "category": "equipamiento",
-          "code": "N-CA-CI-50",
-          "brand": "NUTRISPORT",
-          "title": "Gel Energizante Nutrisport Con Cafeína 50g. Express.",
-          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-          "price": 125,
-          "stock": 200,
-          "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto3.jpg?alt=media&token=472f605e-b947-4066-922a-35dd1e20463f"
-        },
-        "quantity": 11
-      },
-      {
-        "product": {
-          "id": 7,
-          "timestamp": 1638898220901,
-          "category": "indumentaria",
-          "code": "S-S-SWOR.018-WT/42",
-          "brand": "SPECIALIZED",
-          "title": "Zapatillas Specialized S-Works De Ruta. Blanco. Talle: 42.",
-          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-          "price": 14910,
-          "stock": 3,
-          "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto7.jpg?alt=media&token=ba7bc862-6955-41ed-93d0-35c710474aba"
-        },
-        "quantity": 2
-      }
-    ]
-  },
-  {
     "id": 2,
     "timestamp": 1638917673765,
     "products": [
       {
         "product": {
-          "id": 5,
-          "timestamp": 1638898220901,
-          "category": "accesorios",
-          "code": "Velo.St.12",
-          "brand": "CATEYE",
-          "title": "Velocimetro Cateye Inalámbrico ST-12.",
+          "id": 6,
+          "timestamp": 1638976507529,
+          "category": "componentes",
+          "code": "TUBOLITO.C.29/1.75-SP",
+          "brand": "TUBOLITO",
+          "title": "Cámara Tubolito MTB 29 X 1.75.",
           "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-          "price": 3560,
-          "stock": 0,
-          "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto5.jpg?alt=media&token=ca98d5b5-eb8d-4135-83bd-8df816373772"
+          "price": 473,
+          "stock": 18,
+          "thumbnail": "/img/productos/1639158012490-producto6.jpg"
         },
         "quantity": 7
       },
       {
         "product": {
           "id": 7,
-          "timestamp": 1638898220901,
+          "timestamp": 1638976507530,
           "category": "indumentaria",
           "code": "S-S-SWOR.018-WT/42",
           "brand": "SPECIALIZED",
@@ -65,7 +29,7 @@
           "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
           "price": 14910,
           "stock": 3,
-          "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto7.jpg?alt=media&token=ba7bc862-6955-41ed-93d0-35c710474aba"
+          "thumbnail": "/img/productos/1639158031547-producto7.jpg"
         },
         "quantity": 1
       }
@@ -74,7 +38,53 @@
   {
     "id": 4,
     "timestamp": 1638917674848,
-    "products": []
+    "products": [
+      {
+        "product": {
+          "id": 8,
+          "timestamp": 1638976507531,
+          "category": "bicicletas",
+          "code": "CODIGO",
+          "brand": "GIANT",
+          "title": "Bicicleta Ruta Giant Propel Advanced Sl 0 Disc 2020",
+          "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+          "price": 510000,
+          "stock": 2,
+          "thumbnail": "/img/productos/1639158049437-producto8.jpg"
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "id": 11,
+          "timestamp": 1639144716501,
+          "title": "Bicicleta Ruta Liv Envi Advanced Pro 1 Disc 2021",
+          "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+          "code": "CODIGO",
+          "brand": "LIV",
+          "category": "bicicletas",
+          "price": 437000,
+          "stock": 437000,
+          "thumbnail": "/img/productos/1639175527746-producto11.jpg"
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "id": 6,
+          "timestamp": 1638976507529,
+          "category": "componentes",
+          "code": "TUBOLITO.C.29/1.75-SP",
+          "brand": "TUBOLITO",
+          "title": "Cámara Tubolito MTB 29 X 1.75.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "price": 473,
+          "stock": 18,
+          "thumbnail": "/img/productos/1639158012490-producto6.jpg"
+        },
+        "quantity": 12
+      }
+    ]
   },
   {
     "id": 5,
@@ -84,6 +94,93 @@
   {
     "id": 7,
     "timestamp": 1639179542127,
+    "products": [
+      {
+        "product": {
+          "id": 3,
+          "timestamp": 1638976507528,
+          "category": "equipamiento",
+          "code": "N-CA-CI-50",
+          "brand": "NUTRISPORT",
+          "title": "Gel Energizante Nutrisport Con Cafeína 50g. Express.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "price": 125,
+          "stock": 200,
+          "thumbnail": "/img/productos/1639157975529-producto3.jpg"
+        },
+        "quantity": 11
+      },
+      {
+        "product": {
+          "id": 7,
+          "timestamp": 1638976507530,
+          "category": "indumentaria",
+          "code": "S-S-SWOR.018-WT/42",
+          "brand": "SPECIALIZED",
+          "title": "Zapatillas Specialized S-Works De Ruta. Blanco. Talle: 42.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "price": 14910,
+          "stock": 3,
+          "thumbnail": "/img/productos/1639158031547-producto7.jpg"
+        },
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "timestamp": 1639250392832,
     "products": []
+  },
+  {
+    "id": 9,
+    "timestamp": 1639251822752,
+    "products": [
+      {
+        "product": {
+          "id": 1,
+          "timestamp": 1638976507527,
+          "category": "accesorios",
+          "code": "00001-B3",
+          "brand": "PODIUM",
+          "title": "Caramagnola Plástica Podium 0.5L. Versión Eco. Color A Granel.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "price": 450,
+          "stock": 50,
+          "thumbnail": "/img/productos/1639157946700-producto1.jpg"
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "id": 9,
+          "timestamp": 1638976507531,
+          "category": "bicicletas",
+          "code": "CODIGO",
+          "brand": "ORBEA",
+          "title": "Bicicleta Ruta Orbea Gain M10 2019",
+          "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+          "price": 374000,
+          "stock": 2,
+          "thumbnail": "/img/productos/1639158067978-producto9.jpg"
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "id": 4,
+          "timestamp": 1638976507528,
+          "category": "equipamiento",
+          "code": "S-H-PREV.075-BC/RED/SM",
+          "brand": "SPECIALIZED",
+          "title": "Casco Specialized Echelon II Ruta. Verde FL / Small.",
+          "detail": "Casco de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+          "price": 15480,
+          "stock": 5,
+          "thumbnail": "/img/productos/1639157991226-producto4.jpg"
+        },
+        "quantity": 1
+      }
+    ]
   }
 ]

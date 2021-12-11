@@ -1,7 +1,7 @@
 .cartManage {
   width: 95%;
   max-width: 60rem;
-  margin: 1rem auto;
+  margin: 1rem auto 2rem auto;
   padding: 2rem;
   background-color: #2c3034;
   border-radius: 1rem;
@@ -57,6 +57,7 @@
 //***********************
 //***************************
 #cartProducts {
+  display: none; //Para efecto Jquery cambio inicial
   text-align: center;
   margin-bottom: 2rem;
   .table {
@@ -88,6 +89,9 @@
       }
     }
     tbody {
+      td:first-child {
+        padding: 0;
+      }
       td:nth-child(2) {
         padding: 1rem 0;
         .table__image {
@@ -99,7 +103,8 @@
       }
       td:last-child {
         img {
-          max-width: 2rem;
+          cursor: pointer;
+          max-width: 1.5rem;
         }
       }
     }

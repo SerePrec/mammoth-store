@@ -326,7 +326,7 @@ html {
 .cartManage {
   width: 95%;
   max-width: 60rem;
-  margin: 1rem auto;
+  margin: 1rem auto 2rem auto;
   padding: 2rem;
   background-color: #2c3034;
   border-radius: 1rem;
@@ -372,6 +372,7 @@ html {
   background-color: #2f5777; }
 
 #cartProducts {
+  display: none;
   text-align: center;
   margin-bottom: 2rem; }
   #cartProducts .table {
@@ -394,6 +395,8 @@ html {
       width: 15%; }
     #cartProducts .table thead th:last-child {
       width: 8%; }
+    #cartProducts .table tbody td:first-child {
+      padding: 0; }
     #cartProducts .table tbody td:nth-child(2) {
       padding: 1rem 0; }
       #cartProducts .table tbody td:nth-child(2) .table__image {
@@ -401,6 +404,7 @@ html {
     #cartProducts .table tbody td:nth-child(3) {
       text-align: left; }
     #cartProducts .table tbody td:last-child img {
-      max-width: 2rem; }
+      cursor: pointer;
+      max-width: 1.5rem; }
   #cartProducts div.bg-yellow {
     background-color: #ffc107d6; }

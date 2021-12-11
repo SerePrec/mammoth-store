@@ -62,7 +62,10 @@ const cartsApi = {
   addProductToCart: async (id, id_prod, quantity) => {
     return fetch(`/api/carrito/${id}/productos`, {
       method: "POST",
-      body: { id: id_prod, quantity }
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ id: id_prod, quantity })
     }).then(data => data.json());
   },
   deleteProductFromCart: async (id, id_prod) => {
@@ -412,14 +415,11 @@ function mostrarProductos(vectorProductos) {
     // genero los eventos para todos los botones agregar
     // para luego pasar los valores del producto correspondiente a la funcion de agregar al carrito,
     // tomo esos valores del atributo "data-" mediante el metodo data()
-    let id = $(this).data("productoId");
-    let $inputCantidad = $(this).next();
-    let cant = parseInt($inputCantidad.val());
-    //TODO::TODO: primero verifico si la cantidad es valida entes de agregar al carrito. Si bien setee el
-    // atributo "max" en el input, puede que el usuario manualmente fuerce un valor no admisible
-    // if (validarCantidad(id, cant)) {
-    //   agregarCarrito(id, cant);
-    // }
+    const id = $selectCart.value;
+    const id_prod = $(this).data("productoId");
+    const $inputCantidad = $(this).next();
+    const cant = parseInt($inputCantidad.val());
+    addProductToCart(id, id_prod, cant);
     $inputCantidad.val(1); // devuelve el valor del input a 1
   });
 }
@@ -721,11 +721,13 @@ function processResponse(okText) {
       return;
     }
     if (data.result === "ok" || data.id || Array.isArray(data)) {
-      $cartInfoMessages.innerText = okText;
-      $cartInfoMessages.classList.add("show", "info");
-      setTimeout(() => {
-        $cartInfoMessages.classList.remove("show", "info");
-      }, 4000);
+      if (okText) {
+        $cartInfoMessages.innerText = okText;
+        $cartInfoMessages.classList.add("show", "info");
+        setTimeout(() => {
+          $cartInfoMessages.classList.remove("show", "info");
+        }, 2500);
+      }
       return data;
     }
   };
@@ -784,6 +786,7 @@ function updateCartsList() {
       htmlCode += options.join("");
       $selectCart.innerHTML = htmlCode;
       hiddenButton();
+      updateCartTable();
     })
     .catch(error => {
       $cartInfoMessages.innerText =
@@ -820,6 +823,34 @@ function deleteCart() {
     .catch(console.log);
 }
 
+function addProductToCart(id, id_prod, quantity) {
+  if (id) {
+    cartsApi
+      .addProductToCart(id, id_prod, quantity)
+      .then(processResponse("Selección agregada al carrito"))
+      .then(data => {
+        if (data) {
+          updateCartTable();
+        }
+      })
+      .catch(console.log);
+  }
+}
+
+function deleteProductFromCart(id, id_prod) {
+  if (id) {
+    cartsApi
+      .deleteProductFromCart(id, id_prod)
+      .then(processResponse("Producto eliminado del carrito"))
+      .then(data => {
+        if (data) {
+          updateCartTable();
+        }
+      })
+      .catch(console.log);
+  }
+}
+
 function hiddenButton() {
   if (!$selectCart.value) {
     $btnDeleteCart.classList.add("hidden");
@@ -835,7 +866,7 @@ $btnDeleteCart.addEventListener("click", () => {
 });
 
 $selectCart.addEventListener("change", () => {
-  updateCartTable();
+  $("#cartProducts").slideUp("slow", updateCartTable);
   hiddenButton();
 });
 
@@ -863,11 +894,15 @@ function renderCartTable(id, data) {
         (html += `
         <tr>
           <td>${product.id}</td>
-          <td><img class="table__image" src="${product.thumbnail}" alt="producto" /></td>
+          <td><img class="table__image" src="${
+            product.thumbnail
+          }" alt="producto" /></td>
           <td>${product.title}</td>
-          <td>$${product.price}</td>
+          <td>$${formatoPrecio(product.price)}</td>
            <td>${quantity}</td>
-           <td><img class="table-trash" src="/img/trash.svg" alt="borrar"/></td>
+           <td><img class="table-trash" src="/img/trash.svg" alt="borrar" data-producto-id="${
+             product.id
+           }"/></td>
         </tr>`)
     );
     html += `
@@ -890,10 +925,17 @@ function updateCartTable() {
   if (id) {
     cartsApi
       .getCartProducts(id)
-      .then(processResponse("Carrito cargado con éxito"))
+      .then(processResponse())
       .then(data => {
         if (data) {
           $cartProducts.innerHTML = renderCartTable(id, data);
+          $("#cartProducts .table-trash").click(function (e) {
+            // genero los eventos para todos los botones eliminar
+            const id = $selectCart.value;
+            const id_prod = $(this).data("productoId");
+            deleteProductFromCart(id, id_prod);
+          });
+          $("#cartProducts").slideDown(300);
         }
       })
       .catch(console.log);
