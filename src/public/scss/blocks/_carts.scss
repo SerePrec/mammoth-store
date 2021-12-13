@@ -54,8 +54,6 @@
   background-color: #2f5777;
 }
 
-//***********************
-//***************************
 #cartProducts {
   display: none; //Para efecto Jquery cambio inicial
   text-align: center;
@@ -100,16 +98,71 @@
       }
       td:nth-child(3) {
         text-align: left;
+        padding-right: 0.25rem;
+        p:last-child {
+          margin-top: 1rem;
+          display: none;
+        }
+      }
+      td:nth-child(4) {
+        .btn-qty-update {
+          display: none;
+        }
       }
       td:last-child {
         img {
           cursor: pointer;
-          max-width: 1.5rem;
+          max-width: 1.25rem;
         }
       }
     }
   }
   div.bg-yellow {
     background-color: #ffc107d6;
+  }
+  @media (max-width: $md) {
+    .table {
+      thead {
+        th:first-child,
+        th:nth-child(5) {
+          display: none;
+        }
+        th:nth-child(2) {
+          width: 10%;
+        }
+        th:nth-child(3) {
+          width: 50%;
+        }
+        th:nth-child(4) {
+          width: 32%;
+        }
+        th:last-child {
+          width: 8%;
+        }
+      }
+      tbody {
+        td:first-child,
+        td:nth-child(5) {
+          display: none;
+        }
+        td:nth-child(2) {
+          .table__image {
+            width: 100%;
+          }
+        }
+        td:nth-child(3) {
+          p:last-child {
+            display: block;
+          }
+        }
+        td:last-child {
+          padding: 0;
+          img {
+            width: 1rem;
+            padding: 1rem 0;
+          }
+        }
+      }
+    }
   }
 }

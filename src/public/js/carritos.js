@@ -68,6 +68,15 @@ const cartsApi = {
       body: JSON.stringify({ id: id_prod, quantity })
     }).then(data => data.json());
   },
+  updateProductFromCart: async (id, id_prod, quantity) => {
+    return fetch(`/api/carrito/${id}/productos`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ id: id_prod, quantity })
+    }).then(data => data.json());
+  },
   deleteProductFromCart: async (id, id_prod) => {
     return fetch(`/api/carrito/${id}/productos/${id_prod}`, {
       method: "DELETE"
@@ -837,6 +846,20 @@ function addProductToCart(id, id_prod, quantity) {
   }
 }
 
+function updateProductFromCart(id, id_prod, quantity) {
+  if (id) {
+    cartsApi
+      .updateProductFromCart(id, id_prod, quantity)
+      .then(processResponse("Cantidad actualizada en el carrito"))
+      .then(data => {
+        if (data) {
+          updateCartTable();
+        }
+      })
+      .catch(console.log);
+  }
+}
+
 function deleteProductFromCart(id, id_prod) {
   if (id) {
     cartsApi
@@ -872,6 +895,10 @@ $selectCart.addEventListener("change", () => {
 
 // Renderiza la tabla de productos utilizando template
 function renderCartTable(id, data) {
+  const total = data.reduce(
+    (tot, { product, quantity }) => (tot += product.price * quantity),
+    0
+  );
   let html = `
     <div class="listado">
       <h3>PRODUCTOS EN CARRITO ID ${id}</h3>`;
@@ -883,8 +910,8 @@ function renderCartTable(id, data) {
             <th scope="col">id</th>
             <th scope="col"></th>
             <th scope="col">Descripción</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Cant.</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Subtotal</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -897,17 +924,41 @@ function renderCartTable(id, data) {
           <td><img class="table__image" src="${
             product.thumbnail
           }" alt="producto" /></td>
-          <td>${product.title}</td>
-          <td>$${formatoPrecio(product.price)}</td>
-           <td>${quantity}</td>
-           <td><img class="table-trash" src="/img/trash.svg" alt="borrar" data-producto-id="${
-             product.id
-           }"/></td>
+          <td>
+            <p>${product.title}</p>
+            <p><b>$${formatoPrecio(product.price)}</b><del></del></p>
+            <p><b>SUBTOTAL: $${formatoPrecio(product.price * quantity)}</b></p>
+          </td>
+          <td>
+            <div class="mb-3 input-group input-group-sm">
+              <div class="input-group-prepend">
+                <button type="button" class="btn btn-outline-secondary btn-minus">-</button>
+              </div>
+              <input type="text" class="text-center form-control product-qty" data-product-stk="${
+                product.stock
+              }" value="${quantity}" disabled>
+              <div class="input-group-append">
+                <button type="button" class="btn btn-outline-secondary btn-plus" data-product-stk="${
+                  product.stock
+                }">+</button>
+              </div>
+            </div>
+            <button type="button" class="typicBtn font-weight-bold btn btn-danger btn-block btn-sm btn-qty-update" data-producto-id="${
+              product.id
+            }">Actualizar</button>
+          </td>
+          <td>$${formatoPrecio(product.price * quantity)}</td>
+          <td>
+            <img class="table-trash" src="/img/trash.svg" alt="borrar" data-producto-id="${
+              product.id
+            }"/>
+          </td>
         </tr>`)
     );
     html += `
         </tbody>
-      </table>`;
+      </table>
+      <h3>TOTAL $${formatoPrecio(total)}</h3>`;
   } else {
     html += `
       <div class="container p-5 mb-4 bg-yellow rounded-3">
@@ -935,11 +986,51 @@ function updateCartTable() {
             const id_prod = $(this).data("productoId");
             deleteProductFromCart(id, id_prod);
           });
+          $("#cartProducts .btn-minus").click(function (e) {
+            // genero los eventos para todos los botones -
+            const $inputQty = $(this).parent().next();
+            const qty = parseInt($inputQty.val());
+            if (qty > 1) {
+              $inputQty.val(qty - 1);
+              checkInputChange($inputQty);
+            }
+          });
+          $("#cartProducts .btn-plus").click(function (e) {
+            // genero los eventos para todos los botones +
+            const $inputQty = $(this).parent().prev();
+            const qty = parseInt($inputQty.val());
+            const stock = parseInt($(this).data("productStk"));
+            if (qty < stock) {
+              $inputQty.val(qty + 1);
+              checkInputChange($inputQty);
+            }
+          });
+          $("#cartProducts .product-qty").on("input", function (e) {
+            $(this).val($(this).attr("value"));
+          });
+          $("#cartProducts .btn-qty-update").click(function (e) {
+            const id = $selectCart.value;
+            const id_prod = $(this).data("productoId");
+            const $inputQty = $(this).prev(".input-group").find(".product-qty");
+            const qty = parseInt($inputQty.val());
+            updateProductFromCart(id, id_prod, qty);
+          });
           $("#cartProducts").slideDown(300);
         }
       })
       .catch(console.log);
   } else {
     $cartProducts.innerHTML = "";
+  }
+}
+
+function checkInputChange($input) {
+  const prevQty = $input.attr("value");
+  const actQty = $input.val();
+  console.log(prevQty, actQty);
+  if (actQty !== prevQty) {
+    $input.parent().next(".btn-qty-update").slideDown("fast");
+  } else {
+    $input.parent().next(".btn-qty-update").slideUp("fast");
   }
 }
