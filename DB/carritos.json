@@ -5,21 +5,6 @@
     "products": [
       {
         "product": {
-          "id": 6,
-          "timestamp": 1638976507529,
-          "category": "componentes",
-          "code": "TUBOLITO.C.29/1.75-SP",
-          "brand": "TUBOLITO",
-          "title": "Cámara Tubolito MTB 29 X 1.75.",
-          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-          "price": 473,
-          "stock": 18,
-          "thumbnail": "/img/productos/1639158012490-producto6.jpg"
-        },
-        "quantity": 7
-      },
-      {
-        "product": {
           "id": 7,
           "timestamp": 1638976507530,
           "category": "indumentaria",
@@ -32,6 +17,21 @@
           "thumbnail": "/img/productos/1639158031547-producto7.jpg"
         },
         "quantity": 1
+      },
+      {
+        "product": {
+          "id": 6,
+          "timestamp": 1638976507529,
+          "category": "componentes",
+          "code": "TUBOLITO.C.29/1.75-SP",
+          "brand": "TUBOLITO",
+          "title": "Cámara Tubolito MTB 29 X 1.75.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "price": 473,
+          "stock": 18,
+          "thumbnail": "/img/productos/1639158012490-producto6.jpg"
+        },
+        "quantity": 7
       }
     ]
   },

@@ -710,7 +710,8 @@ function cargaInicialOk() {
 function processResponse(okText) {
   return data => {
     if (data.error) {
-      $productInfoMessages.innerText = data.error;
+      $productInfoMessages.innerText =
+        data.error === -1 ? "No posee los permisos necesarios" : data.error;
       $productInfoMessages.classList.add("show", "warning");
       setTimeout(() => {
         $productInfoMessages.classList.remove("show", "warning");
@@ -809,4 +810,5 @@ document.getElementById("formBtnUpdate").addEventListener("click", e => {
     .catch(console.log);
 });
 
+// Inicio
 updateTable();

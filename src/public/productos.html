@@ -63,7 +63,9 @@
         </div>
         <div class="mb-3">
           <label for="inputThumbnail" class="form-label">URL de la imágen</label>
-          <input type="url" class="form-control" id="inputThumbnail" name="thumbnail">
+          <input type="text" class="form-control" id="inputThumbnail" name="thumbnail"
+            pattern='^(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}|[/])\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$'
+            title="URL o ruta local">
         </div>
         <div class="mb-3">
           <label for="inputFile" class="form-label">Subir imagen</label>

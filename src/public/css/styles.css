@@ -348,6 +348,11 @@ html {
       .cartManage .select-wrapper #btnDeleteCart.hidden {
         opacity: 0;
         pointer-events: none; }
+  @media (max-width: 575px) {
+    .cartManage {
+      padding: 1rem; }
+      .cartManage .select-wrapper .form-select {
+        width: 40%; } }
 
 #cartInfoMessages {
   display: flex;
@@ -419,11 +424,11 @@ html {
     #cartProducts .table thead th:nth-child(5) {
       display: none; }
     #cartProducts .table thead th:nth-child(2) {
-      width: 10%; }
+      width: 12%; }
     #cartProducts .table thead th:nth-child(3) {
-      width: 50%; }
+      width: 52%; }
     #cartProducts .table thead th:nth-child(4) {
-      width: 32%; }
+      width: 28%; }
     #cartProducts .table thead th:last-child {
       width: 8%; }
     #cartProducts .table tbody td:first-child,
@@ -433,6 +438,10 @@ html {
       width: 100%; }
     #cartProducts .table tbody td:nth-child(3) p:last-child {
       display: block; }
+    #cartProducts .table tbody td:nth-child(4) .btn {
+      padding: 0.2rem 0.35rem; }
+    #cartProducts .table tbody td:nth-child(4) .input-group > .form-control {
+      padding: 0.2rem; }
     #cartProducts .table tbody td:last-child {
       padding: 0; }
       #cartProducts .table tbody td:last-child img {
