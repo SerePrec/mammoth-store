@@ -357,6 +357,9 @@ function mostrarProductos(vectorProductos) {
       }
 
       codigoHTML += `
+                    <span class="badge rounded-pill idBadge">${
+                      producto.id
+                    }</span>
                     <img src="${
                       producto.thumbnail
                     }" class="card-img-top" alt="${producto.title}">
@@ -413,9 +416,11 @@ function mostrarProductos(vectorProductos) {
     );
 
     if (isOk) {
+      formToUpdate = false;
       productsApi
         .deleteProduct(id)
         .then(processResponse(`Producto eliminado con éxito`))
+        .then(formForSave)
         .catch(console.log);
     }
   });

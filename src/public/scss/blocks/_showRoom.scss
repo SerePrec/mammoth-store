@@ -238,6 +238,14 @@
       }
 
       .card {
+        .idBadge {
+          position: absolute;
+          top: 0.25rem;
+          left: 0.25rem;
+          width: 5rem;
+          background-color: #6d8fad;
+          font-style: italic;
+        }
         .descuento {
           position: absolute;
           width: 3.5rem;
