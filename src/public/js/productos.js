@@ -146,7 +146,9 @@ function buscarProductos(e) {
   if (fraseBuscar) {
     fraseBuscar = fraseBuscar.toLowerCase();
     productosFiltradosCliente = productos.filter(
-      prod => prod.title.toLowerCase().indexOf(fraseBuscar) != -1
+      prod =>
+        prod.title.toLowerCase().indexOf(fraseBuscar) !== -1 ||
+        prod.brand.toLowerCase().indexOf(fraseBuscar) !== -1
     );
 
     $filtroBuscar.removeClass("ocultar"); // Hace visible un botón para luego quitar esté filtrado por búsqueda. Este boton esta oculto al inicio
@@ -357,9 +359,9 @@ function mostrarProductos(vectorProductos) {
       }
 
       codigoHTML += `
-                    <span class="badge rounded-pill idBadge">${
-                      producto.id
-                    }</span>
+                    <span class="badge rounded-pill idBadge">${producto.id
+                      .toString()
+                      .padStart(6, "0")}</span>
                     <img src="${
                       producto.thumbnail
                     }" class="card-img-top" alt="${producto.title}">

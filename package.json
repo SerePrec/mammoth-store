@@ -19,6 +19,7 @@
     "socket.io": "^4.4.0"
   },
   "devDependencies": {
-    "node-sass": "^7.0.0"
+    "node-sass": "^7.0.0",
+    "nodemon": "^2.0.15"
   }
 }
