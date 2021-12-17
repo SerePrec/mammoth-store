@@ -86,7 +86,8 @@ class ContenedorFS {
       const match = content.find(elem => elem.id === id);
       if (match) {
         for (const key in data) {
-          if (!data[key]) data[key] = match[key];
+          if (data[key] === undefined || data[key] === "")
+            data[key] = match[key];
         }
         const newProducto = { ...match, ...data };
         const newContent = content.map(elem =>

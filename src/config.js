@@ -13,20 +13,20 @@ const config = {
     messagesFile: "mensajes.json",
     productsFile: "productos.json",
     cartsFile: "carritos.json"
+  },
+  mariaDb: {
+    client: "mysql",
+    connection: {
+      host: "127.0.0.1",
+      user: "root",
+      password: "",
+      database: "ecommerce"
+    }
   }
-  // mariaDb: {
-  //   client: "mysql",
-  //   connection: {
-  //     host: "localhost",
-  //     user: "coderhouse",
-  //     password: "coderhouse",
-  //     database: "coderhouse"
-  //   }
-  // },
   // sqlite3: {
   //   client: "sqlite3",
   //   connection: {
-  //     filename: `./DB/ecommerce.sqlite`
+  //     filename: path.join(__dirname, "..", "DB", "ecommerce.sqlite")
   //   },
   //   useNullAsDefault: true
   // }
