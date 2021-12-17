@@ -1,12 +1,12 @@
 import * as fs from "fs/promises";
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
+import path from "path";
+import config from "../../config.js";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const dbDir = config.fileSystemDb.path;
 
 class ContenedorFS {
   constructor(filename = "testDB.json") {
-    this.path = path.join(__dirname, "..", "..", "DB", filename);
+    this.path = path.join(dbDir, filename);
     this.nextId = null;
   }
 

@@ -1,9 +1,10 @@
 import { Server as Httpserver } from "http";
 import { Server as IoServer } from "socket.io";
+import config from "./config.js";
 import app from "./app.js";
 import sockets from "./sockets.js";
 
-const PORT = process.env.PORT || 8080;
+const PORT = config.PORT;
 
 async function startServer() {
   //Inicializo mi "storage"

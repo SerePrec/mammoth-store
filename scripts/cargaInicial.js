@@ -1,7 +1,7 @@
 import * as fs from "fs/promises";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import ContenedorFS from "../src/models/ContenedorFS.js";
+import ContenedorFS from "../src/models/containers/ContenedorFS.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BK_FILENAME = "productsBk.json";

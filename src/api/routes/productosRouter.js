@@ -1,7 +1,6 @@
 import { Router } from "express";
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
 import multer from "multer";
+import config from "../../config.js";
 import { productsModel } from "../../models/index.js";
 import {
   validateNumericId,
@@ -10,11 +9,9 @@ import {
 } from "../middlewares/validateData.js";
 import { isAdmin } from "../middlewares/auth.js";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
 const storage = multer.diskStorage({
-  destination: function (req, fulie, cb) {
-    cb(null, path.join(__dirname, "..", "..", "public", "img", "productos"));
+  destination: function (req, file, cb) {
+    cb(null, config.uploadsImg.path);
   },
   filename: function (req, file, cb) {
     const prefix = Date.now();
