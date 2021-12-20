@@ -1,28 +1,35 @@
-import ContenedorFS from "./containers/ContenedorFS.js";
-import config from "../config.js";
+let productsModel;
+let cartsModel;
+let messagesModel;
 
-class ProductsModelFS extends ContenedorFS {
-  constructor() {
-    super(config.fileSystemDb.productsFile);
-  }
+switch (process.env.PERS) {
+  case "fs":
+    const { default: ProductsDaoFS } = await import(
+      "./daos/products/ProductsDaoFS.js"
+    );
+    const { default: CartsDaoFS } = await import("./daos/carts/CartsDaoFS.js");
+    const { default: MessagesDaoFS } = await import(
+      "./daos/messages/MessagesDaoFS.js"
+    );
+    productsModel = new ProductsDaoFS();
+    cartsModel = new CartsDaoFS();
+    messagesModel = new MessagesDaoFS();
+    break;
+  case "mem":
+  default:
+    const { default: ProductsDaoMem } = await import(
+      "./daos/products/ProductsDaoMem.js"
+    );
+    const { default: CartsDaoMem } = await import(
+      "./daos/carts/CartsDaoMem.js"
+    );
+    const { default: MessagesDaoMem } = await import(
+      "./daos/messages/MessagesDaoMem.js"
+    );
+    productsModel = new ProductsDaoMem();
+    cartsModel = new CartsDaoMem();
+    messagesModel = new MessagesDaoMem();
+    break;
 }
-const productsModel = new ProductsModelFS();
-
-class cartsModelFS extends ContenedorFS {
-  constructor() {
-    super(config.fileSystemDb.cartsFile);
-  }
-  async save(cart = { products: [] }) {
-    return super.save(cart);
-  }
-}
-const cartsModel = new cartsModelFS();
-
-class MessagesModelFS extends ContenedorFS {
-  constructor() {
-    super(config.fileSystemDb.messagesFile);
-  }
-}
-const messagesModel = new MessagesModelFS();
 
 export { productsModel, cartsModel, messagesModel };

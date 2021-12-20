@@ -20,16 +20,17 @@ const config = {
       host: "127.0.0.1",
       user: "root",
       password: "",
-      database: "ecommerce"
+      database: "ecommerce",
+      charset: "utf8mb4"
     }
+  },
+  sqlite3: {
+    client: "sqlite3",
+    connection: {
+      filename: path.join(__dirname, "..", "DB", "ecommerce.sqlite")
+    },
+    useNullAsDefault: true
   }
-  // sqlite3: {
-  //   client: "sqlite3",
-  //   connection: {
-  //     filename: path.join(__dirname, "..", "DB", "ecommerce.sqlite")
-  //   },
-  //   useNullAsDefault: true
-  // }
 };
 
 export default config;
