@@ -99,7 +99,7 @@ class CartsDaoSQL {
         };
         dataToSave.push(productInCart);
       }
-      await this.productsInCarts.save(dataToSave);
+      dataToSave.length > 0 && (await this.productsInCarts.save(dataToSave));
       const updateCart = await this.getById(id_cart);
       console.log(`El carrito con id: ${id_cart} se actualizó con éxito`);
       return updateCart;

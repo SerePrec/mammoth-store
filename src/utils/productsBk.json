@@ -7,7 +7,7 @@
     "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
     "price": 450,
     "stock": 50,
-    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto1.jpg?alt=media&token=9b4b16a4-e2ec-46bb-b705-2b4538b316d9"
+    "thumbnail": "/img/productos/1639157946700-producto1.jpg"
   },
   {
     "category": "componentes",
@@ -17,7 +17,7 @@
     "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
     "price": 4750,
     "stock": 15,
-    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto2.jpg?alt=media&token=732eaa6f-68f6-40a1-a953-9729cb3689e1"
+    "thumbnail": "/img/productos/1639157959863-producto2.jpg"
   },
   {
     "category": "equipamiento",
@@ -27,7 +27,7 @@
     "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
     "price": 125,
     "stock": 200,
-    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto3.jpg?alt=media&token=472f605e-b947-4066-922a-35dd1e20463f"
+    "thumbnail": "/img/productos/1639157975529-producto3.jpg"
   },
   {
     "category": "equipamiento",
@@ -37,7 +37,7 @@
     "detail": "Casco de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
     "price": 15480,
     "stock": 5,
-    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto4.jpg?alt=media&token=c319469b-9ce8-40ad-b757-4366875c3d87"
+    "thumbnail": "/img/productos/1639157991226-producto4.jpg"
   },
   {
     "category": "accesorios",
@@ -47,7 +47,7 @@
     "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
     "price": 3560,
     "stock": 0,
-    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto5.jpg?alt=media&token=ca98d5b5-eb8d-4135-83bd-8df816373772"
+    "thumbnail": "/img/productos/1639157910158-producto5.jpg"
   },
   {
     "category": "componentes",
@@ -57,7 +57,7 @@
     "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
     "price": 473,
     "stock": 18,
-    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto6.jpg?alt=media&token=b7515ed0-9b64-4fb2-97d9-9c64e9f26db6"
+    "thumbnail": "/img/productos/1639158012490-producto6.jpg"
   },
   {
     "category": "indumentaria",
@@ -67,7 +67,7 @@
     "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
     "price": 14910,
     "stock": 3,
-    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto7.jpg?alt=media&token=ba7bc862-6955-41ed-93d0-35c710474aba"
+    "thumbnail": "/img/productos/1639158031547-producto7.jpg"
   },
   {
     "category": "bicicletas",
@@ -77,7 +77,7 @@
     "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
     "price": 510000,
     "stock": 2,
-    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto8.jpg?alt=media&token=292632d0-02a6-40d3-8c8d-67edfb578f3e"
+    "thumbnail": "/img/productos/1639158049437-producto8.jpg"
   },
   {
     "category": "bicicletas",
@@ -87,7 +87,7 @@
     "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
     "price": 374000,
     "stock": 2,
-    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto9.jpg?alt=media&token=8d05581d-a5db-4c36-88ff-319d8124ee60"
+    "thumbnail": "/img/productos/1639158067978-producto9.jpg"
   },
   {
     "category": "bicicletas",
@@ -97,6 +97,36 @@
     "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
     "price": 412000,
     "stock": 3,
-    "thumbnail": "https://firebasestorage.googleapis.com/v0/b/mammoth-bike-store.appspot.com/o/images%2Fproducts%2Fproducto10.jpg?alt=media&token=2bb8280e-e4da-416f-981a-03df17dbea47"
+    "thumbnail": "/img/productos/1639158096426-producto10.jpg"
+  },
+  {
+    "title": "Bicicleta Ruta Liv Envi Advanced Pro 1 Disc 2021",
+    "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "code": "CODIGO",
+    "brand": "LIV",
+    "category": "bicicletas",
+    "price": 437000,
+    "stock": 3,
+    "thumbnail": "/img/productos/1639175527746-producto11.jpg"
+  },
+  {
+    "title": "Bicicleta Tria Scott Plasma RC 2021",
+    "detail": "Bicicleta de triatlón amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "code": "CODIGO",
+    "brand": "SCOTT",
+    "category": "bicicletas",
+    "price": 628000,
+    "stock": 2,
+    "thumbnail": "/img/productos/1639175575420-producto12.jpg"
+  },
+  {
+    "title": "Bicicleta Ruta Giant TCR Advanced SL 1 Disc 2021",
+    "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "code": "CODIGO",
+    "brand": "GIANT",
+    "category": "bicicletas",
+    "price": 475000,
+    "stock": 2,
+    "thumbnail": "/img/productos/1639250150155-producto13.jpg"
   }
 ]
