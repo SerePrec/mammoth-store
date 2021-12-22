@@ -89,13 +89,13 @@ class ContenedorFS {
           if (data[key] === undefined || data[key] === "")
             data[key] = match[key];
         }
-        const newProducto = { ...match, ...data };
+        const newElement = { ...match, ...data };
         const newContent = content.map(elem =>
-          elem.id !== id ? elem : newProducto
+          elem.id !== id ? elem : newElement
         );
         await fs.writeFile(this.path, JSON.stringify(newContent, null, 2));
         console.log(`El elemento con id: ${id} se actualizó con éxito`);
-        return newProducto;
+        return newElement;
       } else {
         console.log(`No se encontró el elemento con el id: ${id}`);
         return null;

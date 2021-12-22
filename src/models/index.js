@@ -29,7 +29,6 @@ switch (process.env.PERS) {
     productsModel = new ProductsDaoMariaDb();
     cartsModel = new CartsDaoMariaDb();
     messagesModel = new MessagesDaoMariaDb();
-    cartsModel.deleteAll();
     break;
 
   case "sqlite3":

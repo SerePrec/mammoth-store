@@ -89,15 +89,17 @@ class CartsDaoSQL {
     try {
       id_cart = parseInt(id_cart);
       await this.productsInCarts.deleteAll({ id_cart });
+      const dataToSave = [];
       for (const prod of products) {
         delete prod.product.timestamp;
-        const dataToSave = {
+        const productInCart = {
           id_cart,
           ...prod.product,
           quantity: prod.quantity
         };
-        await this.productsInCarts.save(dataToSave);
+        dataToSave.push(productInCart);
       }
+      await this.productsInCarts.save(dataToSave);
       const updateCart = await this.getById(id_cart);
       console.log(`El carrito con id: ${id_cart} se actualizó con éxito`);
       return updateCart;

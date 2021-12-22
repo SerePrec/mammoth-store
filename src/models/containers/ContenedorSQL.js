@@ -35,10 +35,15 @@ class ContenedorSQL {
   async save(data) {
     try {
       // El manejo del id y el timestamp se maneja internamente desde base de datos
+      // data puede ser un objeto o array (usado en productsInCarts)
       const [newId] = await this.knex(this.table).insert(data);
       console.log("Elemento guardado con éxito");
       // Pido el elemento por si hay campos que se generan al insertar y no dispongo de ellos para devolver. Ej timestamp
-      const newElement = await this.getById(newId);
+      // si inserté un array no tiene sentido pedir 1 elemento
+      let newElement;
+      Array.isArray(data)
+        ? (newElement = data)
+        : (newElement = await this.getById(newId));
       return deepClone(newElement);
     } catch (error) {
       throw new Error(`Error al guardar el elemento: ${error}`);

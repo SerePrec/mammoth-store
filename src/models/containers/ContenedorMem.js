@@ -35,13 +35,13 @@ class ContenedorMem {
       for (const key in data) {
         if (!data[key]) data[key] = match[key];
       }
-      const newProducto = { ...match, ...data };
+      const newElement = { ...match, ...data };
       const newContent = this.elements.map(elem =>
-        elem.id !== id ? elem : newProducto
+        elem.id !== id ? elem : newElement
       );
       this.elements = newContent;
       console.log(`El elemento con id: ${id} se actualizó con éxito`);
-      return newProducto;
+      return newElement;
     } else {
       console.log(`No se encontró el elemento con el id: ${id}`);
       return null;
