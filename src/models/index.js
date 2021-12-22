@@ -15,6 +15,38 @@ switch (process.env.PERS) {
     cartsModel = new CartsDaoFS();
     messagesModel = new MessagesDaoFS();
     break;
+
+  case "mariadb":
+    const { default: ProductsDaoMariaDb } = await import(
+      "./daos/products/ProductsDaoMariaDb.js"
+    );
+    const { default: CartsDaoMariaDb } = await import(
+      "./daos/carts/CartsDaoMariaDb.js"
+    );
+    const { default: MessagesDaoMariaDb } = await import(
+      "./daos/messages/MessagesDaoMariaDb.js"
+    );
+    productsModel = new ProductsDaoMariaDb();
+    cartsModel = new CartsDaoMariaDb();
+    messagesModel = new MessagesDaoMariaDb();
+    cartsModel.deleteAll();
+    break;
+
+  case "sqlite3":
+    const { default: ProductsDaoSQLite3 } = await import(
+      "./daos/products/ProductsDaoSQLite3.js"
+    );
+    const { default: CartsDaoSQLite3 } = await import(
+      "./daos/carts/CartsDaoSQLite3.js"
+    );
+    const { default: MessagesDaoSQLite3 } = await import(
+      "./daos/messages/MessagesDaoSQLite3.js"
+    );
+    productsModel = new ProductsDaoSQLite3();
+    cartsModel = new CartsDaoSQLite3();
+    messagesModel = new MessagesDaoSQLite3();
+    break;
+
   case "mem":
   default:
     const { default: ProductsDaoMem } = await import(

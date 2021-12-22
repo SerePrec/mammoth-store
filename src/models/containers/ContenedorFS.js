@@ -39,23 +39,6 @@ class ContenedorFS {
     }
   }
 
-  //Guardo el elemento
-  async save(data) {
-    try {
-      const id = this.nextId;
-      const timestamp = Date.now();
-      const elemento = { id, timestamp, ...data };
-      const content = await this.getAll();
-      content.push(elemento);
-      await fs.writeFile(this.path, JSON.stringify(content, null, 2));
-      this.nextId++;
-      console.log("Elemento guardado con éxito");
-      return elemento;
-    } catch (error) {
-      throw new Error(`Error al guardar el elemento: ${error}`);
-    }
-  }
-
   //Obtengo todos los elementos
   async getAll() {
     try {
@@ -75,6 +58,23 @@ class ContenedorFS {
       return match ? match : null;
     } catch (error) {
       throw new Error(`Error al obtener el elemento con id '${id}': ${error}`);
+    }
+  }
+
+  //Guardo el elemento
+  async save(data) {
+    try {
+      const id = this.nextId;
+      const timestamp = Date.now();
+      const elemento = { id, timestamp, ...data };
+      const content = await this.getAll();
+      content.push(elemento);
+      await fs.writeFile(this.path, JSON.stringify(content, null, 2));
+      this.nextId++;
+      console.log("Elemento guardado con éxito");
+      return elemento;
+    } catch (error) {
+      throw new Error(`Error al guardar el elemento: ${error}`);
     }
   }
 

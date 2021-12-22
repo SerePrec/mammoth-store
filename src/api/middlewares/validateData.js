@@ -59,7 +59,6 @@ const validateProductPostBody = (req, res, next) => {
 
 //Valida que el formato de datos del producto a actualizar sea válido
 const validateProductPutBody = (req, res, next) => {
-  console.log(req.body);
   let { title, detail, code, brand, category, price, stock, thumbnail } =
     req.body;
   const filename = req.file?.filename;

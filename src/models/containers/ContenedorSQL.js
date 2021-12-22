@@ -7,20 +7,6 @@ class ContenedorSQL {
     this.table = table;
   }
 
-  //Guardo el elemento
-  async save(data) {
-    try {
-      // El manejo del id y el timestamp se maneja internamente desde base de datos
-      const [newId] = await this.knex(this.table).insert(data);
-      console.log("Elemento guardado con éxito");
-      // Pido el elemento por si hay campos que se generan al insertar y no dispongo de ellos para devolver. Ej timestamp
-      const newElement = await this.getById(newId);
-      return deepClone(newElement);
-    } catch (error) {
-      throw new Error(`Error al guardar el elemento: ${error}`);
-    }
-  }
-
   //Obtengo todos los elementos
   async getAll(conditions = {}) {
     try {
@@ -45,10 +31,23 @@ class ContenedorSQL {
     }
   }
 
+  //Guardo el elemento
+  async save(data) {
+    try {
+      // El manejo del id y el timestamp se maneja internamente desde base de datos
+      const [newId] = await this.knex(this.table).insert(data);
+      console.log("Elemento guardado con éxito");
+      // Pido el elemento por si hay campos que se generan al insertar y no dispongo de ellos para devolver. Ej timestamp
+      const newElement = await this.getById(newId);
+      return deepClone(newElement);
+    } catch (error) {
+      throw new Error(`Error al guardar el elemento: ${error}`);
+    }
+  }
+
   //actualizo un elemento por su id
   async updateById(id, data) {
     try {
-      console.log(data);
       id = parseInt(id);
       const dataToUpdate = {};
       for (const key in data) {

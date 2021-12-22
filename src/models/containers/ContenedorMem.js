@@ -4,17 +4,6 @@ class ContenedorMem {
     this.nextId = 1;
   }
 
-  //Guardo el elemento
-  save(data) {
-    const id = this.nextId;
-    const timestamp = Date.now();
-    const elemento = { id, timestamp, ...data };
-    this.elements.push(elemento);
-    this.nextId++;
-    console.log("Elemento guardado con éxito");
-    return elemento;
-  }
-
   //Obtengo todos los elementos
   getAll() {
     return [...this.elements];
@@ -25,6 +14,17 @@ class ContenedorMem {
     id = parseInt(id);
     const match = this.elements.find(elem => elem.id === id);
     return match ? match : null;
+  }
+
+  //Guardo el elemento
+  save(data) {
+    const id = this.nextId;
+    const timestamp = Date.now();
+    const elemento = { id, timestamp, ...data };
+    this.elements.push(elemento);
+    this.nextId++;
+    console.log("Elemento guardado con éxito");
+    return elemento;
   }
 
   //actualizo un elemento por su id

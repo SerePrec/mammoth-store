@@ -139,7 +139,6 @@ router.delete(
   validateNumericIdId_prod,
   async (req, res) => {
     try {
-      console.log(req.params);
       const { id, id_prod } = req.params;
       const cart = await cartsModel.getById(id);
       if (cart === null) return res.json({ error: "Carrito no encontrado" });
