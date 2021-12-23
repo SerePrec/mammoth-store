@@ -23,18 +23,78 @@ function renderUsers(data) {
 function renderMessages(data) {
   const { messages } = data;
   let html = "";
+  const today = new Date().toLocaleDateString();
+  let prevDate;
+  let prevUser;
   messages.forEach(message => {
+    messageDate = new Date(message.timestamp).toLocaleDateString();
+    const user = message.user;
+    const color = stringToColour(user);
+    if (prevDate !== messageDate) {
+      prevDate = messageDate;
+      html += `
+        <div class="date">
+          ${prevDate === today ? "Hoy" : prevDate}
+        </div>
+        `;
+    }
     html += `
-    <div class="message">
-      <b>${message.user}</b>
-      [ <span style="color:brown;">${new Date(
-        message.timestamp
-      ).toLocaleString()}</span> ] :
-      <i style="color:green;">${message.text}</i>
-    </div>
+      <div class="message-box">
+        <div class="color" style="background-color:${color};"></div>
+        <div class="message">
+        `;
+    if (user !== prevUser) {
+      html += `
+        <b style="color:${color};">${trimText(user, 26)}</b>
+      `;
+      prevUser = user;
+    }
+    html += `
+          <i>${new Date(message.timestamp)
+            .toLocaleTimeString()
+            .slice(0, -3)}</i>
+          <span>${message.text}</span>
+        </div>
+      </div>
     `;
   });
   return html;
+}
+
+function stringToColour(string) {
+  const colors = [
+    "#e51c23",
+    "#e7477d",
+    "#9c27b0",
+    "#673ab7",
+    "#3f51b5",
+    "#5677fc",
+    "#03a9f4",
+    "#11c4db",
+    "#009688",
+    "#259b24",
+    "#8bc34a",
+    "#ebf157",
+    "#ff9800",
+    "#ff5722",
+    "#795548",
+    "#607d8b"
+  ];
+  let hash = 0;
+  if (string.length === 0) return hash;
+  for (let i = 0; i < string.length; i++) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    hash = hash & hash;
+  }
+  hash = ((hash % colors.length) + colors.length) % colors.length;
+  return colors[hash];
+}
+
+function trimText(text, maxChars) {
+  if (text.length > maxChars) {
+    text = text.slice(0, maxChars - 3).concat("...");
+  }
+  return text;
 }
 
 // Escucha evento de cantidad de usuarios conectados

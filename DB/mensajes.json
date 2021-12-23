@@ -52,5 +52,47 @@
     "user": "prellezose@gmail.com",
     "text": "Sí, a mí también",
     "timestamp": 1638381366170
+  },
+  {
+    "id": 17,
+    "timestamp": 1640298946202,
+    "user": "tonell@gmail.com",
+    "text": "Hola"
+  },
+  {
+    "id": 18,
+    "timestamp": 1640298951463,
+    "user": "tonell@gmail.com",
+    "text": "otro más"
+  },
+  {
+    "id": 19,
+    "timestamp": 1640298962316,
+    "user": "prellezose@gmail.com",
+    "text": "ahora yo"
+  },
+  {
+    "id": 20,
+    "timestamp": 1640298966623,
+    "user": "prellezose@gmail.com",
+    "text": "y otro más"
+  },
+  {
+    "id": 21,
+    "timestamp": 1640298978734,
+    "user": "tonell@gmail.com",
+    "text": "Esta lindo no?"
+  },
+  {
+    "id": 22,
+    "timestamp": 1640299041227,
+    "user": "miraquenombredeusuariolargoquepongo@yahoo.com.ar",
+    "text": "Nombre de usuario largo"
+  },
+  {
+    "id": 23,
+    "timestamp": 1640299051125,
+    "user": "miraquenombredeusuariolargoquepongo@yahoo.com.ar",
+    "text": "aparece recortado con ..."
   }
 ]
