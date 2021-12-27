@@ -1,163 +1,202 @@
 [
   {
     "id": 1,
+    "timestamp": 1638381024755,
     "user": "prellezose@gmail.com",
-    "type": "user",
     "text": "Hola!",
-    "timestamp": 1638381024755
+    "type": "user",
+    "replyMessage": null
   },
   {
     "id": 2,
+    "timestamp": 1638381065335,
     "user": "pepo@gmail.com",
-    "type": "user",
     "text": "Hola, que bueno este chat!",
-    "timestamp": 1638381065335
+    "type": "user",
+    "replyMessage": null
   },
   {
     "id": 3,
+    "timestamp": 1638381217278,
     "user": "andrespipo@gmail.com",
-    "type": "user",
     "text": "Vamos a probar una frase maś larga para ver como se acomoda a la vista de los mensajes. Que bueno que está esto de los web sockets!!!  🤓🤓🤓",
-    "timestamp": 1638381217278
+    "type": "user",
+    "replyMessage": null
   },
   {
     "id": 4,
+    "timestamp": 1638381262867,
     "user": "prellezose@gmail.com",
-    "type": "user",
     "text": "Ajusté el formato de la hora para que se guarde como time stamp",
-    "timestamp": 1638381262867
+    "type": "user",
+    "replyMessage": null
   },
   {
     "id": 5,
+    "timestamp": 1638381286195,
     "user": "prellezose@gmail.com",
-    "type": "user",
     "text": "Así al recuperarla cada usuario lo ajusta a su hora local!",
-    "timestamp": 1638381286195
+    "type": "user",
+    "replyMessage": null
   },
   {
     "id": 6,
+    "timestamp": 1638381295163,
     "user": "pepo@gmail.com",
-    "type": "user",
     "text": "ahhhh esta bueno eso!",
-    "timestamp": 1638381295163
+    "type": "user",
+    "replyMessage": null
   },
   {
     "id": 7,
+    "timestamp": 1638381312443,
     "user": "andrespipo@gmail.com",
-    "type": "user",
     "text": "claro.....",
-    "timestamp": 1638381312443
+    "type": "user",
+    "replyMessage": null
   },
   {
     "id": 8,
+    "timestamp": 1638381345930,
     "user": "pepo@gmail.com",
-    "type": "user",
     "text": "Me gusta el tema dark de la página,jajaj",
-    "timestamp": 1638381345930
+    "type": "user",
+    "replyMessage": null
   },
   {
     "id": 9,
+    "timestamp": 1638381366170,
     "user": "prellezose@gmail.com",
-    "type": "user",
     "text": "Sí, a mí también",
-    "timestamp": 1638381366170
+    "type": "user",
+    "replyMessage": null
   },
   {
     "id": 10,
     "timestamp": 1640298946202,
     "user": "tonell@gmail.com",
+    "text": "Hola",
     "type": "user",
-    "text": "Hola"
+    "replyMessage": null
   },
   {
     "id": 11,
     "timestamp": 1640298951463,
     "user": "tonell@gmail.com",
+    "text": "otro más",
     "type": "user",
-    "text": "otro más"
+    "replyMessage": null
   },
   {
     "id": 12,
     "timestamp": 1640298962316,
     "user": "prellezose@gmail.com",
+    "text": "ahora yo",
     "type": "user",
-    "text": "ahora yo"
+    "replyMessage": null
   },
   {
     "id": 13,
     "timestamp": 1640298966623,
     "user": "prellezose@gmail.com",
+    "text": "y otro más",
     "type": "user",
-    "text": "y otro más"
+    "replyMessage": null
   },
   {
     "id": 14,
     "timestamp": 1640298978734,
     "user": "tonell@gmail.com",
+    "text": "Esta lindo no?",
     "type": "user",
-    "text": "Esta lindo no?"
+    "replyMessage": null
   },
   {
     "id": 15,
     "timestamp": 1640299041227,
     "user": "miraquenombredeusuariolargoquepongo@yahoo.com.ar",
+    "text": "Nombre de usuario largo",
     "type": "user",
-    "text": "Nombre de usuario largo"
+    "replyMessage": null
   },
   {
     "id": 16,
     "timestamp": 1640299051125,
     "user": "miraquenombredeusuariolargoquepongo@yahoo.com.ar",
+    "text": "hago que aparezca recortado con ...",
     "type": "user",
-    "text": "hago que aparezca recortado con ..."
+    "replyMessage": null
   },
   {
     "id": 17,
     "timestamp": 1640553188099,
     "user": "prellezose@gmail.com",
+    "text": "probando mensajes individuales",
     "type": "user",
-    "text": "probando mensajes individuales"
+    "replyMessage": null
   },
   {
     "id": 18,
     "timestamp": 1640553295367,
     "user": "prellezose@gmail.com",
+    "text": "segundo mensaje",
     "type": "user",
-    "text": "segundo mensaje"
+    "replyMessage": null
   },
   {
     "id": 19,
     "timestamp": 1640553352302,
     "user": "pepo@gmail.com",
+    "text": "Acá estoy nuevamente!!!",
     "type": "user",
-    "text": "Acá estoy nuevamente!!!"
+    "replyMessage": null
   },
   {
     "id": 20,
     "timestamp": 1640559373747,
     "user": "andrespipo@gmail.com",
     "text": "Yo también!",
-    "type": "user"
+    "type": "user",
+    "replyMessage": null
   },
   {
     "id": 21,
     "timestamp": 1640562289082,
     "user": "prellezose@gmail.com",
-    "text": "Respuesta a prellezose@...",
-    "type": "admin"
+    "text": "Respuesta génerica a prellezose@...",
+    "type": "admin",
+    "replyMessage": null
   },
   {
     "id": 22,
     "timestamp": 1640562307652,
     "user": "all",
-    "text": "respuesta a todos los usuarios",
-    "type": "admin"
+    "text": "Mensaje a todos los usuarios",
+    "type": "admin",
+    "replyMessage": null
   },
   {
     "id": 23,
     "timestamp": 1640562709802,
     "user": "prellezose@gmail.com",
     "text": "me respondieron!",
-    "type": "user"
+    "type": "user",
+    "replyMessage": null
+  },
+  {
+    "id": 24,
+    "timestamp": 1640616448374,
+    "user": "tonell@gmail.com",
+    "text": "Hola!, esta es una respuesta puntual a tu mensaje",
+    "replyMessage": "Hola",
+    "type": "admin"
+  },
+  {
+    "id": 25,
+    "timestamp": 1640614449879,
+    "user": "tonell@gmail.com",
+    "text": "Que bueno que te guste!!",
+    "replyMessage": "Esta lindo no?",
+    "type": "admin"
   }
 ]

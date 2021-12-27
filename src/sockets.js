@@ -29,6 +29,7 @@ export default io => {
           throw new Error("Mensaje inválido");
         message.text = escapeHtml(message.text);
         message.type = "user";
+        message.replyMessage = null;
         const newMessage = { ...message };
         await messagesModel.save(newMessage);
         const messages = await messagesModel.getAll();

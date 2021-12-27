@@ -86,7 +86,9 @@ async function crearTablaMensajes(config) {
     await knex.schema.createTable("messages", table => {
       table.increments("id");
       table.string("user", 50).notNullable();
+      table.string("type", 10).notNullable();
       table.text("text").notNullable();
+      table.text("replyMessage");
       table.timestamp("timestamp").defaultTo(knex.fn.now());
     });
 

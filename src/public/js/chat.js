@@ -23,40 +23,101 @@ function renderMessages(data) {
   const { messages } = data;
   let html = "";
   const today = new Date().toLocaleDateString();
-  let prevDate;
-  let prevUser;
+  const prevData = { prevDate: null, prevUser: null, prevToUser: null };
   messages.forEach(message => {
-    messageDate = new Date(message.timestamp).toLocaleDateString();
-    const user = message.user;
-    const color = stringToColour(user);
-    if (prevDate !== messageDate) {
+    const { type, timestamp } = message;
+    const messageDate = new Date(timestamp).toLocaleDateString();
+    if (prevData.prevDate !== messageDate) {
       html += `
         <div class="date">
           ${messageDate === today ? "Hoy" : messageDate}
         </div>
         `;
     }
-    html += `
+    if (type === "user") {
+      html += renderUserMessage(message, prevData);
+    } else if (type === "admin") {
+      html += renderAdminMessage(message, prevData);
+    }
+    prevData.prevDate !== messageDate
+      ? (prevData.prevDate = messageDate)
+      : null;
+  });
+  return html;
+}
+
+function renderUserMessage(message, prevData) {
+  let html = "";
+  const { prevUser, prevDate } = prevData;
+  const { id, user, text, timestamp } = message;
+  const color = stringToColour(user);
+  const messageDate = new Date(timestamp).toLocaleDateString();
+  html += `
       <div class="message-box">
         <div class="color" style="background-color:${color};"></div>
         <div class="message">
         `;
-    if (user !== prevUser || prevDate !== messageDate) {
-      html += `
-        <b style="color:${color};">${trimText(user, 26)}</b>
-      `;
-      prevUser = user;
-    }
+  if (user !== prevUser || prevDate !== messageDate) {
     html += `
-          <i>${new Date(message.timestamp)
-            .toLocaleTimeString()
-            .slice(0, -3)}</i>
-          <span>${message.text}</span>
+        <b style="color:${color};">${trimText(user, 23)}</b>
+      `;
+  }
+  html += `
+          <i>${new Date(timestamp).toLocaleTimeString().slice(0, -3)}</i>
+          <span>${text}</span>
         </div>
       </div>
-    `;
-    prevDate !== messageDate ? (prevDate = messageDate) : null;
-  });
+      `;
+
+  prevData.prevUser !== user ? (prevData.prevUser = user) : null;
+  return html;
+}
+
+function renderAdminMessage(message, prevData) {
+  let html = "";
+  const { prevUser, prevToUser, prevDate } = prevData;
+  let { user, text, replyMessage, timestamp } = message;
+  const toUser = user;
+  const color = stringToColour(user);
+  user = "Mammoth Bike Store";
+  const messageDate = new Date(timestamp).toLocaleDateString();
+
+  html += `
+      <div class="message-box admin">
+        <div class="color" style="background-color:#b30404;"></div>
+        <div class="message">
+        `;
+  if (user !== prevUser || toUser !== prevToUser || prevDate !== messageDate) {
+    html += `
+        <b style="color:#b30404;">${user}</b>
+      `;
+  }
+  html += `
+      <i>${new Date(timestamp).toLocaleTimeString().slice(0, -3)}</i>
+      `;
+  if (toUser && toUser !== "all" && (toUser !== prevToUser || replyMessage)) {
+    html += `
+        <div class="toUser ${
+          replyMessage ? "with-border" : ""
+        }" style="border-color:${color};">
+          <i>Re:</i>
+          <b style="color:${color};">${trimText(toUser, 23)}</b>
+        `;
+    if (replyMessage) {
+      html += `
+        <i class="d-block">${replyMessage}</i>
+        `;
+    }
+    html += `</div>`;
+  }
+  html += `
+          <span>${text}</span>
+        </div>
+      </div>
+      `;
+
+  prevData.prevUser !== user ? (prevData.prevUser = user) : null;
+  prevData.prevToUser !== toUser ? (prevData.prevToUser = toUser) : null;
   return html;
 }
 

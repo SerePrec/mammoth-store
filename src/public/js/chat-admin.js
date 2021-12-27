@@ -6,6 +6,9 @@ const $inputMessage = document.getElementById("inputMessage");
 const $btnSend = document.getElementById("btn-send");
 const $messagesWrapper = document.getElementById("messages-wrapper");
 const $messageErrors = document.getElementById("messageErrors");
+const $replyMessage = document.getElementById("reply-message");
+let isReplyMessage = false;
+
 const socket = io();
 
 // Renderiza vista de cantidad de usuarios
@@ -21,63 +24,104 @@ function renderMessages(data) {
   const { messages } = data;
   let html = "";
   const today = new Date().toLocaleDateString();
-  let prevDate;
-  let prevUser;
-  let prevToUser;
+  const prevData = { prevDate: null, prevUser: null, prevToUser: null };
   messages.forEach(message => {
-    let { id, type, user, text, timestamp } = message;
-    const toUser = type === "admin" ? user : null;
-    const color = stringToColour(user);
-    user = type === "admin" ? "Mammoth Bike Store" : user;
-    messageDate = new Date(timestamp).toLocaleDateString();
-    if (prevDate !== messageDate) {
+    const { type, timestamp } = message;
+    const messageDate = new Date(timestamp).toLocaleDateString();
+    if (prevData.prevDate !== messageDate) {
       html += `
         <div class="date">
           ${messageDate === today ? "Hoy" : messageDate}
         </div>
         `;
     }
-    html += `
-      <div class="message-box ${type === "admin" ? "admin" : ""}">
-        <div class="color" style="background-color:${
-          type === "admin" ? "#b30404" : color
-        };"></div>
-        <div class="message ${
-          type === "user" ? "clickable" : ""
-        }" data-id="${id}" data-user="${user}">
-        `;
-    if (
-      user !== prevUser ||
-      toUser !== prevToUser ||
-      prevDate !== messageDate
-    ) {
-      html += `
-        <b style="color:${type === "admin" ? "#b30404" : color};">${trimText(
-        user,
-        23
-      )}</b>
-      `;
+    if (type === "user") {
+      html += renderUserMessage(message, prevData);
+    } else if (type === "admin") {
+      html += renderAdminMessage(message, prevData);
     }
+    prevData.prevDate !== messageDate
+      ? (prevData.prevDate = messageDate)
+      : null;
+  });
+  return html;
+}
+
+function renderUserMessage(message, prevData) {
+  let html = "";
+  const { prevUser, prevDate } = prevData;
+  const { id, user, text, timestamp } = message;
+  const color = stringToColour(user);
+  const messageDate = new Date(timestamp).toLocaleDateString();
+  html += `
+      <div class="message-box">
+        <div class="color" style="background-color:${color};"></div>
+        <div class="message clickable" data-id="${id}" data-user="${user}">
+        `;
+  if (user !== prevUser || prevDate !== messageDate) {
     html += `
+        <b style="color:${color};">${trimText(user, 23)}</b>
+      `;
+  }
+  html += `
+          <i>${new Date(timestamp).toLocaleTimeString().slice(0, -3)}</i>
+          <span>${text}</span>
+        </div>
+        <div class="reply" style="background-color:${color};" data-text="${text}">
+          <i class="fa fa-reply"></i>
+        </div>
+      </div>
+      `;
+
+  prevData.prevUser !== user ? (prevData.prevUser = user) : null;
+  return html;
+}
+
+function renderAdminMessage(message, prevData) {
+  let html = "";
+  const { prevUser, prevToUser, prevDate } = prevData;
+  let { user, text, replyMessage, timestamp } = message;
+  const toUser = user;
+  const color = stringToColour(user);
+  user = "Mammoth Bike Store";
+  const messageDate = new Date(timestamp).toLocaleDateString();
+
+  html += `
+      <div class="message-box admin">
+        <div class="color" style="background-color:#b30404;"></div>
+        <div class="message">
+        `;
+  if (user !== prevUser || toUser !== prevToUser || prevDate !== messageDate) {
+    html += `
+        <b style="color:#b30404;">${user}</b>
+      `;
+  }
+  html += `
       <i>${new Date(timestamp).toLocaleTimeString().slice(0, -3)}</i>
       `;
-    if (toUser && toUser !== "all" && toUser !== prevToUser) {
-      html += `
-        <div class="toUser">
+  if (toUser && toUser !== "all" && (toUser !== prevToUser || replyMessage)) {
+    html += `
+        <div class="toUser ${
+          replyMessage ? "with-border" : ""
+        }" style="border-color:${color};">
           <i>Re:</i>
           <b style="color:${color};">${trimText(toUser, 23)}</b>
-        </div>
+        `;
+    if (replyMessage) {
+      html += `
+        <i class="d-block">${replyMessage}</i>
         `;
     }
-    html += `
+    html += `</div>`;
+  }
+  html += `
           <span>${text}</span>
         </div>
       </div>
       `;
-    prevDate !== messageDate ? (prevDate = messageDate) : null;
-    prevUser !== user ? (prevUser = user) : null;
-    prevToUser !== toUser ? (prevToUser = toUser) : null;
-  });
+
+  prevData.prevUser !== user ? (prevData.prevUser = user) : null;
+  prevData.prevToUser !== toUser ? (prevData.prevToUser = toUser) : null;
   return html;
 }
 
@@ -117,6 +161,14 @@ function trimText(text, maxChars) {
   return text;
 }
 
+function clearReplyMessage() {
+  if (isReplyMessage) {
+    $replyMessage.innerText = "";
+    $replyMessage.parentElement.classList.remove("show");
+    isReplyMessage = false;
+  }
+}
+
 // Escucha evento de cantidad de usuarios conectados
 socket.on("usersCount", async usersQty => {
   $usersQty.innerHTML = renderUsers({
@@ -153,15 +205,32 @@ $messageForm.addEventListener("submit", e => {
   const inputValue = $inputMessage.value;
   if (inputValue.trim()) {
     const text = inputValue;
-    socket.emit("adminMessage", { user, text });
+    const replyMessage = $replyMessage.innerText || null;
+    socket.emit("adminMessage", { user, text, replyMessage });
     $messageForm.reset();
     $inputMessage.focus();
+    clearReplyMessage();
     $btnSend.disabled = !$inputMessage.value.trim();
   }
 });
 
 $messagesWrapper.addEventListener("click", e => {
+  const $reply = e.target.closest(".message-box .reply");
+  if ($reply) {
+    const $message = $reply.previousElementSibling;
+    $inputEmail.value = $message.dataset.user;
+    $replyMessage.innerText = $reply.dataset.text;
+    $replyMessage.parentElement.classList.add("show");
+    isReplyMessage = true;
+  }
   const $message = e.target.closest(".message.clickable");
-  if (!$message) return;
-  $inputEmail.value = $message.dataset.user;
+  if ($message) {
+    $inputEmail.value = $message.dataset.user;
+    clearReplyMessage();
+  }
 });
+
+$inputEmail.addEventListener("input", clearReplyMessage);
+document
+  .querySelector("#userForm button[type=reset]")
+  .addEventListener("click", clearReplyMessage);
