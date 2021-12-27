@@ -3,11 +3,9 @@ const $messageForm = document.getElementById("messageForm");
 const $usersQty = document.getElementById("usersQty");
 const $inputEmail = document.getElementById("inputEmail");
 const $inputMessage = document.getElementById("inputMessage");
-const $btnLog = document.getElementById("btn-log");
 const $btnSend = document.getElementById("btn-send");
 const $messagesWrapper = document.getElementById("messages-wrapper");
 const $messageErrors = document.getElementById("messageErrors");
-let user = null;
 const socket = io();
 
 // Renderiza vista de cantidad de usuarios
@@ -25,10 +23,13 @@ function renderMessages(data) {
   const today = new Date().toLocaleDateString();
   let prevDate;
   let prevUser;
+  let prevToUser;
   messages.forEach(message => {
-    messageDate = new Date(message.timestamp).toLocaleDateString();
-    const user = message.user;
+    let { id, type, user, text, timestamp } = message;
+    const toUser = type === "admin" ? user : null;
     const color = stringToColour(user);
+    user = type === "admin" ? "Mammoth Bike Store" : user;
+    messageDate = new Date(timestamp).toLocaleDateString();
     if (prevDate !== messageDate) {
       html += `
         <div class="date">
@@ -37,25 +38,45 @@ function renderMessages(data) {
         `;
     }
     html += `
-      <div class="message-box">
-        <div class="color" style="background-color:${color};"></div>
-        <div class="message">
+      <div class="message-box ${type === "admin" ? "admin" : ""}">
+        <div class="color" style="background-color:${
+          type === "admin" ? "#b30404" : color
+        };"></div>
+        <div class="message ${
+          type === "user" ? "clickable" : ""
+        }" data-id="${id}" data-user="${user}">
         `;
-    if (user !== prevUser || prevDate !== messageDate) {
+    if (
+      user !== prevUser ||
+      toUser !== prevToUser ||
+      prevDate !== messageDate
+    ) {
       html += `
-        <b style="color:${color};">${trimText(user, 26)}</b>
+        <b style="color:${type === "admin" ? "#b30404" : color};">${trimText(
+        user,
+        23
+      )}</b>
       `;
-      prevUser = user;
     }
     html += `
-          <i>${new Date(message.timestamp)
-            .toLocaleTimeString()
-            .slice(0, -3)}</i>
-          <span>${message.text}</span>
+      <i>${new Date(timestamp).toLocaleTimeString().slice(0, -3)}</i>
+      `;
+    if (toUser && toUser !== "all" && toUser !== prevToUser) {
+      html += `
+        <div class="toUser">
+          <i>Re:</i>
+          <b style="color:${color};">${trimText(toUser, 23)}</b>
+        </div>
+        `;
+    }
+    html += `
+          <span>${text}</span>
         </div>
       </div>
-    `;
+      `;
     prevDate !== messageDate ? (prevDate = messageDate) : null;
+    prevUser !== user ? (prevUser = user) : null;
+    prevToUser !== toUser ? (prevToUser = toUser) : null;
   });
   return html;
 }
@@ -120,33 +141,6 @@ socket.on("messageErrors", error => {
   }, 4000);
 });
 
-// Acciones al loguearse
-$userForm.addEventListener("submit", e => {
-  e.preventDefault();
-  if (user) {
-    user = null;
-    $inputEmail.disabled = false;
-    $inputEmail.classList.remove("logged");
-    $btnLog.innerText = "Login";
-    $btnLog.classList.remove("logged");
-    $userForm.reset();
-    $inputMessage.disabled = true;
-    $btnSend.disabled = true;
-    return;
-  }
-  const inputValue = $inputEmail.value;
-  if (/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/.test(inputValue)) {
-    user = inputValue;
-    $inputEmail.disabled = true;
-    $inputEmail.classList.add("logged");
-    $btnLog.innerText = "Logout";
-    $btnLog.classList.add("logged");
-    $inputMessage.disabled = false;
-    $inputMessage.focus();
-    $btnSend.disabled = !$inputMessage.value.trim();
-  }
-});
-
 // Acciones al tipear mensaje
 $inputMessage.addEventListener("input", e => {
   $btnSend.disabled = !$inputMessage.value.trim();
@@ -155,12 +149,19 @@ $inputMessage.addEventListener("input", e => {
 // Acciones al enviar el mensaje
 $messageForm.addEventListener("submit", e => {
   e.preventDefault();
+  const user = $inputEmail.value.trim() || "all";
   const inputValue = $inputMessage.value;
-  if (user && inputValue.trim()) {
+  if (inputValue.trim()) {
     const text = inputValue;
-    socket.emit("newMessage", { user, text });
+    socket.emit("adminMessage", { user, text });
     $messageForm.reset();
     $inputMessage.focus();
     $btnSend.disabled = !$inputMessage.value.trim();
   }
+});
+
+$messagesWrapper.addEventListener("click", e => {
+  const $message = e.target.closest(".message.clickable");
+  if (!$message) return;
+  $inputEmail.value = $message.dataset.user;
 });

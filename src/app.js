@@ -1,6 +1,7 @@
 import express from "express";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+import webServerRouter from "./api/routes/webServerRouter.js";
 import productosRouter from "./api/routes/productosRouter.js";
 import carritoRouter from "./api/routes/carritoRouter.js";
 
@@ -13,6 +14,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(webServerRouter);
 app.use("/api/productos", productosRouter);
 app.use("/api/carrito", carritoRouter);
 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <%- include("../partials/HeadWithBootstrap.ejs")  %>
+  <!-- Mi CSS -->
+  <link rel="stylesheet" href="/css/styles-chat.css">
+</head>
+
+<body>
+  <main class="chat">
+    <div class="chatZone">
+      <h2>MENSAJES DE USUARIO</h2>
+      <h3><i><%= email %></i></h3>
+      <div id="messages-wrapper"></div>
+      <div id="messageErrors"></div>
+    </div>
+  </main>
+
+  <%- include("../partials/bootstrapScripts.ejs")  %>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/chat-user.js"></script>
+</body>
+
+</html>

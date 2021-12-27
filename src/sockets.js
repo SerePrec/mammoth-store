@@ -28,6 +28,24 @@ export default io => {
         if (!message.user || !message.text.trim())
           throw new Error("Mensaje inválido");
         message.text = escapeHtml(message.text);
+        message.type = "user";
+        const newMessage = { ...message };
+        await messagesModel.save(newMessage);
+        const messages = await messagesModel.getAll();
+        io.sockets.emit("allMessages", messages);
+      } catch (error) {
+        console.log(error);
+        socket.emit("messageErrors", "Error al procesar el mensaje enviado");
+      }
+    });
+
+    //Escucha el evento de un nuevo mensaje del administrador
+    socket.on("adminMessage", async message => {
+      try {
+        if (!message.user || !message.text.trim())
+          throw new Error("Mensaje inválido");
+        message.text = escapeHtml(message.text);
+        message.type = "admin";
         const newMessage = { ...message };
         await messagesModel.save(newMessage);
         const messages = await messagesModel.getAll();

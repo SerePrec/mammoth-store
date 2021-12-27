@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <%- include("../partials/HeadWithBootstrap.ejs")  %>
+  <!-- Mi CSS -->
+  <link rel="stylesheet" href="/css/styles-chat.css">
+</head>
+
+<body>
+  <main class="chat">
+    <div class="chatZone">
+      <h2><%= title.toUpperCase() %> </h2>
+      <div id="usersQty"></div>
+      <form id="userForm" class="input-group my-3">
+        <span class="input-group-text">@</span>
+        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Ingrese usuario a responder"
+          required maxlength="50" />
+        <button type="reset" class="btn btn-secondary">Borrar</button>
+      </form>
+      <div id="messages-wrapper"></div>
+      <form id="messageForm" class="input-group my-3">
+        <input type="text" class="form-control" id="inputMessage" name="message" placeholder="Escriba un mensaje..."
+          autocomplete="off" required maxlength="65535" />
+        <button id="btn-send" type="submit" class="btn btn-danger" disabled>Enviar</button>
+      </form>
+      <div id="messageErrors"></div>
+    </div>
+  </main>
+
+  <%- include("../partials/bootstrapScripts.ejs")  %>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/chat-admin.js"></script>
+</body>
+
+</html>

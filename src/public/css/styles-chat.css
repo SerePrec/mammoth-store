@@ -13,64 +13,13 @@ body {
 main.chat {
   text-align: center;
 }
-.form-wrapper {
-  width: 95%;
-  max-width: 30rem;
-  margin: 1rem auto;
-  padding: 2rem;
-  background-color: #2c3034;
-  border-radius: 1rem;
-}
-.form-wrapper h2 {
-  color: white;
-  margin-top: 1rem;
-}
-.form-wrapper form {
-  margin-top: 1rem;
-  color: white;
-}
-.form-wrapper form button[type="submit"] {
-  display: block;
-  margin: auto;
-  padding: 0.5rem 2rem;
-}
-main.listado {
-  text-align: center;
-}
-main.listado h2 {
-  color: white;
-  margin-top: 1rem;
-}
-.table {
-  width: 95%;
-  max-width: 50rem;
-  margin: 1rem auto;
-  vertical-align: middle;
-  text-align: center;
-}
-.table thead th:first-child {
-  width: 10%;
-}
-.table thead th:nth-child(2) {
-  width: 50%;
-  text-align: left;
-}
-.table thead th:nth-child(3) {
-  width: 20%;
-}
-.table thead th:last-child {
-  width: 20%;
-}
-.table tbody td:nth-child(2) {
-  text-align: left;
-}
-.table .table__image {
-  width: 50%;
-}
 div.bg-yellow {
   background-color: #ffc107d6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #343c42;
 }
-#productInfoMessages,
 #messageErrors {
   display: flex;
   justify-content: center;
@@ -85,7 +34,6 @@ div.bg-yellow {
   opacity: 0;
   transition: 0.5s all ease-in-out;
 }
-#productInfoMessages.show,
 #messageErrors.show {
   opacity: 1;
 }
@@ -140,6 +88,9 @@ div.bg-yellow {
   flex-wrap: nowrap;
   margin: 0.25rem 1rem 0.25rem 1rem;
 }
+#messages-wrapper .message-box.admin {
+  justify-content: flex-end;
+}
 #messages-wrapper .message-box .color {
   width: 0.5rem;
   height: 100%;
@@ -147,15 +98,38 @@ div.bg-yellow {
   flex-shrink: 0;
   border-bottom-left-radius: 0.75rem;
 }
+#messages-wrapper .message-box.admin .color {
+  order: 2;
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: 0.75rem;
+}
 #messages-wrapper .message {
   text-align: left;
   background-color: #212529c0;
   padding: 0.25rem 1rem;
   border-top-right-radius: 0.75rem;
   border-bottom-right-radius: 0.75rem;
+  max-width: 90%;
+}
+#messages-wrapper .message-box.admin .message {
+  text-align: left;
+  border-top-right-radius: unset;
+  border-bottom-right-radius: unset;
+  border-top-left-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+}
+#messages-wrapper .message.clickable {
+  cursor: pointer;
 }
 #messages-wrapper .message b {
   text-align: left;
+  margin-right: 0.5rem;
+}
+#messages-wrapper .message .toUser {
+  display: block;
+  margin-bottom: 1rem;
+}
+#messages-wrapper .message .toUser i {
   margin-right: 0.5rem;
 }
 #messages-wrapper .message i {
