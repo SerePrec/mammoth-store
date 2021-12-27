@@ -100,7 +100,10 @@ function renderAdminMessage(message, prevData) {
   if (
     toUser &&
     toUser !== "all" &&
-    (toUser !== prevToUser || replyMessage || prevDate !== messageDate)
+    (user !== prevUser ||
+      toUser !== prevToUser ||
+      replyMessage ||
+      prevDate !== messageDate)
   ) {
     html += `
         <div class="toUser ${
