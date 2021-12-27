@@ -113,10 +113,17 @@ div.bg-yellow {
 }
 #messages-wrapper .message-box.admin .message {
   text-align: left;
+  background-color: #1a2f3c;
   border-top-right-radius: unset;
   border-bottom-right-radius: unset;
   border-top-left-radius: 0.75rem;
   border-bottom-left-radius: 0.75rem;
+}
+#messages-wrapper .message-box.admin .message.toUser {
+  border-left: 4px solid;
+}
+#messages-wrapper .message-box.admin .message.toAll {
+  border: 2px solid;
 }
 #messages-wrapper .message.clickable {
   cursor: pointer;

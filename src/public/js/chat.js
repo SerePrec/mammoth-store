@@ -85,7 +85,9 @@ function renderAdminMessage(message, prevData) {
   html += `
       <div class="message-box admin">
         <div class="color" style="background-color:#b30404;"></div>
-        <div class="message">
+         <div class="message ${
+           toUser === "all" ? "toAll" : "toUser"
+         }" style="border-color:${toUser === "all" ? "#b30404" : color};">
         `;
   if (user !== prevUser || toUser !== prevToUser || prevDate !== messageDate) {
     html += `
@@ -95,7 +97,11 @@ function renderAdminMessage(message, prevData) {
   html += `
       <i>${new Date(timestamp).toLocaleTimeString().slice(0, -3)}</i>
       `;
-  if (toUser && toUser !== "all" && (toUser !== prevToUser || replyMessage)) {
+  if (
+    toUser &&
+    toUser !== "all" &&
+    (toUser !== prevToUser || replyMessage || prevDate !== messageDate)
+  ) {
     html += `
         <div class="toUser ${
           replyMessage ? "with-border" : ""
