@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "timestamp": 1638381024755,
+    "timestamp": "2021-12-01T17:50:24.755Z",
     "user": "prellezose@gmail.com",
     "text": "Hola!",
     "type": "user",
@@ -9,7 +9,7 @@
   },
   {
     "id": 2,
-    "timestamp": 1638381065335,
+    "timestamp": "2021-12-01T17:51:05.335Z",
     "user": "pepo@gmail.com",
     "text": "Hola, que bueno este chat!",
     "type": "user",
@@ -17,7 +17,7 @@
   },
   {
     "id": 3,
-    "timestamp": 1638381217278,
+    "timestamp": "2021-12-01T17:53:37.278Z",
     "user": "andrespipo@gmail.com",
     "text": "Vamos a probar una frase maś larga para ver como se acomoda a la vista de los mensajes. Que bueno que está esto de los web sockets!!!  🤓🤓🤓",
     "type": "user",
@@ -25,7 +25,7 @@
   },
   {
     "id": 4,
-    "timestamp": 1638381262867,
+    "timestamp": "2021-12-01T17:54:22.867Z",
     "user": "prellezose@gmail.com",
     "text": "Ajusté el formato de la hora para que se guarde como time stamp",
     "type": "user",
@@ -33,7 +33,7 @@
   },
   {
     "id": 5,
-    "timestamp": 1638381286195,
+    "timestamp": "2021-12-01T17:54:46.195Z",
     "user": "prellezose@gmail.com",
     "text": "Así al recuperarla cada usuario lo ajusta a su hora local!",
     "type": "user",
@@ -41,7 +41,7 @@
   },
   {
     "id": 6,
-    "timestamp": 1638381295163,
+    "timestamp": "2021-12-01T17:54:55.163Z",
     "user": "pepo@gmail.com",
     "text": "ahhhh esta bueno eso!",
     "type": "user",
@@ -49,7 +49,7 @@
   },
   {
     "id": 7,
-    "timestamp": 1638381312443,
+    "timestamp": "2021-12-01T17:55:12.443Z",
     "user": "andrespipo@gmail.com",
     "text": "claro.....",
     "type": "user",
@@ -57,7 +57,7 @@
   },
   {
     "id": 8,
-    "timestamp": 1638381345930,
+    "timestamp": "2021-12-01T17:55:45.930Z",
     "user": "pepo@gmail.com",
     "text": "Me gusta el tema dark de la página,jajaj",
     "type": "user",
@@ -65,7 +65,7 @@
   },
   {
     "id": 9,
-    "timestamp": 1638381366170,
+    "timestamp": "2021-12-01T17:56:06.170Z",
     "user": "prellezose@gmail.com",
     "text": "Sí, a mí también",
     "type": "user",
@@ -73,7 +73,7 @@
   },
   {
     "id": 10,
-    "timestamp": 1640298946202,
+    "timestamp": "2021-12-23T22:35:46.202Z",
     "user": "tonell@gmail.com",
     "text": "Hola",
     "type": "user",
@@ -81,7 +81,7 @@
   },
   {
     "id": 11,
-    "timestamp": 1640298951463,
+    "timestamp": "2021-12-23T22:35:51.463Z",
     "user": "tonell@gmail.com",
     "text": "otro más",
     "type": "user",
@@ -89,7 +89,7 @@
   },
   {
     "id": 12,
-    "timestamp": 1640298962316,
+    "timestamp": "2021-12-23T22:36:02.316Z",
     "user": "prellezose@gmail.com",
     "text": "ahora yo",
     "type": "user",
@@ -97,7 +97,7 @@
   },
   {
     "id": 13,
-    "timestamp": 1640298966623,
+    "timestamp": "2021-12-23T22:36:06.623Z",
     "user": "prellezose@gmail.com",
     "text": "y otro más",
     "type": "user",
@@ -105,7 +105,7 @@
   },
   {
     "id": 14,
-    "timestamp": 1640298978734,
+    "timestamp": "2021-12-23T22:36:18.734Z",
     "user": "tonell@gmail.com",
     "text": "Esta lindo no?",
     "type": "user",
@@ -113,7 +113,7 @@
   },
   {
     "id": 15,
-    "timestamp": 1640299041227,
+    "timestamp": "2021-12-23T22:37:21.227Z",
     "user": "miraquenombredeusuariolargoquepongo@yahoo.com.ar",
     "text": "Nombre de usuario largo",
     "type": "user",
@@ -121,7 +121,7 @@
   },
   {
     "id": 16,
-    "timestamp": 1640299051125,
+    "timestamp": "2021-12-23T22:37:31.125Z",
     "user": "miraquenombredeusuariolargoquepongo@yahoo.com.ar",
     "text": "hago que aparezca recortado con ...",
     "type": "user",
@@ -129,7 +129,7 @@
   },
   {
     "id": 17,
-    "timestamp": 1640553188099,
+    "timestamp": "2021-12-26T21:13:08.099Z",
     "user": "prellezose@gmail.com",
     "text": "probando mensajes individuales",
     "type": "user",
@@ -137,7 +137,7 @@
   },
   {
     "id": 18,
-    "timestamp": 1640553295367,
+    "timestamp": "2021-12-26T21:14:55.367Z",
     "user": "prellezose@gmail.com",
     "text": "segundo mensaje",
     "type": "user",
@@ -145,7 +145,7 @@
   },
   {
     "id": 19,
-    "timestamp": 1640553352302,
+    "timestamp": "2021-12-26T21:15:52.302Z",
     "user": "pepo@gmail.com",
     "text": "Acá estoy nuevamente!!!",
     "type": "user",
@@ -153,7 +153,7 @@
   },
   {
     "id": 20,
-    "timestamp": 1640559373747,
+    "timestamp": "2021-12-26T22:56:13.747Z",
     "user": "andrespipo@gmail.com",
     "text": "Yo también!",
     "type": "user",
@@ -161,7 +161,7 @@
   },
   {
     "id": 21,
-    "timestamp": 1640562289082,
+    "timestamp": "2021-12-26T23:44:49.082Z",
     "user": "prellezose@gmail.com",
     "text": "Respuesta génerica a prellezose@...",
     "type": "admin",
@@ -169,7 +169,7 @@
   },
   {
     "id": 22,
-    "timestamp": 1640562307652,
+    "timestamp": "2021-12-26T23:45:07.652Z",
     "user": "all",
     "text": "Mensaje a todos los usuarios",
     "type": "admin",
@@ -177,7 +177,7 @@
   },
   {
     "id": 23,
-    "timestamp": 1640562709802,
+    "timestamp": "2021-12-26T23:51:49.802Z",
     "user": "prellezose@gmail.com",
     "text": "me respondieron!",
     "type": "user",
@@ -185,7 +185,7 @@
   },
   {
     "id": 24,
-    "timestamp": 1640616448374,
+    "timestamp": "2021-12-27T14:47:28.374Z",
     "user": "tonell@gmail.com",
     "text": "Hola!, esta es una respuesta puntual a tu mensaje",
     "replyMessage": "Hola",
@@ -193,7 +193,7 @@
   },
   {
     "id": 25,
-    "timestamp": 1640614449879,
+    "timestamp": "2021-12-27T14:14:09.879Z",
     "user": "tonell@gmail.com",
     "text": "Que bueno que te guste!!",
     "replyMessage": "Esta lindo no?",

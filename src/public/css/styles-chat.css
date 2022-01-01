@@ -205,3 +205,22 @@ div.bg-yellow {
     margin: 0 auto;
   }
 }
+
+#messages-wrapper::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+#messages-wrapper::-webkit-scrollbar:vertical {
+  width: 0.5rem;
+}
+#messages-wrapper::-webkit-scrollbar-button:increment,
+#messages-wrapper::-webkit-scrollbar-button {
+  display: none;
+}
+#messages-wrapper::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 20px;
+}
+#messages-wrapper::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: darkgrey;
+}

@@ -65,7 +65,7 @@ class ContenedorFS {
   async save(data) {
     try {
       const id = this.nextId;
-      const timestamp = Date.now();
+      const timestamp = new Date().toISOString();
       const elemento = { id, timestamp, ...data };
       const content = await this.getAll();
       content.push(elemento);

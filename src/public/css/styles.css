@@ -322,6 +322,18 @@ html {
       .showRoom .colProductos #contenedorProductos .errorResultadoBuscar h3,
       .showRoom .colProductos #contenedorProductos .errorResultadoBuscar p {
         width: 100%; }
+    .showRoom .colProductos #contenedorProductos::-webkit-scrollbar {
+      -webkit-appearance: none; }
+    .showRoom .colProductos #contenedorProductos::-webkit-scrollbar:vertical {
+      width: 0.5rem; }
+    .showRoom .colProductos #contenedorProductos::-webkit-scrollbar-button:increment, .showRoom .colProductos #contenedorProductos::-webkit-scrollbar-button {
+      display: none; }
+    .showRoom .colProductos #contenedorProductos::-webkit-scrollbar-thumb {
+      background-color: gray;
+      border-radius: 20px; }
+    .showRoom .colProductos #contenedorProductos::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background-color: darkgrey; }
   @media (max-width: 575px) {
     .showRoom .colProductos {
       padding-left: 0;

@@ -19,7 +19,7 @@ class ContenedorMem {
   //Guardo el elemento
   save(data) {
     const id = this.nextId;
-    const timestamp = Date.now();
+    const timestamp = new Date().toISOString();
     const elemento = { id, timestamp, ...data };
     this.elements.push(elemento);
     this.nextId++;

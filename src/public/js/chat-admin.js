@@ -244,4 +244,7 @@ $messagesWrapper.addEventListener("click", e => {
 $inputEmail.addEventListener("input", clearReplyMessage);
 document
   .querySelector("#userForm button[type=reset]")
-  .addEventListener("click", clearReplyMessage);
+  .addEventListener("click", () => {
+    clearReplyMessage();
+    $inputMessage.focus();
+  });

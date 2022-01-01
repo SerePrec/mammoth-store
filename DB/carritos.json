@@ -1,12 +1,12 @@
 [
   {
     "id": 2,
-    "timestamp": 1638917673765,
+    "timestamp": "2021-12-07T22:54:33.765Z",
     "products": [
       {
         "product": {
           "id": 7,
-          "timestamp": 1638976507530,
+          "timestamp": "2021-12-08T15:15:07.530Z",
           "category": "indumentaria",
           "code": "S-S-SWOR.018-WT/42",
           "brand": "SPECIALIZED",
@@ -21,7 +21,7 @@
       {
         "product": {
           "id": 6,
-          "timestamp": 1638976507529,
+          "timestamp": "2021-12-08T15:15:07.529Z",
           "category": "componentes",
           "code": "TUBOLITO.C.29/1.75-SP",
           "brand": "TUBOLITO",
@@ -37,12 +37,12 @@
   },
   {
     "id": 4,
-    "timestamp": 1638917674848,
+    "timestamp": "2021-12-07T22:54:34.848Z",
     "products": [
       {
         "product": {
           "id": 8,
-          "timestamp": 1638976507531,
+          "timestamp": "2021-12-08T15:15:07.531Z",
           "category": "bicicletas",
           "code": "CODIGO",
           "brand": "GIANT",
@@ -57,7 +57,7 @@
       {
         "product": {
           "id": 11,
-          "timestamp": 1639144716501,
+          "timestamp": "2021-12-10T13:58:36.501Z",
           "title": "Bicicleta Ruta Liv Envi Advanced Pro 1 Disc 2021",
           "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
           "code": "CODIGO",
@@ -72,7 +72,7 @@
       {
         "product": {
           "id": 6,
-          "timestamp": 1638976507529,
+          "timestamp": "2021-12-08T15:15:07.529Z",
           "category": "componentes",
           "code": "TUBOLITO.C.29/1.75-SP",
           "brand": "TUBOLITO",
@@ -88,17 +88,17 @@
   },
   {
     "id": 5,
-    "timestamp": 1638917675344,
+    "timestamp": "2021-12-07T22:54:35.344Z",
     "products": []
   },
   {
     "id": 7,
-    "timestamp": 1639179542127,
+    "timestamp": "2021-12-10T23:39:02.127Z",
     "products": [
       {
         "product": {
           "id": 3,
-          "timestamp": 1638976507528,
+          "timestamp": "2021-12-08T15:15:07.528Z",
           "category": "equipamiento",
           "code": "N-CA-CI-50",
           "brand": "NUTRISPORT",
@@ -113,7 +113,7 @@
       {
         "product": {
           "id": 7,
-          "timestamp": 1638976507530,
+          "timestamp": "2021-12-08T15:15:07.530Z",
           "category": "indumentaria",
           "code": "S-S-SWOR.018-WT/42",
           "brand": "SPECIALIZED",
@@ -129,17 +129,17 @@
   },
   {
     "id": 8,
-    "timestamp": 1639250392832,
+    "timestamp": "2021-12-11T19:19:52.832Z",
     "products": []
   },
   {
     "id": 9,
-    "timestamp": 1639251822752,
+    "timestamp": "2021-12-11T19:43:42.752Z",
     "products": [
       {
         "product": {
           "id": 1,
-          "timestamp": 1638976507527,
+          "timestamp": "2021-12-08T15:15:07.527Z",
           "category": "accesorios",
           "code": "00001-B3",
           "brand": "PODIUM",
@@ -154,7 +154,7 @@
       {
         "product": {
           "id": 9,
-          "timestamp": 1638976507531,
+          "timestamp": "2021-12-08T15:15:07.531Z",
           "category": "bicicletas",
           "code": "CODIGO",
           "brand": "ORBEA",
@@ -169,7 +169,7 @@
       {
         "product": {
           "id": 4,
-          "timestamp": 1638976507528,
+          "timestamp": "2021-12-08T15:15:07.528Z",
           "category": "equipamiento",
           "code": "S-H-PREV.075-BC/RED/SM",
           "brand": "SPECIALIZED",
