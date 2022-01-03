@@ -400,6 +400,8 @@ html {
   display: none;
   text-align: center;
   margin-bottom: 2rem; }
+  #cartProducts h3 i {
+    font-size: 1.4rem; }
   #cartProducts .table {
     width: 95%;
     max-width: 50rem;
@@ -421,7 +423,8 @@ html {
     #cartProducts .table thead th:last-child {
       width: 8%; }
     #cartProducts .table tbody td:first-child {
-      padding: 0; }
+      padding: 0;
+      font-size: 0.7rem; }
     #cartProducts .table tbody td:nth-child(2) {
       padding: 1rem 0; }
       #cartProducts .table tbody td:nth-child(2) .table__image {

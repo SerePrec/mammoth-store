@@ -584,7 +584,7 @@ function renderCartTable(id, data) {
   );
   let html = `
     <div class="listado">
-      <h3>PRODUCTOS EN CARRITO ID ${id}</h3>`;
+      <h3>PRODUCTOS EN CARRITO ID <i>${id}</i></h3>`;
   if (data.length > 0) {
     html += `
       <table class="table table-dark table-striped">

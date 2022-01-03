@@ -4,24 +4,34 @@ import {
   isPrice,
   isInteger,
   isPositiveInteger,
+  isAlphanumeric,
   isURL
 } from "../../utils/validations.js";
 
-// Valida que sea el id numérico
-const validateNumericId = (req, res, next) => {
+let idValidator;
+(function assignIdValidator() {
+  const persWithNumId = ["mem", "fs", "mariadb", "sqlite3"];
+  const pers = process.env.PERS;
+  persWithNumId.includes(pers)
+    ? (idValidator = isNumericId)
+    : (idValidator = isAlphanumeric);
+})();
+
+// Valida que sea id numérico o alfanumérico según el tipo de persistencia
+const validateId = (req, res, next) => {
   const { id } = req.params;
-  if (!isNumericId(id))
-    res.status(400).json({ error: "El parámetro no es válido" });
+  if (!idValidator(id))
+    res.status(400).json({ error: "El id no es de un formato válido" });
   else {
     next();
   }
 };
 
-// Valida que ambos ids sean numérico
-const validateNumericIdId_prod = (req, res, next) => {
+// Valida que ambos ids sean numéricos o alfanuméricos según el tipo de persistencia
+const validateIdId_prod = (req, res, next) => {
   const { id, id_prod } = req.params;
-  if (!isNumericId(id) || !isNumericId(id_prod))
-    res.status(400).json({ error: "El parámetro no es válido" });
+  if (!idValidator(id) || !idValidator(id_prod))
+    res.status(400).json({ error: "El id no es de un formato válido" });
   else {
     next();
   }
@@ -101,7 +111,7 @@ const validateProductPutBody = (req, res, next) => {
 //Valida que el formato de datos del producto a incorporar o modificar al carrito sea válido
 const validateCartProductBody = (req, res, next) => {
   let { id, quantity } = req.body;
-  if (!isNumericId(id) || !isPositiveInteger(quantity))
+  if (!idValidator(id) || !isPositiveInteger(quantity))
     res.status(400).json({ error: "Los valores enviados no son válidos" });
   else {
     req.body.quantity = parseInt(quantity);
@@ -110,8 +120,8 @@ const validateCartProductBody = (req, res, next) => {
 };
 
 export {
-  validateNumericId,
-  validateNumericIdId_prod,
+  validateId,
+  validateIdId_prod,
   validateProductPostBody,
   validateProductPutBody,
   validateCartProductBody

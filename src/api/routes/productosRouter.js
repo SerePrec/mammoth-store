@@ -3,7 +3,7 @@ import multer from "multer";
 import config from "../../config.js";
 import { productsModel } from "../../models/index.js";
 import {
-  validateNumericId,
+  validateId,
   validateProductPostBody,
   validateProductPutBody
 } from "../middlewares/validateData.js";
@@ -37,7 +37,7 @@ router.get(
       });
     }
   },
-  validateNumericId,
+  validateId,
   async (req, res) => {
     try {
       const producto = await productsModel.getById(req.params.id);
@@ -87,7 +87,7 @@ router.put(
   "/:id",
   isAdmin,
   upload.single("imageFile"),
-  validateNumericId,
+  validateId,
   validateProductPutBody,
   async (req, res) => {
     try {
@@ -117,7 +117,7 @@ router.put(
   }
 );
 
-router.delete("/:id", isAdmin, validateNumericId, async (req, res) => {
+router.delete("/:id", isAdmin, validateId, async (req, res) => {
   try {
     const deletedId = await productsModel.deleteById(req.params.id);
     deletedId !== null

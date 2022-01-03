@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { cartsModel, productsModel } from "../../models/index.js";
 import {
-  validateNumericId,
-  validateNumericIdId_prod,
+  validateId,
+  validateIdId_prod,
   validateCartProductBody
 } from "../middlewares/validateData.js";
 
@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:id", validateNumericId, async (req, res) => {
+router.delete("/:id", validateId, async (req, res) => {
   try {
     const deletedId = await cartsModel.deleteById(req.params.id);
     deletedId !== null
@@ -46,7 +46,7 @@ router.delete("/:id", validateNumericId, async (req, res) => {
   }
 });
 
-router.get("/:id/productos", validateNumericId, async (req, res) => {
+router.get("/:id/productos", validateId, async (req, res) => {
   try {
     const cart = await cartsModel.getById(req.params.id);
     cart !== null
@@ -62,7 +62,7 @@ router.get("/:id/productos", validateNumericId, async (req, res) => {
 
 router.post(
   "/:id/productos",
-  validateNumericId,
+  validateId,
   validateCartProductBody,
   async (req, res) => {
     try {
@@ -100,7 +100,7 @@ router.post(
 
 router.put(
   "/:id/productos",
-  validateNumericId,
+  validateId,
   validateCartProductBody,
   async (req, res) => {
     try {
@@ -136,7 +136,7 @@ router.put(
 
 router.delete(
   "/:id/productos/:id_prod",
-  validateNumericIdId_prod,
+  validateIdId_prod,
   async (req, res) => {
     try {
       const { id, id_prod } = req.params;

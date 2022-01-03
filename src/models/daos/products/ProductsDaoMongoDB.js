@@ -3,7 +3,7 @@ import ContenedorMongoDB from "../../containers/ContenedorMongoDB.js";
 
 const { Schema } = mongoose;
 
-export const productSchema = new Schema({
+const productSchema = new Schema({
   title: { type: String, required: true },
   detail: { type: String },
   brand: { type: String, uppercase: true, required: true },
@@ -12,7 +12,7 @@ export const productSchema = new Schema({
   price: { type: Number, required: true, min: 0 },
   stock: { type: Number, required: true },
   thumbnail: { type: String },
-  timestamp: { type: Date, default: new Date() }
+  timestamp: { type: Date, default: Date.now }
 });
 
 class ProductsDaoMongoDB extends ContenedorMongoDB {
