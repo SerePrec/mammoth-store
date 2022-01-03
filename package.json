@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/.",
+    "start": "NODE_ENV=production PERS=cleardb node src/.",
     "dev": "nodemon src/index.js --ignore DB/",
     "build-css": "node-sass --include-path src/public/scss src/public/scss/styles.scss src/public/css/styles.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\""
