@@ -14,6 +14,14 @@ switch (process.env.PERS) {
     productsModel = new ProductsDaoFS();
     cartsModel = new CartsDaoFS();
     messagesModel = new MessagesDaoFS();
+    //Inicializo mi "storage"
+    try {
+      await productsModel.init();
+      await cartsModel.init();
+      await messagesModel.init();
+    } catch (error) {
+      console.log(error);
+    }
     break;
 
   case "mariadb":
@@ -44,6 +52,21 @@ switch (process.env.PERS) {
     productsModel = new ProductsDaoSQLite3();
     cartsModel = new CartsDaoSQLite3();
     messagesModel = new MessagesDaoSQLite3();
+    break;
+
+  case "mongodb":
+    const { default: ProductsDaoMongoDB } = await import(
+      "./daos/products/ProductsDaoMongoDB.js"
+    );
+    const { default: CartsDaoMongoDB } = await import(
+      "./daos/carts/CartsDaoMongoDB.js"
+    );
+    const { default: MessagesDaoMongoDB } = await import(
+      "./daos/messages/MessagesDaoMongoDB.js"
+    );
+    productsModel = new ProductsDaoMongoDB();
+    cartsModel = new CartsDaoMongoDB();
+    messagesModel = new MessagesDaoMongoDB();
     break;
 
   case "mem":

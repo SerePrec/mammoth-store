@@ -242,7 +242,8 @@
           position: absolute;
           top: 0.25rem;
           left: 0.25rem;
-          width: 5rem;
+          width: auto;
+          min-width: 5rem;
           background-color: #6d8fad;
           font-style: italic;
         }

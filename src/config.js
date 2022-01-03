@@ -30,6 +30,14 @@ const config = {
       filename: path.join(__dirname, "..", "DB", "ecommerce.sqlite")
     },
     useNullAsDefault: true
+  },
+  mongodb: {
+    connectionString: "mongodb://localhost/ecommerce",
+    options: {
+      useNewUrlParser: true, //No necesario desde mongoose 6
+      useUnifiedTopology: true, //No necesario desde mongoose 6
+      serverSelectionTimeoutMS: 5000
+    }
   }
 };
 

@@ -1,4 +1,5 @@
 import ContenedorSQL from "../../containers/ContenedorSQL.js";
+import { removeField } from "../../../utils/dataTools.js";
 
 class CartsDaoSQL {
   constructor(config) {
@@ -38,10 +39,8 @@ class CartsDaoSQL {
         cartData => (cartsDic[cartData.id] = { ...cartData, products: [] })
       );
       productsInCarts.forEach(product => {
-        const idCart = product.id_cart;
-        const quantity = product.quantity;
-        delete product.id_cart;
-        delete product.quantity;
+        const idCart = removeField(product, "id_cart");
+        const quantity = removeField(product, "quantity");
         const cartItem = { product, quantity };
         cartsDic[idCart].products.push(cartItem);
       });
@@ -69,9 +68,8 @@ class CartsDaoSQL {
       if (cartData) {
         const cart = { ...cartData, products: [] };
         productsInCart.forEach(product => {
-          const quantity = product.quantity;
-          delete product.id_cart;
-          delete product.quantity;
+          const quantity = removeField(product, "quantity");
+          removeField(product, "id_cart");
           const cartItem = { product, quantity };
           cart.products.push(cartItem);
         });
@@ -91,7 +89,7 @@ class CartsDaoSQL {
       await this.productsInCarts.deleteAll({ id_cart });
       const dataToSave = [];
       for (const prod of products) {
-        delete prod.product.timestamp;
+        removeField(prod.product, "timestamp");
         const productInCart = {
           id_cart,
           ...prod.product,

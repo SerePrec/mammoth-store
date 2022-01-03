@@ -39,7 +39,7 @@ class ContenedorSQL {
       const [newId] = await this.knex(this.table).insert(data);
       console.log("Elemento guardado con éxito");
       // Pido el elemento por si hay campos que se generan al insertar y no dispongo de ellos para devolver. Ej timestamp
-      // si inserté un array no tiene sentido pedir 1 elemento
+      // si inserté un array no tiene sentido pedir 1 elemento. esta funcionalidad se usa internamente en instancia carrito (updateById). No se expone a la api por eso ese faltante de datos no es relevante
       let newElement;
       Array.isArray(data)
         ? (newElement = data)
