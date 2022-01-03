@@ -70,6 +70,7 @@ switch (process.env.PERS) {
     break;
 
   case "mongodb":
+  case "mongodb_atlas":
     const { default: ProductsDaoMongoDB } = await import(
       "./daos/products/ProductsDaoMongoDB.js"
     );

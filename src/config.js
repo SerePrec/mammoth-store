@@ -46,8 +46,16 @@ const config = {
     },
     useNullAsDefault: true
   },
-  mongodb: {
+  mongoDb: {
     connectionString: "mongodb://localhost/ecommerce",
+    options: {
+      useNewUrlParser: true, //No necesario desde mongoose 6
+      useUnifiedTopology: true, //No necesario desde mongoose 6
+      serverSelectionTimeoutMS: 5000
+    }
+  },
+  mongoDbAtlas: {
+    connectionString: process.env.MONGODB_ATLAS_URI,
     options: {
       useNewUrlParser: true, //No necesario desde mongoose 6
       useUnifiedTopology: true, //No necesario desde mongoose 6

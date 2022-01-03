@@ -3,11 +3,24 @@ import config from "../../config.js";
 import { deepClone, renameField, removeField } from "../../utils/dataTools.js";
 
 try {
-  await mongoose.connect(
-    config.mongodb.connectionString,
-    config.mongodb.options
-  );
-  console.log("Conectado con MongoDB");
+  switch (process.env.PERS) {
+    case "mongodb_atlas":
+      await mongoose.connect(
+        config.mongoDbAtlas.connectionString,
+        config.mongoDbAtlas.options
+      );
+      console.log("Conectado con MongoDB Atlas");
+      break;
+
+    case "mongodb":
+    default:
+      await mongoose.connect(
+        config.mongoDb.connectionString,
+        config.mongoDb.options
+      );
+      console.log("Conectado con MongoDB (localhost)");
+      break;
+  }
 } catch (error) {
   console.log(`Error al conectar con MongoDb: ${error}`);
 }
