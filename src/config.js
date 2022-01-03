@@ -1,6 +1,11 @@
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 
+if (process.env.NODE_ENV !== "production") {
+  const { config } = await import("dotenv");
+  config();
+}
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const config = {
@@ -21,6 +26,16 @@ const config = {
       user: "root",
       password: "",
       database: "ecommerce",
+      charset: "utf8mb4"
+    }
+  },
+  clearDb: {
+    client: "mysql",
+    connection: {
+      host: process.env.CLEARDB_HOST,
+      user: process.env.CLEARDB_USER,
+      password: process.env.CLEARDB_PWD,
+      database: process.env.CLEARDB_DB,
       charset: "utf8mb4"
     }
   },

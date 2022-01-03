@@ -39,6 +39,21 @@ switch (process.env.PERS) {
     messagesModel = new MessagesDaoMariaDb();
     break;
 
+  case "cleardb":
+    const { default: ProductsDaoClearDb } = await import(
+      "./daos/products/ProductsDaoClearDb.js"
+    );
+    const { default: CartsDaoClearDb } = await import(
+      "./daos/carts/CartsDaoClearDb.js"
+    );
+    const { default: MessagesDaoClearDb } = await import(
+      "./daos/messages/MessagesDaoClearDb.js"
+    );
+    productsModel = new ProductsDaoClearDb();
+    cartsModel = new CartsDaoClearDb();
+    messagesModel = new MessagesDaoClearDb();
+    break;
+
   case "sqlite3":
     const { default: ProductsDaoSQLite3 } = await import(
       "./daos/products/ProductsDaoSQLite3.js"

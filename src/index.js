@@ -19,6 +19,8 @@ async function startServer() {
       console.log(
         `Servidor http con websockets escuchando en el puerto ${
           httpServer.address().port
+        }\nEntorno: ${
+          process.env.NODE_ENV === "production" ? "Producción" : "Desarrollo"
         }`
       )
     )

@@ -119,14 +119,23 @@ async function cargaProductosPrueba(config) {
   }
 }
 
-await crearTablaProductos(config.mariaDb);
-await crearTablaCarritos(config.mariaDb);
-await crearTablaProductosEnCarrito(config.mariaDb);
-await crearTablaMensajes(config.mariaDb);
-await cargaProductosPrueba(config.mariaDb);
+//Carga local mariaDB
+// await crearTablaProductos(config.mariaDb);
+// await crearTablaCarritos(config.mariaDb);
+// await crearTablaProductosEnCarrito(config.mariaDb);
+// await crearTablaMensajes(config.mariaDb);
+// await cargaProductosPrueba(config.mariaDb);
 
-await crearTablaProductos(config.sqlite3);
-await crearTablaCarritos(config.sqlite3);
-await crearTablaProductosEnCarrito(config.sqlite3);
-await crearTablaMensajes(config.sqlite3);
-await cargaProductosPrueba(config.sqlite3);
+//Carga Sqlite3
+// await crearTablaProductos(config.sqlite3);
+// await crearTablaCarritos(config.sqlite3);
+// await crearTablaProductosEnCarrito(config.sqlite3);
+// await crearTablaMensajes(config.sqlite3);
+// await cargaProductosPrueba(config.sqlite3);
+
+//Carga Heroku ClearDB
+// await crearTablaProductos(config.clearDb);
+// await crearTablaCarritos(config.clearDb);
+// await crearTablaProductosEnCarrito(config.clearDb);
+// await crearTablaMensajes(config.clearDb);
+// await cargaProductosPrueba(config.clearDb);
