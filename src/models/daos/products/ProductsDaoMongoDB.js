@@ -3,7 +3,7 @@ import ContenedorMongoDB from "../../containers/ContenedorMongoDB.js";
 
 const { Schema } = mongoose;
 
-const productSchema = new Schema({
+export const productSchema = new Schema({
   title: { type: String, required: true },
   detail: { type: String },
   brand: { type: String, uppercase: true, required: true },

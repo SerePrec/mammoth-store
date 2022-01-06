@@ -34,4 +34,4 @@ async function cargaInicial() {
   }
 }
 
-cargaInicial();
+//cargaInicial();

@@ -1,17 +1,18 @@
 import * as fs from "fs/promises";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import ContenedorFS from "../src/models/containers/ContenedorFS.js";
+import mongoose from "mongoose";
+import ContenedorMongoDB from "../src/models/containers/ContenedorMongoDB.js";
+import { productSchema } from "../src/models/daos/products/ProductsDaoMongoDB.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BK_FILENAME = "productsBk.json";
-const OUTPUT_FILENAME = "productos.json";
+const COLLECTION = "productoss";
 
 async function cargaInicial() {
   try {
     // Instancio e inicializo el contenedor productos
-    const productos = new ContenedorFS(OUTPUT_FILENAME);
-    await productos.init();
+    const productosModel = new ContenedorMongoDB(COLLECTION, productSchema);
 
     // Obtengo los datos de un archivo de datos
     const content = await fs.readFile(
@@ -22,17 +23,22 @@ async function cargaInicial() {
 
     //Guardo todos los elementos
     for (const element of productsBk) {
-      const { id } = await productos.save(element);
+      const { id } = await productosModel.save(element);
       console.log(`Elemento con id: '${id}' guardado con éxito`);
     }
 
     //Listo todos sus elementos
     console.log("\n\n***********************************");
-    const all = await productos.getAll();
+    const all = await productosModel.getAll();
     console.log("Listado de todos los productos: \n", all);
   } catch (error) {
     console.log("Error durante la carga: ", error);
+  } finally {
+    mongoose.disconnect();
   }
 }
 
 //cargaInicial();
+
+// Recordar definir la variable de entorno PERS como mongodb o mongodb_atlas
+// según se quieran cargar los datos en la base local o en Cloud
