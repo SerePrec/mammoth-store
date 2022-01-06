@@ -1,2 +1,8 @@
+# Nodejs
 node_modules/
+
+# config credentials
+config/
+
+# environment variables
 .env

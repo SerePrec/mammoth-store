@@ -85,6 +85,21 @@ switch (process.env.PERS) {
     messagesModel = new MessagesDaoMongoDB();
     break;
 
+  case "firebase":
+    const { default: ProductsDaoFirebase } = await import(
+      "./daos/products/ProductsDaoFirebase.js"
+    );
+    const { default: CartsDaoFirebase } = await import(
+      "./daos/carts/CartsDaoFirebase.js"
+    );
+    const { default: MessagesDaoFirebase } = await import(
+      "./daos/messages/MessagesDaoFirebase.js"
+    );
+    productsModel = new ProductsDaoFirebase();
+    cartsModel = new CartsDaoFirebase();
+    messagesModel = new MessagesDaoFirebase();
+    break;
+
   case "mem":
   default:
     const { default: ProductsDaoMem } = await import(

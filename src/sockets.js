@@ -1,4 +1,4 @@
-import { productsModel, messagesModel } from "./models/index.js";
+import { messagesModel } from "./models/index.js";
 import { escapeHtml } from "./utils/messageTools.js";
 
 //Configuración de sockets

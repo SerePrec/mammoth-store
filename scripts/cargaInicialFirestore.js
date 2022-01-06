@@ -1,17 +1,16 @@
 import * as fs from "fs/promises";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import ContenedorFS from "../src/models/containers/ContenedorFS.js";
+import ContenedorFirebase from "../src/models/containers/ContenedorFirebase.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BK_FILENAME = "productsBk.json";
-const OUTPUT_FILENAME = "productos.json";
+const COLLECTION = "products";
 
 async function cargaInicial() {
   try {
     // Instancio e inicializo el contenedor productos
-    const productos = new ContenedorFS(OUTPUT_FILENAME);
-    await productos.init();
+    const productosModel = new ContenedorFirebase(COLLECTION);
 
     // Obtengo los datos de un archivo de datos
     const content = await fs.readFile(
@@ -22,13 +21,13 @@ async function cargaInicial() {
 
     //Guardo todos los elementos
     for (const element of productsBk) {
-      const { id } = await productos.save(element);
+      const { id } = await productosModel.save(element);
       console.log(`Elemento con id: '${id}' guardado con éxito`);
     }
 
     //Listo todos sus elementos
     console.log("\n\n***********************************");
-    const all = await productos.getAll();
+    const all = await productosModel.getAll();
     console.log("Listado de todos los productos: \n", all);
   } catch (error) {
     console.log("Error durante la carga: ", error);
