@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 //Variables
 //Generales ***************************
 let busqueda = false;

@@ -1,7 +1,5 @@
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import fs from "fs";
-
 if (process.env.NODE_ENV !== "production") {
   const { config } = await import("dotenv");
   config();

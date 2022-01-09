@@ -1,4 +1,3 @@
-const $userForm = document.getElementById("userForm");
 const $messageForm = document.getElementById("messageForm");
 const $usersQty = document.getElementById("usersQty");
 const $inputEmail = document.getElementById("inputEmail");
@@ -9,6 +8,7 @@ const $messageErrors = document.getElementById("messageErrors");
 const $replyMessage = document.getElementById("reply-message");
 let isReplyMessage = false;
 
+// eslint-disable-next-line no-undef
 const socket = io();
 
 // Renderiza vista de cantidad de usuarios

@@ -3,7 +3,7 @@ let cartsModel;
 let messagesModel;
 
 switch (process.env.PERS) {
-  case "fs":
+  case "fs": {
     const { default: ProductsDaoFS } = await import(
       "./daos/products/ProductsDaoFS.js"
     );
@@ -23,8 +23,9 @@ switch (process.env.PERS) {
       console.log(error);
     }
     break;
+  }
 
-  case "mariadb":
+  case "mariadb": {
     const { default: ProductsDaoMariaDb } = await import(
       "./daos/products/ProductsDaoMariaDb.js"
     );
@@ -38,8 +39,9 @@ switch (process.env.PERS) {
     cartsModel = new CartsDaoMariaDb();
     messagesModel = new MessagesDaoMariaDb();
     break;
+  }
 
-  case "cleardb":
+  case "cleardb": {
     const { default: ProductsDaoClearDb } = await import(
       "./daos/products/ProductsDaoClearDb.js"
     );
@@ -53,8 +55,9 @@ switch (process.env.PERS) {
     cartsModel = new CartsDaoClearDb();
     messagesModel = new MessagesDaoClearDb();
     break;
+  }
 
-  case "sqlite3":
+  case "sqlite3": {
     const { default: ProductsDaoSQLite3 } = await import(
       "./daos/products/ProductsDaoSQLite3.js"
     );
@@ -68,9 +71,10 @@ switch (process.env.PERS) {
     cartsModel = new CartsDaoSQLite3();
     messagesModel = new MessagesDaoSQLite3();
     break;
+  }
 
   case "mongodb":
-  case "mongodb_atlas":
+  case "mongodb_atlas": {
     const { default: ProductsDaoMongoDB } = await import(
       "./daos/products/ProductsDaoMongoDB.js"
     );
@@ -84,8 +88,9 @@ switch (process.env.PERS) {
     cartsModel = new CartsDaoMongoDB();
     messagesModel = new MessagesDaoMongoDB();
     break;
+  }
 
-  case "firebase":
+  case "firebase": {
     const { default: ProductsDaoFirebase } = await import(
       "./daos/products/ProductsDaoFirebase.js"
     );
@@ -99,9 +104,10 @@ switch (process.env.PERS) {
     cartsModel = new CartsDaoFirebase();
     messagesModel = new MessagesDaoFirebase();
     break;
+  }
 
   case "mem":
-  default:
+  default: {
     const { default: ProductsDaoMem } = await import(
       "./daos/products/ProductsDaoMem.js"
     );
@@ -115,6 +121,7 @@ switch (process.env.PERS) {
     cartsModel = new CartsDaoMem();
     messagesModel = new MessagesDaoMem();
     break;
+  }
 }
 
 export { productsModel, cartsModel, messagesModel };

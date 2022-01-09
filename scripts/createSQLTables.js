@@ -1,4 +1,5 @@
 import Knex from "knex";
+// eslint-disable-next-line no-unused-vars
 import config from "../src/config.js";
 import * as fs from "fs/promises";
 import path, { dirname } from "path";
@@ -6,6 +7,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+// eslint-disable-next-line no-unused-vars
 async function crearTablaProductos(config) {
   const knex = Knex(config);
   try {
@@ -32,6 +34,7 @@ async function crearTablaProductos(config) {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 async function crearTablaCarritos(config) {
   const knex = Knex(config);
   try {
@@ -50,6 +53,7 @@ async function crearTablaCarritos(config) {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 async function crearTablaProductosEnCarrito(config) {
   const knex = Knex(config);
   try {
@@ -78,6 +82,7 @@ async function crearTablaProductosEnCarrito(config) {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 async function crearTablaMensajes(config) {
   const knex = Knex(config);
   try {
@@ -100,6 +105,7 @@ async function crearTablaMensajes(config) {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 async function cargaProductosPrueba(config) {
   const knex = Knex(config);
   const BK_FILENAME = "productsBk.json";

@@ -1,5 +1,5 @@
-import { initializeApp, applicationDefault, cert } from "firebase-admin/app";
-import { getFirestore, Timestamp, FieldValue } from "firebase-admin/firestore";
+import { initializeApp, cert } from "firebase-admin/app";
+import { getFirestore, Timestamp } from "firebase-admin/firestore";
 import config from "../../config.js";
 
 const serviceAccount = config.firebase;
@@ -67,7 +67,7 @@ class ContenedorFirebase {
         if (data[key] !== undefined && data[key] !== "")
           dataToUpdate[key] = data[key];
       }
-      const updated = await this.collection.doc(`${id}`).update(dataToUpdate);
+      await this.collection.doc(`${id}`).update(dataToUpdate);
       console.log(`El elemento con id: ${id} se actualizó con éxito`);
       // lo consulto para obtener los datos completos del elemento actualizado
       return await this.getById(id);

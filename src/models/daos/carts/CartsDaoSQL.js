@@ -78,7 +78,9 @@ class CartsDaoSQL {
         return null;
       }
     } catch (error) {
-      throw new Error(`Error al obtener el carrito con id '${id}': ${error}`);
+      throw new Error(
+        `Error al obtener el carrito con id '${id_cart}': ${error}`
+      );
     }
   }
 

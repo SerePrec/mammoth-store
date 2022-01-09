@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 //Variables
 //Generales ***************************
 let busqueda = false;
@@ -549,7 +550,7 @@ function updateCartsList() {
       }
     })
     .then(cartsId => {
-      htmlCode = `<option value="" selected>Seleccionar carrito</option>`;
+      let htmlCode = `<option value="" selected>Seleccionar carrito</option>`;
       const options = cartsId.map(
         cartId => `<option value="${cartId}">ID ${cartId}</option>`
       );

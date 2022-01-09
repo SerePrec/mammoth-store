@@ -7,6 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const BK_FILENAME = "productsBk.json";
 const COLLECTION = "products";
 
+// eslint-disable-next-line no-unused-vars
 async function cargaInicial() {
   try {
     // Instancio e inicializo el contenedor productos
@@ -34,4 +35,4 @@ async function cargaInicial() {
   }
 }
 
-//cargaInicial();
+// cargaInicial();

@@ -3,6 +3,7 @@ const $messageErrors = document.getElementById("messageErrors");
 
 let userEmail = location.pathname.replace("/chat/", "");
 
+// eslint-disable-next-line no-undef
 const socket = io();
 
 // renderiza vista de mensajes
@@ -119,14 +120,14 @@ function renderAdminMessage(message, prevData) {
 }
 
 function renderEmptyMessages() {
-  return (html = `
+  return `
               <div class="container p-5 my-4 h-100 bg-yellow rounded-3">
                 <div class="py-5">
                   <h3 class="display-6 fw-bold">¡Oops!, vacío</h1>
                   <p>No se encontraron mensajes para <i>${userEmail}</i></p>
                 </div>
               </div>
-              `);
+              `;
 }
 
 function stringToColour(string) {

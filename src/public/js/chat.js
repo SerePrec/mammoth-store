@@ -8,6 +8,8 @@ const $btnSend = document.getElementById("btn-send");
 const $messagesWrapper = document.getElementById("messages-wrapper");
 const $messageErrors = document.getElementById("messageErrors");
 let user = null;
+
+// eslint-disable-next-line no-undef
 const socket = io();
 
 // Renderiza vista de cantidad de usuarios
@@ -205,7 +207,7 @@ $userForm.addEventListener("submit", e => {
     return;
   }
   const inputValue = $inputEmail.value;
-  if (/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/.test(inputValue)) {
+  if (/^([a-z0-9_.-]+)@([a-z0-9_.-]+)\.([a-z.]{2,6})$/.test(inputValue)) {
     user = inputValue;
     $inputEmail.disabled = true;
     $inputEmail.classList.add("logged");
