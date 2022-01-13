@@ -11,6 +11,10 @@ Esta segunda entrega cuenta con la misma funcionalidad que la primera, pero con 
 - 8 modos de persistencia de datos configurables en el arranque del servidor
 - Nuevas funcionalidades y rediseño del chat
 
+### Deploy en Heroku (Temporal):
+
+https://entrega2-prellezose.herokuapp.com
+
 ## Ejecución
 
 Luego de clonar o descargar el repositorio e instalar todas las dependencias con `npm install`, existen dos comandos para levantar el proyecto.
@@ -140,7 +144,3 @@ También antes de agregar o modificar productos del carrito, valido el stock act
 - [Chat - Administrador y 2 usuarios](https://drive.google.com/file/d/1xjfIOB7aln4uUZBxEzTEFZzIS4Fw3Oca/view)
 
 - [Chat - Historial de mensajes individuales](https://drive.google.com/file/d/17KBsQwGtI8zABUeAPJxYxZ4i61Y2Y5IJ/view)
-
-### Deploy en Heroku (Temporal):
-
-https://entrega2-prellezose.herokuapp.com
