@@ -34,7 +34,9 @@ class ContenedorMongoDB {
   async getAll() {
     try {
       //uso lean para devolver los objetos como POJO y mejorar la velocidad de las consultas
-      let elements = await this.CollModel.find({}, { __v: 0 }).lean();
+      let elements = await this.CollModel.find({}, { __v: 0 })
+        .sort({ _id: 1 })
+        .lean();
       elements = deepClone(elements);
       elements.forEach(element => renameField(element, "_id", "id"));
       return elements;

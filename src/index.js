@@ -4,12 +4,13 @@ import config from "./config.js";
 import app from "./app.js";
 import sockets from "./sockets.js";
 
-const PORT = config.PORT;
-
 async function startServer() {
+  const PORT = config.PORT;
+
   //Instancio servidor http y websocket
   const httpServer = new Httpserver(app);
   const io = new IoServer(httpServer);
+
   //Configuro el servidor websocket
   sockets(io);
 

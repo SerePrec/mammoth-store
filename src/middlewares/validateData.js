@@ -6,7 +6,7 @@ import {
   isPositiveInteger,
   isAlphanumeric,
   isURL
-} from "../../utils/validations.js";
+} from "../utils/validations.js";
 
 let idValidator;
 (function assignIdValidator() {

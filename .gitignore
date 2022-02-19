@@ -6,3 +6,6 @@ config/
 
 # environment variables
 .env
+
+# logs
+logs/
