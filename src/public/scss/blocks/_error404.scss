@@ -1,0 +1,25 @@
+.error404 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+  padding: 3rem;
+  h2 {
+    font-size: 8rem;
+    font-style: italic;
+    font-weight: 700;
+    color: #b30404;
+  }
+  h3 {
+    font-size: 4rem;
+    font-style: italic;
+    font-weight: 300;
+    color: #b30404;
+  }
+  p {
+    font-size: 1.25rem;
+    margin-bottom: 4rem;
+  }
+}

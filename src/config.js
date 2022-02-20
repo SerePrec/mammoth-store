@@ -9,6 +9,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const config = {
   PORT: process.env.PORT || 8080,
+  PERS: process.env.PERS || "mem",
   uploadsImg: {
     path: path.join(__dirname, "public", "img", "productos")
   },

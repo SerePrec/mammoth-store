@@ -24,13 +24,26 @@ app.use(webServerRouter);
 app.use("/api/productos", productsRouter);
 app.use("/api/carrito", cartsRouter);
 
-// error 404 TODO:TODO: Hacer API Y WEB
-app.use((req, res, next) => {
+// error 404 API
+app.use("/api", (req, res, next) => {
+  // logger.warn(
+  //   `ruta '${req.baseUrl + req.path}' método '${req.method}' no implementada`
+  // );
   res.status(404).json({
     error: -2,
     descripcion: `ruta '${req.baseUrl + req.path}' método '${
       req.method
     }' no implementada`
+  });
+});
+
+// error 404 WEB
+app.use((req, res, next) => {
+  // logger.warn(
+  //   `ruta '${req.baseUrl + req.path}' método '${req.method}' no implementada`
+  // );
+  res.sendFile("404.html", {
+    root: path.join(__dirname, "views")
   });
 });
 
