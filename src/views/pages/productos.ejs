@@ -2,86 +2,126 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="/img/logo_M.png">
-  <!-- Font Awesome -->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
-    integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <%- include("../partials/HeadWithBootstrap.ejs")  %>
   <!-- Mi CSS -->
   <link rel="stylesheet" href="/css/styles.css">
-  <title>Panel de productos</title>
 </head>
 
 <body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark">
+      <button aria-controls="navbar-categories" type="button" aria-label="Toggle navigation"
+        class="navbar-toggler collapsed">
+        <img src="/img/iconred.png" alt="Icono menú">
+      </button>
+      <a class="navbar-brand" href="/">
+        <img src="/img/logo.svg" height="80" class="d-inline-block align-top animate__flipInX"
+          alt="Logo de Mamooth - Inicio">
+      </a>
+      <div class="navbar-collapse collapse" id="navbar-myAccount">
+        <a href="/myaccount" class="nav-link">
+          <img src="/img/cuenta.svg" alt="Mi cuenta">
+          MI CUENTA
+        </a>
+      </div>
+      <a href="/cart" class="cartWidget nav-link">
+        <span class="itemsQuantity  hidden">0</span>
+        <img src="/img/icon_cart.svg" alt="Carrito">
+      </a>
+      <div class="navbar-collapse collapse" id="navbar-categories">
+        <div class="m-auto animate__navbar-nav--loaded navbar-nav">
+          <a class="nav-link" href="/productos/categoria/bicicletas"
+            data-rb-event-key="alPuUe3glKMhF5LDqPPx">BICICLETAS</a>
+          <a class="nav-link" href="/productos/categoria/componentes"
+            data-rb-event-key="qVl1VQr85v3ELbe6JXYp">COMPONENTES</a>
+          <a class="nav-link" href="/productos/categoria/accesorios"
+            data-rb-event-key="RUCwOHdV6dsB8GUMr6Xt">ACCESORIOS</a>
+          <a class="nav-link" href="/productos/categoria/equipamiento"
+            data-rb-event-key="rljUAJkE8ErQeLLqO1EE">EQUIPAMIENTO</a>
+          <a class="nav-link" href="/productos/categoria/indumentaria"
+            data-rb-event-key="uYmH81rNnxjnIBJICee6">INDUMENTARIA</a>
+        </div>
+      </div>
+    </nav>
+  </header>
   <main class="productos">
-    <div class="form-wrapper">
-      <h2 id="form-title">CARGAR PRODUCTO</h2>
-      <form id="productForm">
-        <input type="hidden" id="inputId" name="id">
-        <div class="mb-3">
-          <label for="inputTitle" class="form-label">Título</label>
-          <input type="text" class="form-control" id="inputTitle" name="title" required maxlength="80">
-        </div>
-        <div class="mb-3">
-          <label for="inputDetail" class="form-label">Detalle</label>
-          <textarea class="form-control" id="inputDetail" name="detail" rows="3" required maxlength="65535"></textarea>
-        </div>
-        <div class="row">
-          <div class="col-md mb-3">
-            <label for="inputBrand" class="form-label">Marca</label>
-            <input type="text" class="form-control" id="inputBrand" name="brand" required maxlength="40">
-          </div>
-          <div class="col-md mb-3">
-            <label for="inputCode" class="form-label">Código</label>
-            <input type="text" class="form-control" id="inputCode" name="code" required maxlength="40">
+
+    <div id="carouselHome" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="0" class="active" aria-current="true"
+          aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active"><img class="d-block w-100" src="/img/Carousel1.jpeg" alt="First slide">
+          <div class="carousel-caption">
+            <h3>Ciclismo es aire libre</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="inputCategory" class="form-label">Categoría</label>
-            <select class="form-select" id="inputCategory" name="category" required>
-              <option value="bicicletas" selected>Bicicletas</option>
-              <option value="componentes">Componentes</option>
-              <option value="accesorios">Accesorios</option>
-              <option value="equipamiento">Equipamiento</option>
-              <option value="indumentaria">Indumentaria</option>
-            </select>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="inputPrice" class="form-label">Precio</label>
-            <input type="number" step="0.01" class="form-control" id="inputPrice" name="price" required>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for=" inputStock" class="form-label">Stock</label>
-            <input type="number" step="1" class="form-control" id="inputStock" name="stock" required>
+        <div class="carousel-item"><img class="d-block w-100" src="/img/Carousel2.jpeg" alt="Second slide">
+          <div class="carousel-caption">
+            <h3>Ciclismo es compartir</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
           </div>
         </div>
-        <div class="mb-3">
-          <label for="inputThumbnail" class="form-label">URL de la imágen</label>
-          <input type="text" class="form-control" id="inputThumbnail" name="thumbnail"
-            pattern='^(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}|[/])\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$'
-            title="URL o ruta local" maxlength="1024">
+        <div class="carousel-item"><img class="d-block w-100" src="/img/Carousel3.jpeg" alt="Third slide">
+          <div class="carousel-caption">
+            <h3>Ciclismo es adrenalina</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="inputFile" class="form-label">Subir imagen</label>
-          <input type="file" class="form-control" id="inputFile" name="imageFile">
+        <div class="carousel-item"><img class="d-block w-100" src="/img/Carousel4.jpeg" alt="First slide">
+          <div class="carousel-caption">
+            <h3>Ciclismo es dedicación</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          </div>
         </div>
-        <button type="submit" id="hideSubmit" style="display: none;"></button>
-        <div class="d-flex justify-content-evenly">
-          <button type="reset" class="btn btn-secondary">LIMPIAR</button>
-          <button id="formBtnUpdate" class="btn btn-warning">ACTUALIZAR</button>
-          <button id="formBtnSave" class="btn btn-danger">CARGAR</button>
-        </div>
-      </form>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <div id="productInfoMessages"></div>
+
+    <div class="brands">
+      <a href="https://www.specialized.com/ar/es" target="_blank" rel="noreferrer">
+        <img src="/img/logo_Specialized.png" alt="Specialized">
+      </a>
+      <a href="https://www.orbea.com/ar-es/" target="_blank" rel="noreferrer">
+        <img src="/img/logo_Orbea.png" alt="Orbea">
+      </a>
+      <a href="https://www.scott-sports.com/ar/es" target="_blank" rel="noreferrer">
+        <img src="/img/logo_Scott.png" alt="Scott">
+      </a>
+      <a href="https://www.giant-bicycles.com/es" target="_blank" rel="noreferrer">
+        <img src="/img/logo_Giant.png" alt="Giant">
+      </a>
+      <a href="https://www.cube.eu/es/cube-bikes/" target="_blank" rel="noreferrer">
+        <img src="/img/logo_Cube.png" alt="Cube">
+      </a>
+      <a href="https://www.cannondale.com/es-es" target="_blank" rel="noreferrer">
+        <img src="/img/logo_Cannondale.png" alt="Cannondale">
+      </a>
+      <a href="https://www.merida-bikes.com/es-es" target="_blank" rel="noreferrer">
+        <img src="/img/logo_Merida.png" alt="Merida">
+      </a>
+    </div>
+
+
+
+
+
+
+
     <div class="container-xl">
-      <h2 class="text-center pb-3">PRODUCTOS CARGADOS</h2>
+      <h2 class="text-center py-4">CATALOGO DE PRODUCTOS</h2>
 
       <!---------------------- Show Room - Inicio ------------------------>
       <div class="row mx-0 mr-sm-n3 showRoom">
@@ -199,10 +239,8 @@
 
   </main>
   <!-- jQuery y Bootstrap JS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+  <%- include("../partials/jQueryScripts.ejs")  %>
+  <%- include("../partials/bootstrapScripts.ejs")  %>
   <!-- Mi JS -->
   <script src="/js/productos.js"></script>
 </body>

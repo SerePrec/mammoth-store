@@ -149,3 +149,5 @@ También antes de agregar o modificar productos del carrito, valido el stock act
 
 Normalización: Analicé la normalización para la transmisión de los mensajes, pero para la estructura de datos que tengo en este caso, no resulta conveniente la normalización. Por lo contrario, se obtienen datos con mayor volumen que el original.
 Esto se debe a que no existe una redudndncia de infomación en la data que haga necesario la normalización, ni tampoco infomación profundamente anidada. diferente era el caso del desafío ..... donde se guardaba más infomación en los mensajes y había mucha redundancia de la misma, lo que hacía ventajoso el uso de la normalización para bajar la cantidad de datos transmitidos.
+
+OWASP. Escape html en endpoints y entradas de usuarios

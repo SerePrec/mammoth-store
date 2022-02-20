@@ -1,0 +1,163 @@
+.navbar {
+  background: linear-gradient(
+    90deg,
+    rgba(33, 33, 33, 1) 0%,
+    rgba(84, 84, 84, 1) 75%,
+    rgba(185, 184, 184, 1) 100%
+  );
+  padding: 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .navbar-brand {
+    margin: 0 0.5rem;
+    padding: 0;
+  }
+
+  .navbar-toggler {
+    margin-left: 0.5rem;
+    border-color: white;
+    &:focus {
+      outline-color: black;
+    }
+    img {
+      width: 2.5rem;
+    }
+  }
+
+  .searchForm {
+    width: 35%;
+  }
+
+  #navbar-myAccount {
+    flex-grow: 0;
+    font-size: 1rem;
+    background-color: $rojoMarca;
+    border-radius: 0.5rem;
+    &:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+    .nav-link {
+      color: white;
+      img {
+        width: 1.5rem;
+        margin-right: 0.5rem;
+      }
+      div {
+        background-color: #ff5722;
+        width: 1.5rem;
+        margin-right: 0.5rem;
+        border-radius: 50%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-family: $fuente-principal;
+      }
+    }
+  }
+
+  #navbar-categories {
+    justify-content: center;
+    width: 100%;
+    background-color: $tonoMuyOscuro;
+    padding: 0.25rem 0;
+    overflow: hidden;
+
+    .navbar-nav {
+      height: 2rem;
+
+      .nav-link {
+        font-size: 1.25rem;
+        border-left: 3px solid $rojoMarca;
+        margin: 0;
+        padding: 0 4rem 0 0.55rem;
+        transition: all 0.5s;
+
+        &.activeLink {
+          color: white;
+          font-style: italic;
+          border-radius: 0.4rem 0 0 0;
+          border-width: 7px;
+        }
+
+        &:hover {
+          color: white;
+          border-color: rgba($rojoMarca, 0);
+
+          &::after {
+            width: 150%;
+          }
+        }
+
+        &::after {
+          display: block;
+          content: " ";
+          width: 0;
+          height: 3px;
+          background-image: linear-gradient(
+            90deg,
+            rgba($rojoMarca, 1),
+            rgba($rojoMarca, 0)
+          );
+          transition: all 0.5s ease;
+        }
+      }
+    }
+  }
+
+  @media (max-width: $lg) {
+    #navbar-categories {
+      .navbar-nav {
+        animation-name: fadeInDown;
+        height: auto;
+        .nav-link {
+          font-size: 1rem;
+          padding-top: 0.25rem;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+
+  @media (max-width: $md) {
+    .navbar-brand {
+      order: 2;
+      img {
+        height: 65px;
+      }
+    }
+
+    .navbar-toggler {
+      order: 1;
+    }
+
+    .navbar-collapse {
+      order: 4;
+    }
+
+    .cartWidget {
+      order: 3;
+    }
+
+    .searchForm {
+      order: 5;
+      width: 100%;
+    }
+
+    #navbar-categories {
+      .navbar-nav {
+        .nav-link {
+          margin-left: 0.5rem;
+          padding-bottom: 0.25rem;
+
+          &:hover {
+            &::after {
+              width: 15rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.cartWidget {
+  position: relative;
+  padding-bottom: 0;
+
+  .itemsQuantity {
+    position: absolute;
+    top: -10px;
+    left: 22px;
+    background-color: red;
+    width: 2rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+    animation-duration: 0.5s;
+    transition: opacity 0.5s;
+    &.hidden {
+      opacity: 0;
+    }
+  }
+}

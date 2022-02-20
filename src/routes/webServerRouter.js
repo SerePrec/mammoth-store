@@ -2,19 +2,22 @@ import { Router } from "express";
 import { isAdmin } from "../middlewares/auth.js";
 import {
   getProducts,
-  getCarts,
+  getAdminProducts,
+  getAdminCarts,
   getUsersChat,
   getAdminChat
 } from "../controllers/webServerController.js";
 
 const router = Router();
 
-router.get("/productos", isAdmin, getProducts);
+router.get("/productos", getProducts);
 
-router.get("/carritos", getCarts);
+router.get("/productos/admin", isAdmin, getAdminProducts);
+
+router.get("/carritos/admin", isAdmin, getAdminCarts);
+
+router.get("/chat/admin", isAdmin, getAdminChat);
 
 router.get("/chat/:email?", getUsersChat);
-
-router.get("/chat-admin", isAdmin, getAdminChat);
 
 export default router;

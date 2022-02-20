@@ -2,11 +2,17 @@
 @import "base/variables";
 @import "base/reset";
 @import "base/fonts";
+@import "base/animations";
 
 // importación de bloques
+@import "blocks/header";
 @import "blocks/productFrom";
 @import "blocks/showRoom";
 @import "blocks/carts";
 @import "blocks/error404";
 
 // importación de componentes
+@import "components/navBar";
+@import "components/cartWidget";
+@import "components/landingCarousel";
+@import "components/brandBanner";

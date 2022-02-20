@@ -4,6 +4,7 @@
 let busqueda = false;
 let filtroPrecioAplicado = false;
 let filtroMarcaAplicado = false;
+let formToUpdate = false;
 let primerCarga = true;
 let marcasAFiltrar = [];
 let precioMinimo, precioMaximo, precioMinSel, precioMaxSel;
@@ -20,14 +21,11 @@ const $inputBuscar = $("#inputBuscar");
 const $inputPrecioMaximo = $("#inputPrecioMax");
 const $inputPrecioMinimo = $("#inputPrecioMin");
 const $listadoFitros = $("#filtros");
-const $cartInfoMessages = document.getElementById("cartInfoMessages");
+const $productForm = document.getElementById("productForm");
+const $productInfoMessages = document.getElementById("productInfoMessages");
 const $rangoPrecioMaximo = $("#rangoPrecioMax");
 const $rangoPrecioMinimo = $("#rangoPrecioMin");
 const $selectOrdenar = $("#selectOrdenar");
-const $selectCart = document.getElementById("selectCart");
-const $btnCreateCart = document.getElementById("btnCreateCart");
-const $btnDeleteCart = document.getElementById("btnDeleteCart");
-const $cartProducts = document.getElementById("cartProducts");
 
 // **************************************************************************//
 // *********************** Definiciones de funciones ************************//
@@ -42,53 +40,30 @@ class ItemMarca {
   }
 }
 
-// Funciones para inetractuar con la api de carritos
-const cartsApi = {
-  getCarts: async () => {
-    return fetch(`/api/carrito`).then(data => data.json());
-  },
-  getCartProducts: async id => {
-    return fetch(`/api/carrito/${id}/productos`).then(data => data.json());
-  },
-  createCart: async () => {
-    return fetch(`/api/carrito`, {
-      method: "POST"
-    }).then(data => data.json());
-  },
-  deleteCart: async id => {
-    return fetch(`/api/carrito/${id}`, {
-      method: "DELETE"
-    }).then(data => data.json());
-  },
-  addProductToCart: async (id, id_prod, quantity) => {
-    return fetch(`/api/carrito/${id}/productos`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ id: id_prod, quantity })
-    }).then(data => data.json());
-  },
-  updateProductFromCart: async (id, id_prod, quantity) => {
-    return fetch(`/api/carrito/${id}/productos`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ id: id_prod, quantity })
-    }).then(data => data.json());
-  },
-  deleteProductFromCart: async (id, id_prod) => {
-    return fetch(`/api/carrito/${id}/productos/${id_prod}`, {
-      method: "DELETE"
-    }).then(data => data.json());
-  }
-};
-
 // Funciones para inetractuar con la api de productos
 const productsApi = {
   getProducts: async () => {
     return fetch(`/api/productos`).then(data => data.json());
+  },
+  getProduct: async id => {
+    return fetch(`/api/productos/${id}`).then(data => data.json());
+  },
+  saveProduct: async productData => {
+    return fetch(`/api/productos`, {
+      method: "POST",
+      body: productData
+    }).then(data => data.json());
+  },
+  updateProduct: async (id, productData) => {
+    return fetch(`/api/productos/${id}`, {
+      method: "PUT",
+      body: productData
+    }).then(data => data.json());
+  },
+  deleteProduct: async id => {
+    return fetch(`/api/productos/${id}`, {
+      method: "DELETE"
+    }).then(data => data.json());
   }
 };
 
@@ -385,6 +360,9 @@ function mostrarProductos(vectorProductos) {
       }
 
       codigoHTML += `
+                    <span class="badge rounded-pill idBadge">${producto.id
+                      .toString()
+                      .padStart(6, "0")}</span>
                     <img src="${
                       producto.thumbnail
                     }" class="card-img-top" alt="${producto.title}">
@@ -396,24 +374,17 @@ function mostrarProductos(vectorProductos) {
                       <p class="my-2"><b>Precio: $${formatoPrecio(
                         producto.price
                       )}</b> ${precioSinDescuento}</p>
-                      <p class="my-2">Disponible: ${producto.stock}u</p>`;
-
-      if (producto.stock > 0) {
-        // Si se puede vender genera los botones de agregar y el input de cantidad
-        // setea el atributo "data-" con el valor del id del producto.
-        // seteo el atributo del input "max" en el actual valor de stock para tener un control extra sobre el rango.
-        codigoHTML += `
-                        <div class="d-flex">
-                            <button type="button" class="btn btn-danger w-50 btnAgregar" data-producto-id="${producto.id}">Agregar</button>
-                            <input type="number" class="form-control ml-2 inputCantidad" value="1" min="1" max="${producto.stock}">
-                        </div>`;
-      } else {
-        // Si el producto no tiene stock genera una tarjeta con un boton "disbled" que notifica "Agotado"
-        codigoHTML += `<button type="button" class="btn btn-danger" data-producto-id="${producto.id}" disabled>Agotado</button>`;
-      }
-      codigoHTML += `
+                      <p class="my-2">Stock: ${producto.stock}u</p>
+                      <div class="row justify-content-around">
+                        <button type="button" class="btn btn-warning col-6 btnUpdate"  data-producto-id="${
+                          producto.id
+                        }">Actualizar</button>
+                       <button type="button" class="btn btn-danger col-4 btnDelete"  data-producto-id="${
+                         producto.id
+                       }">Eliminar</button>
+                      </div>
                     </div>
-                </div>`;
+                  </div>`;
 
       $contenedorTarjeta.html(codigoHTML);
       arrayTarjetas.push($contenedorTarjeta);
@@ -423,16 +394,38 @@ function mostrarProductos(vectorProductos) {
     $contenedorProductos.append(arrayTarjetas);
   }
 
-  $("#contenedorProductos .btnAgregar").click(function (e) {
-    // genero los eventos para todos los botones agregar
-    // para luego pasar los valores del producto correspondiente a la funcion de agregar al carrito,
+  $("#contenedorProductos .btnUpdate").click(function (e) {
+    let id = $(this).data("productoId");
+    window.scrollTo(0, 0);
+    formToUpdate = true;
+    productsApi
+      .getProduct(id)
+      .then(processResponse(`Se cargó la infomación para actualizar`))
+      .then(formForUpdate)
+      .catch(console.log);
+  });
+
+  $("#contenedorProductos .btnDelete").click(function (e) {
+    const title = $(this)
+      .closest(".card-body")
+      .find(".card-title")
+      .text()
+      .trim();
     // tomo esos valores del atributo "data-" mediante el metodo data()
-    const id = $selectCart.value;
-    const id_prod = $(this).data("productoId");
-    const $inputCantidad = $(this).next();
-    const cant = parseInt($inputCantidad.val());
-    addProductToCart(id, id_prod, cant);
-    $inputCantidad.val(1); // devuelve el valor del input a 1
+    let id = $(this).data("productoId");
+
+    const isOk = confirm(
+      `Esta seguro de eliminar el producto:\nid: ${id}\n${title}`
+    );
+
+    if (isOk) {
+      formToUpdate = false;
+      productsApi
+        .deleteProduct(id)
+        .then(processResponse(`Producto eliminado con éxito`))
+        .then(formForSave)
+        .catch(console.log);
+    }
   });
 }
 
@@ -465,261 +458,6 @@ function quitarDecimales(string) {
   // Quita los decimales del string pasado por formatoPrecio
   string = string.slice(0, string.indexOf(","));
   return string;
-}
-
-// Funciones CRUD carritos  ***************************************************
-//*****************************************************************************
-function createCart() {
-  cartsApi
-    .createCart()
-    .then(processResponse("Carrito creado con éxito"))
-    .then(data => {
-      if (data) {
-        updateCartsList();
-      }
-    })
-    .catch(console.log);
-}
-
-function deleteCart() {
-  const id = $selectCart.value;
-  cartsApi
-    .deleteCart(id)
-    .then(processResponse("Carrito eliminado con éxito"))
-    .then(data => {
-      if (data) {
-        updateCartsList();
-      }
-    })
-    .catch(console.log);
-}
-
-function addProductToCart(id, id_prod, quantity) {
-  if (id) {
-    cartsApi
-      .addProductToCart(id, id_prod, quantity)
-      .then(processResponse("Selección agregada al carrito"))
-      .then(data => {
-        if (data) {
-          updateCartTable();
-        }
-      })
-      .catch(console.log);
-  }
-}
-
-function updateProductFromCart(id, id_prod, quantity) {
-  if (id) {
-    cartsApi
-      .updateProductFromCart(id, id_prod, quantity)
-      .then(processResponse("Cantidad actualizada en el carrito"))
-      .then(data => {
-        if (data) {
-          updateCartTable();
-        }
-      })
-      .catch(console.log);
-  }
-}
-
-function deleteProductFromCart(id, id_prod) {
-  if (id) {
-    cartsApi
-      .deleteProductFromCart(id, id_prod)
-      .then(processResponse("Producto eliminado del carrito"))
-      .then(data => {
-        if (data) {
-          updateCartTable();
-        }
-      })
-      .catch(console.log);
-  }
-}
-
-// Funciones para mostrar y/o actualizar la información de los carritos  ******
-//*****************************************************************************
-
-function updateCartsList() {
-  cartsApi
-    .getCarts()
-    .then(data => {
-      if (Array.isArray(data)) {
-        return Promise.resolve(data);
-      } else {
-        return Promise.reject("Error de datos");
-      }
-    })
-    .then(cartsId => {
-      let htmlCode = `<option value="" selected>Seleccionar carrito</option>`;
-      const options = cartsId.map(
-        cartId => `<option value="${cartId}">ID ${cartId}</option>`
-      );
-      htmlCode += options.join("");
-      $selectCart.innerHTML = htmlCode;
-      hiddenButton();
-      updateCartTable();
-    })
-    .catch(error => {
-      $cartInfoMessages.innerText =
-        "Error. No se pudo cargar el listado de carritos";
-      $cartInfoMessages.classList.add("show", "warning");
-      setTimeout(() => {
-        $cartInfoMessages.classList.remove("show", "warning");
-      }, 4000);
-    });
-}
-
-function hiddenButton() {
-  if (!$selectCart.value) {
-    $btnDeleteCart.classList.add("hidden");
-  } else {
-    $btnDeleteCart.classList.remove("hidden");
-  }
-}
-
-// Renderiza la tabla de productos utilizando template
-function renderCartTable(id, data) {
-  const total = data.reduce(
-    (tot, { product, quantity }) => (tot += product.price * quantity),
-    0
-  );
-  let html = `
-    <div class="listado">
-      <h3>PRODUCTOS EN CARRITO ID <i>${id}</i></h3>`;
-  if (data.length > 0) {
-    html += `
-      <table class="table table-dark table-striped">
-        <thead>
-          <tr>
-            <th scope="col">id</th>
-            <th scope="col"></th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col">Subtotal</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>`;
-    data.forEach(
-      ({ product, quantity }) =>
-        (html += `
-        <tr>
-          <td>${product.id}</td>
-          <td><img class="table__image" src="${
-            product.thumbnail
-          }" alt="producto" /></td>
-          <td>
-            <p>${product.title}</p>
-            <p><b>$${formatoPrecio(product.price)}</b><del></del></p>
-            <p><b>SUBTOTAL: $${formatoPrecio(product.price * quantity)}</b></p>
-          </td>
-          <td>
-            <div class="my-3 input-group input-group-sm">
-              <div class="input-group-prepend">
-                <button type="button" class="btn btn-outline-secondary btn-minus">-</button>
-              </div>
-              <input type="text" class="text-center form-control product-qty" data-product-stk="${
-                product.stock
-              }" value="${quantity}" disabled>
-              <div class="input-group-append">
-                <button type="button" class="btn btn-outline-secondary btn-plus" data-product-stk="${
-                  product.stock
-                }">+</button>
-              </div>
-            </div>
-            <button type="button" class="typicBtn font-weight-bold btn btn-danger btn-block btn-sm btn-qty-update" data-producto-id="${
-              product.id
-            }">Actualizar</button>
-          </td>
-          <td>$${formatoPrecio(product.price * quantity)}</td>
-          <td>
-            <img class="table-trash" src="/img/trash.svg" alt="borrar" data-producto-id="${
-              product.id
-            }"/>
-          </td>
-        </tr>`)
-    );
-    html += `
-        </tbody>
-      </table>
-      <h3>TOTAL $${formatoPrecio(total)}</h3>`;
-  } else {
-    html += `
-      <div class="container p-5 mb-4 bg-yellow rounded-3">
-        <div class="py-5">
-          <h3 class="display-6 fw-bold">¡Oops!, carrito vacío</h1>
-          <p>No se encontraron productos cargados.</p>
-        </div>
-      </div>`;
-  }
-  return html;
-}
-
-function updateCartTable() {
-  const id = $selectCart.value;
-  if (id) {
-    cartsApi
-      .getCartProducts(id)
-      .then(processResponse())
-      .then(data => {
-        if (data) {
-          $cartProducts.innerHTML = renderCartTable(id, data);
-          assignEventsToCartTable();
-          $("#cartProducts").slideDown(300);
-        }
-      })
-      .catch(console.log);
-  } else {
-    $cartProducts.innerHTML = "";
-  }
-}
-
-function checkInputChange($input) {
-  const prevQty = $input.attr("value");
-  const actQty = $input.val();
-  if (actQty !== prevQty) {
-    $input.parent().next(".btn-qty-update").slideDown("fast");
-  } else {
-    $input.parent().next(".btn-qty-update").slideUp("fast");
-  }
-}
-
-function assignEventsToCartTable() {
-  $("#cartProducts .table-trash").click(function (e) {
-    // genero los eventos para todos los botones eliminar
-    const id = $selectCart.value;
-    const id_prod = $(this).data("productoId");
-    deleteProductFromCart(id, id_prod);
-  });
-  $("#cartProducts .btn-minus").click(function (e) {
-    // genero los eventos para todos los botones -
-    const $inputQty = $(this).parent().next();
-    const qty = parseInt($inputQty.val());
-    if (qty > 1) {
-      $inputQty.val(qty - 1);
-      checkInputChange($inputQty);
-    }
-  });
-  $("#cartProducts .btn-plus").click(function (e) {
-    // genero los eventos para todos los botones +
-    const $inputQty = $(this).parent().prev();
-    const qty = parseInt($inputQty.val());
-    const stock = parseInt($(this).data("productStk"));
-    if (qty < stock) {
-      $inputQty.val(qty + 1);
-      checkInputChange($inputQty);
-    }
-  });
-  $("#cartProducts .product-qty").on("input", function (e) {
-    $(this).val($(this).attr("value"));
-  });
-  $("#cartProducts .btn-qty-update").click(function (e) {
-    const id = $selectCart.value;
-    const id_prod = $(this).data("productoId");
-    const $inputQty = $(this).prev(".input-group").find(".product-qty");
-    const qty = parseInt($inputQty.val());
-    updateProductFromCart(id, id_prod, qty);
-  });
 }
 
 // Funciones de lógica de carga inicial y respuestas del servidor  ************
@@ -980,23 +718,22 @@ function cargaInicialOk() {
 function processResponse(okText) {
   return data => {
     if (data.error) {
-      $cartInfoMessages.innerText =
+      $productInfoMessages.innerText =
         data.error === -1 ? "No posee los permisos necesarios" : data.error;
-      $cartInfoMessages.classList.add("show", "warning");
+      $productInfoMessages.classList.add("show", "warning");
       setTimeout(() => {
-        $cartInfoMessages.classList.remove("show", "warning");
+        $productInfoMessages.classList.remove("show", "warning");
       }, 4000);
       return;
     }
-    if (data.result === "ok" || data.id || Array.isArray(data)) {
-      if (okText) {
-        $cartInfoMessages.innerText = okText;
-        $cartInfoMessages.classList.add("show", "info");
-        setTimeout(() => {
-          $cartInfoMessages.classList.remove("show", "info");
-        }, 2500);
-      }
-      return data;
+    if (data.result === "ok" || data.id) {
+      $productForm.reset();
+      $productInfoMessages.innerText = okText;
+      $productInfoMessages.classList.add("show", "info");
+      setTimeout(() => {
+        $productInfoMessages.classList.remove("show", "info");
+      }, 4000);
+      return !formToUpdate ? updateTable() : data;
     }
   };
 }
@@ -1027,23 +764,59 @@ function triggerRenderTable() {
   $filtroBuscar.trigger("click");
 }
 
+function formForUpdate(data) {
+  $("#form-title").text("ACTUALIZAR / CARGAR PRODUCTO");
+  $("#formBtnUpdate").css("display", "block");
+  for (const key in data) {
+    if (key === "timestamp") continue;
+    $productForm[key].value = data[key];
+  }
+}
+
+function formForSave() {
+  $("#form-title").text("CARGAR PRODUCTO");
+  $("#formBtnUpdate").css("display", "none");
+  $productForm.reset();
+}
+
 // **********************************************************************//
-// *********************** Eventos panel carritos ***********************//
+// ****************** Eventos Formulario Productos **********************//
 // **********************************************************************//
 
-$btnCreateCart.addEventListener("click", createCart);
+// Acciones al enviar el formulario de productos
+$productForm.addEventListener("submit", e => e.preventDefault());
 
-$btnDeleteCart.addEventListener("click", () => {
-  deleteCart();
+document.getElementById("formBtnSave").addEventListener("click", e => {
+  e.preventDefault();
+  // Simulo un click en submit para lanzar y ver
+  // validaciones html. si se cumplen continúo
+  $("#hideSubmit").trigger("click");
+  if ($productForm.checkValidity()) {
+    const formData = new FormData($productForm);
+    formData.delete("id");
+    formToUpdate = false;
+    productsApi
+      .saveProduct(formData)
+      .then(processResponse(`Producto cargado con éxito`))
+      .then(formForSave)
+      .catch(console.log);
+  }
 });
 
-$selectCart.addEventListener("change", () => {
-  $("#cartProducts").slideUp("slow", updateCartTable);
-  hiddenButton();
+document.getElementById("formBtnUpdate").addEventListener("click", e => {
+  e.preventDefault();
+  // En el update no es necesario validar porque pueden
+  // ir vacíos también
+  const formData = new FormData($productForm);
+  const id = formData.get("id");
+  formData.delete("id");
+  formToUpdate = false;
+  productsApi
+    .updateProduct(id, formData)
+    .then(processResponse(`Producto actualizado con éxito`))
+    .then(formForSave)
+    .catch(console.log);
 });
 
 // Inicio
-(() => {
-  updateTable();
-  updateCartsList();
-})();
+updateTable();

@@ -5,11 +5,15 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const viewsPath = path.join(__dirname, "..", "views");
 
 export const getProducts = (req, res) => {
-  res.sendFile("productos.html", { root: viewsPath });
+  res.render("pages/productos", { title: "Mammoth Bike Store | Productos" });
 };
 
-export const getCarts = (req, res) => {
-  res.sendFile("carritos.html", { root: viewsPath });
+export const getAdminProducts = (req, res) => {
+  res.sendFile("productos-admin.html", { root: viewsPath });
+};
+
+export const getAdminCarts = (req, res) => {
+  res.sendFile("carritos-admin.html", { root: viewsPath });
 };
 
 export const getUsersChat = (req, res) => {

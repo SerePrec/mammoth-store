@@ -1,0 +1,33 @@
+.carousel {
+  background-color: $tonoOscuro;
+  img {
+    object-fit: cover;
+  }
+  .carousel-caption {
+    top: 20px;
+    bottom: auto;
+    left: 12%;
+    right: auto;
+    text-shadow: 1px 1px #545454;
+  }
+
+  @media (max-width: $lg) {
+    img {
+      min-height: 35vw;
+    }
+    .carousel-item:nth-child(2) {
+      img {
+        object-position: 80%;
+      }
+    }
+    .carousel-caption {
+      display: none;
+    }
+  }
+
+  @media (max-width: $md) {
+    .carousel-indicators {
+      display: none;
+    }
+  }
+}
