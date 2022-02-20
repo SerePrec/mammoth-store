@@ -1,8 +1,10 @@
+import config from "../config.js";
+
 let productsModel;
 let cartsModel;
 let messagesModel;
 
-switch (process.env.PERS) {
+switch (config.PERS) {
   case "fs": {
     const { default: ProductsDaoFS } = await import(
       "./daos/products/ProductsDaoFS.js"

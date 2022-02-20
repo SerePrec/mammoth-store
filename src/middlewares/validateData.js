@@ -1,3 +1,4 @@
+import config from "../config.js";
 import {
   isTextRequired,
   isNumericId,
@@ -7,11 +8,12 @@ import {
   isAlphanumeric,
   isURL
 } from "../utils/validations.js";
+import { escapeHtml } from "../utils/dataTools.js";
 
 let idValidator;
 (function assignIdValidator() {
   const persWithNumId = ["mem", "fs", "mariadb", "sqlite3"];
-  const pers = process.env.PERS;
+  const pers = config.PERS;
   persWithNumId.includes(pers)
     ? (idValidator = isNumericId)
     : (idValidator = isAlphanumeric);
@@ -55,11 +57,11 @@ const validateProductPostBody = (req, res, next) => {
   )
     res.status(400).json({ error: "Los valores enviados no son válidos" });
   else {
-    req.body.title = title.trim();
-    req.body.detail = detail.trim();
-    req.body.code = code.trim();
-    req.body.brand = brand.trim();
-    req.body.category = category.trim();
+    req.body.title = escapeHtml(title.trim());
+    req.body.detail = escapeHtml(detail.trim());
+    req.body.code = escapeHtml(code.trim());
+    req.body.brand = escapeHtml(brand.trim());
+    req.body.category = escapeHtml(category.trim());
     req.body.price = Math.round(parseFloat(price) * 100) / 100;
     req.body.stock = parseInt(stock);
     req.body.thumbnail = thumbnail.trim();
@@ -96,11 +98,11 @@ const validateProductPutBody = (req, res, next) => {
   )
     res.status(400).json({ error: "No hay campos válidos para actualizar" });
   else {
-    req.body.title = title?.trim();
-    req.body.detail = detail?.trim();
-    req.body.code = code?.trim();
-    req.body.brand = brand?.trim();
-    req.body.category = category?.trim();
+    req.body.title = escapeHtml(title?.trim());
+    req.body.detail = escapeHtml(detail?.trim());
+    req.body.code = escapeHtml(code?.trim());
+    req.body.brand = escapeHtml(brand?.trim());
+    req.body.category = escapeHtml(category?.trim());
     req.body.price = price && Math.round(parseFloat(price) * 100) / 100;
     req.body.stock = stock && parseInt(stock);
     req.body.thumbnail = thumbnail?.trim();

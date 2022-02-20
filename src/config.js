@@ -1,6 +1,9 @@
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-if (process.env.NODE_ENV !== "production") {
+
+const NODE_ENV = process.env.NODE_ENV;
+
+if (NODE_ENV !== "production") {
   const { config } = await import("dotenv");
   config();
 }
@@ -8,6 +11,7 @@ if (process.env.NODE_ENV !== "production") {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const config = {
+  NODE_ENV,
   PORT: process.env.PORT || 8080,
   PERS: process.env.PERS || "mem",
   uploadsImg: {

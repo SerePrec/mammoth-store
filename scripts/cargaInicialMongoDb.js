@@ -7,7 +7,7 @@ import { productSchema } from "../src/models/daos/products/ProductsDaoMongoDB.js
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BK_FILENAME = "productsBk.json";
-const COLLECTION = "productoss";
+const COLLECTION = "productos";
 
 // eslint-disable-next-line no-unused-vars
 async function cargaInicial() {

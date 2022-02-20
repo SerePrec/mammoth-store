@@ -3,7 +3,7 @@ import config from "../../config.js";
 import { deepClone, renameField, removeField } from "../../utils/dataTools.js";
 
 try {
-  switch (process.env.PERS) {
+  switch (config.PERS) {
     case "mongodb_atlas":
       await mongoose.connect(
         config.mongoDbAtlas.connectionString,

@@ -1,5 +1,5 @@
 import { messagesModel } from "./models/index.js";
-import { escapeHtml } from "./utils/messageTools.js";
+import { escapeHtml } from "./utils/dataTools.js";
 
 //Configuración de sockets
 export default io => {
