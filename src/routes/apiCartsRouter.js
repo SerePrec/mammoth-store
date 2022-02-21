@@ -6,6 +6,7 @@ import {
 } from "../middlewares/validateData.js";
 import {
   getCarts,
+  getUserCart,
   createCart,
   deleteCart,
   getProductsFromCart,
@@ -18,11 +19,11 @@ const router = Router();
 
 router.get("/", getCarts);
 
-router.post("/", createCart);
-
-router.delete("/:id", validateId, deleteCart);
+router.get("/usuario", getUserCart);
 
 router.get("/:id/productos", validateId, getProductsFromCart);
+
+router.post("/", createCart);
 
 router.post(
   "/:id/productos",
@@ -37,6 +38,8 @@ router.put(
   validateCartProductBody,
   updateProductFromCart
 );
+
+router.delete("/:id", validateId, deleteCart);
 
 router.delete(
   "/:id/productos/:id_prod",

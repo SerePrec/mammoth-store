@@ -29,7 +29,7 @@ const config = {
       host: "127.0.0.1",
       user: "root",
       password: "",
-      database: "ecommerce",
+      database: "ecommerce-mammoth",
       charset: "utf8mb4"
     }
   },
@@ -51,12 +51,13 @@ const config = {
     useNullAsDefault: true
   },
   mongoDb: {
-    connectionString: "mongodb://localhost/ecommerce",
+    connectionString: "mongodb://localhost/ecommerce-mammoth",
     options: {
       useNewUrlParser: true, //No necesario desde mongoose 6
       useUnifiedTopology: true, //No necesario desde mongoose 6
       serverSelectionTimeoutMS: 5000
-    }
+    },
+    advancedOptions: { useUnifiedTopology: true }
   },
   mongoDbAtlas: {
     connectionString: process.env.MONGODB_ATLAS_URI,
@@ -64,6 +65,10 @@ const config = {
       useNewUrlParser: true, //No necesario desde mongoose 6
       useUnifiedTopology: true, //No necesario desde mongoose 6
       serverSelectionTimeoutMS: 5000
+    },
+    advancedOptions: {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     }
   },
   firebase: {
@@ -77,6 +82,15 @@ const config = {
     token_uri: "https://oauth2.googleapis.com/token",
     auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
     client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL
+  },
+  session: {
+    secret: process.env.SESSION_SECRET || "secret",
+    resave: false,
+    saveUninitialized: false,
+    rolling: true,
+    cookie: {
+      maxAge: 10 * 60 * 1000
+    }
   }
 };
 

@@ -9,6 +9,8 @@ let marcasAFiltrar = [];
 let precioMinimo, precioMaximo, precioMinSel, precioMaxSel;
 let productos = [];
 let productosFiltradosCliente = [];
+let userCartId = null;
+let cartProductsQty = 0;
 
 //DOM *********************************
 const $contenedorProductos = document.querySelector(
@@ -42,6 +44,9 @@ class ItemMarca {
 const cartsApi = {
   getCarts: async () => {
     return fetch(`/api/carrito`).then(data => data.json());
+  },
+  getUserCart: async () => {
+    return fetch(`/api/carrito/usuario`).then(data => data.json());
   },
   getCartProducts: async id => {
     return fetch(`/api/carrito/${id}/productos`).then(data => data.json());
@@ -468,68 +473,82 @@ function quitarDecimales(string) {
 function createCart() {
   cartsApi
     .createCart()
-    .then(processResponse("Carrito creado con éxito"))
-    .then(data => {
-      if (data) {
-        updateCartsList();
-      }
-    })
+    .then(console.log)
+    // .then(processResponse("Carrito creado con éxito"))
+    // .then(data => {
+    //   if (data) {
+    //     updateCartsList();
+    //   }
+    // })
     .catch(console.log);
 }
 
-function deleteCart() {
-  const id = $selectCart.value;
-  cartsApi
-    .deleteCart(id)
-    .then(processResponse("Carrito eliminado con éxito"))
-    .then(data => {
-      if (data) {
-        updateCartsList();
-      }
-    })
-    .catch(console.log);
-}
+// function deleteCart() {
+//   const id = $selectCart.value;
+//   cartsApi
+//     .deleteCart(id)
+//     .then(processResponse("Carrito eliminado con éxito"))
+//     .then(data => {
+//       if (data) {
+//         updateCartsList();
+//       }
+//     })
+//     .catch(console.log);
+// }
 
-function addProductToCart(id, id_prod, quantity) {
-  if (id) {
-    cartsApi
-      .addProductToCart(id, id_prod, quantity)
-      .then(processResponse("Selección agregada al carrito"))
-      .then(data => {
-        if (data) {
-          updateCartTable();
-        }
-      })
-      .catch(console.log);
-  }
-}
+// function addProductToCart(id, id_prod, quantity) {
+//   if (id) {
+//     cartsApi
+//       .addProductToCart(id, id_prod, quantity)
+//       .then(processResponse("Selección agregada al carrito"))
+//       .then(data => {
+//         if (data) {
+//           updateCartTable();
+//         }
+//       })
+//       .catch(console.log);
+//   }
+// }
 
-function updateProductFromCart(id, id_prod, quantity) {
-  if (id) {
-    cartsApi
-      .updateProductFromCart(id, id_prod, quantity)
-      .then(processResponse("Cantidad actualizada en el carrito"))
-      .then(data => {
-        if (data) {
-          updateCartTable();
-        }
-      })
-      .catch(console.log);
-  }
-}
+// function updateProductFromCart(id, id_prod, quantity) {
+//   if (id) {
+//     cartsApi
+//       .updateProductFromCart(id, id_prod, quantity)
+//       .then(processResponse("Cantidad actualizada en el carrito"))
+//       .then(data => {
+//         if (data) {
+//           updateCartTable();
+//         }
+//       })
+//       .catch(console.log);
+//   }
+// }
 
-function deleteProductFromCart(id, id_prod) {
-  if (id) {
-    cartsApi
-      .deleteProductFromCart(id, id_prod)
-      .then(processResponse("Producto eliminado del carrito"))
-      .then(data => {
-        if (data) {
-          updateCartTable();
-        }
-      })
-      .catch(console.log);
-  }
+// function deleteProductFromCart(id, id_prod) {
+//   if (id) {
+//     cartsApi
+//       .deleteProductFromCart(id, id_prod)
+//       .then(processResponse("Producto eliminado del carrito"))
+//       .then(data => {
+//         if (data) {
+//           updateCartTable();
+//         }
+//       })
+//       .catch(console.log);
+//   }
+// }
+
+// Funciones relacionadas a lógica del carrito  *******************************
+// ****************************************************************************
+
+async function cartAssign() {
+  cartsApi.getUserCart().then(res => {
+    if (res.cartId !== null) {
+      console.log(res.cartId);
+    } else {
+      return createCart();
+    }
+  });
 }
 
 // Funciones de lógica de carga inicial y respuestas del servidor  ************
@@ -819,6 +838,7 @@ function isResponseOk(data) {
     if (primerCarga) {
       cargaInicialOk();
       primerCarga = false;
+      cartAssign();
     }
     return Promise.resolve();
   } else {

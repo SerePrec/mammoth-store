@@ -12,28 +12,18 @@ export const getCarts = async (req, res) => {
   }
 };
 
-export const createCart = async (req, res) => {
+export const getUserCart = async (req, res) => {
   try {
-    const { id } = await cartsModel.save();
-    res.json({ result: "ok", cartId: id });
+    // evito pedir información a la BD si la tengo en la sesión
+    if (req.session?.cartId) return res.json({ cartId: req.session.cartId });
+    const username = req.session?.username;
+    const userCart = await cartsModel.getByUsername(username);
+    if (userCart && req.session) req.session.cartId = userCart.id;
+    res.json({ cartId: userCart ? userCart.id : null });
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      error: "No se pudo crear el carrito"
-    });
-  }
-};
-
-export const deleteCart = async (req, res) => {
-  try {
-    const deletedId = await cartsModel.deleteById(req.params.id);
-    deletedId !== null
-      ? res.json({ result: "ok", deletedId })
-      : res.json({ error: "Carrito no encontrado" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      error: "No se pudo eliminar el carrito"
+      error: "No se pudo recuperar la infomación"
     });
   }
 };
@@ -48,6 +38,21 @@ export const getProductsFromCart = async (req, res) => {
     console.log(error);
     res.status(500).json({
       error: "No se pudo recuperar la infomación"
+    });
+  }
+};
+
+export const createCart = async (req, res) => {
+  try {
+    const username = req.session?.username;
+    const cart = { username, products: [] };
+    const { id } = await cartsModel.save(cart);
+    req.session ? (req.session.cartId = id) : null;
+    res.json({ result: "ok", cartId: id });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: "No se pudo crear el carrito"
     });
   }
 };
@@ -111,6 +116,20 @@ export const updateProductFromCart = async (req, res) => {
     console.log(error);
     res.status(500).json({
       error: `No se pudo modificar la cantidad del producto en el carrito`
+    });
+  }
+};
+
+export const deleteCart = async (req, res) => {
+  try {
+    const deletedId = await cartsModel.deleteById(req.params.id);
+    deletedId !== null
+      ? res.json({ result: "ok", deletedId })
+      : res.json({ error: "Carrito no encontrado" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: "No se pudo eliminar el carrito"
     });
   }
 };

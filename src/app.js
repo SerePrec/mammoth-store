@@ -1,11 +1,24 @@
 import express from "express";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+import config from "./config.js";
+import { isAuthApi } from "./middlewares/auth.js";
 import productsRouter from "./routes/apiProductsRouter.js";
 import cartsRouter from "./routes/apiCartsRouter.js";
 import webServerRouter from "./routes/webServerRouter.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const mongoUrl =
+  config.PERS === "mongodb"
+    ? config.mongoDb.connectionString
+    : config.mongoDbAtlas.connectionString;
+const mongoOptions =
+  config.PERS === "mongodb"
+    ? config.mongoDb.advancedOptions
+    : config.mongoDbAtlas.advancedOptions;
+
 const app = express();
 
 // configuración motor de plantillas
@@ -19,10 +32,25 @@ app.use(express.urlencoded({ extended: true }));
 // servir archivos estáticos
 app.use(express.static(path.join(__dirname, "public")));
 
+// sesiones
+app.use(
+  session({
+    store: MongoStore.create({ mongoUrl, mongoOptions }),
+    ...config.session
+  })
+);
+
+//FIXME:FIXME:
+app.use((req, res, next) => {
+  req.session.username = "prellezose@yahoo.com.ar";
+  console.log(req.session);
+  next();
+});
+
 // routers
 app.use(webServerRouter);
 app.use("/api/productos", productsRouter);
-app.use("/api/carrito", cartsRouter);
+app.use("/api/carrito", isAuthApi, cartsRouter);
 
 // error 404 API
 app.use("/api", (req, res, next) => {
