@@ -14,12 +14,17 @@ export const getCarts = async (req, res) => {
 
 export const getUserCart = async (req, res) => {
   try {
-    // evito pedir información a la BD si la tengo en la sesión
-    if (req.session?.cartId) return res.json({ cartId: req.session.cartId });
     const username = req.session?.username;
     const userCart = await cartsModel.getByUsername(username);
-    if (userCart && req.session) req.session.cartId = userCart.id;
-    res.json({ cartId: userCart ? userCart.id : null });
+    if (userCart && req.session) {
+      req.session.cartId = userCart.id;
+      res.json({ cartId: userCart.id, products: userCart.products });
+    } else {
+      const cart = { username, products: [] };
+      const { id } = await cartsModel.save(cart);
+      req.session ? (req.session.cartId = id) : null;
+      res.json({ cartId: id, products: [] });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({

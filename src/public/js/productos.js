@@ -397,7 +397,7 @@ function mostrarProductos(vectorProductos) {
                       <p class="my-2"><b>Precio: $${formatoPrecio(
                         producto.price
                       )}</b> ${precioSinDescuento}</p>
-                      <p class="my-2">Disponible: ${producto.stock}u</p>`;
+                      <p class="my-2">Stock: ${producto.stock}u</p>`;
 
       if (producto.stock > 0) {
         // Si se puede vender genera los botones de agregar y el input de cantidad
@@ -428,7 +428,7 @@ function mostrarProductos(vectorProductos) {
     // genero los eventos para todos los botones agregar
     // para luego pasar los valores del producto correspondiente a la funcion de agregar al carrito,
     // tomo esos valores del atributo "data-" mediante el metodo data()
-    const id = $selectCart.value;
+    const id = userCartId;
     const id_prod = $(this).data("productoId");
     const $inputCantidad = $(this).next();
     const cant = parseInt($inputCantidad.val());
@@ -470,18 +470,18 @@ function quitarDecimales(string) {
 
 // Funciones CRUD carritos  ***************************************************
 //*****************************************************************************
-function createCart() {
-  cartsApi
-    .createCart()
-    .then(console.log)
-    // .then(processResponse("Carrito creado con éxito"))
-    // .then(data => {
-    //   if (data) {
-    //     updateCartsList();
-    //   }
-    // })
-    .catch(console.log);
-}
+// function createCart() {
+//   cartsApi
+//     .createCart()
+//     .then(console.log)
+//     .then(processResponse("Carrito creado con éxito"))
+//     .then(data => {
+//       if (data) {
+//         updateCartsList();
+//       }
+//     })
+//     .catch(console.log);
+// }
 
 // function deleteCart() {
 //   const id = $selectCart.value;
@@ -496,19 +496,28 @@ function createCart() {
 //     .catch(console.log);
 // }
 
-// function addProductToCart(id, id_prod, quantity) {
-//   if (id) {
-//     cartsApi
-//       .addProductToCart(id, id_prod, quantity)
-//       .then(processResponse("Selección agregada al carrito"))
-//       .then(data => {
-//         if (data) {
-//           updateCartTable();
-//         }
-//       })
-//       .catch(console.log);
-//   }
-// }
+function addProductToCart(id, id_prod, quantity) {
+  if (id) {
+    cartsApi
+      .addProductToCart(id, id_prod, quantity)
+      .then(res => {
+        if (res.result === "ok") {
+          const prevQty = cartProductsQty;
+          cartProductsQty += quantity;
+          updateCartWidget(prevQty, cartProductsQty);
+        } else {
+          return Promise.reject(res);
+        }
+      })
+      // .then(processResponse("Selección agregada al carrito"))
+      // .then(data => {
+      //   if (data) {
+      //     updateCartTable();
+      //   }
+      // })
+      .catch(console.error);
+  }
+}
 
 // function updateProductFromCart(id, id_prod, quantity) {
 //   if (id) {
@@ -543,12 +552,38 @@ function createCart() {
 
 async function cartAssign() {
   cartsApi.getUserCart().then(res => {
-    if (res.cartId !== null) {
-      console.log(res.cartId);
-    } else {
-      return createCart();
-    }
+    const { cartId, products } = res;
+    userCartId = cartId;
+    const prevCartQty = cartProductsQty;
+    cartProductsQty = products.reduce((tot, prod) => tot + prod.quantity, 0);
+    updateCartWidget(prevCartQty, cartProductsQty);
+    console.log(res);
   });
+}
+
+function updateCartWidget(prevQty, finalQty) {
+  const $cartWidget = document.querySelector(".itemsQuantity");
+  if (finalQty < prevQty) {
+    $cartWidget.classList.add("animate__fadeOutUp");
+    $cartWidget.classList.remove("animate__fadeInDown");
+    finalQty !== 0
+      ? $cartWidget.classList.remove("hidden")
+      : $cartWidget.classList.add("hidden");
+    setTimeout(() => {
+      $cartWidget.classList.remove("animate__fadeOutUp");
+      $cartWidget.innerText = finalQty;
+    }, 500);
+  } else if (finalQty > prevQty) {
+    $cartWidget.classList.add("animate__fadeInDown");
+    $cartWidget.classList.remove("animate__fadeOutUp");
+    $cartWidget.innerText = finalQty;
+    finalQty !== 0
+      ? $cartWidget.classList.remove("hidden")
+      : $cartWidget.classList.add("hidden");
+    setTimeout(() => {
+      $cartWidget.classList.remove("animate__fadeInDown");
+    }, 500);
+  }
 }
 
 // Funciones de lógica de carga inicial y respuestas del servidor  ************
