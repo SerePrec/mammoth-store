@@ -68,6 +68,10 @@
   margin-bottom: 2rem;
   h3 i {
     font-size: 1.4rem;
+    border-radius: 0.25rem;
+    border: 1px solid;
+    padding: 0.25rem 0.5rem;
+    margin-left: 0.5rem;
   }
   .table {
     width: 95%;
@@ -129,6 +133,7 @@
       }
     }
   }
+
   div.bg-yellow {
     background-color: #ffc107d6;
   }
@@ -182,6 +187,21 @@
             padding: 1rem 0;
           }
         }
+      }
+    }
+  }
+}
+
+main.userCart #cartProducts {
+  .table {
+    thead {
+      th:first-child {
+        display: none;
+      }
+    }
+    tbody {
+      td:first-child {
+        display: none;
       }
     }
   }

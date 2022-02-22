@@ -16,14 +16,11 @@ export const getUserCart = async (req, res) => {
   try {
     const username = req.session?.username;
     const userCart = await cartsModel.getByUsername(username);
-    if (userCart && req.session) {
-      req.session.cartId = userCart.id;
+    if (userCart) {
+      req.session ? (req.session.cartId = userCart.id) : null;
       res.json({ cartId: userCart.id, products: userCart.products });
     } else {
-      const cart = { username, products: [] };
-      const { id } = await cartsModel.save(cart);
-      req.session ? (req.session.cartId = id) : null;
-      res.json({ cartId: id, products: [] });
+      res.json({ error: "Carrito no encontrado" });
     }
   } catch (error) {
     console.log(error);
@@ -128,6 +125,7 @@ export const updateProductFromCart = async (req, res) => {
 export const deleteCart = async (req, res) => {
   try {
     const deletedId = await cartsModel.deleteById(req.params.id);
+    req.session ? (req.session.cartId = null) : null;
     deletedId !== null
       ? res.json({ result: "ok", deletedId })
       : res.json({ error: "Carrito no encontrado" });

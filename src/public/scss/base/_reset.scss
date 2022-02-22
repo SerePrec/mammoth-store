@@ -15,6 +15,15 @@ body {
   margin: auto;
 }
 
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 // para pisar a Bootstrap
 p {
   margin-bottom: 0;

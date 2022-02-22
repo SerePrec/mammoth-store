@@ -145,6 +145,12 @@
       width: 100%;
     }
 
+    #navbar-myAccount {
+      background-color: $rojoMarca;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
     #navbar-categories {
       .navbar-nav {
         .nav-link {

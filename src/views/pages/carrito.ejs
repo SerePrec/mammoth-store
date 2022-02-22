@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <%- include("../partials/HeadWithBootstrap.ejs")  %>
+  <!-- Mi CSS -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbar-categories,#navbar-myAccount" aria-controls="navbar-categories navbar-myAccount"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <img src="/img/iconred.png" alt="Icono menú">
+      </button>
+      <a class="navbar-brand" href="/">
+        <img src="/img/logo.svg" height="80" class="d-inline-block align-top animate__flipInX"
+          alt="Logo de Mamooth - Inicio">
+      </a>
+      <div class="navbar-collapse collapse" id="navbar-myAccount">
+        <a href="/myaccount" class="nav-link">
+          <img src="/img/cuenta.svg" alt="Mi cuenta">
+          MI CUENTA
+        </a>
+      </div>
+      <a href="/carrito" class="cartWidget nav-link">
+        <span class="itemsQuantity hidden">0</span>
+        <img src="/img/icon_cart.svg" alt="Carrito">
+      </a>
+      <div class="navbar-collapse collapse" id="navbar-categories">
+        <div class="m-auto animate__navbar-nav--loaded navbar-nav">
+          <a class="nav-link" href="/productos/categoria/bicicletas"
+            data-rb-event-key="alPuUe3glKMhF5LDqPPx">BICICLETAS</a>
+          <a class="nav-link" href="/productos/categoria/componentes"
+            data-rb-event-key="qVl1VQr85v3ELbe6JXYp">COMPONENTES</a>
+          <a class="nav-link" href="/productos/categoria/accesorios"
+            data-rb-event-key="RUCwOHdV6dsB8GUMr6Xt">ACCESORIOS</a>
+          <a class="nav-link" href="/productos/categoria/equipamiento"
+            data-rb-event-key="rljUAJkE8ErQeLLqO1EE">EQUIPAMIENTO</a>
+          <a class="nav-link" href="/productos/categoria/indumentaria"
+            data-rb-event-key="uYmH81rNnxjnIBJICee6">INDUMENTARIA</a>
+        </div>
+      </div>
+    </nav>
+    <div class="mensajesEmergentes">
+      <button type="button" class="btn-close" aria-label="Close"></button>
+      <p></p>
+    </div>
+  </header>
+  <main class="userCart">
+    <div class="cartManage">
+      <h2>MI CARRITO</h2>
+      <button id="btnDeleteCart" class="btn btn-secondary hidden">ELIMINAR CARRITO</button>
+
+    </div>
+    <div id="cartProducts"></div>
+    <div id="cartInfoMessages"></div>
+  </main>
+  <!-- jQuery y Bootstrap JS -->
+  <%- include("../partials/jQueryScripts.ejs")  %>
+  <%- include("../partials/bootstrapScripts.ejs")  %>
+  <!-- Mi JS -->
+  <script src="/js/carrito.js"></script>
+</body>
+
+</html>

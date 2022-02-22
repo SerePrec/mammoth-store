@@ -2,30 +2,34 @@
 //Variables
 //Generales ***************************
 let busqueda = false;
+let cartProductsQty = 0;
 let filtroPrecioAplicado = false;
 let filtroMarcaAplicado = false;
-let primerCarga = true;
 let marcasAFiltrar = [];
+let outerWidthPrevio = window.outerWidth;
 let precioMinimo, precioMaximo, precioMinSel, precioMaxSel;
+let primerCarga = true;
 let productos = [];
 let productosFiltradosCliente = [];
+let tempEmergente; // temporizador de los mensajes emergentes
 let userCartId = null;
-let cartProductsQty = 0;
 
 //DOM *********************************
 const $contenedorProductos = document.querySelector(
   "#contenedorProductos .loader"
 );
 const $btnBuscar = $("#btnBuscar");
+const $btnCerrarMensajeEmergente = $(".mensajesEmergentes button");
+const $divMensajesEmergentes = $(".mensajesEmergentes");
 const $filtroBuscar = $("#filtroBuscar");
 const $inputBuscar = $("#inputBuscar");
 const $inputPrecioMaximo = $("#inputPrecioMax");
 const $inputPrecioMinimo = $("#inputPrecioMin");
 const $listadoFitros = $("#filtros");
+const $pMensajeEmergente = $(".mensajesEmergentes p");
 const $rangoPrecioMaximo = $("#rangoPrecioMax");
 const $rangoPrecioMinimo = $("#rangoPrecioMin");
 const $selectOrdenar = $("#selectOrdenar");
-const $selectCart = document.getElementById("selectCart");
 
 // **************************************************************************//
 // *********************** Definiciones de funciones ************************//
@@ -375,7 +379,9 @@ function mostrarProductos(vectorProductos) {
       const $contenedorTarjeta = $(`<div class="col mb-4"></div>`);
       let precioSinDescuento = "";
       let codigoHTML = `
-                <div class="card h-100">`;
+                <div class="card h-100 ${
+                  producto.stock > 0 ? "" : "opacity-50"
+                }">`;
 
       if (producto.discount > 0) {
         codigoHTML += `
@@ -432,9 +438,30 @@ function mostrarProductos(vectorProductos) {
     const id_prod = $(this).data("productoId");
     const $inputCantidad = $(this).next();
     const cant = parseInt($inputCantidad.val());
-    addProductToCart(id, id_prod, cant);
+    const descrp = $(this).parent().parent().find(".card-text").text();
+    addProductToCart(id, id_prod, cant, descrp);
     $inputCantidad.val(1); // devuelve el valor del input a 1
   });
+}
+
+function mostrarEmergente(leyenda, tiempo = 4000, destacar = false) {
+  // Funcion para mostrar mensajes emergentes (no modales). Se introduce por
+  // parámetro la leyenda, el tiempo de cierre y si es destacado o no.
+  $pMensajeEmergente.html(leyenda);
+  $divMensajesEmergentes.addClass("show"); // muestra el HTML previamente estructurado, agregando el contenido de la leyenda
+  if (destacar) {
+    // si es del tipo destacado, asigna una clase que contiene estilos específicos
+    $divMensajesEmergentes.addClass("destacado");
+  } else {
+    // si no la quita por si antes había un mensaje destacado
+    $divMensajesEmergentes.removeClass("destacado");
+  }
+  clearTimeout(tempEmergente); // cancela un timeout previo si lo había
+  tempEmergente = setTimeout(() => {
+    // genera un timeout para ocultar el mensaje luego del tiempo elegido
+    $divMensajesEmergentes.removeClass("show");
+    $divMensajesEmergentes.removeClass("destacado");
+  }, tiempo);
 }
 
 function formatoPrecio(num) {
@@ -470,33 +497,8 @@ function quitarDecimales(string) {
 
 // Funciones CRUD carritos  ***************************************************
 //*****************************************************************************
-// function createCart() {
-//   cartsApi
-//     .createCart()
-//     .then(console.log)
-//     .then(processResponse("Carrito creado con éxito"))
-//     .then(data => {
-//       if (data) {
-//         updateCartsList();
-//       }
-//     })
-//     .catch(console.log);
-// }
 
-// function deleteCart() {
-//   const id = $selectCart.value;
-//   cartsApi
-//     .deleteCart(id)
-//     .then(processResponse("Carrito eliminado con éxito"))
-//     .then(data => {
-//       if (data) {
-//         updateCartsList();
-//       }
-//     })
-//     .catch(console.log);
-// }
-
-function addProductToCart(id, id_prod, quantity) {
+function addProductToCart(id, id_prod, quantity, description) {
   if (id) {
     cartsApi
       .addProductToCart(id, id_prod, quantity)
@@ -505,60 +507,58 @@ function addProductToCart(id, id_prod, quantity) {
           const prevQty = cartProductsQty;
           cartProductsQty += quantity;
           updateCartWidget(prevQty, cartProductsQty);
+          mostrarEmergente(
+            `Agregado: ${description}<br>Cantidad: ${
+              quantity > 1 ? quantity + " unidades." : quantity + " unidad."
+            }`
+          );
+        } else if (res.error) {
+          mostrarEmergente(res.error, 5000, true);
         } else {
           return Promise.reject(res);
         }
       })
-      // .then(processResponse("Selección agregada al carrito"))
-      // .then(data => {
-      //   if (data) {
-      //     updateCartTable();
-      //   }
-      // })
       .catch(console.error);
   }
 }
-
-// function updateProductFromCart(id, id_prod, quantity) {
-//   if (id) {
-//     cartsApi
-//       .updateProductFromCart(id, id_prod, quantity)
-//       .then(processResponse("Cantidad actualizada en el carrito"))
-//       .then(data => {
-//         if (data) {
-//           updateCartTable();
-//         }
-//       })
-//       .catch(console.log);
-//   }
-// }
-
-// function deleteProductFromCart(id, id_prod) {
-//   if (id) {
-//     cartsApi
-//       .deleteProductFromCart(id, id_prod)
-//       .then(processResponse("Producto eliminado del carrito"))
-//       .then(data => {
-//         if (data) {
-//           updateCartTable();
-//         }
-//       })
-//       .catch(console.log);
-//   }
-// }
 
 // Funciones relacionadas a lógica del carrito  *******************************
 // ****************************************************************************
 
 async function cartAssign() {
-  cartsApi.getUserCart().then(res => {
-    const { cartId, products } = res;
-    userCartId = cartId;
-    const prevCartQty = cartProductsQty;
-    cartProductsQty = products.reduce((tot, prod) => tot + prod.quantity, 0);
-    updateCartWidget(prevCartQty, cartProductsQty);
-    console.log(res);
-  });
+  return cartsApi
+    .getUserCart()
+    .then(res => {
+      if (res.cartId) {
+        const { cartId, products } = res;
+        userCartId = cartId;
+        const prevCartQty = cartProductsQty;
+        cartProductsQty = products.reduce(
+          (tot, prod) => tot + prod.quantity,
+          0
+        );
+        updateCartWidget(prevCartQty, cartProductsQty);
+        cartProductsQty > 0 &&
+          !sessionStorage.getItem("init-session") &&
+          mostrarEmergente(
+            "¡Encontramos un carrito que te pertenece y lo cargamos!"
+          );
+      } else if (res.error == "Carrito no encontrado") {
+        return cartsApi.createCart();
+      } else {
+        return Promise.reject(res);
+      }
+    })
+    .then(res => {
+      if (res?.result === "ok") {
+        const { cartId } = res;
+        userCartId = cartId;
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      return Promise.reject(error);
+    });
 }
 
 function updateCartWidget(prevQty, finalQty) {
@@ -595,7 +595,7 @@ function loadError(error) {
     <p>Intenta recargar la página o regresa más tarde.</p>
     <p>Disculpe las molestias.</p>`;
 
-  console.log(error);
+  console.error(error);
 }
 
 function cargaInicialOk() {
@@ -841,50 +841,63 @@ function cargaInicialOk() {
   });
 }
 
-function processResponse(okText) {
-  //TODO:TODO:TODO:
-  return data => {
-    if (data.error) {
-      $cartInfoMessages.innerText =
-        data.error === -1 ? "No posee los permisos necesarios" : data.error;
-      $cartInfoMessages.classList.add("show", "warning");
-      setTimeout(() => {
-        $cartInfoMessages.classList.remove("show", "warning");
-      }, 4000);
-      return;
+$btnCerrarMensajeEmergente.click(e => {
+  // Evento al clickear en la x de los mensajes emergentes para ocultarlo
+  $divMensajesEmergentes.removeClass("show");
+  $divMensajesEmergentes.removeClass("destacado");
+  clearTimeout(tempEmergente); // quita el timer que se inicializó con el mensaje
+});
+
+$(window).resize(function () {
+  // Evento por si el usuario cambia posición de dispositivo para que siempre
+  // los filtros en vista xs empiecen ocultos y en mayores anchos empiecen
+  // visibles. Esto se da por defecto al cargar la página, pero si el usuario
+  // interactua con el toggle de filtros y lo oculta, puede llegar a verse
+  // vacio si pasa a una vista de ancho mayor en donde los filtros van en una
+  // columna izquierda
+  if (window.outerWidth != outerWidthPrevio) {
+    // Esta comparación la hago porque en los celulares al hacer scroll, se
+    // reacomoda el ALTO de la ventana y dispara el evento resize, cerrando el
+    // desplegable. entonces de esta maner pregunto si el outerwidth es el
+    // mismo y no hago nada de lo contrario ejecuto el código y almaceno el //nuevo valor como previo
+    if (
+      $("#contenedorFiltros").css("display") == "none" &&
+      window.innerWidth >= 576
+    ) {
+      $("#contenedorFiltros").css("display", "block");
     }
-    if (data.result === "ok" || data.id || Array.isArray(data)) {
-      if (okText) {
-        $cartInfoMessages.innerText = okText;
-        $cartInfoMessages.classList.add("show", "info");
-        setTimeout(() => {
-          $cartInfoMessages.classList.remove("show", "info");
-        }, 2500);
-      }
-      return data;
+    if (
+      $("#contenedorFiltros").css("display") == "block" &&
+      window.innerWidth < 576
+    ) {
+      $("#contenedorFiltros").css("display", "none");
     }
-  };
-}
+    outerWidthPrevio = window.outerWidth;
+  }
+});
 
 function isResponseOk(data) {
   if (Array.isArray(data)) {
     productos = data;
     productosFiltradosCliente = [...productos];
-    if (primerCarga) {
-      cargaInicialOk();
-      primerCarga = false;
-      cartAssign();
-    }
-    return Promise.resolve();
+    return cartAssign();
   } else {
     return Promise.reject("Error de datos");
   }
 }
 
-function updateTable() {
+function cargar() {
   productsApi
     .getProducts()
     .then(isResponseOk)
+    .then(() => {
+      if (primerCarga) {
+        cargaInicialOk();
+        primerCarga = false;
+        sessionStorage.setItem("init-session", true);
+      }
+      return Promise.resolve();
+    })
     .then(triggerRenderTable)
     .catch(loadError);
 }
@@ -894,6 +907,4 @@ function triggerRenderTable() {
 }
 
 // Inicio
-(() => {
-  updateTable();
-})();
+cargar();

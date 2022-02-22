@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /********************* Reseteo general CSS *********************/
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,700;0,800;1,500;1,700;1,800&family=Roboto+Condensed:wght@300;400;700&display=swap");
 * {
@@ -12,6 +13,13 @@ body {
 .max-w {
   max-width: 1460px;
   margin: auto; }
+
+.opacity-50 {
+  opacity: 0.5; }
+
+.hidden {
+  opacity: 0;
+  pointer-events: none; }
 
 p {
   margin-bottom: 0; }
@@ -496,7 +504,11 @@ header {
   text-align: center;
   margin-bottom: 2rem; }
   #cartProducts h3 i {
-    font-size: 1.4rem; }
+    font-size: 1.4rem;
+    border-radius: 0.25rem;
+    border: 1px solid;
+    padding: 0.25rem 0.5rem;
+    margin-left: 0.5rem; }
   #cartProducts .table {
     width: 95%;
     max-width: 50rem;
@@ -565,6 +577,12 @@ header {
       #cartProducts .table tbody td:last-child img {
         width: 1rem;
         padding: 1rem 0; } }
+
+main.userCart #cartProducts .table thead th:first-child {
+  display: none; }
+
+main.userCart #cartProducts .table tbody td:first-child {
+  display: none; }
 
 .error404 {
   display: flex;
@@ -680,6 +698,10 @@ header {
     .navbar .searchForm {
       order: 5;
       width: 100%; }
+    .navbar #navbar-myAccount {
+      background-color: #b30404;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0; }
     .navbar #navbar-categories .navbar-nav .nav-link {
       margin-left: 0.5rem;
       padding-bottom: 0.25rem; }
@@ -704,6 +726,55 @@ header {
     transition: opacity 0.5s; }
     .cartWidget .itemsQuantity.hidden {
       opacity: 0; }
+
+.mensajesEmergentes {
+  position: absolute;
+  display: none;
+  width: 50%;
+  max-width: 400px;
+  min-height: 7rem;
+  background-color: #435541c0;
+  right: 0;
+  top: 100%;
+  margin-right: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  color: white;
+  text-shadow: #212121 1px 1px;
+  font-size: 1.25rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  z-index: 1000; }
+  .mensajesEmergentes.show {
+    opacity: 1;
+    display: flex;
+    animation-name: emerge;
+    animation-duration: 1s;
+    animation-timing-function: ease-out; }
+    .mensajesEmergentes.show.destacado {
+      background-color: #b30404b0; }
+  .mensajesEmergentes button.btn-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    outline: none;
+    color: white;
+    opacity: 1;
+    height: 5px;
+    width: 5px; }
+
+/*** Fotogramas de animación emerge ***/
+@keyframes emerge {
+  0% {
+    top: -150%;
+    opacity: 0; }
+  50% {
+    top: 100%;
+    opacity: 0.5; }
+  100% {
+    opacity: 1; } }
 
 .carousel {
   background-color: #212121; }

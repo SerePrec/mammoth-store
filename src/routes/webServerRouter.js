@@ -3,6 +3,7 @@ import { isAdmin } from "../middlewares/auth.js";
 import {
   getProducts,
   getAdminProducts,
+  getCart,
   getAdminCarts,
   getUsersChat,
   getAdminChat
@@ -13,6 +14,8 @@ const router = Router();
 router.get("/productos", getProducts);
 
 router.get("/productos/admin", isAdmin, getAdminProducts);
+
+router.get("/carrito", getCart);
 
 router.get("/carritos/admin", isAdmin, getAdminCarts);
 

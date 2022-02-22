@@ -1,0 +1,61 @@
+.mensajesEmergentes {
+  position: absolute;
+  display: none;
+  width: 50%;
+  max-width: 400px;
+  min-height: 7rem;
+  background-color: #435541c0;
+  right: 0;
+  top: 100%;
+  margin-right: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  color: white;
+  text-shadow: #212121 1px 1px;
+  font-size: 1.25rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  z-index: 1000;
+
+  &.show {
+    opacity: 1;
+    display: flex;
+    animation-name: emerge;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+
+    &.destacado {
+      background-color: #b30404b0;
+    }
+  }
+
+  button.btn-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    outline: none;
+    color: white;
+    opacity: 1;
+    height: 5px;
+    width: 5px;
+  }
+}
+
+/*** Fotogramas de animación emerge ***/
+@keyframes emerge {
+  0% {
+    top: -150%;
+    opacity: 0;
+  }
+
+  50% {
+    top: 100%;
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
