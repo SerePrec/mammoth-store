@@ -584,6 +584,94 @@ main.userCart #cartProducts .table thead th:first-child {
 main.userCart #cartProducts .table tbody td:first-child {
   display: none; }
 
+main.userCart a.btn {
+  width: fit-content; }
+  main.userCart a.btn img {
+    margin-left: 0.5rem;
+    width: 1.5rem; }
+
+main.checkout {
+  overflow: hidden;
+  background-color: #b9b8b8;
+  background: linear-gradient(180deg, #b9b8b8 0%, rgba(84, 84, 84, 0.75) 100%); }
+  main.checkout h2 {
+    background-color: #545454;
+    margin: 1.5rem auto;
+    border-radius: 0.5rem; }
+  main.checkout #checkOutCompra {
+    color: black; }
+    main.checkout #checkOutCompra .resumenCompra {
+      background-color: #e9ecef;
+      border-radius: 0.25rem; }
+      main.checkout #checkOutCompra .resumenCompra h3 {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem; }
+      main.checkout #checkOutCompra .resumenCompra .table tr {
+        opacity: 0; }
+        main.checkout #checkOutCompra .resumenCompra .table tr td {
+          background-color: white;
+          padding: 0.25rem;
+          vertical-align: middle; }
+          main.checkout #checkOutCompra .resumenCompra .table tr td:nth-child(1) {
+            width: 22%; }
+          main.checkout #checkOutCompra .resumenCompra .table tr td:nth-child(2) {
+            width: 50%; }
+          main.checkout #checkOutCompra .resumenCompra .table tr td:nth-child(3) {
+            width: 10%; }
+          main.checkout #checkOutCompra .resumenCompra .table tr td:nth-child(4) {
+            width: 18%; }
+      main.checkout #checkOutCompra .resumenCompra .importe {
+        opacity: 0;
+        color: #fff;
+        background-color: #545454;
+        border-radius: 0.25rem;
+        padding: 0.5rem 1rem;
+        font-weight: 700;
+        padding-right: 1rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem; }
+        main.checkout #checkOutCompra .resumenCompra .importe p {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 0;
+          font-size: 1.4rem; }
+          main.checkout #checkOutCompra .resumenCompra .importe p span {
+            font-size: 1.7rem; }
+      main.checkout #checkOutCompra .resumenCompra .help {
+        text-align: center;
+        padding-top: 0.5rem;
+        font-size: 1.1rem;
+        color: #545454; }
+        main.checkout #checkOutCompra .resumenCompra .help span {
+          font-weight: bold;
+          color: #b30404;
+          font-size: 1.4rem;
+          white-space: nowrap; }
+    main.checkout #checkOutCompra form div.col-sm-12 {
+      margin-bottom: 5px; }
+    main.checkout #checkOutCompra form label {
+      font-weight: bold; }
+    main.checkout #checkOutCompra form small {
+      color: black;
+      font-weight: 300; }
+    main.checkout #checkOutCompra form fieldset legend {
+      font-weight: bold;
+      font-size: 1.2rem; }
+    main.checkout #checkOutCompra form #contenedorCuotas label span {
+      font-weight: bold;
+      padding-right: 1rem;
+      padding-left: 0.25rem; }
+    main.checkout #checkOutCompra form #contenedorCuotas label i {
+      white-space: nowrap; }
+    main.checkout #checkOutCompra form #btnAceptaCompra {
+      background-color: #b30404; }
+      main.checkout #checkOutCompra form #btnAceptaCompra:hover {
+        background-color: #d11212; }
+  @media (max-width: 500px) {
+    main.checkout #checkOutCompra form #contenedorCuotas label span {
+      padding-right: 0.5rem; } }
+
 .error404 {
   display: flex;
   flex-direction: column;

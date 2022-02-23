@@ -399,6 +399,7 @@ function cargar() {
     .catch(loadError);
 }
 
+//FIXME:FIXME:
 function loadError(error) {
   // $contenedorProductos.innerHTML = `
   //   <h3>Ocurrió Un Error De Carga</h3>

@@ -1,0 +1,137 @@
+main.checkout {
+  overflow: hidden;
+  background-color: #b9b8b8;
+  background: linear-gradient(180deg, #b9b8b8 0%, rgba(84, 84, 84, 0.75) 100%);
+
+  h2 {
+    background-color: $tonoMedio;
+    margin: 1.5rem auto;
+    border-radius: 0.5rem;
+  }
+
+  #checkOutCompra {
+    color: black;
+    .resumenCompra {
+      background-color: #e9ecef;
+      border-radius: 0.25rem;
+
+      h3 {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+
+      .table tr {
+        opacity: 0;
+
+        td {
+          background-color: white;
+          padding: 0.25rem;
+          vertical-align: middle;
+
+          &:nth-child(1) {
+            width: 22%;
+          }
+
+          &:nth-child(2) {
+            width: 50%;
+          }
+
+          &:nth-child(3) {
+            width: 10%;
+          }
+
+          &:nth-child(4) {
+            width: 18%;
+          }
+        }
+      }
+
+      .importe {
+        opacity: 0;
+        color: #fff;
+        background-color: $tonoMedio;
+        border-radius: 0.25rem;
+        padding: 0.5rem 1rem;
+        font-weight: 700;
+        padding-right: 1rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        p {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 0;
+          font-size: 1.4rem;
+          span {
+            font-size: 1.7rem;
+          }
+        }
+      }
+
+      .help {
+        text-align: center;
+        padding-top: 0.5rem;
+        font-size: 1.1rem;
+        color: $tonoMedio;
+        span {
+          font-weight: bold;
+          color: $rojoMarca;
+          font-size: 1.4rem;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    form {
+      div.col-sm-12 {
+        margin-bottom: 5px;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      small {
+        color: black;
+        font-weight: 300;
+      }
+
+      fieldset legend {
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      #contenedorCuotas label {
+        span {
+          font-weight: bold;
+          padding-right: 1rem;
+          padding-left: 0.25rem;
+        }
+
+        i {
+          white-space: nowrap;
+        }
+      }
+
+      #btnAceptaCompra {
+        background-color: #b30404;
+
+        &:hover {
+          background-color: #d11212;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    #checkOutCompra {
+      form {
+        #contenedorCuotas label {
+          span {
+            padding-right: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <%- include("../partials/HeadWithBootstrap.ejs")  %>
+  <!-- Mi CSS -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbar-categories,#navbar-myAccount" aria-controls="navbar-categories navbar-myAccount"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <img src="/img/iconred.png" alt="Icono menú">
+      </button>
+      <a class="navbar-brand" href="/">
+        <img src="/img/logo.svg" height="80" class="d-inline-block align-top animate__flipInX"
+          alt="Logo de Mamooth - Inicio">
+      </a>
+      <div class="navbar-collapse collapse" id="navbar-myAccount">
+        <a href="/myaccount" class="nav-link">
+          <img src="/img/cuenta.svg" alt="Mi cuenta">
+          MI CUENTA
+        </a>
+      </div>
+      <a href="/carrito" class="cartWidget nav-link">
+        <span class="itemsQuantity hidden">0</span>
+        <img src="/img/icon_cart.svg" alt="Carrito">
+      </a>
+      <div class="navbar-collapse collapse" id="navbar-categories">
+        <div class="m-auto animate__navbar-nav--loaded navbar-nav">
+          <a class="nav-link" href="/productos/categoria/bicicletas"
+            data-rb-event-key="alPuUe3glKMhF5LDqPPx">BICICLETAS</a>
+          <a class="nav-link" href="/productos/categoria/componentes"
+            data-rb-event-key="qVl1VQr85v3ELbe6JXYp">COMPONENTES</a>
+          <a class="nav-link" href="/productos/categoria/accesorios"
+            data-rb-event-key="RUCwOHdV6dsB8GUMr6Xt">ACCESORIOS</a>
+          <a class="nav-link" href="/productos/categoria/equipamiento"
+            data-rb-event-key="rljUAJkE8ErQeLLqO1EE">EQUIPAMIENTO</a>
+          <a class="nav-link" href="/productos/categoria/indumentaria"
+            data-rb-event-key="uYmH81rNnxjnIBJICee6">INDUMENTARIA</a>
+        </div>
+      </div>
+    </nav>
+    <div class="mensajesEmergentes">
+      <button type="button" class="btn-close" aria-label="Close"></button>
+      <p></p>
+    </div>
+  </header>
+  <main class="checkout">
+    <div class="container-xl">
+
+      <h2 class="text-center py-2">CHECKOUT</h2>
+
+      <!---------------------- Checkout - inicio ------------------------>
+      <div id="checkOutCompra" class="row mx-0 mr-md-n3">
+
+        <!----------------- Columna de resumen de compra ------------------->
+        <div class="col-md-5 mb-4 resumenCompra">
+          <h3>Resumen de compra</h3>
+          <table class="table">
+            <tbody id="contenedorResumenCompra">
+            </tbody>
+          </table>
+          <div class="importe">
+            <p></p>
+          </div>
+          <div class="help">
+            <p><b>¿Necesitas ayuda? </b>Llamanos al <span>0800-888-1234</span></p>
+          </div>
+        </div>
+
+        <!----------------- Columna de formulario ------------------->
+        <div class="col-md-7">
+          <form id="formularioCompra">
+            <div class="row mb-3">
+              <label for="inputNombre" class="col-sm-2 col-form-label">Nombre y Apellido</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputNombre" placeholder="Ingresa tu nombre y apellido"
+                  required>
+                <small class="form-text">Con estos datos se hará la facturación.</small>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputTelefono" class="col-sm-2 col-form-label">Teléfono</label>
+              <div class="col-sm-10">
+                <input type="tel" class="form-control" id="inputTelefono" placeholder="Ingresa un teléfono de contacto"
+                  required>
+                <small class="form-text">Puede que necesitemos contactarnos por tu compra.</small>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail" placeholder="ejemplo@ejemplo.com" required>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputDireccion" class="col-sm-2 col-form-label">Dirección</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputDireccion" placeholder="Ingresa tu dirección COMPLETA"
+                  required>
+                <small class="form-text">Es la dirección a la que enviaremos tu pedido</small>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputCP" class="col-form-label col-sm-2">Código Postal</label>
+              <div class="col-5">
+                <input name="cp" placeholder="Ingresa el CP" required type="text" id="inputCP" class="form-control">
+                <small class="form-text">CP de la dirección de
+                  envío</small>
+              </div>
+            </div>
+
+            <!----------------- cuotas ------------------->
+            <fieldset class="form-group py-3 cuotas">
+              <div class="row" style="display:none">
+                <legend class="col-form-label col-sm-2 pt-0 pr-0">Cuotas</legend>
+                <div id="contenedorCuotas" class="col-sm-10 pl-1">
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="form-group row">
+              <div class="col-sm-12 d-flex justify-content-evenly">
+                <a href="index.html" class="btn btn-dark">Volver a ShowRoom</a>
+                <button id="btnAceptaCompra" type="submit" class="btn btn-danger">Aceptar la
+                  compra</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+      <!---------------------- Checkout - Fin ------------------------>
+    </div>
+  </main>
+  <!-- jQuery y Bootstrap JS -->
+  <%- include("../partials/jQueryScripts.ejs")  %>
+  <%- include("../partials/bootstrapScripts.ejs")  %>
+  <!-- Mi JS -->
+  <script src="/js/checkout.js"></script>
+</body>
+
+</html>

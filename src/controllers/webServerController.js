@@ -20,6 +20,10 @@ export const getAdminCarts = (req, res) => {
   res.sendFile("carritos-admin.html", { root: viewsPath });
 };
 
+export const getCheckout = (req, res) => {
+  res.render("pages/checkout", { title: "Mammoth Bike Store | Checkout" });
+};
+
 export const getUsersChat = (req, res) => {
   const { email } = req.params;
   if (email) {

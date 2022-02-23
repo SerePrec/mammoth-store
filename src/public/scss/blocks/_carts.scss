@@ -192,17 +192,26 @@
   }
 }
 
-main.userCart #cartProducts {
-  .table {
-    thead {
-      th:first-child {
-        display: none;
+main.userCart {
+  #cartProducts {
+    .table {
+      thead {
+        th:first-child {
+          display: none;
+        }
+      }
+      tbody {
+        td:first-child {
+          display: none;
+        }
       }
     }
-    tbody {
-      td:first-child {
-        display: none;
-      }
+  }
+  a.btn {
+    width: fit-content;
+    img {
+      margin-left: 0.5rem;
+      width: 1.5rem;
     }
   }
 }

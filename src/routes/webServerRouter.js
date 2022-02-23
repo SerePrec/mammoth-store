@@ -5,6 +5,7 @@ import {
   getAdminProducts,
   getCart,
   getAdminCarts,
+  getCheckout,
   getUsersChat,
   getAdminChat
 } from "../controllers/webServerController.js";
@@ -18,6 +19,8 @@ router.get("/productos/admin", isAdmin, getAdminProducts);
 router.get("/carrito", getCart);
 
 router.get("/carritos/admin", isAdmin, getAdminCarts);
+
+router.get("/checkout", getCheckout);
 
 router.get("/chat/admin", isAdmin, getAdminChat);
 
