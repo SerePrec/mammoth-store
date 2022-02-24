@@ -101,11 +101,18 @@ main.checkout {
         font-size: 1.2rem;
       }
 
-      #contenedorCuotas label {
+      #contenedorCuotas {
+        .item-cuota {
+          border-bottom: 1px solid #3e3e3e;
+          margin-bottom: 0.5rem;
+        }
         span {
           font-weight: bold;
           padding-right: 1rem;
           padding-left: 0.25rem;
+          b {
+            font-size: 1.25rem;
+          }
         }
 
         i {
@@ -126,9 +133,12 @@ main.checkout {
   @media (max-width: 500px) {
     #checkOutCompra {
       form {
-        #contenedorCuotas label {
+        #contenedorCuotas {
           span {
             padding-right: 0.5rem;
+          }
+          i {
+            display: block;
           }
         }
       }

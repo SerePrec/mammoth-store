@@ -21,7 +21,8 @@ const config = {
     path: path.join(__dirname, "..", "DB"),
     messagesFile: "mensajes.json",
     productsFile: "productos.json",
-    cartsFile: "carritos.json"
+    cartsFile: "carritos.json",
+    usersFile: "usuarios.json"
   },
   mariaDb: {
     client: "mysql",
@@ -91,6 +92,13 @@ const config = {
     cookie: {
       maxAge: 10 * 60 * 1000
     }
+  },
+  googleAuth: {
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    // callbackURL:
+    //   "https://des13-dual-prellezose.herokuapp.com/auth/google/callback",
+    callbackURL: "/auth/google/callback"
   }
 };
 

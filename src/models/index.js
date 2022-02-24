@@ -3,6 +3,7 @@ import config from "../config.js";
 let productsModel;
 let cartsModel;
 let messagesModel;
+let usersModel;
 
 switch (config.PERS) {
   case "fs": {
@@ -13,14 +14,17 @@ switch (config.PERS) {
     const { default: MessagesDaoFS } = await import(
       "./daos/messages/MessagesDaoFS.js"
     );
+    const { default: UsersDaoFS } = await import("./daos/users/UsersDaoFS.js");
     productsModel = new ProductsDaoFS();
     cartsModel = new CartsDaoFS();
     messagesModel = new MessagesDaoFS();
+    usersModel = new UsersDaoFS();
     //Inicializo mi "storage"
     try {
       await productsModel.init();
       await cartsModel.init();
       await messagesModel.init();
+      await usersModel.init();
     } catch (error) {
       console.log(error);
     }
@@ -126,4 +130,4 @@ switch (config.PERS) {
   }
 }
 
-export { productsModel, cartsModel, messagesModel };
+export { productsModel, cartsModel, messagesModel, usersModel };

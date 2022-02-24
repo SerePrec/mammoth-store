@@ -5,8 +5,10 @@
 
 //Generales ***************************
 let acumulado = 0;
-let carritoUsuario = {};
-let usuario = "";
+let cartProductsQty = 0;
+let primerCarga = true;
+let tempEmergente; // temporizador de los mensajes emergentes
+let userCartId = null;
 
 const interes3Cuotas = 8;
 const interes6Cuotas = 12;
@@ -25,31 +27,107 @@ $(document).ready(function () {
 // *********************** Definiciones de funciones ************************//
 // **************************************************************************//
 
-// Funciones de carga de Usuario y Carrito ************************************
-//*****************************************************************************
-
-const inicioCompra = () => {
-  // Inicializa la página
-  if (!cargarCarrito(usuario) || carritoUsuario.length == 0) {
-    // recoje el carrito actual
-    // si no hay carrito por algún motivo, o no se puede obtener la lista de productos o el dolar del sessionStorage,
-    // redirige a la página anterior del proceso. Ej: Esto puede pasar al recargar la página una vez terminada
-    // la compra o si la pagina se abre independiente de la sesion.
-
-    console.log("No hay carrito que procesar, se redirige a index.html"); // para control interno
-    location.assign("index.html");
-    return;
+// Funciones para inetractuar con la api de carritos *************************
+// ***************************************************************************
+const cartsApi = {
+  getCarts: async () => {
+    return fetch(`/api/carrito`).then(data => data.json());
+  },
+  getUserCart: async () => {
+    return fetch(`/api/carrito/usuario`).then(data => data.json());
+  },
+  getCartProducts: async id => {
+    return fetch(`/api/carrito/${id}/productos`).then(data => data.json());
+  },
+  createCart: async () => {
+    return fetch(`/api/carrito`, {
+      method: "POST"
+    }).then(data => data.json());
+  },
+  deleteCart: async id => {
+    return fetch(`/api/carrito/${id}`, {
+      method: "DELETE"
+    }).then(data => data.json());
+  },
+  addProductToCart: async (id, id_prod, quantity) => {
+    return fetch(`/api/carrito/${id}/productos`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ id: id_prod, quantity })
+    }).then(data => data.json());
+  },
+  updateProductFromCart: async (id, id_prod, quantity) => {
+    return fetch(`/api/carrito/${id}/productos`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ id: id_prod, quantity })
+    }).then(data => data.json());
+  },
+  deleteProductFromCart: async (id, id_prod) => {
+    return fetch(`/api/carrito/${id}/productos/${id_prod}`, {
+      method: "DELETE"
+    }).then(data => data.json());
   }
-
-  mostrarResumenCompra(); // carga el contenido HTML relativo a la selección de productos previa
-  animarResumenCompra();
 };
 
-// Funciones relacionadas a mostrar el resumen de compra **********************
+// Funciones de carga de Carrito ************************************
+//*******************************************************************
+async function cartAssign() {
+  return cartsApi
+    .getUserCart()
+    .then(res => {
+      if (res.cartId && res.products.length > 0) {
+        const { cartId, products } = res;
+        userCartId = cartId;
+        const prevCartQty = cartProductsQty;
+        cartProductsQty = products.reduce(
+          (tot, prod) => tot + prod.quantity,
+          0
+        );
+        updateCartWidget(prevCartQty, cartProductsQty);
+        return products;
+      } else {
+        return location.assign("/productos");
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      return Promise.reject(error);
+    });
+}
+
+function cargar() {
+  cartAssign()
+    .then(products => {
+      if (primerCarga) {
+        primerCarga = false;
+        sessionStorage.setItem("init-session", true);
+      }
+      mostrarResumenCompra(products);
+      animarResumenCompra();
+      return Promise.resolve();
+    })
+    .catch(loadError);
+}
+
+//FIXME:FIXME:
+function loadError(error) {
+  // $contenedorProductos.innerHTML = `
+  //   <h3>Ocurrió Un Error De Carga</h3>
+  //   <p>Intenta recargar la página o regresa más tarde.</p>
+  //   <p>Disculpe las molestias.</p>`;
+
+  console.error(error);
+}
+
+// Funciones relacionadas a mostrar y animar la vista *************************
 //*****************************************************************************
 
 function mostrarResumenCompra(cart) {
-  console.log(cart);
   //genera el HTML para la zona de resumen de compra
 
   let arrayFilas = []; // trabajo con un array para evitar múltiples regeneraciones del DOM
@@ -86,57 +164,58 @@ function mostrarResumenCompra(cart) {
   let importeC18 = (acumulado * (1 + interes18Cuotas / 100)) / 18;
 
   $contenedorCuotas.html(`
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="numCuotas" id="inputRadio1"
-                    value="1" checked>
-                <label class="form-check-label" for="inputRadio1">
-                    <span>1 Cuota de $${formatoPrecio(acumulado)}</span>
-                </label>
+            <div class="item-cuota">
+              <span>1 Cuota de <b>$${formatoPrecio(acumulado)}</b></span>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="numCuotas" id="inputRadio2"
-                    value="3">
-                <label class="form-check-label" for="inputRadio2">
-                <span>3 Cuotas de $${formatoPrecio(
-                  importeC3
-                )}</span><i> (Int.: ${interes3Cuotas}%) Total: $${formatoPrecio(
+            <div class="item-cuota">
+              <span>3 Cuotas de <b>$${formatoPrecio(importeC3)}</b></span>
+              <i> (Int.: ${interes3Cuotas}%) Total: $${formatoPrecio(
     importeC3 * 3
   )}</i>
-                </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="numCuotas" id="inputRadio3"
-                    value="6">
-                <label class="form-check-label" for="inputRadio3">
-                <span>6 Cuotas de $${formatoPrecio(
-                  importeC6
-                )}</span><i> (Int.: ${interes6Cuotas}%) Total: $${formatoPrecio(
+            <div class="item-cuota">
+              <span>6 Cuotas de <b>$${formatoPrecio(importeC6)}</b></span>
+              <i> (Int.: ${interes6Cuotas}%) Total: $${formatoPrecio(
     importeC6 * 6
   )}</i>
-                </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="numCuotas" id="inputRadio4"
-                    value="12">
-                <label class="form-check-label" for="inputRadio4">
-                <span>12 Cuotas de $${formatoPrecio(
-                  importeC12
-                )}</span><i> (Int.: ${interes12Cuotas}%) Total: $${formatoPrecio(
+            <div class="item-cuota">
+              <span>12 Cuotas de <b>$${formatoPrecio(importeC12)}</b></span>
+              <i> (Int.: ${interes12Cuotas}%) Total: $${formatoPrecio(
     importeC12 * 12
   )}</i>
-                </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="numCuotas" id="inputRadio5"
-                    value="18">
-                <label class="form-check-label" for="inputRadio5">
-                <span>18 Cuotas de $${formatoPrecio(
-                  importeC18
-                )}</span><i> (Int.: ${interes18Cuotas}%) Total: $${formatoPrecio(
+            <div class="item-cuota">
+              <span>18 Cuotas de <b>$${formatoPrecio(importeC18)}</b></span>
+              <i> (Int.: ${interes18Cuotas}%) Total: $${formatoPrecio(
     importeC18 * 18
   )}</i>
-                </label>
             </div>`);
+}
+
+function formatoPrecio(num) {
+  // Función para dar formato de precio con separadores de miles (.) y decimales (,)
+  num = num.toFixed(2);
+  let entero, decimales;
+  if (num.indexOf(".") >= 0) {
+    entero = num.slice(0, num.indexOf("."));
+    decimales = num.slice(num.indexOf(".")).replace(".", ",");
+  }
+  let enteroFormateado = "";
+  for (let i = 1; i <= entero.length; i++) {
+    if (i % 3 == 0) {
+      if (i == entero.length) {
+        enteroFormateado =
+          entero.substr(entero.length - i, 3) + enteroFormateado;
+        break;
+      }
+      enteroFormateado =
+        ".".concat(entero.substr(entero.length - i, 3)) + enteroFormateado;
+    }
+  }
+  enteroFormateado = entero.slice(0, entero.length % 3) + enteroFormateado;
+  num = enteroFormateado.concat(decimales);
+  return num;
 }
 
 function animarResumenCompra() {
@@ -184,116 +263,6 @@ function animarResumenCompra() {
   });
 }
 
-// **************************************************************************//
-// ******************************* Ejecución ********************************//
-// **************************************************************************//
-
-let cartProductsQty = 0;
-
-let primerCarga = true;
-
-let tempEmergente; // temporizador de los mensajes emergentes
-
-let userCartId = null;
-
-// Funciones para inetractuar con la api de carritos
-const cartsApi = {
-  getCarts: async () => {
-    return fetch(`/api/carrito`).then(data => data.json());
-  },
-  getUserCart: async () => {
-    return fetch(`/api/carrito/usuario`).then(data => data.json());
-  },
-  getCartProducts: async id => {
-    return fetch(`/api/carrito/${id}/productos`).then(data => data.json());
-  },
-  createCart: async () => {
-    return fetch(`/api/carrito`, {
-      method: "POST"
-    }).then(data => data.json());
-  },
-  deleteCart: async id => {
-    return fetch(`/api/carrito/${id}`, {
-      method: "DELETE"
-    }).then(data => data.json());
-  },
-  addProductToCart: async (id, id_prod, quantity) => {
-    return fetch(`/api/carrito/${id}/productos`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ id: id_prod, quantity })
-    }).then(data => data.json());
-  },
-  updateProductFromCart: async (id, id_prod, quantity) => {
-    return fetch(`/api/carrito/${id}/productos`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ id: id_prod, quantity })
-    }).then(data => data.json());
-  },
-  deleteProductFromCart: async (id, id_prod) => {
-    return fetch(`/api/carrito/${id}/productos/${id_prod}`, {
-      method: "DELETE"
-    }).then(data => data.json());
-  }
-};
-
-function formatoPrecio(num) {
-  // Función para dar formato de precio con separadores de miles (.) y decimales (,)
-  num = num.toFixed(2);
-  let entero, decimales;
-  if (num.indexOf(".") >= 0) {
-    entero = num.slice(0, num.indexOf("."));
-    decimales = num.slice(num.indexOf(".")).replace(".", ",");
-  }
-  let enteroFormateado = "";
-  for (let i = 1; i <= entero.length; i++) {
-    if (i % 3 == 0) {
-      if (i == entero.length) {
-        enteroFormateado =
-          entero.substr(entero.length - i, 3) + enteroFormateado;
-        break;
-      }
-      enteroFormateado =
-        ".".concat(entero.substr(entero.length - i, 3)) + enteroFormateado;
-    }
-  }
-  enteroFormateado = entero.slice(0, entero.length % 3) + enteroFormateado;
-  num = enteroFormateado.concat(decimales);
-  return num;
-}
-
-// Funciones relacionadas a lógica del carrito  *******************************
-// ****************************************************************************
-
-async function cartAssign() {
-  return cartsApi
-    .getUserCart()
-    .then(res => {
-      if (res.cartId && res.products.length > 0) {
-        const { cartId, products } = res;
-        userCartId = cartId;
-        const prevCartQty = cartProductsQty;
-        cartProductsQty = products.reduce(
-          (tot, prod) => tot + prod.quantity,
-          0
-        );
-        updateCartWidget(prevCartQty, cartProductsQty);
-        return products;
-      } else {
-        return location.assign("/productos");
-      }
-    })
-    .catch(error => {
-      console.error(error);
-      return Promise.reject(error);
-    });
-}
-
 function updateCartWidget(prevQty, finalQty) {
   const $cartWidget = document.querySelector(".itemsQuantity");
   if (finalQty < prevQty) {
@@ -319,29 +288,8 @@ function updateCartWidget(prevQty, finalQty) {
   }
 }
 
-function cargar() {
-  cartAssign()
-    .then(products => {
-      if (primerCarga) {
-        primerCarga = false;
-        sessionStorage.setItem("init-session", true);
-      }
-      mostrarResumenCompra(products);
-      animarResumenCompra();
-      return Promise.resolve();
-    })
-    .catch(loadError);
-}
+// **************************************************************************//
+// ******************************* Ejecución ********************************//
+// **************************************************************************//
 
-//FIXME:FIXME:
-function loadError(error) {
-  // $contenedorProductos.innerHTML = `
-  //   <h3>Ocurrió Un Error De Carga</h3>
-  //   <p>Intenta recargar la página o regresa más tarde.</p>
-  //   <p>Disculpe las molestias.</p>`;
-
-  console.error(error);
-}
-
-// Inicio
 cargar();

@@ -19,11 +19,7 @@ const isAuthWeb = (req, res, next) => {
 };
 
 const isAuthApi = (req, res, next) => {
-  //FIXME:
-  // if (req.isAuthenticated()) {
-  //   return next();
-  // }
-  if (req.session.username) {
+  if (req.isAuthenticated()) {
     return next();
   }
   res.status(401).json({

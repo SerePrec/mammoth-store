@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/img/logo_M.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>Login de usuario</title>
+</head>
+
+<body>
+  <main>
+    <div class="form-wrapper">
+      <h2 class="text-center">LOGIN DE USUARIO</h2>
+      <p class="text-center">Ingrese sus datos para acceder al sitio</p>
+      <form action="/login" method="POST" class="needs-validation" novalidate>
+        <div class="mb-3">
+          <label for=" inputEmail" class="form-label">Email</label>
+          <input type="email" class="form-control" id="inputEmail" name="username" maxlength="50"
+            placeholder="Ingrese su email" required>
+          <div class="invalid-feedback">
+            Introduzca una dirección de email correcta
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="inputPassword" class="form-label">Password</label>
+          <input type="password" class="form-control" id="inputPassword" name="password" minlength="6"
+            placeholder="Ingrese una contraseña" required>
+          <div class="invalid-feedback">
+            Debe tener al menos 6 caractéres
+          </div>
+        </div>
+        <button type="submit" class="btn btn-danger mt-4">Ingresar</button>
+      </form>
+      <a href="/auth/google" class="btn btn-light btn-google">
+        <img src="/img/google.svg" alt="Google">
+        Acceder con Google
+      </a>
+    </div>
+    <a href="/register" class="btn btn-secondary btn-redirect">Ir a Registrarse</a>
+  </main>
+  <script src="/js/login.js"></script>
+</body>
+
+</html>

@@ -201,14 +201,19 @@ function renderCartTable(id, data) {
     html += `
         </tbody>
       </table>
-      <h3>TOTAL $${formatoPrecio(total)}</h3>`;
+      <h3>TOTAL $${formatoPrecio(total)}</h3>
+      <a id="confirmCart" class="my-5 font-weight-bold btn btn-danger d-block m-auto" href="/checkout">
+      CONFIRMAR MI PEDIDO
+        <img src="/img/check.svg" alt="">
+      </a>`;
   } else {
     html += `
-      <div class="container p-5 mb-4 bg-yellow rounded-3">
-        <div class="py-5">
-          <h3 class="display-6 fw-bold">¡Oops!, carrito vacío</h1>
-          <p>No se encontraron productos cargados.</p>
-        </div>
+      <div class="container emptyCart animate__fadeIn">
+        <img src="/img/icon_cart2_red.png" alt="Carrito vacío">
+        <h2>¡TU CARRITO ESTÁ VACÍO!</h2>
+        <p>Aún no has añadido productos para tu compra</p>
+        <h4>Continuá eligiendo productos desde aquí:</h4>
+        <div><a href="/">Seguir Navegando</a></div>
       </div>`;
   }
   updateCartWidget(cartProductsQty, qty);

@@ -4,7 +4,9 @@ import MongoStore from "connect-mongo";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import config from "./config.js";
+import { passport } from "./middlewares/passport.js";
 import { isAuthApi } from "./middlewares/auth.js";
+import authRouter from "./routes/authRouter.js";
 import productsRouter from "./routes/apiProductsRouter.js";
 import cartsRouter from "./routes/apiCartsRouter.js";
 import webServerRouter from "./routes/webServerRouter.js";
@@ -42,12 +44,17 @@ app.use(
 
 //FIXME:FIXME:
 app.use((req, res, next) => {
-  req.session.username = "prellezose@yahoo.com.ar";
+  // req.session.username = "prellezose@yahoo.com.ar";
   console.log(req.session);
   next();
 });
 
+// passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 // routers
+app.use(authRouter);
 app.use(webServerRouter);
 app.use("/api/productos", productsRouter);
 app.use("/api/carrito", isAuthApi, cartsRouter);
