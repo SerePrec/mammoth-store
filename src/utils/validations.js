@@ -24,3 +24,20 @@ export const isURL = data =>
   /^(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}|[/])\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)$/.test(
     data
   );
+
+export const isValidUsername = data =>
+  typeof data == "string" &&
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+    data
+  );
+
+export const isValidPwd = data => typeof data == "string" && data.length >= 8;
+
+export const isValidAge = data =>
+  (typeof data == "string" || typeof data == "number") &&
+  /^\d+$/.test(data) &&
+  parseInt(data) >= 18 &&
+  parseInt(data) <= 120;
+
+export const isValidPhone = data =>
+  typeof data == "string" && /^[+][0-9]{8,20}$/.test(data);

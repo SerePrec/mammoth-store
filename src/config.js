@@ -15,7 +15,8 @@ const config = {
   PORT: process.env.PORT || 8080,
   PERS: process.env.PERS || "mem",
   uploadsImg: {
-    path: path.join(__dirname, "public", "img", "productos")
+    productsPath: path.join(__dirname, "public", "img", "productos"),
+    avatarsPath: path.join(__dirname, "public", "img", "avatars")
   },
   fileSystemDb: {
     path: path.join(__dirname, "..", "DB"),

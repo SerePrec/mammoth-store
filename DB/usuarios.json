@@ -1,8 +1,13 @@
 [
   {
     "id": 1,
-    "timestamp": "2022-02-24T13:50:21.382Z",
-    "username": "prellezose@gmail.com",
-    "password": "$2b$10$NnDJw3y0GzmrJ2eQ4Oh2Z.b3UG.VBWg0VtZlcJysBIiY/9lNnPuv6"
+    "timestamp": "2022-02-24T20:00:00.010Z",
+    "username": "prellezose@yahoo.com.ar",
+    "password": "$2b$10$26piBoHkFeUyA7vjfTq9T.hECB32BEi/nK1gL0L9szpx6gSd7v7N.",
+    "name": "Sergio Emanuel Prellezo",
+    "address": "33 #922",
+    "age": 43,
+    "phone": "+5492215737971",
+    "avatar": "/img/avatars/1645732799962-sep.png"
   }
 ]

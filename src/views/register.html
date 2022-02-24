@@ -8,30 +8,66 @@
   <link rel="icon" type="image/png" href="/img/logo_M.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/styles.css">
   <title>Registro de usuario</title>
 </head>
 
 <body>
   <main>
-    <div class="form-wrapper">
+    <div class="auth-form-wrapper">
       <h2 class="text-center">REGISTRO DE USUARIO</h2>
-      <p class="text-center">Ingrese los siguientes datos para registrarse</p>
-      <form action="/register" method="POST" class="needs-validation" novalidate>
+      <p class="text-center">Ingresa los siguientes datos para registrarte</p>
+      <form action="/register" enctype="multipart/form-data" method="POST" class="needs-validation" novalidate>
+        <div class="mb-3">
+          <label for="inputName" class="form-label">Nombre y Apellido</label>
+          <input type="text" class="form-control" id="inputName" name="name" maxlength="50"
+            placeholder="Ingresa tu nombre y apellido" required>
+          <div class="invalid-feedback">
+            Introduce tu nombre
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="inputFile" class="form-label">Avatar</label>
+          <input type="file" class="form-control" id="inputFile" name="imageFile">
+        </div>
+        <div class="mb-3">
+          <label for="inputAddress" class="form-label">Dirección</label>
+          <input type="text" class="form-control" id="inputAddress" name="address" maxlength="80"
+            placeholder="Ingresa tu dirección COMPLETA" required>
+          <div class="invalid-feedback">
+            Introduce una dirección
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="inputAge" class="form-label">Edad</label>
+          <input type="number" class="form-control" id="inputAge" name="age" min="18" max="120" maxlength="3"
+            placeholder="Ingresa tu edad" required>
+          <div class="invalid-feedback">
+            Debes ser mayor de 18 años para registrate
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="inputPhone" class="form-label">Celular</label>
+          <input type="tel" class="form-control" id="inputPhone" name="phone" maxlength="20"
+            placeholder="Ej: +5491231234567" pattern="[+][0-9]{8,20}" required>
+          <div class="invalid-feedback">
+            Introduce un número con el formato del ejemplo
+          </div>
+        </div>
         <div class="mb-3">
           <label for=" inputEmail" class="form-label">Email</label>
           <input type="email" class="form-control" id="inputEmail" name="username" maxlength="50"
             placeholder="Ingrese su email" required>
           <div class="invalid-feedback">
-            Introduzca una dirección de email correcta
+            Introduce una dirección de email correcta
           </div>
         </div>
         <div class="mb-3">
           <label for="inputPassword" class="form-label">Password</label>
-          <input type="password" class="form-control" id="inputPassword" name="password" minlength="6"
+          <input type="password" class="form-control" id="inputPassword" name="password" minlength="8"
             placeholder="Ingrese una contraseña" required>
           <div class="invalid-feedback">
-            Debe tener al menos 6 caractéres
+            Debe tener al menos 8 caractéres
           </div>
         </div>
         <div class="mb-3">

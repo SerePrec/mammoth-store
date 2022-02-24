@@ -6,6 +6,7 @@ import {
   passportAuthGoogle,
   passportAuthGoogleCb
 } from "../middlewares/passport.js";
+import { uploadAvatarImage } from "../middlewares/multer.js";
 import * as controller from "../controllers/authController.js";
 
 const router = Router();
@@ -19,7 +20,12 @@ router.post("/login", passportAuthLogin);
 
 router.get("/register", controller.getRegister);
 
-router.post("/register", validateRegisterPost, passportAuthRegister);
+router.post(
+  "/register",
+  uploadAvatarImage,
+  validateRegisterPost,
+  passportAuthRegister
+);
 
 //FIXME:
 //router.get("/register-error", controller.getRegisterError);

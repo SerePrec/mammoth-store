@@ -1,14 +1,34 @@
+import {
+  isTextRequired,
+  isValidAge,
+  isValidPhone,
+  isValidUsername,
+  isValidPwd
+} from "../utils/validations.js";
+import { escapeHtml } from "../utils/dataTools.js";
+
 // Valida que sea un formato de usuario válido para guardar en la BD
 const validateRegisterPost = (req, res, next) => {
-  const { username, password } = req.body;
+  const { name, address, age, phone, username, password } = req.body;
+  const filename = req.file?.filename;
+  const avatar = filename
+    ? `/img/avatars/${filename}`
+    : `/img/avatars/default_avatar.svg`;
   if (
-    !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-      username
-    ) ||
-    !(typeof password === "string" && password.length >= 6)
+    !isTextRequired(name) ||
+    !isTextRequired(address) ||
+    !isValidAge(age) ||
+    !isValidPhone(phone) ||
+    !isValidUsername(username) ||
+    !isValidPwd(password)
   ) {
     res.redirect("/register");
   } else {
+    req.body.name = escapeHtml(name.trim());
+    req.body.address = escapeHtml(address.trim());
+    req.body.age = parseInt(age);
+    req.body.username = escapeHtml(username);
+    req.body.avatar = avatar;
     next();
   }
 };
