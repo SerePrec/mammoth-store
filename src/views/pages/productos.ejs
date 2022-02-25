@@ -20,10 +20,13 @@
           alt="Logo de Mamooth - Inicio">
       </a>
       <div class="navbar-collapse collapse" id="navbar-myAccount">
+        <img src="<%= avatar %>" alt="avatar" referrerpolicy="no-referrer" class="avatar">
         <a href="/myaccount" class="nav-link">
-          <img src="/img/cuenta.svg" alt="Mi cuenta">
           MI CUENTA
         </a>
+        <button id="btn-logout" type="button" class="typicBtn btn btn-danger">CERRAR SESION<img
+            src="/img/sign-out-alt.svg" alt="Salir">
+        </button>
       </div>
       <a href="/carrito" class="cartWidget nav-link">
         <span class="itemsQuantity hidden">0</span>

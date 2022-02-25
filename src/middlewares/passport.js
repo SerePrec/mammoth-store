@@ -138,3 +138,5 @@ export {
   passportAuthGoogle,
   passportAuthGoogleCb
 };
+
+// https://lh3.googleusercontent.com/a/AATXAJxSCWhB5RedHSHRySuMrJUJ42nmUSk5KwsunooA=s96-c

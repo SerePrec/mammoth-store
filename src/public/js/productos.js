@@ -848,6 +848,11 @@ $btnCerrarMensajeEmergente.click(e => {
   clearTimeout(tempEmergente); // quita el timer que se inicializó con el mensaje
 });
 
+// Accion botón logout
+document.getElementById("btn-logout").addEventListener("click", e => {
+  location.assign("/logout");
+});
+
 $(window).resize(function () {
   // Evento por si el usuario cambia posición de dispositivo para que siempre
   // los filtros en vista xs empiecen ocultos y en mayores anchos empiecen

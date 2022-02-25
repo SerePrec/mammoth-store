@@ -14,7 +14,8 @@ export const getCarts = async (req, res) => {
 
 export const getUserCart = async (req, res) => {
   try {
-    const username = req.session?.username;
+    const { user } = req;
+    const username = user.provider ? user.emails[0].value : user.username;
     const userCart = await cartsModel.getByUsername(username);
     if (userCart) {
       req.session ? (req.session.cartId = userCart.id) : null;
@@ -46,7 +47,8 @@ export const getProductsFromCart = async (req, res) => {
 
 export const createCart = async (req, res) => {
   try {
-    const username = req.session?.username;
+    const { user } = req;
+    const username = user.provider ? user.emails[0].value : user.username;
     const cart = { username, products: [] };
     const { id } = await cartsModel.save(cart);
     req.session ? (req.session.cartId = id) : null;

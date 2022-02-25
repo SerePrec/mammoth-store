@@ -9,5 +9,16 @@
     "age": 43,
     "phone": "+5492215737971",
     "avatar": "/img/avatars/1645732799962-sep.png"
+  },
+  {
+    "id": 2,
+    "timestamp": "2022-02-24T21:07:27.363Z",
+    "username": "prellezose@gmail.com",
+    "password": "$2b$10$aHWxgERESES1hKC3NPYngOoEX48vhi9a4uSTF5IkX0kHvirYdzgl6",
+    "name": "Sergio Emanuel Prellezo",
+    "address": "33 #922",
+    "age": 43,
+    "phone": "+5492215737971",
+    "avatar": "/img/avatars/default_avatar.svg"
   }
 ]

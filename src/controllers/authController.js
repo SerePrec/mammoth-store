@@ -10,19 +10,18 @@ export const getLogin = (req, res) => {
   });
 };
 
-//FIXME:
-// export const getLoginError = (req, res) => {
-//   const { messages } = req.session;
-//   let message;
-//   if (messages) {
-//     req.session.messages = [];
-//     message = messages[messages.length - 1];
-//   }
-//   res.render("pages/loginError", {
-//     title: "Error de login",
-//     error: message
-//   });
-// };
+export const getLoginError = (req, res) => {
+  const { messages } = req.session;
+  let message;
+  if (messages) {
+    req.session.messages = [];
+    message = messages[messages.length - 1];
+  }
+  res.render("pages/loginError", {
+    title: "Mammoth Bike Store | Error de login",
+    error: message
+  });
+};
 
 export const getRegister = (req, res) => {
   if (req.isAuthenticated()) return res.redirect("/");
@@ -31,33 +30,35 @@ export const getRegister = (req, res) => {
   });
 };
 
-//FIXME:
-// export const getRegisterError = (req, res) => {
-//   const { messages } = req.session;
-//   let message;
-//   if (messages) {
-//     req.session.messages = [];
-//     message = messages[messages.length - 1];
-//   }
-//   res.render("pages/registerError", {
-//     title: "Error de registro",
-//     error: message
-//   });
-// };
+export const getRegisterError = (req, res) => {
+  const { messages } = req.session;
+  let message;
+  if (messages) {
+    req.session.messages = [];
+    message = messages[messages.length - 1];
+  }
+  res.render("pages/registerError", {
+    title: "Mammoth Bike Store | Error de registro",
+    error: message
+  });
+};
 
-//FIXME:
-// export const getLogout = (req, res) => {
-//   if (req.isAuthenticated()) {
-//     const { username } = req.user;
-//     req.logout();
-//     req.session.destroy(err => {
-//       if (!err) {
-//         res.clearCookie("connect.sid");
-//         return res.render("./pages/logout", { title: "Logout", username });
-//       }
-//       res.redirect("/");
-//     });
-//   } else {
-//     res.redirect("/");
-//   }
-// };
+export const getLogout = (req, res) => {
+  if (req.isAuthenticated()) {
+    const { user } = req;
+    const name = user.provider ? user.displayName : user.name;
+    req.logout();
+    req.session.destroy(err => {
+      if (!err) {
+        res.clearCookie("connect.sid");
+        return res.render("./pages/logout", {
+          title: "Mammoth Bike Store | Logout",
+          name
+        });
+      }
+      res.redirect("/");
+    });
+  } else {
+    res.redirect("/");
+  }
+};

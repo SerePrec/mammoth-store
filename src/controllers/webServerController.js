@@ -5,7 +5,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const viewsPath = path.join(__dirname, "..", "views");
 
 export const getProducts = (req, res) => {
-  res.render("pages/productos", { title: "Mammoth Bike Store | Productos" });
+  const { user } = req;
+  res.render("pages/productos", {
+    title: "Mammoth Bike Store | Productos",
+    username: user.provider ? user.emails[0].value : user.username,
+    avatar: user.provider ? user.photos[0].value : user.avatar
+  });
 };
 
 export const getAdminProducts = (req, res) => {
@@ -13,7 +18,12 @@ export const getAdminProducts = (req, res) => {
 };
 
 export const getCart = (req, res) => {
-  res.render("pages/carrito", { title: "Mammoth Bike Store | Carrito" });
+  const { user } = req;
+  res.render("pages/carrito", {
+    title: "Mammoth Bike Store | Carrito",
+    username: user.provider ? user.emails[0].value : user.username,
+    avatar: user.provider ? user.photos[0].value : user.avatar
+  });
 };
 
 export const getAdminCarts = (req, res) => {
@@ -21,7 +31,15 @@ export const getAdminCarts = (req, res) => {
 };
 
 export const getCheckout = (req, res) => {
-  res.render("pages/checkout", { title: "Mammoth Bike Store | Checkout" });
+  const { user } = req;
+  res.render("pages/checkout", {
+    title: "Mammoth Bike Store | Checkout",
+    username: user.provider ? user.emails[0].value : user.username,
+    name: user.provider ? user.displayName : user.name,
+    address: user.provider ? "" : user.address,
+    phone: user.provider ? "" : user.phone,
+    avatar: user.provider ? user.photos[0].value : user.avatar
+  });
 };
 
 export const getUsersChat = (req, res) => {

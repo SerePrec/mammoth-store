@@ -32,14 +32,20 @@
   #navbar-myAccount {
     flex-grow: 0;
     font-size: 1rem;
-    background-color: $rojoMarca;
-    border-radius: 0.5rem;
-    &:hover {
-      background-color: #c82333;
-      border-color: #bd2130;
+    .avatar {
+      width: 3rem;
+      border-radius: 50%;
+      background-color: $tonoOscuro;
     }
     .nav-link {
+      background-color: $tonoOscuro;
       color: white;
+      border-radius: 0.5rem;
+      margin: 0 1rem;
+      &:hover {
+        background-color: #313131;
+        border-color: #313131;
+      }
       img {
         width: 1.5rem;
         margin-right: 0.5rem;
@@ -53,6 +59,15 @@
         justify-content: center;
         align-items: center;
         font-family: $fuente-principal;
+      }
+    }
+    .typicBtn {
+      border: none;
+      padding: 0.5rem;
+      img {
+        width: 1.5rem;
+        margin-left: 0.5rem;
+        vertical-align: bottom;
       }
     }
   }
@@ -146,9 +161,20 @@
     }
 
     #navbar-myAccount {
+      text-align: center;
       background-color: $rojoMarca;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
+      padding: 0.2rem 1rem;
+      > .btn,
+      > .nav-link {
+        display: inline-block;
+      }
+      .typicBtn {
+        background-color: #832024;
+      }
     }
 
     #navbar-categories {

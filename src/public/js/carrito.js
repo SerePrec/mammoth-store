@@ -332,6 +332,11 @@ $btnDeleteCart.addEventListener("click", () => {
   deleteCart();
 });
 
+// Accion botón logout
+document.getElementById("btn-logout").addEventListener("click", e => {
+  location.assign("/logout");
+});
+
 // Funciones relacionadas a lógica del carrito  *******************************
 // ****************************************************************************
 

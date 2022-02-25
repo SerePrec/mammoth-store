@@ -30,4 +30,13 @@ const isAuthApi = (req, res, next) => {
   });
 };
 
-export { isAuthWeb, isAuthApi, isAdmin };
+// Lo utilizo para desviar el flujo en caso de que ya se encuentre el usuario autenticado
+// Así se busca que el usuario cierre sesión antes de ello. (Ej: login y registro sólo si no hay sesión activa)
+const isNotAuthWeb = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/");
+  }
+  next();
+};
+
+export { isAuthWeb, isAuthApi, isNotAuthWeb, isAdmin };

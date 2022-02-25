@@ -695,6 +695,43 @@ main.checkout {
     main.checkout #checkOutCompra form #contenedorCuotas i {
       display: block; } }
 
+.logout {
+  width: 95%;
+  max-width: 60rem;
+  margin: 1rem auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: #2b5165; }
+  .logout h2 {
+    color: white;
+    margin-top: 1rem;
+    text-align: center; }
+  .logout .btn {
+    display: block;
+    margin: 3rem auto 0 auto;
+    padding: 0.5rem 2rem;
+    width: fit-content;
+    text-decoration: none;
+    color: white;
+    border-radius: 5rem; }
+
+.auth-error-wrapper {
+  width: 95%;
+  max-width: 30rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #2c3034;
+  border-radius: 1rem;
+  text-align: center;
+  color: #b30404; }
+  .auth-error-wrapper h1 {
+    font-style: italic; }
+  .auth-error-wrapper p {
+    font-size: 1.25rem;
+    color: #cecece; }
+  .auth-error-wrapper a {
+    width: fit-content; }
+
 .error404 {
   display: flex;
   flex-direction: column;
@@ -770,14 +807,19 @@ main.checkout {
     width: 35%; }
   .navbar #navbar-myAccount {
     flex-grow: 0;
-    font-size: 1rem;
-    background-color: #b30404;
-    border-radius: 0.5rem; }
-    .navbar #navbar-myAccount:hover {
-      background-color: #c82333;
-      border-color: #bd2130; }
+    font-size: 1rem; }
+    .navbar #navbar-myAccount .avatar {
+      width: 3rem;
+      border-radius: 50%;
+      background-color: #212121; }
     .navbar #navbar-myAccount .nav-link {
-      color: white; }
+      background-color: #212121;
+      color: white;
+      border-radius: 0.5rem;
+      margin: 0 1rem; }
+      .navbar #navbar-myAccount .nav-link:hover {
+        background-color: #313131;
+        border-color: #313131; }
       .navbar #navbar-myAccount .nav-link img {
         width: 1.5rem;
         margin-right: 0.5rem; }
@@ -790,6 +832,13 @@ main.checkout {
         justify-content: center;
         align-items: center;
         font-family: "Montserrat", Helvetica, sans-serif; }
+    .navbar #navbar-myAccount .typicBtn {
+      border: none;
+      padding: 0.5rem; }
+      .navbar #navbar-myAccount .typicBtn img {
+        width: 1.5rem;
+        margin-left: 0.5rem;
+        vertical-align: bottom; }
   .navbar #navbar-categories {
     justify-content: center;
     width: 100%;
@@ -844,9 +893,18 @@ main.checkout {
       order: 5;
       width: 100%; }
     .navbar #navbar-myAccount {
+      text-align: center;
       background-color: #b30404;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
       border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0; }
+      border-bottom-right-radius: 0;
+      padding: 0.2rem 1rem; }
+      .navbar #navbar-myAccount > .btn,
+      .navbar #navbar-myAccount > .nav-link {
+        display: inline-block; }
+      .navbar #navbar-myAccount .typicBtn {
+        background-color: #832024; }
     .navbar #navbar-categories .navbar-nav .nav-link {
       margin-left: 0.5rem;
       padding-bottom: 0.25rem; }

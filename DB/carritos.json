@@ -202,7 +202,50 @@
           "thumbnail": "/img/productos/1639157975529-producto3.jpg"
         },
         "quantity": 1
+      },
+      {
+        "product": {
+          "id": 2,
+          "timestamp": "2021-12-08T15:15:07.528Z",
+          "category": "componentes",
+          "code": "M-MTB-0345",
+          "brand": "MAXXIS",
+          "title": "Cubierta De Kevlar Maxxis Race King 29 X 2,15.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "price": 4750,
+          "stock": 15,
+          "thumbnail": "/img/productos/1639157959863-producto2.jpg"
+        },
+        "quantity": 1
       }
     ]
+  },
+  {
+    "id": 12,
+    "timestamp": "2022-02-24T21:52:37.618Z",
+    "username": "prellezose@gmail.com",
+    "products": [
+      {
+        "product": {
+          "id": 7,
+          "timestamp": "2021-12-08T15:15:07.530Z",
+          "category": "indumentaria",
+          "code": "S-S-SWOR.018-WT/42",
+          "brand": "SPECIALIZED",
+          "title": "Zapatillas Specialized S-Works De Ruta. Blanco. Talle: 42.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "price": 14910,
+          "stock": 3,
+          "thumbnail": "/img/productos/1639158031547-producto7.jpg"
+        },
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "timestamp": "2022-02-24T22:28:10.206Z",
+    "username": "sereprec@gmail.com",
+    "products": []
   }
 ]

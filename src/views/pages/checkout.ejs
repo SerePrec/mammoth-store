@@ -20,10 +20,13 @@
           alt="Logo de Mamooth - Inicio">
       </a>
       <div class="navbar-collapse collapse" id="navbar-myAccount">
+        <img src="<%= avatar %>" alt="avatar" referrerpolicy="no-referrer" class="avatar">
         <a href="/myaccount" class="nav-link">
-          <img src="/img/cuenta.svg" alt="Mi cuenta">
           MI CUENTA
         </a>
+        <button id="btn-logout" type="button" class="typicBtn btn btn-danger">CERRAR SESION<img
+            src="/img/sign-out-alt.svg" alt="Salir">
+        </button>
       </div>
       <a href="/carrito" class="cartWidget nav-link">
         <span class="itemsQuantity hidden">0</span>
@@ -79,7 +82,7 @@
               <label for="inputNombre" class="col-sm-2 col-form-label">Nombre y Apellido</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="inputNombre" placeholder="Ingresa tu nombre y apellido"
-                  required>
+                  value="<%= name %>" required>
                 <small class="form-text">Con estos datos se hará la facturación.</small>
               </div>
             </div>
@@ -87,21 +90,22 @@
               <label for="inputTelefono" class="col-sm-2 col-form-label">Teléfono</label>
               <div class="col-sm-10">
                 <input type="tel" class="form-control" id="inputTelefono" placeholder="Ingresa un teléfono de contacto"
-                  required>
+                  value="<%= phone %>" required>
                 <small class="form-text">Puede que necesitemos contactarnos por tu compra.</small>
               </div>
             </div>
             <div class="row mb-3">
               <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
               <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail" placeholder="ejemplo@ejemplo.com" required>
+                <input type="email" class="form-control" id="inputEmail" placeholder="ejemplo@ejemplo.com"
+                  value="<%= username %>" required disabled>
               </div>
             </div>
             <div class="row mb-3">
               <label for="inputDireccion" class="col-sm-2 col-form-label">Dirección</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="inputDireccion" placeholder="Ingresa tu dirección COMPLETA"
-                  required>
+                  value="<%= address %>" required>
                 <small class="form-text">Es la dirección a la que enviaremos tu pedido</small>
               </div>
             </div>
@@ -125,7 +129,7 @@
 
             <div class="form-group row">
               <div class="col-sm-12 d-flex justify-content-evenly mb-4">
-                <a href="/productos" class="btn btn-dark">Volver a ShowRoom</a>
+                <a href="/" class="btn btn-dark">Volver a ShowRoom</a>
                 <button id="btnAceptaCompra" type="submit" class="btn btn-danger">Aceptar la
                   compra</button>
               </div>

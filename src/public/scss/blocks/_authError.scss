@@ -1,0 +1,20 @@
+.auth-error-wrapper {
+  width: 95%;
+  max-width: 30rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #2c3034;
+  border-radius: 1rem;
+  text-align: center;
+  color: #b30404;
+  h1 {
+    font-style: italic;
+  }
+  p {
+    font-size: 1.25rem;
+    color: #cecece;
+  }
+  a {
+    width: fit-content;
+  }
+}

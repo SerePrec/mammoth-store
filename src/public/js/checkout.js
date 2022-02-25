@@ -124,6 +124,11 @@ function loadError(error) {
   console.error(error);
 }
 
+// Accion botón logout
+document.getElementById("btn-logout").addEventListener("click", e => {
+  location.assign("/logout");
+});
+
 // Funciones relacionadas a mostrar y animar la vista *************************
 //*****************************************************************************
 

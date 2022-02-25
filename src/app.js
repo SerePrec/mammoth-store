@@ -44,7 +44,6 @@ app.use(
 
 //FIXME:FIXME:
 app.use((req, res, next) => {
-  // req.session.username = "prellezose@yahoo.com.ar";
   console.log(req.session);
   next();
 });

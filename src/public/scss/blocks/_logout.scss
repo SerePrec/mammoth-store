@@ -1,0 +1,22 @@
+.logout {
+  width: 95%;
+  max-width: 60rem;
+  margin: 1rem auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: #2b5165;
+  h2 {
+    color: white;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .btn {
+    display: block;
+    margin: 3rem auto 0 auto;
+    padding: 0.5rem 2rem;
+    width: fit-content;
+    text-decoration: none;
+    color: white;
+    border-radius: 5rem;
+  }
+}

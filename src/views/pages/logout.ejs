@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <%- include("../partials/HeadWithBootstrap.ejs")  %>
+  <!-- Mi CSS -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <main>
+    <div class="logout">
+      <h2>Hasta luego, <%= name %> </h2>
+      <a class="btn btn-success" href="/">Serás redirigido al inicio en <span id=seconds></span> seg</a>
+    </div>
+  </main>
+  <!-- Bootstrap JS -->
+  <%- include("../partials/bootstrapScripts.ejs")  %>
+  <!-- Mi JS -->
+  <script src="/js/logout.js"></script>
+</body>
+
+</html>
