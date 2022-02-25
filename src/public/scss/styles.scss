@@ -1,5 +1,6 @@
 // importación de bases
 @import "base/variables";
+@import "base/placeholders";
 @import "base/reset";
 @import "base/fonts";
 @import "base/animations";
@@ -9,7 +10,9 @@
 @import "blocks/productFrom";
 @import "blocks/showRoom";
 @import "blocks/carts";
+@import "blocks/chat";
 @import "blocks/checkout";
+@import "blocks/footer";
 @import "blocks/logout";
 @import "blocks/authError";
 @import "blocks/error404";
@@ -22,3 +25,6 @@
 @import "components/landingCarousel";
 @import "components/brandBanner";
 @import "components/emptyCart";
+@import "components/modales";
+@import "components/newsletter";
+@import "components/social";

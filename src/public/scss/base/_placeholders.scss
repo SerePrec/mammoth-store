@@ -1,0 +1,47 @@
+/***************************************************************/
+/******************** Place Holders - Inicio  ******************/
+%fondoOscuro {
+  background-color: $tonoMedio;
+  color: white;
+}
+
+%tituloBoxClaro {
+  background-color: $tonoClaro;
+  color: white;
+  font-weight: 700;
+  @media (max-width: $lg) {
+    font-size: 1.3rem;
+  }
+}
+
+%tituloFooter {
+  font: {
+    family: "Roboto Condensed", Helvetica, sans-serif;
+    size: 1.2rem;
+    weight: 500;
+  }
+  letter-spacing: 0.25rem;
+  width: 90%;
+  height: auto;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  margin: 0 auto 1rem auto;
+}
+
+%botonFormulario {
+  width: 8vw;
+  min-width: 7rem;
+  height: 2rem;
+  background-color: $rojoMarca;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  font: {
+    weight: 500;
+    style: normal;
+    size: 1rem;
+  }
+  letter-spacing: 0.07rem;
+}
+/********************* Place Holders - Fin  ********************/
+/***************************************************************/

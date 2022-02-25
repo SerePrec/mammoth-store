@@ -151,3 +151,11 @@ Normalización: Analicé la normalización para la transmisión de los mensajes,
 Esto se debe a que no existe una redudndncia de infomación en la data que haga necesario la normalización, ni tampoco infomación profundamente anidada. diferente era el caso del desafío ..... donde se guardaba más infomación en los mensajes y había mucha redundancia de la misma, lo que hacía ventajoso el uso de la normalización para bajar la cantidad de datos transmitidos.
 
 OWASP. Escape html en endpoints y entradas de usuarios
+
+bcrypt asíncrono: Sin embargo, si está utilizando bcrypt en un servidor, se recomienda el modo asíncrono. Esto se debe a que el hash realizado por bcrypt requiere un uso intensivo de la CPU, por lo que la versión de sincronización bloqueará el bucle de eventos y evitará que su aplicación atienda otras solicitudes o eventos entrantes. La versión asíncrona utiliza un grupo de subprocesos que no bloquea el bucle de eventos principal.
+
+validaciones isNotauth para evitar loguear o registrar si ya se esta logueado, y otras
+
+mensajes tipo flash
+
+validacion de carrito al enviar id del front contra el amacednado en session. Lo mismo que se recurpera carritpo desde el back con datos de auth para evitar enviar desde el front y que no sea tan veridico

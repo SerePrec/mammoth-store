@@ -39,4 +39,14 @@ const isNotAuthWeb = (req, res, next) => {
   next();
 };
 
-export { isAuthWeb, isAuthApi, isNotAuthWeb, isAdmin };
+const isUserCart = (req, res, next) => {
+  if (req.session?.cartId == req.params.id) {
+    return next();
+  }
+  res.status(403).json({
+    error: "No autorizado",
+    descripcion: `El id del carrito al que intenta acceder no fue asignado al usuario`
+  });
+};
+
+export { isAuthWeb, isAuthApi, isNotAuthWeb, isUserCart, isAdmin };

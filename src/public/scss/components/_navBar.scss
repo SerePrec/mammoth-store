@@ -61,6 +61,13 @@
         font-family: $fuente-principal;
       }
     }
+    .chat-link {
+      img {
+        background-color: transparent;
+        border-radius: 0;
+        margin-right: 1rem;
+      }
+    }
     .typicBtn {
       border: none;
       padding: 0.5rem;
@@ -192,4 +199,8 @@
       }
     }
   }
+}
+
+header.not-logged .navbar {
+  justify-content: center;
 }

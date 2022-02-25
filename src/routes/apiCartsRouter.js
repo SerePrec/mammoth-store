@@ -4,6 +4,7 @@ import {
   validateIdId_prod,
   validateCartProductBody
 } from "../middlewares/validateData.js";
+import { isUserCart, isAdmin } from "../middlewares/auth.js";
 import {
   getCarts,
   getUserCart,
@@ -17,17 +18,18 @@ import {
 
 const router = Router();
 
-router.get("/", getCarts);
+router.get("/", isAdmin, getCarts);
 
 router.get("/usuario", getUserCart);
 
-router.get("/:id/productos", validateId, getProductsFromCart);
+router.get("/:id/productos", validateId, isUserCart, getProductsFromCart);
 
 router.post("/", createCart);
 
 router.post(
   "/:id/productos",
   validateId,
+  isUserCart,
   validateCartProductBody,
   addProductToCart
 );
@@ -35,15 +37,17 @@ router.post(
 router.put(
   "/:id/productos",
   validateId,
+  isUserCart,
   validateCartProductBody,
   updateProductFromCart
 );
 
-router.delete("/:id", validateId, deleteCart);
+router.delete("/:id", validateId, isUserCart, deleteCart);
 
 router.delete(
   "/:id/productos/:id_prod",
   validateIdId_prod,
+  isUserCart,
   deleteProductFromCart
 );
 

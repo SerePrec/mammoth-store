@@ -44,10 +44,16 @@ export const getCheckout = (req, res) => {
 
 export const getUsersChat = (req, res) => {
   const { email } = req.params;
+  const { user } = req;
+  const options = {
+    title: `Mammoth Bike Store | Chat`,
+    username: user.provider ? user.emails[0].value : user.username,
+    avatar: user.provider ? user.photos[0].value : user.avatar
+  };
   if (email) {
-    res.render("pages/chat-user", { title: `Mensajes ${email}`, email });
+    res.render("pages/chat-user", options);
   } else {
-    res.sendFile("chat.html", { root: viewsPath });
+    res.render("pages/chat", options);
   }
 };
 

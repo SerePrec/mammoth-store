@@ -20,7 +20,7 @@ passport.use(
         const { name, address, age, phone, avatar } = req.body;
         const newUser = {
           username,
-          password: createHash(password),
+          password: await createHash(password),
           name,
           address,
           age,
@@ -48,7 +48,7 @@ passport.use(
           message: "Nombre de usuario y/o contraseña incorrectos"
         });
       }
-      if (!isValidPassword(user, password)) {
+      if (!(await isValidPassword(user, password))) {
         return done(null, false, {
           message: "Nombre de usuario y/o contraseña incorrectos"
         });
@@ -138,5 +138,3 @@ export {
   passportAuthGoogle,
   passportAuthGoogleCb
 };
-
-// https://lh3.googleusercontent.com/a/AATXAJxSCWhB5RedHSHRySuMrJUJ42nmUSk5KwsunooA=s96-c

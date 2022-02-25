@@ -55,13 +55,28 @@
       <p></p>
     </div>
   </header>
-  <main class="userCart">
-    <div class="cartManage">
-      <h2>MI CARRITO</h2>
-      <button id="btnDeleteCart" class="btn btn-secondary hidden">ELIMINAR CARRITO</button>
+  <main class="chat">
+    <div class="chatZone">
+      <h2>CENTRO DE MENSAJES</h2>
+      <div id="usersQty"></div>
+      <form id="userForm" class="input-group my-3">
+        <span class="input-group-text">@</span>
+        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Ingrese su e-mail"
+          value="<%= username %>" maxlength="50" required disabled />
+        <button id="btn-log" type="submit" class="btn btn-danger">Login</button>
+        <button id="btn-filter" class="btn btn-danger">
+          <img src="/img/cuenta.svg" alt="usuario">
+          FILTRAR
+        </button>
+      </form>
+      <div id="messages-wrapper"></div>
+      <form id="messageForm" class="input-group my-3">
+        <input type="text" class="form-control" id="inputMessage" name="message" placeholder="Escriba un mensaje..."
+          autocomplete="off" required disabled maxlength="65535" />
+        <button id="btn-send" type="submit" class="btn btn-danger" disabled>Enviar</button>
+      </form>
+      <div id="messageErrors"></div>
     </div>
-    <div id="cartProducts"></div>
-    <div id="cartInfoMessages"></div>
   </main>
 
   <!--------- Footer - inicio ----------->
@@ -221,11 +236,12 @@
   </div>
   <!------------------- Modal Terminos y Condiciones - Fin ------------------->
 
-  <!-- jQuery y Bootstrap JS -->
-  <%- include("../partials/jQueryScripts.ejs")  %>
-  <%- include("../partials/bootstrapScripts.ejs")  %>
-  <!-- Mi JS -->
-  <script src="/js/carrito.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/chat.js"></script>
 </body>
 
 </html>

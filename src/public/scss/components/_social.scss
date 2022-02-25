@@ -1,0 +1,37 @@
+/********************** Redes sociales *************************/
+/****** se uso grid para acomodar los iconos y el título *******/
+.social {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 25%;
+  align-items: start;
+  justify-items: center;
+  .social__titulo {
+    @extend %fondoOscuro;
+    @extend %tituloFooter;
+  }
+  @each $i, $grilla in $grillaSocial {
+    :nth-child(#{$i}) {
+      grid-area: #{$grilla};
+    }
+  }
+  img {
+    width: 2.5rem;
+  }
+  @media (max-width: $lg) {
+    width: 50%;
+    .social__titulo {
+      font-size: 1rem;
+    }
+  }
+  @media (max-width: $sm) {
+    width: 100%;
+    grid-template-rows: repeat(2, 1fr);
+    img {
+      width: 30px;
+    }
+  }
+}
+/************************* Redes - Fin *************************/
+/***************************************************************/

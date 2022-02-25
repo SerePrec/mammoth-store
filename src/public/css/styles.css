@@ -1,6 +1,38 @@
 @charset "UTF-8";
-/********************* Reseteo general CSS *********************/
+/***************************************************************/
+/******************** Place Holders - Inicio  ******************/
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,700;0,800;1,500;1,700;1,800&family=Roboto+Condensed:wght@300;400;700&display=swap");
+.newsletter .newsletter__titulo, .social .social__titulo {
+  background-color: #545454;
+  color: white; }
+
+.newsletter .newsletter__titulo, .social .social__titulo {
+  font-family: "Roboto Condensed", Helvetica, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.25rem;
+  width: 90%;
+  height: auto;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  margin: 0 auto 1rem auto; }
+
+.newsletter form .input-group input[type="submit"] {
+  width: 8vw;
+  min-width: 7rem;
+  height: 2rem;
+  background-color: #b30404;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1rem;
+  letter-spacing: 0.07rem; }
+
+/********************* Place Holders - Fin  ********************/
+/***************************************************************/
+/********************* Reseteo general CSS *********************/
 * {
   margin: 0;
   padding: 0;
@@ -20,6 +52,15 @@ body {
 .hidden {
   opacity: 0;
   pointer-events: none; }
+
+main.min-height {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+main.mh-70 {
+  min-height: 70vh; }
 
 /* para pisar Bootstrap */
 /* ******************** */
@@ -606,6 +647,221 @@ main.userCart a.btn {
     margin-left: 0.5rem;
     width: 1.5rem; }
 
+main.chat {
+  text-align: center; }
+
+div.bg-yellow {
+  background-color: #ffc107d6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #343c42; }
+
+#messageErrors {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 95%;
+  max-width: 30rem;
+  margin: 1rem auto;
+  background-color: #ff8a47;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  opacity: 0;
+  transition: 0.5s all ease-in-out; }
+
+#messageErrors.show {
+  opacity: 1; }
+
+.chatZone {
+  width: 95%;
+  max-width: 60rem;
+  margin: 1rem auto;
+  padding: 2rem 2rem 0.25rem 2rem;
+  background-color: #2c3034;
+  border-radius: 1rem; }
+
+#userForm {
+  width: 95%;
+  max-width: 28rem;
+  margin: auto; }
+
+#inputEmail.logged {
+  color: #3232e9;
+  background-color: #212529c0;
+  font-weight: bolder; }
+
+#btn-log,
+#btn-send {
+  transition: all 0.5s ease-in-out; }
+
+#btn-log {
+  display: none; }
+  #btn-log .logged {
+    background-color: #dc354578; }
+
+#btn-filter img {
+  width: 1.75rem;
+  padding-right: 0.5rem; }
+
+#btn-send:disabled {
+  background-color: transparent; }
+
+#inputMessage {
+  transition: all 0.75s ease-in-out; }
+
+#inputMessage:disabled {
+  background-color: transparent; }
+
+#messages-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  background-color: #343c42;
+  border-radius: 0.5rem;
+  color: #8f8f8f; }
+
+#messages-wrapper .message-box {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  margin: 0.25rem 1rem 0.25rem 1rem; }
+
+#messages-wrapper .message-box.admin {
+  justify-content: flex-end; }
+
+#messages-wrapper .message-box .color {
+  width: 0.5rem;
+  height: 100%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  border-bottom-left-radius: 0.75rem; }
+
+#messages-wrapper .message-box.admin .color {
+  order: 2;
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: 0.75rem; }
+
+#messages-wrapper .message {
+  text-align: left;
+  background-color: #212529c0;
+  padding: 0.25rem 1rem;
+  border-top-right-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+  max-width: 90%; }
+
+#messages-wrapper .message-box.admin .message {
+  text-align: left;
+  background-color: #1a2f3c;
+  border-top-right-radius: unset;
+  border-bottom-right-radius: unset;
+  border-top-left-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem; }
+
+#messages-wrapper .message-box.admin .message.toUser {
+  border-left: 4px solid; }
+
+#messages-wrapper .message-box.admin .message.toAll {
+  border: 2px solid; }
+
+#messages-wrapper .message.clickable {
+  cursor: pointer; }
+
+#messages-wrapper .message b {
+  text-align: left;
+  margin-right: 0.5rem; }
+
+#messages-wrapper .message .toUser {
+  display: block;
+  margin-bottom: 1rem; }
+
+#messages-wrapper .message .toUser.with-border {
+  padding-left: 0.25rem;
+  border-left: 2px solid; }
+
+#messages-wrapper .message .toUser i {
+  margin-right: 0.5rem; }
+
+#messages-wrapper .message i {
+  font-size: 0.8rem; }
+
+#messages-wrapper .message span {
+  display: block;
+  color: #c6c6c6; }
+
+#messages-wrapper .date {
+  text-align: center;
+  color: #b1b1b1;
+  background-color: #2125296b;
+  padding: 0.25rem 1rem;
+  border-radius: 0.5rem;
+  margin: 0.5rem auto; }
+
+#messages-wrapper .message-box .reply {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 0.25rem;
+  flex-grow: 0;
+  flex-shrink: 0;
+  border-radius: 50%;
+  align-self: center;
+  opacity: 0;
+  transition: all 0.3s ease-in; }
+
+#messages-wrapper .message-box:hover .reply {
+  cursor: pointer;
+  opacity: 1; }
+
+#messages-wrapper .message-box .reply i {
+  color: #252a2e; }
+
+.reply-wrapper {
+  margin-top: 1rem;
+  text-align: left;
+  display: none; }
+
+.reply-wrapper.show {
+  display: block; }
+
+.reply-wrapper span {
+  color: #b30404;
+  font-style: italic;
+  margin-right: 0.5rem; }
+
+.reply-wrapper #reply-message {
+  color: #8f8f8f;
+  font-style: italic;
+  margin-right: 0.5rem; }
+
+@media (max-width: 576px) {
+  .chatZone {
+    padding: 2rem 0.5rem 0.25rem 0.5rem; } }
+
+@media (max-width: 340px) {
+  .chatZone {
+    margin: 0 auto; } }
+
+#messages-wrapper::-webkit-scrollbar {
+  -webkit-appearance: none; }
+
+#messages-wrapper::-webkit-scrollbar:vertical {
+  width: 0.5rem; }
+
+#messages-wrapper::-webkit-scrollbar-button:increment,
+#messages-wrapper::-webkit-scrollbar-button {
+  display: none; }
+
+#messages-wrapper::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 20px; }
+
+#messages-wrapper::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: darkgrey; }
+
 main.checkout {
   overflow: hidden;
   background-color: #b9b8b8;
@@ -695,6 +951,60 @@ main.checkout {
     main.checkout #checkOutCompra form #contenedorCuotas i {
       display: block; } }
 
+/***************************************************************/
+/************************ Footer - Inicio  *********************/
+/********************* Flexbox anidados row ********************/
+footer .contenidoFooter {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: #212121;
+  color: white;
+  height: auto;
+  text-align: center;
+  padding: 1.5rem 0 1rem 0; }
+  footer .contenidoFooter .info {
+    overflow: hidden;
+    width: 25%;
+    padding: 1em 3vw; }
+    footer .contenidoFooter .info p:nth-child(2) {
+      padding-bottom: 1rem; }
+
+footer .logo {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  footer .logo img {
+    width: 4rem; }
+  @media (max-width: 991px) {
+    footer .logo {
+      display: none; } }
+
+footer address {
+  background-color: #060606;
+  text-align: center;
+  color: white;
+  padding: 1.5rem 0.625rem;
+  margin-bottom: 0;
+  /* para pisar a Bootstrap */ }
+
+@media (max-width: 991px) {
+  footer .contenidoFooter {
+    flex-wrap: wrap; }
+    footer .contenidoFooter .info {
+      width: 50%; } }
+
+@media (max-width: 575px) {
+  footer .contenidoFooter .info {
+    width: 100%;
+    padding-top: 0; }
+    footer .contenidoFooter .info p:nth-child(1),
+    footer .contenidoFooter .info p:nth-child(2) {
+      display: none; } }
+
+/************************ Footer - Fin  ************************/
+/***************************************************************/
 .logout {
   width: 95%;
   max-width: 60rem;
@@ -832,6 +1142,10 @@ main.checkout {
         justify-content: center;
         align-items: center;
         font-family: "Montserrat", Helvetica, sans-serif; }
+    .navbar #navbar-myAccount .chat-link img {
+      background-color: transparent;
+      border-radius: 0;
+      margin-right: 1rem; }
     .navbar #navbar-myAccount .typicBtn {
       border: none;
       padding: 0.5rem; }
@@ -910,6 +1224,9 @@ main.checkout {
       padding-bottom: 0.25rem; }
       .navbar #navbar-categories .navbar-nav .nav-link:hover::after {
         width: 15rem; } }
+
+header.not-logged .navbar {
+  justify-content: center; }
 
 .cartWidget {
   position: relative;
@@ -1077,3 +1394,97 @@ main.checkout {
       font-size: 1.5rem; }
     .emptyCart h4 {
       font-size: 1rem; } }
+
+#modalTerminos .modal-content {
+  background-color: #b9b8b8; }
+  #modalTerminos .modal-content .modal-header h2 {
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem; }
+  #modalTerminos .modal-content .modal-body {
+    padding: 0; }
+    #modalTerminos .modal-content .modal-body .imagenTerminos {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-image: url("/img/terminos.jpg");
+      background-position: top;
+      height: 35vw; }
+    #modalTerminos .modal-content .modal-body article.terminos {
+      width: 75%;
+      margin: auto;
+      background-color: #545454;
+      text-align: center;
+      padding: 1.5vh 3vw;
+      color: white; }
+      #modalTerminos .modal-content .modal-body article.terminos ol {
+        padding: 0 3rem; }
+      #modalTerminos .modal-content .modal-body article.terminos p {
+        padding: 1rem;
+        text-align: justify; }
+
+@media (max-width: 991px) {
+  #modalTerminos .modal-content .modal-body article.terminos {
+    width: 100%;
+    padding: 0.5vh 1vw; } }
+
+.newsletter {
+  width: 50%; }
+  .newsletter form {
+    padding-top: 0.9rem; }
+    .newsletter form .input-group {
+      width: 70%;
+      margin: auto;
+      margin-bottom: 1rem; }
+      .newsletter form .input-group input[type="email"] {
+        height: 2rem; }
+  @media (max-width: 991px) {
+    .newsletter {
+      order: -1;
+      width: 100%;
+      padding-bottom: 2vh; }
+      .newsletter .newsletter__titulo {
+        font-size: 1rem; }
+      .newsletter form .input-group {
+        width: 55%; } }
+  @media (max-width: 575px) {
+    .newsletter form .input-group {
+      width: 80%; } }
+  @media (max-width: 500px) {
+    .newsletter form .custom-control-label {
+      width: 85%; } }
+
+/********************** Redes sociales *************************/
+/****** se uso grid para acomodar los iconos y el título *******/
+.social {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 25%;
+  align-items: start;
+  justify-items: center; }
+  .social :nth-child(1) {
+    grid-area: 1 / 1 / 2 / 5; }
+  .social :nth-child(2) {
+    grid-area: 2 / 1 / 3 / 2; }
+  .social :nth-child(3) {
+    grid-area: 2 / 2 / 3 / 3; }
+  .social :nth-child(4) {
+    grid-area: 2 / 3 / 3 / 4; }
+  .social :nth-child(5) {
+    grid-area: 2 / 4 / 3 / 5; }
+  .social img {
+    width: 2.5rem; }
+  @media (max-width: 991px) {
+    .social {
+      width: 50%; }
+      .social .social__titulo {
+        font-size: 1rem; } }
+  @media (max-width: 575px) {
+    .social {
+      width: 100%;
+      grid-template-rows: repeat(2, 1fr); }
+      .social img {
+        width: 30px; } }
+
+/************************* Redes - Fin *************************/
+/***************************************************************/

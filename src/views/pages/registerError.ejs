@@ -8,16 +8,69 @@
 </head>
 
 <body>
-  <main class="auth-error-wrapper">
-    <h1 class="text-center">Error de Registro</h1>
-    <% if (error&&error.length>0) { %>
-    <p><%= error %></p>
-    <% } else { %>
-    <p>Algo salió mal durante el proceso de registro.</p>
-    <p>Por favor, vuelva a intentarlo</p>
-    <% } %>
-    <a href="/register" class="btn btn-light mt-4">Volver</a>
+  <header class="not-logged">
+    <nav class="navbar navbar-expand-md navbar-dark">
+      <a class="navbar-brand" href="/">
+        <img src="/img/logo.svg" height="80" class="d-inline-block align-top animate__flipInX"
+          alt="Logo de Mamooth - Inicio">
+      </a>
+      <div class="navbar-collapse collapse" id="navbar-categories">
+        <div class="m-auto animate__navbar-nav--loaded navbar-nav">
+          <span class="nav-link">BICICLETAS</span>
+          <span class="nav-link">COMPONENTES</span>
+          <span class="nav-link">ACCESORIOS</span>
+          <span class="nav-link">EQUIPAMIENTO</span>
+          <span class="nav-link">INDUMENTARIA</span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="min-height mh-70">
+    <div class="auth-error-wrapper min-height mh-70">
+      <h1 class="text-center">Error de Registro</h1>
+      <% if (error&&error.length>0) { %>
+      <p><%= error %></p>
+      <% } else { %>
+      <p>Algo salió mal durante el proceso de registro.</p>
+      <p>Por favor, vuelva a intentarlo</p>
+      <% } %>
+      <a href="/register" class="btn btn-light mt-4">Volver</a>
+    </div>
   </main>
+
+  <footer>
+    <div class="contenidoFooter">
+
+      <!---------- Sección info -------------->
+      <section class="info">
+        <p>Vive la bici con Mammoth.</p>
+        <p>Mucho más que tu tienda de bicis.</p>
+        <p>Lunes a viernes de 9hs a 19hs.</p>
+        <p>Sábados de 9hs a 14hs.</p>
+      </section>
+
+      <div class="logo"><img src="/img/logo_M.png" alt="logo"></div>
+
+      <!---------- Sección Social -------------->
+      <section class="social">
+        <div class="social__titulo">SOCIAL</div>
+        <a href="#"><img src="/img/facebook.svg" alt="Facebook"></a>
+        <a href="#"><img src="/img/instagram.svg" alt="Instagram"></a>
+        <a href="#"><img src="/img/twitter.svg" alt="Twitter"></a>
+        <a href="#"><img src="/img/youtube.svg" alt="YouTube"></a>
+      </section>
+
+
+    </div>
+
+    <!---------- Sección de datos del desarrollador  -------------->
+    <address>
+      <!--Etiqueta para datos personales-->
+      <p class="font-italic">Copyright &copy; 2022 SerE PreC </p>
+    </address>
+
+  </footer>
 </body>
 
 </html>

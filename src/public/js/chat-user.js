@@ -183,3 +183,8 @@ socket.on("messageErrors", error => {
     $messageErrors.classList.remove("show");
   }, 4000);
 });
+
+// Accion botón logout
+document.getElementById("btn-logout").addEventListener("click", e => {
+  location.assign("/logout");
+});

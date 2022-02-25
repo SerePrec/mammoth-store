@@ -24,6 +24,16 @@ body {
   pointer-events: none;
 }
 
+main.min-height {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+main.mh-70 {
+  min-height: 70vh;
+}
+
 /* para pisar Bootstrap */
 /* ******************** */
 p {

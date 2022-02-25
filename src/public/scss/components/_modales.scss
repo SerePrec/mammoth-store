@@ -1,0 +1,55 @@
+// Modal para Términos y condiciones
+#modalTerminos {
+  .modal-content {
+    background-color: $tonoClaro;
+
+    .modal-header {
+      h2 {
+        color: white;
+        font-weight: 700;
+        font-size: 1.5rem;
+      }
+    }
+
+    .modal-body {
+      padding: 0;
+
+      .imagenTerminos {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url("/img/terminos.jpg");
+        background-position: top;
+        height: 35vw;
+      }
+
+      article.terminos {
+        width: 75%;
+        margin: auto;
+        background-color: $tonoMedio;
+        text-align: center;
+        padding: 1.5vh 3vw;
+        color: white;
+
+        ol {
+          padding: 0 3rem;
+        }
+
+        p {
+          padding: 1rem;
+          text-align: justify;
+        }
+      }
+    }
+  }
+
+  @media (max-width: $lg) {
+    .modal-content {
+      .modal-body {
+        article.terminos {
+          width: 100%;
+          padding: 0.5vh 1vw;
+        }
+      }
+    }
+  }
+}

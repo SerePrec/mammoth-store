@@ -4,6 +4,7 @@ const $usersQty = document.getElementById("usersQty");
 const $inputEmail = document.getElementById("inputEmail");
 const $inputMessage = document.getElementById("inputMessage");
 const $btnLog = document.getElementById("btn-log");
+const $btnFilter = document.getElementById("btn-filter");
 const $btnSend = document.getElementById("btn-send");
 const $messagesWrapper = document.getElementById("messages-wrapper");
 const $messageErrors = document.getElementById("messageErrors");
@@ -219,6 +220,10 @@ $userForm.addEventListener("submit", e => {
   }
 });
 
+$btnFilter.addEventListener("click", () => {
+  location.assign(`/chat/${$inputEmail.value}`);
+});
+
 // Acciones al tipear mensaje
 $inputMessage.addEventListener("input", e => {
   $btnSend.disabled = !$inputMessage.value.trim();
@@ -235,4 +240,18 @@ $messageForm.addEventListener("submit", e => {
     $inputMessage.focus();
     $btnSend.disabled = !$inputMessage.value.trim();
   }
+});
+
+// temporizador p/iniciar sesión de chat luego de cargar la página
+setTimeout(() => {
+  const clickear = new MouseEvent("click", {
+    bubbles: true,
+    cancelable: true
+  });
+  $btnLog.dispatchEvent(clickear);
+}, 1000);
+
+// Accion botón logout
+document.getElementById("btn-logout").addEventListener("click", e => {
+  location.assign("/logout");
 });
