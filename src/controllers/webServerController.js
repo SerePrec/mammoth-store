@@ -13,6 +13,17 @@ export const getProducts = (req, res) => {
   });
 };
 
+export const getProductsByCategory = (req, res) => {
+  const { user } = req;
+  const { cat } = req.params;
+  res.render("pages/productos-categoria", {
+    title: "Mammoth Bike Store | Productos",
+    username: user.provider ? user.emails[0].value : user.username,
+    avatar: user.provider ? user.photos[0].value : user.avatar,
+    cat
+  });
+};
+
 export const getAdminProducts = (req, res) => {
   res.sendFile("productos-admin.html", { root: viewsPath });
 };
