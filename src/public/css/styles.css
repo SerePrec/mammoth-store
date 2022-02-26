@@ -296,6 +296,9 @@ header {
         color: white;
         border-radius: 0.25rem;
         padding-left: 2rem; }
+        .showRoom #filtros .row .form-check.seleccionado.only {
+          padding-top: 1rem;
+          padding-bottom: 1rem; }
       .showRoom #filtros .row .form-check:not(.seleccionado):not(:nth-of-type(7)):hover {
         padding-left: 2rem;
         color: #b30404; }
@@ -373,7 +376,7 @@ header {
     min-height: 33rem; }
     .showRoom .colProductos #contenedorProductos .loader {
       height: 33rem;
-      background-image: url("../img/puff.svg");
+      background-image: url("/img/puff.svg");
       background-size: 50%;
       background-repeat: no-repeat;
       background-position: center;
@@ -1120,6 +1123,8 @@ footer address {
     font-size: 1rem; }
     .navbar #navbar-myAccount .avatar {
       width: 3rem;
+      height: 3rem;
+      object-fit: cover;
       border-radius: 50%;
       background-color: #212121; }
     .navbar #navbar-myAccount .nav-link {
@@ -1338,6 +1343,74 @@ header.not-logged .navbar {
   @media (max-width: 575px) {
     .brands img {
       max-width: 65%; } }
+
+.pictureHeader {
+  display: none;
+  position: relative; }
+  .pictureHeader.bicicletas, .pictureHeader.accesorios, .pictureHeader.componentes, .pictureHeader.equipamiento, .pictureHeader.indumentaria {
+    height: 26vw;
+    background-color: #212121;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center 5rem;
+    background-size: 100%;
+    display: flex;
+    justify-content: initial;
+    align-items: center; }
+    .pictureHeader.bicicletas h1, .pictureHeader.accesorios h1, .pictureHeader.componentes h1, .pictureHeader.equipamiento h1, .pictureHeader.indumentaria h1 {
+      padding-left: 3rem;
+      font-style: italic;
+      color: #fff;
+      text-shadow: 1px 1px 5px #212121; }
+  .pictureHeader.bicicletas {
+    background-image: url("/img/plp-banner_bici.jpg"); }
+  .pictureHeader.componentes {
+    background-image: url("/img/plp-banner_comp.jpg"); }
+  .pictureHeader.accesorios {
+    background-image: url("/img/plp-banner_acc.jpg"); }
+  .pictureHeader.equipamiento {
+    background-image: url("/img/plp-banner_equip.jpg"); }
+  .pictureHeader.indumentaria {
+    background-image: url("/img/plp-banner_Indu.jpg"); }
+  .pictureHeader .gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-image: linear-gradient(to top, #545454a4 0%, #545454ab 5%, #54545485 15%, transparent 40%); }
+  @media (max-width: 1199px) {
+    .pictureHeader.bicicletas, .pictureHeader.accesorios, .pictureHeader.componentes, .pictureHeader.equipamiento, .pictureHeader.indumentaria {
+      height: 35vw;
+      background-position: 70% 5rem;
+      background-size: 150%; }
+    .pictureHeader.componentes {
+      background-position: 20% 5rem; }
+    .pictureHeader.accesorios {
+      background-position: 20% 5rem; }
+    .pictureHeader.indumentaria {
+      background-position: 40% 5rem; } }
+  @media (max-width: 767px) {
+    .pictureHeader.bicicletas, .pictureHeader.accesorios, .pictureHeader.componentes, .pictureHeader.equipamiento, .pictureHeader.indumentaria {
+      height: 45vw;
+      background-attachment: initial;
+      background-position: 70% center;
+      background-size: 180%;
+      transition: none; }
+      .pictureHeader.bicicletas h1, .pictureHeader.accesorios h1, .pictureHeader.componentes h1, .pictureHeader.equipamiento h1, .pictureHeader.indumentaria h1 {
+        font-size: 2rem;
+        padding-left: 1rem; }
+    .pictureHeader.componentes {
+      background-position: 30% center; }
+    .pictureHeader.accesorios {
+      background-position: 20% center; }
+    .pictureHeader.indumentaria {
+      background-position: 40% center; } }
+  @media (max-width: 575px) {
+    .pictureHeader.bicicletas, .pictureHeader.accesorios, .pictureHeader.componentes, .pictureHeader.equipamiento, .pictureHeader.indumentaria {
+      height: 55vw;
+      background-size: 220%; } }
 
 .emptyCart {
   color: black;

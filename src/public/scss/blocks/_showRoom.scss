@@ -77,6 +77,10 @@
           color: white;
           border-radius: 0.25rem;
           padding-left: 2rem;
+          &.only {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+          }
         }
 
         &:not(.seleccionado):not(:nth-of-type(7)):hover {
@@ -205,7 +209,7 @@
 
       .loader {
         height: 33rem;
-        background-image: url("../img/puff.svg");
+        background-image: url("/img/puff.svg");
         background-size: 50%;
         background-repeat: no-repeat;
         background-position: center;

@@ -3,6 +3,13 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const viewsPath = path.join(__dirname, "..", "views");
+const categories = [
+  "bicicletas",
+  "componentes",
+  "accesorios",
+  "equipamiento",
+  "indumentaria"
+];
 
 export const getProducts = (req, res) => {
   const { user } = req;
@@ -13,15 +20,19 @@ export const getProducts = (req, res) => {
   });
 };
 
-export const getProductsByCategory = (req, res) => {
+export const getProductsByCategory = (req, res, next) => {
   const { user } = req;
   const { cat } = req.params;
-  res.render("pages/productos-categoria", {
-    title: "Mammoth Bike Store | Productos",
-    username: user.provider ? user.emails[0].value : user.username,
-    avatar: user.provider ? user.photos[0].value : user.avatar,
-    cat
-  });
+  if (categories.includes(cat)) {
+    res.render("pages/productos-categoria", {
+      title: "Mammoth Bike Store | Productos",
+      username: user.provider ? user.emails[0].value : user.username,
+      avatar: user.provider ? user.photos[0].value : user.avatar,
+      category: cat
+    });
+  } else {
+    next();
+  }
 };
 
 export const getAdminProducts = (req, res) => {

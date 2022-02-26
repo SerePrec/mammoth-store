@@ -97,9 +97,9 @@ const config = {
   googleAuth: {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL:
-      "https://entrega3-prellezose.herokuapp.com/auth/google/callback"
-    //callbackURL: "/auth/google/callback"
+    // callbackURL:
+    //   "https://entrega3-prellezose.herokuapp.com/auth/google/callback",
+    callbackURL: "/auth/google/callback"
   }
 };
 

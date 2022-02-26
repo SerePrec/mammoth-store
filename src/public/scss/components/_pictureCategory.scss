@@ -1,0 +1,117 @@
+.pictureHeader {
+  display: none;
+  position: relative;
+  &.bicicletas,
+  &.accesorios,
+  &.componentes,
+  &.equipamiento,
+  &.indumentaria {
+    height: 26vw;
+    background-color: $tonoOscuro;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center 5rem;
+    background-size: 100%;
+    display: flex;
+    justify-content: initial;
+    align-items: center;
+
+    h1 {
+      padding-left: 3rem;
+      font-style: italic;
+      color: #fff;
+      text-shadow: 1px 1px 5px $tonoOscuro;
+    }
+  }
+
+  &.bicicletas {
+    background-image: url("/img/plp-banner_bici.jpg");
+  }
+  &.componentes {
+    background-image: url("/img/plp-banner_comp.jpg");
+  }
+  &.accesorios {
+    background-image: url("/img/plp-banner_acc.jpg");
+  }
+  &.equipamiento {
+    background-image: url("/img/plp-banner_equip.jpg");
+  }
+  &.indumentaria {
+    background-image: url("/img/plp-banner_Indu.jpg");
+  }
+
+  .gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-image: linear-gradient(
+      to top,
+      #545454a4 0%,
+      #545454ab 5%,
+      #54545485 15%,
+      transparent 40%
+    );
+  }
+
+  @media (max-width: $xl) {
+    &.bicicletas,
+    &.accesorios,
+    &.componentes,
+    &.equipamiento,
+    &.indumentaria {
+      height: 35vw;
+      background-position: 70% 5rem;
+      background-size: 150%;
+    }
+    &.componentes {
+      background-position: 20% 5rem;
+    }
+    &.accesorios {
+      background-position: 20% 5rem;
+    }
+    &.indumentaria {
+      background-position: 40% 5rem;
+    }
+  }
+
+  @media (max-width: $md) {
+    &.bicicletas,
+    &.accesorios,
+    &.componentes,
+    &.equipamiento,
+    &.indumentaria {
+      height: 45vw;
+      background-attachment: initial;
+      background-position: 70% center;
+      background-size: 180%;
+      transition: none;
+      h1 {
+        font-size: 2rem;
+        padding-left: 1rem;
+      }
+    }
+    &.componentes {
+      background-position: 30% center;
+    }
+    &.accesorios {
+      background-position: 20% center;
+    }
+    &.indumentaria {
+      background-position: 40% center;
+    }
+  }
+
+  @media (max-width: $sm) {
+    &.bicicletas,
+    &.accesorios,
+    &.componentes,
+    &.equipamiento,
+    &.indumentaria {
+      height: 55vw;
+      background-size: 220%;
+    }
+  }
+}

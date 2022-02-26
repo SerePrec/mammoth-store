@@ -37,11 +37,16 @@
       </a>
       <div class="navbar-collapse collapse" id="navbar-categories">
         <div class="m-auto animate__navbar-nav--loaded navbar-nav">
-          <a class="nav-link" href="/categoria/bicicletas" data-rb-event-key="alPuUe3glKMhF5LDqPPx">BICICLETAS</a>
-          <a class="nav-link" href="/categoria/componentes" data-rb-event-key="qVl1VQr85v3ELbe6JXYp">COMPONENTES</a>
-          <a class="nav-link" href="/categoria/accesorios" data-rb-event-key="RUCwOHdV6dsB8GUMr6Xt">ACCESORIOS</a>
-          <a class="nav-link" href="/categoria/equipamiento" data-rb-event-key="rljUAJkE8ErQeLLqO1EE">EQUIPAMIENTO</a>
-          <a class="nav-link" href="/categoria/indumentaria" data-rb-event-key="uYmH81rNnxjnIBJICee6">INDUMENTARIA</a>
+          <a class="nav-link <%= category=="bicicletas"?"activeLink":"" %>" href="/categoria/bicicletas"
+            data-rb-event-key="alPuUe3glKMhF5LDqPPx">BICICLETAS</a>
+          <a class="nav-link <%= category=="componentes"?"activeLink":"" %>" href="/categoria/componentes"
+            data-rb-event-key="qVl1VQr85v3ELbe6JXYp">COMPONENTES</a>
+          <a class="nav-link <%= category=="accesorios"?"activeLink":"" %>" href="/categoria/accesorios"
+            data-rb-event-key="RUCwOHdV6dsB8GUMr6Xt">ACCESORIOS</a>
+          <a class="nav-link <%= category=="equipamiento"?"activeLink":"" %>" href="/categoria/equipamiento"
+            data-rb-event-key="rljUAJkE8ErQeLLqO1EE">EQUIPAMIENTO</a>
+          <a class="nav-link <%= category=="indumentaria"?"activeLink":"" %>" href="/categoria/indumentaria"
+            data-rb-event-key="uYmH81rNnxjnIBJICee6">INDUMENTARIA</a>
         </div>
       </div>
     </nav>
@@ -51,84 +56,19 @@
     </div>
   </header>
   <main class="productos">
-
-    <div id="carouselHome" class="carousel slide carousel-fade" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="0" class="active" aria-current="true"
-          aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="3" aria-label="Slide 4"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active"><img class="d-block w-100" src="/img/Carousel1.jpeg" alt="First slide">
-          <div class="carousel-caption">
-            <h3>Ciclismo es aire libre</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </div>
-        </div>
-        <div class="carousel-item"><img class="d-block w-100" src="/img/Carousel2.jpeg" alt="Second slide">
-          <div class="carousel-caption">
-            <h3>Ciclismo es compartir</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </div>
-        </div>
-        <div class="carousel-item"><img class="d-block w-100" src="/img/Carousel3.jpeg" alt="Third slide">
-          <div class="carousel-caption">
-            <h3>Ciclismo es adrenalina</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </div>
-        </div>
-        <div class="carousel-item"><img class="d-block w-100" src="/img/Carousel4.jpeg" alt="First slide">
-          <div class="carousel-caption">
-            <h3>Ciclismo es dedicación</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-
-    <div class="brands">
-      <a href="https://www.specialized.com/ar/es" target="_blank" rel="noreferrer">
-        <img src="/img/logo_Specialized.png" alt="Specialized">
-      </a>
-      <a href="https://www.orbea.com/ar-es/" target="_blank" rel="noreferrer">
-        <img src="/img/logo_Orbea.png" alt="Orbea">
-      </a>
-      <a href="https://www.scott-sports.com/ar/es" target="_blank" rel="noreferrer">
-        <img src="/img/logo_Scott.png" alt="Scott">
-      </a>
-      <a href="https://www.giant-bicycles.com/es" target="_blank" rel="noreferrer">
-        <img src="/img/logo_Giant.png" alt="Giant">
-      </a>
-      <a href="https://www.cube.eu/es/cube-bikes/" target="_blank" rel="noreferrer">
-        <img src="/img/logo_Cube.png" alt="Cube">
-      </a>
-      <a href="https://www.cannondale.com/es-es" target="_blank" rel="noreferrer">
-        <img src="/img/logo_Cannondale.png" alt="Cannondale">
-      </a>
-      <a href="https://www.merida-bikes.com/es-es" target="_blank" rel="noreferrer">
-        <img src="/img/logo_Merida.png" alt="Merida">
-      </a>
+    <div class="pictureHeader <%= category %>">
+      <div class="gradient"></div>
+      <h1><%= category.toUpperCase() %></h1>
     </div>
 
     <div class="container-xl">
-      <h2 class="text-center py-4">CATALOGO DE PRODUCTOS</h2>
-
+      <h2 class="text-center py-4">PRODUCTOS EN LA CATEGORÍA</h2>
       <!---------------------- Show Room - Inicio ------------------------>
       <div class="row mx-0 mr-sm-n3 showRoom">
 
         <!---------------------- Columna filtros - Inicio ------------------------>
         <div id="filtros" class="col-sm-3 col-xl-2 mb-4">
-          <h3>Filtros <span><img src="./img/filtros.png" alt=""></span></h3>
+          <h3>Filtros <span><img src="/img/filtros.png" alt=""></span></h3>
           <div id="contenedorFiltros">
             <div id="cantProductosEncontrados">() producto/s</div>
 
@@ -139,44 +79,48 @@
             <div class="row">
               <div class="col-sm-12">
                 <h4>Categorías</h4>
-                <div class="form-check mb-2 seleccionado">
-                  <input class="form-check-input" type="radio" name="categoria" id="catTodas" value="todas" checked>
-                  <label class="form-check-label" for="catTodas">
-                    TODAS
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="categoria" id="catBicicletas" value="bicicletas">
+                <% if (category=="bicicletas") { %>
+                <div class="form-check seleccionado only">
+                  <input class="form-check-input" type="radio" name="categoria" id="catBicicletas" value="bicicletas"
+                    checked>
                   <label class="form-check-label" for="catBicicletas">
                     Bicicletas
                   </label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="categoria" id="catComponentes" value="componentes">
+                <% } else if (category=="componentes") { %>
+                <div class="form-check seleccionado only">
+                  <input class="form-check-input" type="radio" name="categoria" id="catComponentes" value="componentes"
+                    checked>
                   <label class="form-check-label" for="catComponentes">
                     Componentes
                   </label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="categoria" id="catAccesorios" value="accesorios">
+                <% } else if (category=="accesorios") { %>
+                <div class="form-check seleccionado only">
+                  <input class="form-check-input" type="radio" name="categoria" id="catAccesorios" value="accesorios"
+                    checked>
                   <label class="form-check-label" for="catAccesorios">
                     Accesorios
                   </label>
                 </div>
-                <div class="form-check">
+                <% } else if (category=="equipamiento") { %>
+                <div class="form-check seleccionado only">
                   <input class="form-check-input" type="radio" name="categoria" id="catEquipamiento"
-                    value="equipamiento">
+                    value="equipamiento" checked>
                   <label class="form-check-label" for="catEquipamiento">
                     Equipamiento
                   </label>
                 </div>
-                <div class="form-check mb-3">
+                <% } else if (category=="indumentaria") { %>
+                <div class="form-check seleccionado only">
                   <input class="form-check-input" type="radio" name="categoria" id="catIndumentaria"
-                    value="indumentaria">
+                    value="indumentaria" checked>
                   <label class="form-check-label" for="catIndumentaria">
                     Indumentaria
                   </label>
                 </div>
+                <% } %>
+                <br>
                 <button type="button" id="verMarcas" class="btn btn-sm btn-danger mb-3">MARCAS<i
                     class="fa fa-toggle-off"></i></button>
                 <div class="form-group">
@@ -212,7 +156,7 @@
                   placeholder="Descripción, marca, tipo, ..." aria-label="Search" name="buscar">
               </div>
               <div class="col-1 g-0">
-                <button id="btnBuscar" class="btn btn-dark my-sm-0"><img src="./img/icon_search_w.png" alt=""></button>
+                <button id="btnBuscar" class="btn btn-dark my-sm-0"><img src="/img/icon_search_w.png" alt=""></button>
               </div>
               <div class="col-5">
                 <select id="selectOrdenar" class="form-select ml-auto" name="orden">
