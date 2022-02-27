@@ -8,7 +8,8 @@
     "address": "33 #922",
     "age": 43,
     "phone": "+5492215737971",
-    "avatar": "/img/avatars/1645732799962-sep.png"
+    "avatar": "/img/avatars/1645732799962-sep.png",
+    "role": "user"
   },
   {
     "id": 2,
@@ -19,6 +20,19 @@
     "address": "33 #922",
     "age": 43,
     "phone": "+5492215737971",
-    "avatar": "/img/avatars/default_avatar.svg"
+    "avatar": "/img/avatars/default_avatar.svg",
+    "role": "user"
+  },
+  {
+    "id": 3,
+    "timestamp": "2022-02-26T21:23:26.082Z",
+    "username": "admin@admin.com",
+    "password": "$2b$10$LhC9ZCJQIdPKxO6U7oRZK.7mUNQ6VEG7Kzzfwb0Wl6R.pksWWo8tS",
+    "name": "Sergio Emanuel Prellezo",
+    "address": "33 #922",
+    "age": 43,
+    "phone": "+5492215737971",
+    "avatar": "/img/avatars/admin_avatar.svg",
+    "role": "admin"
   }
 ]

@@ -200,6 +200,7 @@ header {
   width: 95%;
   max-width: 60rem;
   margin: 1rem auto;
+  margin-top: 2rem;
   padding: 2rem;
   background-color: #2c3034;
   border-radius: 1rem; }
@@ -507,7 +508,7 @@ header {
 .cartManage {
   width: 95%;
   max-width: 60rem;
-  margin: 1rem auto 2rem auto;
+  margin: 2rem auto;
   padding: 2rem;
   background-color: #2c3034;
   border-radius: 1rem;
@@ -650,6 +651,9 @@ main.userCart a.btn {
     margin-left: 0.5rem;
     width: 1.5rem; }
 
+main.adminCarts {
+  min-height: 70vh; }
+
 main.chat {
   text-align: center; }
 
@@ -681,6 +685,7 @@ div.bg-yellow {
   width: 95%;
   max-width: 60rem;
   margin: 1rem auto;
+  margin-top: 2rem;
   padding: 2rem 2rem 0.25rem 2rem;
   background-color: #2c3034;
   border-radius: 1rem; }
@@ -1153,7 +1158,8 @@ footer address {
       margin-right: 1rem; }
     .navbar #navbar-myAccount .typicBtn {
       border: none;
-      padding: 0.5rem; }
+      padding: 0.5rem;
+      margin-left: 2rem; }
       .navbar #navbar-myAccount .typicBtn img {
         width: 1.5rem;
         margin-left: 0.5rem;
@@ -1229,9 +1235,48 @@ footer address {
       padding-bottom: 0.25rem; }
       .navbar #navbar-categories .navbar-nav .nav-link:hover::after {
         width: 15rem; } }
+  @media (max-width: 575px) {
+    .navbar #navbar-myAccount .typicBtn {
+      display: block;
+      margin: auto;
+      margin-top: 1rem; } }
 
 header.not-logged .navbar {
   justify-content: center; }
+
+header.admin .navbar #navbar-myAccount .cart-admin img {
+  margin: 0 3rem;
+  width: 3rem; }
+
+header.admin .navbar #navbar-myAccount .products-admin img {
+  margin: 0 3rem;
+  width: 3rem; }
+
+header.admin .navbar #navbar-myAccount .chat-link img {
+  margin-right: 0; }
+
+header.admin .navbar #navbar-myAccount .typicBtn {
+  display: none; }
+
+header.admin .navbar .typicBtn {
+  border: none;
+  padding: 0.5rem;
+  margin-right: 1rem; }
+  header.admin .navbar .typicBtn img {
+    width: 1.5rem;
+    margin-left: 0.5rem;
+    vertical-align: bottom; }
+
+@media (max-width: 767px) {
+  header.admin .navbar .navbar-toggler {
+    order: 3;
+    margin-right: 0.5rem; }
+  header.admin .navbar #navbar-myAccount .typicBtn {
+    display: block;
+    margin: auto;
+    margin-top: 1rem; }
+  header.admin .navbar .typicBtn {
+    display: none; } }
 
 .cartWidget {
   position: relative;

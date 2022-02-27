@@ -362,6 +362,14 @@ $selectCart.addEventListener("change", () => {
   hiddenButton();
 });
 
+// Accion botón logout
+document.getElementById("btn-logout").addEventListener("click", e => {
+  location.assign("/logout");
+});
+document.getElementById("btn-logout-mobile").addEventListener("click", e => {
+  location.assign("/logout");
+});
+
 // Inicio
 (() => {
   updateCartsList();

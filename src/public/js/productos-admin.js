@@ -715,6 +715,14 @@ function cargaInicialOk() {
   });
 }
 
+// Accion botón logout
+document.getElementById("btn-logout").addEventListener("click", e => {
+  location.assign("/logout");
+});
+document.getElementById("btn-logout-mobile").addEventListener("click", e => {
+  location.assign("/logout");
+});
+
 function processResponse(okText) {
   return data => {
     if (data.error) {

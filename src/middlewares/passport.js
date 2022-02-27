@@ -25,7 +25,8 @@ passport.use(
           address,
           age,
           phone,
-          avatar
+          avatar,
+          role: "user"
         };
         const newUserAdded = await usersModel.save(newUser);
         console.log(`Usuario registrado con éxito con id ${newUserAdded.id}`);

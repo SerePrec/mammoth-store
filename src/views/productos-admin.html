@@ -14,10 +14,43 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <!-- Mi CSS -->
   <link rel="stylesheet" href="/css/styles.css">
-  <title>Panel de productos</title>
+  <title>Mammoth Bike Store | Admin Productos</title>
 </head>
 
 <body>
+  <header class="admin">
+    <nav class="navbar navbar-expand-md navbar-dark">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbar-categories,#navbar-myAccount" aria-controls="navbar-categories navbar-myAccount"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <img src="/img/iconred.png" alt="Icono menú">
+      </button>
+      <a class="navbar-brand" href="/">
+        <img src="/img/logo.svg" height="80" class="d-inline-block align-top animate__flipInX"
+          alt="Logo de Mamooth - Inicio">
+      </a>
+      <div class="navbar-collapse collapse" id="navbar-myAccount">
+        <img src="/img/avatars/admin_avatar.svg" alt="avatar" referrerpolicy="no-referrer" class="avatar">
+        <a href="/carritos/admin" class="cart-admin">
+          <img src="/img/admin_cart.svg" alt="Administrar carritos" referrerpolicy="no-referrer">
+        </a>
+        <a href="/chat/admin" class="chat-link">
+          <img src="/img/chat_icon.svg" alt="avatar" referrerpolicy="no-referrer" class="avatar">
+        </a>
+        <button id="btn-logout-mobile" type="button" class="typicBtn btn btn-danger">CERRAR SESION<img
+            src="/img/sign-out-alt.svg" alt="Salir">
+        </button>
+      </div>
+      <button id="btn-logout" type="button" class="typicBtn btn btn-danger">CERRAR SESION<img
+          src="/img/sign-out-alt.svg" alt="Salir">
+      </button>
+    </nav>
+    <div class="mensajesEmergentes">
+      <button type="button" class="btn-close" aria-label="Close"></button>
+      <p></p>
+    </div>
+  </header>
+
   <main class="productos-admin">
     <div class="form-wrapper">
       <h2 id="form-title">CARGAR PRODUCTO</h2>
@@ -196,8 +229,41 @@
       </div>
     </div>
     <!---------------------- Show Room - Fin ------------------------>
-
   </main>
+
+  <footer>
+    <div class="contenidoFooter">
+
+      <!---------- Sección info -------------->
+      <section class="info">
+        <p>Vive la bici con Mammoth.</p>
+        <p>Mucho más que tu tienda de bicis.</p>
+        <p>Lunes a viernes de 9hs a 19hs.</p>
+        <p>Sábados de 9hs a 14hs.</p>
+      </section>
+
+      <div class="logo"><img src="/img/logo_M.png" alt="logo"></div>
+
+      <!---------- Sección Social -------------->
+      <section class="social">
+        <div class="social__titulo">SOCIAL</div>
+        <a href="#"><img src="/img/facebook.svg" alt="Facebook"></a>
+        <a href="#"><img src="/img/instagram.svg" alt="Instagram"></a>
+        <a href="#"><img src="/img/twitter.svg" alt="Twitter"></a>
+        <a href="#"><img src="/img/youtube.svg" alt="YouTube"></a>
+      </section>
+
+
+    </div>
+
+    <!---------- Sección de datos del desarrollador  -------------->
+    <address>
+      <!--Etiqueta para datos personales-->
+      <p class="font-italic">Copyright &copy; 2022 SerE PreC </p>
+    </address>
+
+  </footer>
+
   <!-- jQuery y Bootstrap JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
