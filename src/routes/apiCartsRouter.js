@@ -4,7 +4,7 @@ import {
   validateIdId_prod,
   validateCartProductBody
 } from "../middlewares/validateData.js";
-import { isUserCart, isAdmin } from "../middlewares/auth.js";
+import { isUserCart, isAdminApi } from "../middlewares/auth.js";
 import {
   getCarts,
   getUserCart,
@@ -18,7 +18,7 @@ import {
 
 const router = Router();
 
-router.get("/", isAdmin, getCarts);
+router.get("/", isAdminApi, getCarts);
 
 router.get("/usuario", getUserCart);
 

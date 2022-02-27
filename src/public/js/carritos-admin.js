@@ -3,7 +3,6 @@
 //DOM *********************************
 const $cartInfoMessages = document.getElementById("cartInfoMessages");
 const $selectCart = document.getElementById("selectCart");
-const $btnCreateCart = document.getElementById("btnCreateCart");
 const $btnDeleteCart = document.getElementById("btnDeleteCart");
 const $cartProducts = document.getElementById("cartProducts");
 
@@ -19,32 +18,9 @@ const cartsApi = {
   getCartProducts: async id => {
     return fetch(`/api/carrito/${id}/productos`).then(data => data.json());
   },
-  createCart: async () => {
-    return fetch(`/api/carrito`, {
-      method: "POST"
-    }).then(data => data.json());
-  },
   deleteCart: async id => {
     return fetch(`/api/carrito/${id}`, {
       method: "DELETE"
-    }).then(data => data.json());
-  },
-  addProductToCart: async (id, id_prod, quantity) => {
-    return fetch(`/api/carrito/${id}/productos`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ id: id_prod, quantity })
-    }).then(data => data.json());
-  },
-  updateProductFromCart: async (id, id_prod, quantity) => {
-    return fetch(`/api/carrito/${id}/productos`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ id: id_prod, quantity })
     }).then(data => data.json());
   },
   deleteProductFromCart: async (id, id_prod) => {
@@ -81,18 +57,6 @@ function formatoPrecio(num) {
 
 // Funciones CRUD carritos  ***************************************************
 //*****************************************************************************
-function createCart() {
-  cartsApi
-    .createCart()
-    .then(processResponse("Carrito creado con éxito"))
-    .then(data => {
-      if (data) {
-        updateCartsList();
-      }
-    })
-    .catch(console.log);
-}
-
 function deleteCart() {
   const id = $selectCart.value;
   cartsApi
@@ -104,20 +68,6 @@ function deleteCart() {
       }
     })
     .catch(console.log);
-}
-
-function updateProductFromCart(id, id_prod, quantity) {
-  if (id) {
-    cartsApi
-      .updateProductFromCart(id, id_prod, quantity)
-      .then(processResponse("Cantidad actualizada en el carrito"))
-      .then(data => {
-        if (data) {
-          updateCartTable();
-        }
-      })
-      .catch(console.log);
-  }
 }
 
 function deleteProductFromCart(id, id_prod) {
@@ -213,21 +163,8 @@ function renderCartTable(id, data) {
           </td>
           <td>
             <div class="my-3 input-group input-group-sm">
-              <div class="input-group-prepend">
-                <button type="button" class="btn btn-outline-secondary btn-minus">-</button>
-              </div>
-              <input type="text" class="text-center form-control product-qty" data-product-stk="${
-                product.stock
-              }" value="${quantity}" disabled>
-              <div class="input-group-append">
-                <button type="button" class="btn btn-outline-secondary btn-plus" data-product-stk="${
-                  product.stock
-                }">+</button>
-              </div>
+              <input type="text" class="text-center form-control product-qty" value="${quantity}" disabled>
             </div>
-            <button type="button" class="typicBtn font-weight-bold btn btn-danger btn-block btn-sm btn-qty-update" data-producto-id="${
-              product.id
-            }">Actualizar</button>
           </td>
           <td>$${formatoPrecio(product.price * quantity)}</td>
           <td>
@@ -272,51 +209,12 @@ function updateCartTable() {
   }
 }
 
-function checkInputChange($input) {
-  const prevQty = $input.attr("value");
-  const actQty = $input.val();
-  if (actQty !== prevQty) {
-    $input.parent().next(".btn-qty-update").slideDown("fast");
-  } else {
-    $input.parent().next(".btn-qty-update").slideUp("fast");
-  }
-}
-
 function assignEventsToCartTable() {
   $("#cartProducts .table-trash").click(function (e) {
     // genero los eventos para todos los botones eliminar
     const id = $selectCart.value;
     const id_prod = $(this).data("productoId");
     deleteProductFromCart(id, id_prod);
-  });
-  $("#cartProducts .btn-minus").click(function (e) {
-    // genero los eventos para todos los botones -
-    const $inputQty = $(this).parent().next();
-    const qty = parseInt($inputQty.val());
-    if (qty > 1) {
-      $inputQty.val(qty - 1);
-      checkInputChange($inputQty);
-    }
-  });
-  $("#cartProducts .btn-plus").click(function (e) {
-    // genero los eventos para todos los botones +
-    const $inputQty = $(this).parent().prev();
-    const qty = parseInt($inputQty.val());
-    const stock = parseInt($(this).data("productStk"));
-    if (qty < stock) {
-      $inputQty.val(qty + 1);
-      checkInputChange($inputQty);
-    }
-  });
-  $("#cartProducts .product-qty").on("input", function (e) {
-    $(this).val($(this).attr("value"));
-  });
-  $("#cartProducts .btn-qty-update").click(function (e) {
-    const id = $selectCart.value;
-    const id_prod = $(this).data("productoId");
-    const $inputQty = $(this).prev(".input-group").find(".product-qty");
-    const qty = parseInt($inputQty.val());
-    updateProductFromCart(id, id_prod, qty);
   });
 }
 
@@ -350,8 +248,6 @@ function processResponse(okText) {
 // **********************************************************************//
 // *********************** Eventos panel carritos ***********************//
 // **********************************************************************//
-
-$btnCreateCart.addEventListener("click", createCart);
 
 $btnDeleteCart.addEventListener("click", () => {
   deleteCart();

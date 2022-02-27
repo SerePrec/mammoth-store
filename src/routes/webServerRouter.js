@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { isAuthWeb, isAdmin } from "../middlewares/auth.js";
+import { isAuthWeb, isAdminWeb, isNotAdminWeb } from "../middlewares/auth.js";
 import {
   getProducts,
   getProductsByCategory,
@@ -13,20 +13,20 @@ import {
 
 const router = Router();
 
-router.get("/", isAuthWeb, getProducts);
+router.get("/", isAuthWeb, isNotAdminWeb, getProducts);
 
-router.get("/productos/admin", isAuthWeb, isAdmin, getAdminProducts);
+router.get("/productos/admin", isAuthWeb, isAdminWeb, getAdminProducts);
 
-router.get("/categoria/:cat", isAuthWeb, getProductsByCategory);
+router.get("/categoria/:cat", isAuthWeb, isNotAdminWeb, getProductsByCategory);
 
-router.get("/carrito", isAuthWeb, getCart);
+router.get("/carrito", isAuthWeb, isNotAdminWeb, getCart);
 
-router.get("/carritos/admin", isAuthWeb, isAdmin, getAdminCarts);
+router.get("/carritos/admin", isAuthWeb, isAdminWeb, getAdminCarts);
 
 router.get("/checkout", getCheckout);
 
-router.get("/chat/admin", isAuthWeb, isAdmin, getAdminChat);
+router.get("/chat/admin", isAuthWeb, isAdminWeb, getAdminChat);
 
-router.get("/chat/:email?", isAuthWeb, getUsersChat);
+router.get("/chat/:email?", isAuthWeb, isNotAdminWeb, getUsersChat);
 
 export default router;

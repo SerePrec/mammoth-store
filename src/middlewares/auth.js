@@ -1,16 +1,3 @@
-//FIXME:FIXME: Variable booleana para simular autenticación del usuario
-const admin = true;
-
-const isAdmin = (req, res, next) =>
-  admin
-    ? next()
-    : res.status(403).json({
-        error: -1,
-        descripcion: `ruta '${req.baseUrl + req.path}' método '${
-          req.method
-        }' no autorizada`
-      });
-
 const isAuthWeb = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
@@ -40,7 +27,7 @@ const isNotAuthWeb = (req, res, next) => {
 };
 
 const isUserCart = (req, res, next) => {
-  if (req.session?.cartId == req.params.id) {
+  if (req.session?.cartId == req.params.id || req.user.role === "admin") {
     return next();
   }
   res.status(403).json({
@@ -49,4 +36,38 @@ const isUserCart = (req, res, next) => {
   });
 };
 
-export { isAuthWeb, isAuthApi, isNotAuthWeb, isUserCart, isAdmin };
+const isAdminWeb = (req, res, next) => {
+  if (req.user.role === "admin") {
+    return next();
+  }
+  res.redirect("/");
+};
+
+const isAdminApi = (req, res, next) => {
+  if (req.user.role === "admin") {
+    return next();
+  }
+  res.status(403).json({
+    error: -1,
+    descripcion: `ruta '${req.baseUrl + req.path}' método '${
+      req.method
+    }' no autorizada`
+  });
+};
+
+const isNotAdminWeb = (req, res, next) => {
+  if (req.user.role === "admin") {
+    return res.redirect("/productos/admin");
+  }
+  next();
+};
+
+export {
+  isAuthWeb,
+  isAuthApi,
+  isNotAuthWeb,
+  isUserCart,
+  isAdminWeb,
+  isAdminApi,
+  isNotAdminWeb
+};

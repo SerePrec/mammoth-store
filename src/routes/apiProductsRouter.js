@@ -4,7 +4,7 @@ import {
   validateProductPostBody,
   validateProductPutBody
 } from "../middlewares/validateData.js";
-import { isAdmin } from "../middlewares/auth.js";
+import { isAdminApi } from "../middlewares/auth.js";
 import { uploadProductImage } from "../middlewares/multer.js";
 import {
   getAllProducts,
@@ -20,7 +20,7 @@ router.get("/:id?", getAllProducts, validateId, getProduct);
 
 router.post(
   "/",
-  isAdmin,
+  isAdminApi,
   uploadProductImage,
   validateProductPostBody,
   createProduct
@@ -28,13 +28,13 @@ router.post(
 
 router.put(
   "/:id",
-  isAdmin,
+  isAdminApi,
   uploadProductImage,
   validateId,
   validateProductPutBody,
   updateProduct
 );
 
-router.delete("/:id", isAdmin, validateId, deleteProduct);
+router.delete("/:id", isAdminApi, validateId, deleteProduct);
 
 export default router;
