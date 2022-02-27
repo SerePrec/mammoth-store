@@ -202,10 +202,13 @@ function renderCartTable(id, data) {
         </tbody>
       </table>
       <h3>TOTAL $${formatoPrecio(total)}</h3>
-      <a id="confirmCart" class="my-5 font-weight-bold btn btn-danger d-block m-auto" href="/checkout">
-      CONFIRMAR MI PEDIDO
-        <img src="/img/check.svg" alt="">
-      </a>`;
+      <div class="col-sm-12 d-flex justify-content-evenly actions">
+        <a href="/" class="my-5 font-weight-bold btn btn-dark d-block">VOLVER A SHOWROOM</a>
+        <a id="confirmCart" class="my-5 font-weight-bold btn btn-danger d-block" href="/checkout">
+          CONFIRMAR MI PEDIDO
+          <img src="/img/check.svg" alt="">
+        </a>
+      </div>`;
   } else {
     html += `
       <div class="container emptyCart animate__fadeIn">
@@ -213,7 +216,7 @@ function renderCartTable(id, data) {
         <h2>¡TU CARRITO ESTÁ VACÍO!</h2>
         <p>Aún no has añadido productos para tu compra</p>
         <h4>Continuá eligiendo productos desde aquí:</h4>
-        <div><a href="/">Seguir Navegando</a></div>
+        <div><a href="/">SHOWROOM</a></div>
       </div>`;
   }
   updateCartWidget(cartProductsQty, qty);

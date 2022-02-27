@@ -33,7 +33,7 @@
     padding: 1rem;
     .select-wrapper {
       .form-select {
-        width: 40%;
+        width: 60%;
       }
     }
   }
@@ -140,6 +140,16 @@
   div.bg-yellow {
     background-color: #ffc107d6;
   }
+
+  .actions {
+    .btn-dark {
+      border: 1px solid white;
+      &:hover {
+        background-color: $tonoMedio;
+      }
+    }
+  }
+
   @media (max-width: $md) {
     .table {
       thead {
@@ -221,4 +231,9 @@ main.userCart {
 
 main.adminCarts {
   min-height: 70vh;
+  #cartProducts {
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+  }
 }

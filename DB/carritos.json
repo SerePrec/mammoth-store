@@ -2,6 +2,8 @@
   {
     "id": 2,
     "timestamp": "2021-12-07T22:54:33.765Z",
+    "username": "isabel@gmail.com",
+
     "products": [
       {
         "product": {
@@ -38,6 +40,8 @@
   {
     "id": 4,
     "timestamp": "2021-12-07T22:54:34.848Z",
+    "username": "andrespipo@gmail.com",
+
     "products": [
       {
         "product": {
@@ -89,11 +93,13 @@
   {
     "id": 5,
     "timestamp": "2021-12-07T22:54:35.344Z",
+    "username": "ana@gmail.com",
     "products": []
   },
   {
     "id": 7,
     "timestamp": "2021-12-10T23:39:02.127Z",
+    "username": "pedrogarcia@gmail.com",
     "products": [
       {
         "product": {
@@ -130,11 +136,13 @@
   {
     "id": 8,
     "timestamp": "2021-12-11T19:19:52.832Z",
+    "username": "joseprellezo@gmail.com",
     "products": []
   },
   {
     "id": 9,
     "timestamp": "2021-12-11T19:43:42.752Z",
+    "username": "nadiaprellezo@gmail.com",
     "products": [
       {
         "product": {

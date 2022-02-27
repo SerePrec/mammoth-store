@@ -97,10 +97,15 @@ function updateCartsList() {
         return Promise.reject("Error de datos");
       }
     })
-    .then(cartsId => {
+    .then(cartsData => {
       let htmlCode = `<option value="" selected>Seleccionar carrito</option>`;
-      const options = cartsId.map(
-        cartId => `<option value="${cartId}">ID ${cartId}</option>`
+      const options = cartsData.map(
+        cartData =>
+          `<option value="${cartData.cartId}" data-cart-timestamp="${
+            cartData.timestamp
+          }" data-cart-user="${cartData.cartUser}">[${new Date(
+            cartData.timestamp
+          ).toLocaleDateString()}] ID ${cartData.cartId}</option>`
       );
       htmlCode += options.join("");
       $selectCart.innerHTML = htmlCode;
@@ -126,14 +131,16 @@ function hiddenButton() {
 }
 
 // Renderiza la tabla de productos utilizando template
-function renderCartTable(id, data) {
+function renderCartTable(id, timestamp, user, data) {
   const total = data.reduce(
     (tot, { product, quantity }) => (tot += product.price * quantity),
     0
   );
   let html = `
     <div class="listado">
-      <h3>PRODUCTOS EN CARRITO ID <i>${id}</i></h3>`;
+      <h3>PRODUCTOS EN CARRITO ID <i>${id}</i></h3>
+      <h4>${new Date(timestamp).toLocaleString()}</h4>
+      <h4>${user}</h4>`;
   if (data.length > 0) {
     html += `
       <table class="table table-dark table-striped">
@@ -198,7 +205,10 @@ function updateCartTable() {
       .then(processResponse())
       .then(data => {
         if (data) {
-          $cartProducts.innerHTML = renderCartTable(id, data);
+          const $option = $selectCart.options[selectCart.selectedIndex];
+          const timestamp = $option.dataset.cartTimestamp;
+          const user = $option.dataset.cartUser;
+          $cartProducts.innerHTML = renderCartTable(id, timestamp, user, data);
           assignEventsToCartTable();
           $("#cartProducts").slideDown(300);
         }

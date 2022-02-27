@@ -2,7 +2,11 @@ import { cartsModel, productsModel } from "../models/index.js";
 
 export const getCarts = async (req, res) => {
   try {
-    const cartsIds = (await cartsModel.getAll()).map(cart => cart.id);
+    const cartsIds = (await cartsModel.getAll()).map(cart => ({
+      cartId: cart.id,
+      cartUser: cart.username,
+      timestamp: cart.timestamp
+    }));
     res.json(cartsIds);
   } catch (error) {
     console.log(error);
