@@ -1028,7 +1028,7 @@ footer address {
   margin: 1rem auto;
   padding: 2rem;
   border-radius: 1rem;
-  background-color: #2b5165; }
+  background-color: #334c59; }
   .logout h2 {
     color: white;
     margin-top: 1rem;
@@ -1354,6 +1354,17 @@ header.admin .navbar .typicBtn {
     opacity: 0.5; }
   100% {
     opacity: 1; } }
+
+.successRegister {
+  margin: 1rem auto 0 auto;
+  padding: 2rem;
+  border-radius: 1rem; }
+
+.successRegister {
+  padding: 0.5rem; }
+
+.successRegister .btn-close {
+  top: unset; }
 
 .carousel {
   background-color: #212121; }

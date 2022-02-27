@@ -13,10 +13,17 @@ const categories = [
 
 export const getProducts = (req, res) => {
   const { user } = req;
+  const { messages } = req.session;
+  let message;
+  if (messages) {
+    req.session.messages = [];
+    message = messages[messages.length - 1];
+  }
   res.render("pages/productos", {
     title: "Mammoth Bike Store | Productos",
     username: user.provider ? user.emails[0].value : user.username,
-    avatar: user.provider ? user.photos[0].value : user.avatar
+    avatar: user.provider ? user.photos[0].value : user.avatar,
+    successRegister: message
   });
 };
 
