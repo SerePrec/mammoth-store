@@ -6,7 +6,6 @@
 //Generales ***************************
 let acumulado = 0;
 let cartProductsQty = 0;
-let primerCarga = true;
 let tempEmergente; // temporizador de los mensajes emergentes
 let userCartId = null;
 
@@ -30,104 +29,10 @@ $(document).ready(function () {
 // Funciones para inetractuar con la api de carritos *************************
 // ***************************************************************************
 const cartsApi = {
-  getCarts: async () => {
-    return fetch(`/api/carrito`).then(data => data.json());
-  },
   getUserCart: async () => {
     return fetch(`/api/carrito/usuario`).then(data => data.json());
-  },
-  getCartProducts: async id => {
-    return fetch(`/api/carrito/${id}/productos`).then(data => data.json());
-  },
-  createCart: async () => {
-    return fetch(`/api/carrito`, {
-      method: "POST"
-    }).then(data => data.json());
-  },
-  deleteCart: async id => {
-    return fetch(`/api/carrito/${id}`, {
-      method: "DELETE"
-    }).then(data => data.json());
-  },
-  addProductToCart: async (id, id_prod, quantity) => {
-    return fetch(`/api/carrito/${id}/productos`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ id: id_prod, quantity })
-    }).then(data => data.json());
-  },
-  updateProductFromCart: async (id, id_prod, quantity) => {
-    return fetch(`/api/carrito/${id}/productos`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ id: id_prod, quantity })
-    }).then(data => data.json());
-  },
-  deleteProductFromCart: async (id, id_prod) => {
-    return fetch(`/api/carrito/${id}/productos/${id_prod}`, {
-      method: "DELETE"
-    }).then(data => data.json());
   }
 };
-
-// Funciones de carga de Carrito ************************************
-//*******************************************************************
-async function cartAssign() {
-  return cartsApi
-    .getUserCart()
-    .then(res => {
-      if (res.cartId && res.products.length > 0) {
-        const { cartId, products } = res;
-        userCartId = cartId;
-        const prevCartQty = cartProductsQty;
-        cartProductsQty = products.reduce(
-          (tot, prod) => tot + prod.quantity,
-          0
-        );
-        updateCartWidget(prevCartQty, cartProductsQty);
-        return products;
-      } else {
-        return location.assign("/productos");
-      }
-    })
-    .catch(error => {
-      console.error(error);
-      return Promise.reject(error);
-    });
-}
-
-function cargar() {
-  cartAssign()
-    .then(products => {
-      if (primerCarga) {
-        primerCarga = false;
-        sessionStorage.setItem("init-session", true);
-      }
-      mostrarResumenCompra(products);
-      animarResumenCompra();
-      return Promise.resolve();
-    })
-    .catch(loadError);
-}
-
-//FIXME:FIXME:
-function loadError(error) {
-  // $contenedorProductos.innerHTML = `
-  //   <h3>Ocurrió Un Error De Carga</h3>
-  //   <p>Intenta recargar la página o regresa más tarde.</p>
-  //   <p>Disculpe las molestias.</p>`;
-
-  console.error(error);
-}
-
-// Accion botón logout
-document.getElementById("btn-logout").addEventListener("click", e => {
-  location.assign("/logout");
-});
 
 // Funciones relacionadas a mostrar y animar la vista *************************
 //*****************************************************************************
@@ -294,7 +199,65 @@ function updateCartWidget(prevQty, finalQty) {
 }
 
 // **************************************************************************//
-// ******************************* Ejecución ********************************//
+// ******************************* Eventos **********************************//
 // **************************************************************************//
 
+// Accion botón logout
+document.getElementById("btn-logout").addEventListener("click", e => {
+  location.assign("/logout");
+});
+
+// Funciones de carga de Carrito ************************************
+//*******************************************************************
+async function cartAssign() {
+  return cartsApi
+    .getUserCart()
+    .then(res => {
+      if (res.cartId && res.products.length > 0) {
+        const { cartId, products } = res;
+        userCartId = cartId;
+        const prevCartQty = cartProductsQty;
+        cartProductsQty = products.reduce(
+          (tot, prod) => tot + prod.quantity,
+          0
+        );
+        updateCartWidget(prevCartQty, cartProductsQty);
+        return products;
+      } else {
+        return location.assign("/productos");
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      return Promise.reject(error);
+    });
+}
+
+function cargar() {
+  cartAssign()
+    .then(products => {
+      sessionStorage.setItem("init-session", true);
+      mostrarResumenCompra(products);
+      animarResumenCompra();
+      return Promise.resolve();
+    })
+    .catch(loadError);
+}
+
+function loadError(error) {
+  document.getElementById("checkOutCompra").innerHTML = `
+    <div class="text-center">
+      <br><br>
+      <h3>Ocurrió Un Error De Carga</h3>
+      <p>Intenta recargar la página o regresa más tarde.</p>
+      <p>Disculpe las molestias.</p>
+      <div class="col-sm-12 d-flex justify-content-evenly actions">
+        <a href="/" class="my-5 font-weight-bold btn btn-dark d-block">VOLVER A SHOWROOM</a>
+      </div>
+    </div>`;
+
+  console.error(error);
+}
+
+// Ejecución
 cargar();

@@ -26,7 +26,7 @@ router.get("/carrito", isAuthWeb, isNotAdminWeb, getCart);
 
 router.get("/carritos/admin", isAuthWeb, isAdminWeb, getAdminCarts);
 
-router.get("/checkout", getCheckout);
+router.get("/checkout", isAuthWeb, isNotAdminWeb, getCheckout);
 
 router.get("/chat/admin", isAuthWeb, isAdminWeb, getAdminChat);
 

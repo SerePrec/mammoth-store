@@ -2,7 +2,6 @@
 //Variables
 //Generales ***************************
 let cartProductsQty = 0;
-let primerCarga = true;
 let tempEmergente; // temporizador de los mensajes emergentes
 let productId = null;
 let producto = null;
@@ -304,11 +303,8 @@ function cargar() {
       .getProductById(productId)
       .then(isResponseOk)
       .then(() => {
-        if (primerCarga) {
-          mostrarDetalle(producto);
-          primerCarga = false;
-          sessionStorage.setItem("init-session", true);
-        }
+        mostrarDetalle(producto);
+        sessionStorage.setItem("init-session", true);
         return Promise.resolve();
       })
       .catch(loadError);

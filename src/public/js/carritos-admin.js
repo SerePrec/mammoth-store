@@ -30,31 +30,6 @@ const cartsApi = {
   }
 };
 
-function formatoPrecio(num) {
-  // Función para dar formato de precio con separadores de miles (.) y decimales (,)
-  num = num.toFixed(2);
-  let entero, decimales;
-  if (num.indexOf(".") >= 0) {
-    entero = num.slice(0, num.indexOf("."));
-    decimales = num.slice(num.indexOf(".")).replace(".", ",");
-  }
-  let enteroFormateado = "";
-  for (let i = 1; i <= entero.length; i++) {
-    if (i % 3 == 0) {
-      if (i == entero.length) {
-        enteroFormateado =
-          entero.substr(entero.length - i, 3) + enteroFormateado;
-        break;
-      }
-      enteroFormateado =
-        ".".concat(entero.substr(entero.length - i, 3)) + enteroFormateado;
-    }
-  }
-  enteroFormateado = entero.slice(0, entero.length % 3) + enteroFormateado;
-  num = enteroFormateado.concat(decimales);
-  return num;
-}
-
 // Funciones CRUD carritos  ***************************************************
 //*****************************************************************************
 function deleteCart() {
@@ -219,13 +194,29 @@ function updateCartTable() {
   }
 }
 
-function assignEventsToCartTable() {
-  $("#cartProducts .table-trash").click(function (e) {
-    // genero los eventos para todos los botones eliminar
-    const id = $selectCart.value;
-    const id_prod = $(this).data("productoId");
-    deleteProductFromCart(id, id_prod);
-  });
+function formatoPrecio(num) {
+  // Función para dar formato de precio con separadores de miles (.) y decimales (,)
+  num = num.toFixed(2);
+  let entero, decimales;
+  if (num.indexOf(".") >= 0) {
+    entero = num.slice(0, num.indexOf("."));
+    decimales = num.slice(num.indexOf(".")).replace(".", ",");
+  }
+  let enteroFormateado = "";
+  for (let i = 1; i <= entero.length; i++) {
+    if (i % 3 == 0) {
+      if (i == entero.length) {
+        enteroFormateado =
+          entero.substr(entero.length - i, 3) + enteroFormateado;
+        break;
+      }
+      enteroFormateado =
+        ".".concat(entero.substr(entero.length - i, 3)) + enteroFormateado;
+    }
+  }
+  enteroFormateado = entero.slice(0, entero.length % 3) + enteroFormateado;
+  num = enteroFormateado.concat(decimales);
+  return num;
 }
 
 // Funciones de lógica de carga inicial y respuestas del servidor  ************
@@ -256,8 +247,17 @@ function processResponse(okText) {
 }
 
 // **********************************************************************//
-// *********************** Eventos panel carritos ***********************//
+// ***************************** Eventos ********************************//
 // **********************************************************************//
+
+function assignEventsToCartTable() {
+  $("#cartProducts .table-trash").click(function (e) {
+    // genero los eventos para todos los botones eliminar
+    const id = $selectCart.value;
+    const id_prod = $(this).data("productoId");
+    deleteProductFromCart(id, id_prod);
+  });
+}
 
 $btnDeleteCart.addEventListener("click", () => {
   deleteCart();
@@ -277,6 +277,4 @@ document.getElementById("btn-logout-mobile").addEventListener("click", e => {
 });
 
 // Inicio
-(() => {
-  updateCartsList();
-})();
+updateCartsList();

@@ -3,9 +3,7 @@
 let cartProductsQty = 0;
 
 let primerCarga = true;
-
 let tempEmergente; // temporizador de los mensajes emergentes
-
 let userCartId = null;
 
 //DOM *********************************
@@ -266,6 +264,10 @@ function checkInputChange($input) {
   }
 }
 
+// **********************************************************************//
+// ***************************** Eventos  *******************************//
+// **********************************************************************//
+
 function assignEventsToCartTable() {
   $("#cartProducts .table-trash").click(function (e) {
     // genero los eventos para todos los botones eliminar
@@ -304,6 +306,15 @@ function assignEventsToCartTable() {
   });
 }
 
+$btnDeleteCart.addEventListener("click", () => {
+  deleteCart();
+});
+
+// Accion botón logout
+document.getElementById("btn-logout").addEventListener("click", e => {
+  location.assign("/logout");
+});
+
 // Funciones de lógica de carga inicial y respuestas del servidor  ************
 //*****************************************************************************
 
@@ -330,22 +341,6 @@ function processResponse(okText) {
     }
   };
 }
-
-// **********************************************************************//
-// *********************** Eventos panel carritos ***********************//
-// **********************************************************************//
-
-$btnDeleteCart.addEventListener("click", () => {
-  deleteCart();
-});
-
-// Accion botón logout
-document.getElementById("btn-logout").addEventListener("click", e => {
-  location.assign("/logout");
-});
-
-// Funciones relacionadas a lógica del carrito  *******************************
-// ****************************************************************************
 
 async function cartAssign() {
   return cartsApi
@@ -416,12 +411,16 @@ function cargar() {
     .catch(loadError);
 }
 
-//FIXME:FIXME:
 function loadError(error) {
-  // $contenedorProductos.innerHTML = `
-  //   <h3>Ocurrió Un Error De Carga</h3>
-  //   <p>Intenta recargar la página o regresa más tarde.</p>
-  //   <p>Disculpe las molestias.</p>`;
+  $cartProducts.innerHTML = `
+    <br>
+    <h3>Ocurrió Un Error De Carga</h3>
+    <p>Intenta recargar la página o regresa más tarde.</p>
+    <p>Disculpe las molestias.</p>
+    <div class="col-sm-12 d-flex justify-content-evenly actions">
+      <a href="/" class="my-5 font-weight-bold btn btn-dark d-block">VOLVER A SHOWROOM</a>
+    </div>`;
+  $("#cartProducts").slideDown("slow");
 
   console.error(error);
 }
