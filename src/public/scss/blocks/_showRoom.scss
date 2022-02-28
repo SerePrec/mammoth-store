@@ -387,3 +387,21 @@
     }
   }
 }
+
+main.productos .showRoom {
+  .colProductos {
+    #contenedorProductos {
+      .card {
+        a {
+          overflow: hidden;
+          .card-img-top {
+            transition: all 0.4s ease-in;
+            &:hover {
+              transform: scale(1.05, 1.05);
+            }
+          }
+        }
+      }
+    }
+  }
+}

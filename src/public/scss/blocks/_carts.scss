@@ -113,6 +113,7 @@
         padding: 1rem 0;
         .table__image {
           width: 60%;
+          border-radius: 0.25rem;
         }
       }
       td:nth-child(3) {
@@ -216,6 +217,14 @@ main.userCart {
       tbody {
         td:first-child {
           display: none;
+        }
+        td:nth-child(2) {
+          .table__image {
+            transition: all 0.25s ease-in-out;
+            &:hover {
+              transform: scale(1.05, 1.05);
+            }
+          }
         }
       }
     }

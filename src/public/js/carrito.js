@@ -164,9 +164,13 @@ function renderCartTable(id, data) {
         (html += `
         <tr>
           <td>${product.id}</td>
-          <td><img class="table__image" src="${
-            product.thumbnail
-          }" alt="producto" /></td>
+          <td>
+            <a href="/producto/${product.id}">
+              <img class="table__image" src="${
+                product.thumbnail
+              }" alt="producto" />
+            </a>
+          </td>
           <td>
             <p>${product.title}</p>
             <p><b>$${formatoPrecio(product.price)}</b><del></del></p>

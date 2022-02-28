@@ -2,6 +2,7 @@ import { Router } from "express";
 import { isAuthWeb, isAdminWeb, isNotAdminWeb } from "../middlewares/auth.js";
 import {
   getProducts,
+  getProductDetail,
   getProductsByCategory,
   getAdminProducts,
   getCart,
@@ -14,6 +15,8 @@ import {
 const router = Router();
 
 router.get("/", isAuthWeb, isNotAdminWeb, getProducts);
+
+router.get("/producto/:id", isAuthWeb, isNotAdminWeb, getProductDetail);
 
 router.get("/productos/admin", isAuthWeb, isAdminWeb, getAdminProducts);
 

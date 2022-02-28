@@ -74,7 +74,7 @@ export const addProductToCart = async (req, res) => {
     const product = await productsModel.getById(id_prod);
     if (product === null) return res.json({ error: "Producto no encontrado" });
     const { products } = cart;
-    let index = products.findIndex(item => item.product.id === id_prod);
+    let index = products.findIndex(item => item.product.id == id_prod);
     const { stock } = product;
     if (index === -1 && quantity <= stock) {
       products.push({ product, quantity });
@@ -104,7 +104,7 @@ export const updateProductFromCart = async (req, res) => {
     const cart = await cartsModel.getById(id);
     if (cart === null) return res.json({ error: "Carrito no encontrado" });
     const { products } = cart;
-    let index = products.findIndex(item => item.product.id === id_prod);
+    let index = products.findIndex(item => item.product.id == id_prod);
     if (index === -1) {
       return res.json({ error: "Producto no encontrado" });
     } else {

@@ -27,6 +27,17 @@ export const getProducts = (req, res) => {
   });
 };
 
+export const getProductDetail = (req, res) => {
+  const { id } = req.params;
+  const { user } = req;
+  res.render("pages/producto-detalle", {
+    title: "Mammoth Bike Store | Detalle Del Producto",
+    username: user.provider ? user.emails[0].value : user.username,
+    avatar: user.provider ? user.photos[0].value : user.avatar,
+    id
+  });
+};
+
 export const getProductsByCategory = (req, res, next) => {
   const { user } = req;
   const { cat } = req.params;

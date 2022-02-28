@@ -1,0 +1,311 @@
+.productDetailContainer {
+  background-color: #545454;
+  border: 0.5rem solid #b30404;
+  border-radius: 1rem;
+  color: #000;
+  padding: 1rem;
+  margin: 1rem auto 2rem;
+  transition: all 0.75s;
+  min-height: 45rem;
+
+  .loader {
+    height: 26rem;
+    background-image: url("/img/puff.svg");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+    margin: 1.5rem 0;
+    padding: 2rem;
+    text-align: center;
+    margin: auto;
+    flex: 0 0 80%;
+    max-width: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    font-size: 2rem;
+
+    h3 {
+      width: 100%;
+    }
+
+    p {
+      font-size: 1.25rem;
+      width: 100%;
+      margin-bottom: 0.5rem;
+      &:first-of-type {
+        margin-top: 2rem;
+      }
+    }
+
+    @media (max-width: $sm) {
+      height: 15rem;
+      background-size: 80%;
+    }
+  }
+
+  .loader {
+    min-height: 45rem;
+  }
+
+  .productDetail {
+    color: black;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    padding: 1rem;
+
+    &.productDetail--noStock {
+      opacity: 0.6;
+      filter: grayscale(1);
+    }
+
+    .productDetail_title {
+      justify-content: space-between;
+      align-items: center;
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      & > div:last-child {
+        display: flex;
+        justify-content: flex-end;
+
+        h3 {
+          display: inline-block;
+          color: #fff;
+          font-size: 1.25rem;
+          text-align: center;
+          background-color: $tonoOscuro;
+          padding: 0.5rem;
+          border-radius: 0.25rem;
+          margin-bottom: 0;
+          margin-left: 1rem;
+        }
+      }
+    }
+
+    .productDetail_data {
+      & > div:first-child {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+
+        .ppalImg {
+          width: 90%;
+          object-fit: contain;
+        }
+
+        .fav {
+          position: absolute;
+          top: 0;
+          left: 2rem;
+          width: 3.5rem;
+          height: 3.5rem;
+          background-color: rgba(255, 255, 255, 0.65);
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            width: 3rem;
+            padding: 0;
+            margin: 0;
+          }
+        }
+
+        .discount {
+          position: absolute;
+          width: 5rem;
+          height: 4rem;
+          top: 0;
+          right: 1.25rem;
+          z-index: 1;
+          background-color: #b30404;
+          border-radius: 40% 0% 40% 0%;
+          color: white;
+          font-weight: 700;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      & > div:last-child {
+        h4 {
+          color: $rojoMarca;
+        }
+
+        .price {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: nowrap;
+          padding: 4rem 0;
+          border-top: 1px solid $tonoClaro;
+          border-bottom: 1px solid $tonoClaro;
+          text-align: center;
+          margin: 1rem 0;
+
+          b {
+            font-size: 2.5rem;
+            color: $rojoMarca;
+          }
+
+          del {
+            font-size: 1.25rem;
+            margin-left: 1rem;
+            color: $tonoMedio;
+            font-weight: 700;
+          }
+        }
+
+        .productDetail_stock {
+          padding-top: 1rem;
+          font-weight: bold;
+        }
+
+        .itemCount {
+          text-align: center;
+          .typicBtn {
+            font-weight: bold;
+          }
+        }
+
+        .productDetail_inCart {
+          background-color: $tonoOscuro;
+          color: white;
+          border-radius: 0.5rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 50%;
+          margin: auto;
+          padding: 0.25rem 1rem;
+          img {
+            width: 1.8rem;
+            padding: 0 0.25rem;
+          }
+        }
+      }
+    }
+
+    @media (max-width: $lg) {
+      .productDetail_data {
+        div:first-child {
+          img {
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .paymentBanner {
+    padding: 0.5rem 0;
+    border-top: 1px solid $tonoClaro;
+    border-bottom: 1px solid $tonoClaro;
+    margin-top: 0.35rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    & > div.paymentBanner__item {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      .image {
+        flex-shrink: 0;
+        background-color: $rojoMarca;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &:first-child .image {
+        img {
+          width: 0.65rem;
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      span {
+        padding-left: 0.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+      }
+    }
+
+    @media (max-width: $md) {
+      display: none;
+    }
+  }
+
+  .shipmentInfo {
+    padding: 1rem 0;
+    border-top: 1px solid $tonoClaro;
+    border-bottom: 1px solid $tonoClaro;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    & > div {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+
+      &:first-child img {
+        width: 2rem;
+      }
+
+      &:nth-child(2) img {
+        width: 2.5rem;
+      }
+
+      &:last-child {
+        display: block;
+        padding: 0.25rem 0 0.25rem 1rem;
+        margin-top: 0.5rem;
+        background: linear-gradient(
+          90deg,
+          $tonoClaro 0%,
+          $tonoMedio 25%,
+          $tonoMedio 75%,
+          $tonoClaro 100%
+        );
+        color: #fff;
+        text-align: center;
+        border-radius: 35% 0.25rem 35% 0.25rem;
+        width: 100%;
+      }
+
+      span {
+        padding-left: 0.5rem;
+        font-size: 0.75rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+main.productDetail .btn-dark {
+  display: block;
+  margin: auto;
+  width: fit-content;
+  border: 1px solid white;
+  &:hover {
+    background-color: $tonoMedio;
+  }
+}

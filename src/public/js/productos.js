@@ -392,9 +392,11 @@ function mostrarProductos(vectorProductos) {
       }
 
       codigoHTML += `
-                    <img src="${
-                      producto.thumbnail
-                    }" class="card-img-top" alt="${producto.title}">
+                    <a href="/producto/${producto.id}">
+                      <img src="${
+                        producto.thumbnail
+                      }" class="card-img-top d-block" alt="${producto.title}">
+                    </a>
                     <div class="card-body">
                       <h5 class="card-title">
                         ${producto.brand} - <small>${producto.code}</small>
@@ -499,6 +501,7 @@ function quitarDecimales(string) {
 //*****************************************************************************
 
 function addProductToCart(id, id_prod, quantity, description) {
+  console.log(id_prod);
   if (id) {
     cartsApi
       .addProductToCart(id, id_prod, quantity)

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <%- include("../partials/HeadWithBootstrap.ejs")  %>
+  <!-- Mi CSS -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbar-categories,#navbar-myAccount" aria-controls="navbar-categories navbar-myAccount"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <img src="/img/iconred.png" alt="Icono menú">
+      </button>
+      <a class="navbar-brand" href="/">
+        <img src="/img/logo.svg" height="80" class="d-inline-block align-top animate__flipInX"
+          alt="Logo de Mamooth - Inicio">
+      </a>
+      <div class="navbar-collapse collapse" id="navbar-myAccount">
+        <img src="<%= avatar %>" alt="avatar" referrerpolicy="no-referrer" class="avatar">
+        <a href="/myaccount" class="nav-link">
+          MI CUENTA
+        </a>
+        <a href="/chat" class="chat-link">
+          <img src="/img/chat_icon.svg" alt="avatar" referrerpolicy="no-referrer" class="avatar">
+        </a>
+        <button id="btn-logout" type="button" class="typicBtn btn btn-danger">CERRAR SESION<img
+            src="/img/sign-out-alt.svg" alt="Salir">
+        </button>
+      </div>
+      <a href="/carrito" class="cartWidget nav-link">
+        <span class="itemsQuantity hidden">0</span>
+        <img src="/img/icon_cart.svg" alt="Carrito">
+      </a>
+      <div class="navbar-collapse collapse" id="navbar-categories">
+        <div class="m-auto animate__navbar-nav--loaded navbar-nav">
+          <a class="nav-link" href="/categoria/bicicletas" data-rb-event-key="alPuUe3glKMhF5LDqPPx">BICICLETAS</a>
+          <a class="nav-link" href="/categoria/componentes" data-rb-event-key="qVl1VQr85v3ELbe6JXYp">COMPONENTES</a>
+          <a class="nav-link" href="/categoria/accesorios" data-rb-event-key="RUCwOHdV6dsB8GUMr6Xt">ACCESORIOS</a>
+          <a class="nav-link" href="/categoria/equipamiento" data-rb-event-key="rljUAJkE8ErQeLLqO1EE">EQUIPAMIENTO</a>
+          <a class="nav-link" href="/categoria/indumentaria" data-rb-event-key="uYmH81rNnxjnIBJICee6">INDUMENTARIA</a>
+        </div>
+      </div>
+    </nav>
+    <div class="mensajesEmergentes">
+      <button type="button" class="btn-close" aria-label="Close"></button>
+      <p></p>
+    </div>
+  </header>
+
+  <main class="productDetail">
+
+
+    <div class="container-xl">
+      <h2 id="detailInfo" class="text-center py-4" data-product-id="<%= id %>">DETALLE DEL PRODUCTO</h2>
+
+      <div class="container-xl productDetailContainer">
+        <div class="loader">
+          <h3>Cargando Detalle Del Producto...</h3>
+        </div>
+      </div>
+
+      <a href="/" class="mb-5 font-weight-bold btn btn-dark">VOLVER A SHOWROOM</a>
+
+  </main>
+
+  <!--------- Footer - inicio ----------->
+  <footer>
+    <div class="contenidoFooter">
+
+      <!---------- Sección info -------------->
+      <section class="info">
+        <p>Vive la bici con Mammoth.</p>
+        <p>Mucho más que tu tienda de bicis.</p>
+        <p>Lunes a viernes de 9hs a 19hs.</p>
+        <p>Sábados de 9hs a 14hs.</p>
+      </section>
+
+      <!---------- Sección newsletter -------------->
+      <section class="newsletter">
+        <p class="newsletter__titulo">Suscribite a nuestro newsletter</p>
+        <p>Recibe nuestras novedades, promociones y eventos.</p>
+        <p>Además participás de nuestro <a href="#">SORTEO ANUAL</a> y sorteos mensuales.</p>
+        <form action="#" onsubmit="event.preventDefault()">
+          <div class="input-group">
+            <input type="email" class="form-control" name="email" placeholder="Ingresa tu e-mail"
+              value="<%= username %>" required>
+            <div class="input-group-append">
+              <input type="submit" value="SUSCRIBITE">
+            </div>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="aceptar" name="aceptar" value="1" required>
+            <label class="custom-control-label" for="aceptar">
+              Al enviar tu dirección de correo electrónico, aceptas los
+              <!-- Link para el modal -->
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modalTerminos">Términos y Condiciones</a>
+            </label>
+          </div>
+        </form>
+      </section>
+
+      <!---------- Sección Social -------------->
+      <section class="social">
+        <div class="social__titulo">SOCIAL</div>
+        <a href="#"><img src="/img/facebook.svg" alt="Facebook"></a>
+        <a href="#"><img src="/img/instagram.svg" alt="Instagram"></a>
+        <a href="#"><img src="/img/twitter.svg" alt="Twitter"></a>
+        <a href="#"><img src="/img/youtube.svg" alt="YouTube"></a>
+      </section>
+
+
+    </div>
+
+    <!---------- Sección de datos del desarrollador  -------------->
+    <address>
+      <!--Etiqueta para datos personales-->
+      <p class="font-italic">Copyright &copy; 2022 SerE PreC </p>
+    </address>
+
+  </footer>
+  <!--------- Footer - Fin ----------->
+
+  <!------------------- Modal Terminos y Condiciones - Inicio ------------------->
+  <div class="modal fade" id="modalTerminos" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="modalTerminosLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <h2 class="modal-title" id="modalTerminosLabel">TERMINOS Y CONDICIONES</h2>
+        </div>
+        <div class="modal-body">
+
+          <!----- div para imagen principal de terminos y condiciones ------->
+          <div class="imagenTerminos"></div>
+
+          <!----- Articulo de terminos y condiciones------->
+          <article class="terminos">
+            <h3>Mammoth, términos y condiciones</h3>
+            <p><strong>Mammoth SA</strong> es responsable del tratamiento de los datos de carácter personal,
+              con el fin de responderte todas las solicitudes que realices a través de nuestro formulario
+              de contacto en la página web, gestionar las operaciones comerciales que se realicen por
+              medio de ella y las obligaciones que se deriven de las mismas. Mediante la aceptación de
+              Términos y Condiciones el usuario consiente explícitamente el uso de sus datos personales
+              para la elaboración de perfiles, análisis y estadísticas sobre la utilización del sitio web,
+              como así también determinar los gustos y preferencias de los usuarios para remitir
+              información comercial o promocional acorde.</p>
+            <ol>
+              <li>
+                <p>Envío de información comercial: <strong>Mammoth SA</strong> podría remitirle
+                  información comercial siempre que se haya suscrito al Newsletter, previo
+                  consentimiento o mediante la inscripción del correo electrónico en el apartado
+                  correspondiente. Podrán enviarse comunicaciones comerciales y publicitarias, por los
+                  distintos medios, de acuerdo al comportamiento del usuario y las preferencias o
+                  gustos del mismo, elaborando perfiles.</p>
+              </li>
+              <li>
+                <p>Plazo o criterio de conservación de los datos: Los datos personales proporcionados se
+                  conservarán mientras se mantenga la relación de prestación del servicio, hasta que
+                  solicite la supresión por parte del interesado o durante los años necesarios para
+                  cumplir con las obligaciones legales. Posteriormente, los datos serán suprimidos
+                  conforme a lo dispuesto en la normativa en materia de protección de datos, lo que
+                  implica su bloqueo, estando disponibles tan solo a solicitudes de Jueces y
+                  Tribunales, Defensor del Pueblo, Ministerio Fiscal o las Administraciones Públicas
+                  competentes durante el plazo de prescripción de acciones que pudieran derivar y,
+                  transcurrido este tiempo, se procederá a su completa eliminación.</p>
+              </li>
+              <li>
+                <p>Legitimación para el tratamiento de los datos: La base legal es la necesidad del
+                  tratamiento para la ejecución del contrato de compraventa y posterior cumplimiento
+                  de las obligaciones contractuales y extracontractuales y el consentimiento del
+                  cliente para el envío de información comercial a través de la suscripción al
+                  Newsletter.</p>
+              </li>
+              <li>
+                <p>Cesión o comunicación de los datos: Además, los datos se cederán a terceros en los
+                  casos en los que exista una obligación legal. A entidades financieras o de préstamo
+                  con el fin de financiar la compra de productos si así se solicita. Además, pueden
+                  cederse datos de clientes a otras empresas directamente relacionadas con
+                  <strong>Mammoth SA</strong> debido al interés legítimo del responsable.
+                </p>
+              </li>
+              <li>
+                <p>Derechos de los afectados: cualquier persona tiene derecho a obtener confirmación
+                  sobre si en <strong>Mammoth SA</strong> se están tratando sus datos personales. Las
+                  personas interesadas tienen derecho a: solicitar el acceso a los datos personales
+                  relativos al interesado, solicitar su rectificación o supresión, solicitar la
+                  limitación de su tratamiento, oponerse al tratamiento, solicitar la portabilidad de
+                  los datos. Los interesados podrán acceder a sus datos personales, así como a
+                  solicitar la rectificación de los datos inexactos o, en su caso, solicitar su
+                  supresión cuando, entre otros motivos, los datos ya no sean necesarios para los
+                  fines que fueron recogidos. En determinadas circunstancias, los interesados podrán
+                  solicitar la limitación del tratamiento de sus datos, en cuyo caso únicamente los
+                  conservaré para el ejercicio o la defensa de reclamaciones. En determinadas
+                  circunstancias y por motivos relacionados con su situación particular, los
+                  interesados podrán oponerse al tratamiento de sus datos, <strong>Mammoth SA</strong>
+                  dejará de tratar los datos, salvo por motivos legítimos imperiosos, o el ejercicio o
+                  la defensa de posibles reclamaciones. También podrán solicitar la portabilidad de
+                  sus datos.</p>
+              </li>
+              <li>
+                <p>Procedencia u origen de datos de carácter personal: los datos personales que se
+                  tratan en <strong>Mammoth SA</strong> proceden del propio interesado. Las categorías
+                  de datos que se tratan son: datos de carácter identificativo y datos económicos y
+                  bancarios.</p>
+              </li>
+              <li>
+                <p>Reclamo ante la autoridad de control: podrá presentar reclamación ante la Autoridad
+                  de Control en materia de Protección de Datos competente, especialmente cuando no
+                  haya obtenido satisfacción en el ejercicio de sus derechos.</p>
+              </li>
+            </ol>
+          </article>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!------------------- Modal Terminos y Condiciones - Fin ------------------->
+
+  <!-- jQuery y Bootstrap JS -->
+  <%- include("../partials/jQueryScripts.ejs")  %>
+  <%- include("../partials/bootstrapScripts.ejs")  %>
+  <!-- Mi JS -->
+  <script src="/js/producto-detalle.js"></script>
+</body>
+
+</html>
