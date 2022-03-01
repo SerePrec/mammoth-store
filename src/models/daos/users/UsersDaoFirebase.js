@@ -1,20 +1,14 @@
 import ContenedorFirebase from "../../containers/ContenedorFirebase.js";
 
-class CartsDaoFirebase extends ContenedorFirebase {
+class UsersDaoFirebase extends ContenedorFirebase {
   constructor() {
-    super("carts");
+    super("users");
   }
 
-  async save(cart = { products: [] }) {
-    return super.save(cart);
-  }
-
-  //Obtengo un carrito por username
   async getByUsername(username) {
     try {
       const snapshot = await this.collection
         .where("username", "==", username)
-        .orderBy("timestamp", "desc")
         .limit(1)
         .get();
 
@@ -33,10 +27,10 @@ class CartsDaoFirebase extends ContenedorFirebase {
       }
     } catch (error) {
       throw new Error(
-        `Error al obtener el carrito con username:'${username}': ${error}`
+        `Error al obtener el usuario con username:'${username}': ${error}`
       );
     }
   }
 }
 
-export default CartsDaoFirebase;
+export default UsersDaoFirebase;

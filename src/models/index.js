@@ -106,9 +106,13 @@ switch (config.PERS) {
     const { default: MessagesDaoFirebase } = await import(
       "./daos/messages/MessagesDaoFirebase.js"
     );
+    const { default: UsersDaoFirebase } = await import(
+      "./daos/users/UsersDaoFirebase.js"
+    );
     productsModel = new ProductsDaoFirebase();
     cartsModel = new CartsDaoFirebase();
     messagesModel = new MessagesDaoFirebase();
+    usersModel = new UsersDaoFirebase();
     break;
   }
 
