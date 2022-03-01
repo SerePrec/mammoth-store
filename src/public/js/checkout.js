@@ -224,7 +224,8 @@ async function cartAssign() {
         updateCartWidget(prevCartQty, cartProductsQty);
         return products;
       } else {
-        return location.assign("/productos");
+        location.assign("/");
+        return Promise.reject("Carrito vacío");
       }
     })
     .catch(error => {

@@ -123,9 +123,13 @@ switch (config.PERS) {
     const { default: MessagesDaoMem } = await import(
       "./daos/messages/MessagesDaoMem.js"
     );
+    const { default: UsersDaoMem } = await import(
+      "./daos/users/UsersDaoMem.js"
+    );
     productsModel = new ProductsDaoMem();
     cartsModel = new CartsDaoMem();
     messagesModel = new MessagesDaoMem();
+    usersModel = new UsersDaoMem();
     break;
   }
 }
