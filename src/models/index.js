@@ -90,9 +90,13 @@ switch (config.PERS) {
     const { default: MessagesDaoMongoDB } = await import(
       "./daos/messages/MessagesDaoMongoDB.js"
     );
+    const { default: UsersDaoMongoDB } = await import(
+      "./daos/users/UsersDaoMongoDB.js"
+    );
     productsModel = new ProductsDaoMongoDB();
     cartsModel = new CartsDaoMongoDB();
     messagesModel = new MessagesDaoMongoDB();
+    usersModel = new UsersDaoMongoDB();
     break;
   }
 

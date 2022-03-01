@@ -501,7 +501,6 @@ function quitarDecimales(string) {
 //*****************************************************************************
 
 function addProductToCart(id, id_prod, quantity, description) {
-  console.log(id_prod);
   if (id) {
     cartsApi
       .addProductToCart(id, id_prod, quantity)

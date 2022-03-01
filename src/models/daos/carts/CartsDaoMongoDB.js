@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import ContenedorMongoDB from "../../containers/ContenedorMongoDB.js";
+import { deepClone, renameField } from "../../../utils/dataTools.js";
 
 const { Schema } = mongoose;
 
@@ -26,12 +27,25 @@ const cartItemSchema = new Schema({
 class CartsDaoMongoDB extends ContenedorMongoDB {
   constructor() {
     super("Cart", {
+      username: { type: String, required: true, unique: true },
       products: { type: [cartItemSchema], required: true }, //implicitly default value [] (empty array)
       timestamp: { type: Date, default: Date.now }
     });
   }
   async save(cart = { products: [] }) {
     return super.save(cart);
+  }
+
+  //Obtengo un carrito por username
+  async getByUsername(username) {
+    try {
+      let userCart = await this.CollModel.findOne({ username }, { __v: 0 });
+      return userCart ? renameField(deepClone(userCart), "_id", "id") : null;
+    } catch (error) {
+      throw new Error(
+        `Error al obtener el carrito con username '${username}': ${error}`
+      );
+    }
   }
 }
 
