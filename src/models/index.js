@@ -27,6 +27,7 @@ switch (config.PERS) {
       await usersModel.init();
     } catch (error) {
       console.log(error);
+      process.exit(1);
     }
     break;
   }

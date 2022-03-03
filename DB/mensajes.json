@@ -198,5 +198,29 @@
     "text": "Que bueno que te guste!!",
     "replyMessage": "Esta lindo no?",
     "type": "admin"
+  },
+  {
+    "id": 26,
+    "timestamp": "2022-03-03T19:52:10.775Z",
+    "user": "all",
+    "text": "Probemos el adaptador socket.io para modo cluster",
+    "replyMessage": null,
+    "type": "admin"
+  },
+  {
+    "id": 26,
+    "timestamp": "2022-03-03T19:52:32.291Z",
+    "user": "prellezose@yahoo.com.ar",
+    "text": "Parece funcionar correctamente!",
+    "type": "user",
+    "replyMessage": null
+  },
+  {
+    "id": 26,
+    "timestamp": "2022-03-03T19:52:45.682Z",
+    "user": "prellezose@yahoo.com.ar",
+    "text": "Sí!!",
+    "replyMessage": "Parece funcionar correctamente!",
+    "type": "admin"
   }
 ]

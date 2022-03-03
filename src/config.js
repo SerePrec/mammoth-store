@@ -1,5 +1,14 @@
+import os from "os";
+import parseArgs from "minimist";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const argv = parseArgs(process.argv.slice(2), {
+  alias: { p: ["PORT", "port"], m: ["mode", "MODE"] },
+  default: { p: 8080, m: "FORK" }
+});
 
 const NODE_ENV = process.env.NODE_ENV;
 
@@ -8,11 +17,11 @@ if (NODE_ENV !== "production") {
   config();
 }
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
 const config = {
   NODE_ENV,
-  PORT: process.env.PORT || 8080,
+  PORT: process.env.PORT || Number(argv.PORT) || 8080,
+  MODE: process.env.MODE || argv.MODE || "FORK",
+  numCPUs: os.cpus().length,
   PERS: process.env.PERS || "mem",
   uploadsImg: {
     productsPath: path.join(__dirname, "public", "img", "productos"),
@@ -29,9 +38,10 @@ const config = {
     client: "mysql",
     connection: {
       host: "127.0.0.1",
-      user: "root",
-      password: "",
-      database: "ecommerce_mammoth",
+      user: process.env.MARIADB_USER || "root",
+      password: process.env.MARIADB_PWD || "",
+      database: process.env.MARIADB_DB || "test",
+
       charset: "utf8mb4"
     }
   },
@@ -53,13 +63,12 @@ const config = {
     useNullAsDefault: true
   },
   mongoDb: {
-    connectionString: "mongodb://localhost/ecommerce_mammoth",
+    connectionString: process.env.MONGODB_URI,
     options: {
       useNewUrlParser: true, //No necesario desde mongoose 6
       useUnifiedTopology: true, //No necesario desde mongoose 6
       serverSelectionTimeoutMS: 5000
-    },
-    advancedOptions: { useUnifiedTopology: true }
+    }
   },
   mongoDbAtlas: {
     connectionString: process.env.MONGODB_ATLAS_URI,
@@ -67,10 +76,6 @@ const config = {
       useNewUrlParser: true, //No necesario desde mongoose 6
       useUnifiedTopology: true, //No necesario desde mongoose 6
       serverSelectionTimeoutMS: 5000
-    },
-    advancedOptions: {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
     }
   },
   firebase: {
@@ -86,19 +91,35 @@ const config = {
     client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL
   },
   session: {
-    secret: process.env.SESSION_SECRET || "secret",
-    resave: false,
-    saveUninitialized: false,
-    rolling: true,
-    cookie: {
-      maxAge: 10 * 60 * 1000
+    mongoStoreOptions: {
+      mongoUrl:
+        process.env.PERS === "mongodb"
+          ? process.env.MONGODB_URI
+          : process.env.MONGODB_ATLAS_URI,
+      mongoOptions:
+        process.env.PERS === "mongodb"
+          ? { useUnifiedTopology: true }
+          : {
+              useNewUrlParser: true,
+              useUnifiedTopology: true
+            }
+    },
+    options: {
+      secret: process.env.SESSION_SECRET || "secret",
+      resave: false,
+      saveUninitialized: false,
+      rolling: true,
+      cookie: {
+        maxAge: 10 * 60 * 1000
+      }
     }
   },
   googleAuth: {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: process.env.GOOGLE_CB_URL || "/auth/google/callback"
-  }
+  },
+  logsFolder: path.join(__dirname, "logs")
 };
 
 export default config;

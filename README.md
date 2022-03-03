@@ -159,3 +159,12 @@ validaciones isNotauth para evitar loguear o registrar si ya se esta logueado, y
 mensajes tipo flash
 
 validacion de carrito al enviar id del front contra el amacednado en session. Lo mismo que se recurpera carritpo desde el back con datos de auth para evitar enviar desde el front y que no sea tan veridico
+
+explicar y video de circuito front de funcionameinto user y admin
+
+Distintos sistemas de persistencia
+
+cluster con adaptador para sockets. comentar
+tema de refuncionalidad para el conteo de conectados
+
+error en bd, sale exit(1)

@@ -4,7 +4,8 @@ const $messageErrors = document.getElementById("messageErrors");
 let userEmail = location.pathname.replace("/chat/", "");
 
 // eslint-disable-next-line no-undef
-const socket = io();
+const socket = io({ transports: ["websocket"] });
+// Importante deshabilitar el sondeo largo de HTTP en el lado del cliente. Sino cada uno va a parar a un worker diferente y no funciona. Sino uitlizar una sticky session.
 
 // renderiza vista de mensajes
 function renderMessages(data) {

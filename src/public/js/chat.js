@@ -11,7 +11,8 @@ const $messageErrors = document.getElementById("messageErrors");
 let user = null;
 
 // eslint-disable-next-line no-undef
-const socket = io();
+const socket = io({ transports: ["websocket"] });
+// Importante deshabilitar el sondeo largo de HTTP en el lado del cliente. Sino cada uno va a parar a un worker diferente y no funciona. Sino uitlizar una sticky session.
 
 // Renderiza vista de cantidad de usuarios
 function renderUsers(data) {
@@ -169,12 +170,20 @@ function trimText(text, maxChars) {
   return text;
 }
 
-// Escucha evento de cantidad de usuarios conectados
-socket.on("usersCount", async usersQty => {
-  $usersQty.innerHTML = renderUsers({
-    usersQty
-  });
+// Escucha evento de cantidad de usuarios conectados en cada servidor (modo cluster)
+let allServersConn = 0;
+socket.on("usersCount", usersQty => {
+  allServersConn += usersQty;
 });
+
+setInterval(() => {
+  if (allServersConn) {
+    $usersQty.innerHTML = renderUsers({
+      usersQty: allServersConn
+    });
+    allServersConn = 0;
+  }
+}, 3000);
 
 // Escucha evento del envío de listado de mensajes
 socket.on("allMessages", async messages => {

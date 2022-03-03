@@ -21,8 +21,12 @@ try {
       console.log("Conectado con MongoDB (localhost)");
       break;
   }
+  mongoose.connection.on("disconnected", () =>
+    console.error("MongoDB perdió conexión")
+  );
 } catch (error) {
-  console.log(`Error al conectar con MongoDb: ${error}`);
+  console.error(`Error al conectar con MongoDb: ${error}`);
+  process.exit(1);
 }
 
 class ContenedorMongoDB {
