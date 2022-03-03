@@ -41,9 +41,13 @@ switch (config.PERS) {
     const { default: MessagesDaoMariaDb } = await import(
       "./daos/messages/MessagesDaoMariaDb.js"
     );
+    const { default: UsersDaoMariaDb } = await import(
+      "./daos/users/UsersDaoMariaDb.js"
+    );
     productsModel = new ProductsDaoMariaDb();
     cartsModel = new CartsDaoMariaDb();
     messagesModel = new MessagesDaoMariaDb();
+    usersModel = new UsersDaoMariaDb();
     break;
   }
 
@@ -57,9 +61,13 @@ switch (config.PERS) {
     const { default: MessagesDaoClearDb } = await import(
       "./daos/messages/MessagesDaoClearDb.js"
     );
+    const { default: UsersDaoClearDb } = await import(
+      "./daos/users/UsersDaoClearDb.js"
+    );
     productsModel = new ProductsDaoClearDb();
     cartsModel = new CartsDaoClearDb();
     messagesModel = new MessagesDaoClearDb();
+    usersModel = new UsersDaoClearDb();
     break;
   }
 
@@ -73,9 +81,13 @@ switch (config.PERS) {
     const { default: MessagesDaoSQLite3 } = await import(
       "./daos/messages/MessagesDaoSQLite3.js"
     );
+    const { default: UsersDaoSQLite3 } = await import(
+      "./daos/users/UsersDaoSQLite3.js"
+    );
     productsModel = new ProductsDaoSQLite3();
     cartsModel = new CartsDaoSQLite3();
     messagesModel = new MessagesDaoSQLite3();
+    usersModel = new UsersDaoSQLite3();
     break;
   }
 

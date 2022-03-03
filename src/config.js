@@ -31,7 +31,7 @@ const config = {
       host: "127.0.0.1",
       user: "root",
       password: "",
-      database: "ecommerce-mammoth",
+      database: "ecommerce_mammoth",
       charset: "utf8mb4"
     }
   },
@@ -53,7 +53,7 @@ const config = {
     useNullAsDefault: true
   },
   mongoDb: {
-    connectionString: "mongodb://localhost/ecommerce-mammoth",
+    connectionString: "mongodb://localhost/ecommerce_mammoth",
     options: {
       useNewUrlParser: true, //No necesario desde mongoose 6
       useUnifiedTopology: true, //No necesario desde mongoose 6

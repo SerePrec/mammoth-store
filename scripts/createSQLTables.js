@@ -42,6 +42,7 @@ async function crearTablaCarritos(config) {
 
     await knex.schema.createTable("carts", table => {
       table.increments("id");
+      table.string("username", 50).notNullable().index();
       table.timestamp("timestamp").defaultTo(knex.fn.now());
     });
 
@@ -106,6 +107,33 @@ async function crearTablaMensajes(config) {
 }
 
 // eslint-disable-next-line no-unused-vars
+async function crearTablaUsuarios(config) {
+  const knex = Knex(config);
+  try {
+    await knex.schema.dropTableIfExists("users");
+
+    await knex.schema.createTable("users", table => {
+      table.increments("id");
+      table.string("username", 50).notNullable().unique();
+      table.string("password", 256).notNullable();
+      table.string("name", 50).notNullable();
+      table.string("address", 80).notNullable();
+      table.tinyint("age").unsigned().notNullable();
+      table.string("phone", 20).notNullable();
+      table.string("avatar", 1024);
+      table.string("role", 10).notNullable().defaultTo("user");
+      table.timestamp("timestamp").defaultTo(knex.fn.now());
+    });
+
+    console.log("Tabla 'users' creada con éxito");
+  } catch (error) {
+    console.log("Error al crear tabla 'users': ", error);
+  } finally {
+    knex.destroy();
+  }
+}
+
+// eslint-disable-next-line no-unused-vars
 async function cargaProductosPrueba(config) {
   const knex = Knex(config);
   const BK_FILENAME = "productsBk.json";
@@ -130,6 +158,7 @@ async function cargaProductosPrueba(config) {
 // await crearTablaCarritos(config.mariaDb);
 // await crearTablaProductosEnCarrito(config.mariaDb);
 // await crearTablaMensajes(config.mariaDb);
+// await crearTablaUsuarios(config.mariaDb);
 // await cargaProductosPrueba(config.mariaDb);
 
 //Carga Sqlite3
@@ -137,6 +166,7 @@ async function cargaProductosPrueba(config) {
 // await crearTablaCarritos(config.sqlite3);
 // await crearTablaProductosEnCarrito(config.sqlite3);
 // await crearTablaMensajes(config.sqlite3);
+// await crearTablaUsuarios(config.sqlite3);
 // await cargaProductosPrueba(config.sqlite3);
 
 //Carga Heroku ClearDB
@@ -144,4 +174,5 @@ async function cargaProductosPrueba(config) {
 // await crearTablaCarritos(config.clearDb);
 // await crearTablaProductosEnCarrito(config.clearDb);
 // await crearTablaMensajes(config.clearDb);
+// await crearTablaUsuarios(config.clearDb);
 // await cargaProductosPrueba(config.clearDb);

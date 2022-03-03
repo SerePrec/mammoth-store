@@ -11,7 +11,9 @@ class CartsDaoSQL {
   async save(cart = {}) {
     try {
       // El manejo del id y el timestamp se maneja internamente desde base de datos
-      const newCart = await this.carts.save(cart);
+      const { username } = cart;
+      const cartData = { username };
+      const newCart = await this.carts.save(cartData);
       console.log("Carrito guardado con éxito");
       newCart.products = [];
       return newCart;
@@ -80,6 +82,31 @@ class CartsDaoSQL {
     } catch (error) {
       throw new Error(
         `Error al obtener el carrito con id '${id_cart}': ${error}`
+      );
+    }
+  }
+
+  //Obtengo un carrito por username
+  async getByUsername(username) {
+    try {
+      const [cartData] = await this.carts.getAll({ username });
+      if (cartData) {
+        const id_cart = cartData.id;
+        const productsInCart = await this.productsInCarts.getAll({ id_cart });
+        const cart = { ...cartData, products: [] };
+        productsInCart.forEach(product => {
+          const quantity = removeField(product, "quantity");
+          removeField(product, "id_cart");
+          const cartItem = { product, quantity };
+          cart.products.push(cartItem);
+        });
+        return cart;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      throw new Error(
+        `Error al obtener el carrito con username '${username}': ${error}`
       );
     }
   }
