@@ -3,6 +3,7 @@ import { Server as Httpserver } from "http";
 import { Server as IoServer } from "socket.io";
 import { createAdapter, setupPrimary } from "@socket.io/cluster-adapter";
 import config from "./config.js";
+import { logger } from "./logger/index.js";
 
 const MODE = config.MODE;
 
@@ -25,20 +26,20 @@ async function startServer() {
   //Puesta en marcha del servidor
   httpServer
     .listen(PORT, () =>
-      console.log(
+      logger.info(
         `Servidor http con websockets escuchando en el puerto ${
           httpServer.address().port
         } - PID ${process.pid}`
       )
     )
     .on("error", error => {
-      console.log(`Ocurrió un error en el servidor:\n ${error}`);
+      logger.error(`Ocurrió un error en el servidor: ${error}`);
       process.exit(1);
     });
 }
 
 cluster.isPrimary &&
-  console.log(
+  logger.info(
     `>>>> Entorno: ${
       config.NODE_ENV === "production" ? "Producción" : "Desarrollo"
     } <<<<`
@@ -46,12 +47,12 @@ cluster.isPrimary &&
 
 MODE !== "CLUSTER" &&
   process.on("exit", code => {
-    console.log("Salida del proceso con código de error: " + code);
+    logger.info("Salida del proceso con código de error: " + code);
   });
 
 if (MODE === "CLUSTER" && cluster.isPrimary) {
-  console.log(`Proceso Master iniciado con PID ${process.pid}`);
-  console.log(`Número de procesadores: ${config.numCPUs}`);
+  logger.info(`Proceso Master iniciado con PID ${process.pid}`);
+  logger.info(`Número de procesadores: ${config.numCPUs}`);
 
   // setup conexiones entre workers
   setupPrimary();
@@ -61,7 +62,7 @@ if (MODE === "CLUSTER" && cluster.isPrimary) {
   }
 
   cluster.on("exit", (worker, code, signal) => {
-    console.warn(
+    logger.warn(
       `Worker con PID ${worker.process.pid} terminado - signal/code:[${
         signal || code
       }]`
