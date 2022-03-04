@@ -28,7 +28,7 @@ async function crearTablaProductos(config) {
 
     console.log("Tabla 'products' creada con éxito");
   } catch (error) {
-    console.log("Error al crear tabla 'products': ", error);
+    console.error("Error al crear tabla 'products': ", error);
   } finally {
     knex.destroy();
   }
@@ -48,7 +48,7 @@ async function crearTablaCarritos(config) {
 
     console.log("Tabla 'carts' creada con éxito");
   } catch (error) {
-    console.log("Error al crear tabla 'carts': ", error);
+    console.error("Error al crear tabla 'carts': ", error);
   } finally {
     knex.destroy();
   }
@@ -77,7 +77,7 @@ async function crearTablaProductosEnCarrito(config) {
 
     console.log("Tabla 'products_in_carts' creada con éxito");
   } catch (error) {
-    console.log("Error al crear tabla 'products_in_carts': ", error);
+    console.error("Error al crear tabla 'products_in_carts': ", error);
   } finally {
     knex.destroy();
   }
@@ -100,7 +100,7 @@ async function crearTablaMensajes(config) {
 
     console.log("Tabla 'messages' creada con éxito");
   } catch (error) {
-    console.log("Error al crear tabla 'messages': ", error);
+    console.error("Error al crear tabla 'messages': ", error);
   } finally {
     knex.destroy();
   }
@@ -127,7 +127,7 @@ async function crearTablaUsuarios(config) {
 
     console.log("Tabla 'users' creada con éxito");
   } catch (error) {
-    console.log("Error al crear tabla 'users': ", error);
+    console.error("Error al crear tabla 'users': ", error);
   } finally {
     knex.destroy();
   }
@@ -147,7 +147,7 @@ async function cargaProductosPrueba(config) {
     await knex("products").insert(productsBk);
     console.log("Productos de prueba cargados");
   } catch (error) {
-    console.log("Error al cargar productos de prueba: ", error);
+    console.error("Error al cargar productos de prueba: ", error);
   } finally {
     await knex.destroy();
   }

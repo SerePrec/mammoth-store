@@ -1,5 +1,6 @@
 import ContenedorSQL from "../../containers/ContenedorSQL.js";
 import { removeField } from "../../../utils/dataTools.js";
+import { logger } from "../../../logger/index.js";
 
 class CartsDaoSQL {
   constructor(config) {
@@ -14,7 +15,7 @@ class CartsDaoSQL {
       const { username } = cart;
       const cartData = { username };
       const newCart = await this.carts.save(cartData);
-      console.log("Carrito guardado con éxito");
+      logger.debug("Carrito guardado con éxito");
       newCart.products = [];
       return newCart;
     } catch (error) {
@@ -128,7 +129,7 @@ class CartsDaoSQL {
       }
       dataToSave.length > 0 && (await this.productsInCarts.save(dataToSave));
       const updateCart = await this.getById(id_cart);
-      console.log(`El carrito con id: ${id_cart} se actualizó con éxito`);
+      logger.debug(`El carrito con id: ${id_cart} se actualizó con éxito`);
       return updateCart;
     } catch (error) {
       throw new Error(
@@ -149,7 +150,7 @@ class CartsDaoSQL {
         productsPromise.status === "rejected"
       )
         throw new Error("No se pudo borrar completamente la información");
-      console.log("Todos los carritos borrados con éxito");
+      logger.debug("Todos los carritos borrados con éxito");
       return true;
     } catch (error) {
       throw new Error(`Error al borrar todos los carritos: ${error}`);
@@ -171,10 +172,10 @@ class CartsDaoSQL {
         throw new Error("No se pudo borrar completamente la información");
       const cartData = cartPromise.value;
       if (cartData) {
-        console.log(`El carrito con id: ${id_cart} se eliminó con éxito`);
+        logger.debug(`El carrito con id: ${id_cart} se eliminó con éxito`);
         return id_cart;
       } else {
-        console.log(`No se encontró el carrito con el id: ${id_cart}`);
+        logger.debug(`No se encontró el carrito con el id: ${id_cart}`);
         return null;
       }
     } catch (error) {

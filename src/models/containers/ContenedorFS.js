@@ -1,6 +1,7 @@
 import * as fs from "fs/promises";
 import path from "path";
 import config from "../../config.js";
+import { logger } from "../../logger/index.js";
 
 const dbDir = config.fileSystemDb.path;
 
@@ -12,7 +13,7 @@ class ContenedorFS {
 
   //Inicializo el contenedor con archivo preexistente o nuevo
   async init() {
-    console.log("Inicializando contenedor...");
+    logger.debug("Inicializando contenedor...");
     try {
       if (this.nextId) return; // evita se inicialice más de una vez
       try {
@@ -22,7 +23,7 @@ class ContenedorFS {
           0
         );
         this.nextId = lastId + 1;
-        console.log(
+        logger.debug(
           `Contenedor inicializado con archivo preexistente '${path.basename(
             this.path
           )}'`
@@ -30,7 +31,7 @@ class ContenedorFS {
       } catch (error) {
         await fs.writeFile(this.path, JSON.stringify([]));
         this.nextId = 1;
-        console.log(
+        logger.debug(
           `Contenedor inicializado vacío '${path.basename(this.path)}'`
         );
       }
@@ -71,7 +72,7 @@ class ContenedorFS {
       content.push(elemento);
       await fs.writeFile(this.path, JSON.stringify(content, null, 2));
       this.nextId++;
-      console.log("Elemento guardado con éxito");
+      logger.debug("Elemento guardado con éxito");
       return elemento;
     } catch (error) {
       throw new Error(`Error al guardar el elemento: ${error}`);
@@ -94,10 +95,10 @@ class ContenedorFS {
           elem.id !== id ? elem : newElement
         );
         await fs.writeFile(this.path, JSON.stringify(newContent, null, 2));
-        console.log(`El elemento con id: ${id} se actualizó con éxito`);
+        logger.debug(`El elemento con id: ${id} se actualizó con éxito`);
         return newElement;
       } else {
-        console.log(`No se encontró el elemento con el id: ${id}`);
+        logger.debug(`No se encontró el elemento con el id: ${id}`);
         return null;
       }
     } catch (error) {
@@ -111,7 +112,7 @@ class ContenedorFS {
   async deleteAll() {
     try {
       await fs.writeFile(this.path, JSON.stringify([]));
-      console.log("Todos los elementos borrados con éxito");
+      logger.debug("Todos los elementos borrados con éxito");
       return true;
     } catch (error) {
       throw new Error(`Error al borrar todos los elementos: ${error}`);
@@ -127,10 +128,10 @@ class ContenedorFS {
       if (match) {
         const newContent = content.filter(elem => elem.id !== id);
         await fs.writeFile(this.path, JSON.stringify(newContent, null, 2));
-        console.log(`El elemento con id: ${id} se eliminó con éxito`);
+        logger.debug(`El elemento con id: ${id} se eliminó con éxito`);
         return id;
       } else {
-        console.log(`No se encontró el elemento con el id: ${id}`);
+        logger.debug(`No se encontró el elemento con el id: ${id}`);
         return null;
       }
     } catch (error) {

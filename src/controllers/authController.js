@@ -1,5 +1,6 @@
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+import { logger } from "../logger/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -47,10 +48,12 @@ export const getLogout = (req, res) => {
   if (req.isAuthenticated()) {
     const { user } = req;
     const name = user.provider ? user.displayName : user.name;
+    const username = user.provider ? user.emails[0].value : user.username;
     req.logout();
     req.session.destroy(err => {
       if (!err) {
         res.clearCookie("connect.sid");
+        logger.info(`Logout de usuario '${username}'`);
         return res.render("./pages/logout", {
           title: "Mammoth Bike Store | Logout",
           name

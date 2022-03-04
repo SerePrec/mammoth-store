@@ -4,6 +4,7 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import config from "../config.js";
 import { usersModel } from "../models/index.js";
 import { createHash, isValidPassword } from "../utils/crypt.js";
+import { logger } from "../logger/index.js";
 
 passport.use(
   "register",
@@ -29,10 +30,12 @@ passport.use(
           role: "user"
         };
         const newUserAdded = await usersModel.save(newUser);
-        console.log(`Usuario registrado con éxito con id ${newUserAdded.id}`);
+        logger.info(
+          `Usuario '${username}' registrado con éxito con id ${newUserAdded.id}`
+        );
         return done(null, newUserAdded);
       } catch (error) {
-        console.log("Error al registrar usuario: ", error);
+        logger.error(`Error al registrar usuario: ${error}`);
         done(error);
       }
     }
@@ -45,18 +48,23 @@ passport.use(
     try {
       const user = await usersModel.getByUsername(username);
       if (!user) {
+        logger.warn(`Fallo de login: Usuario '${username}' no existe`);
         return done(null, false, {
           message: "Nombre de usuario y/o contraseña incorrectos"
         });
       }
       if (!(await isValidPassword(user, password))) {
+        logger.warn(
+          `Fallo de login: Contraseña de usuario '${username}' incorrecta`
+        );
         return done(null, false, {
           message: "Nombre de usuario y/o contraseña incorrectos"
         });
       }
+      logger.info(`Usuario '${username}' logueado con éxito`);
       return done(null, user);
     } catch (error) {
-      console.log("Error al loguear usuario: ", error);
+      logger.error(`Error al loguear usuario: ${error}`);
       done(error);
     }
   })
@@ -66,6 +74,9 @@ passport.use(
   new GoogleStrategy(
     config.googleAuth,
     (accessToken, refreshToken, userProfile, done) => {
+      logger.info(
+        `Usuario '${userProfile.emails[0].value}' logueado con éxito`
+      );
       return done(null, userProfile);
     }
   )

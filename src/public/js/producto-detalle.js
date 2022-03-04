@@ -25,7 +25,6 @@ const cartsApi = {
     return fetch(`/api/carrito/usuario`).then(data => data.json());
   },
   addProductToCart: async (id, id_prod, quantity) => {
-    console.log(id, id_prod);
     return fetch(`/api/carrito/${id}/productos`, {
       method: "POST",
       headers: {

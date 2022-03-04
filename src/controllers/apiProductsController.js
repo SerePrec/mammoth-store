@@ -1,6 +1,5 @@
-import multer from "multer";
-import config from "../config.js";
 import { productsModel } from "../models/index.js";
+import { logger } from "../logger/index.js";
 
 export const getAllProducts = async (req, res, next) => {
   if (req.params.id !== undefined) return next();
@@ -8,7 +7,7 @@ export const getAllProducts = async (req, res, next) => {
     const lista = await productsModel.getAll();
     res.json(lista);
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({
       error: "No se pudo recuperar la infomación"
     });
@@ -22,7 +21,7 @@ export const getProduct = async (req, res) => {
       ? res.json(producto)
       : res.json({ error: "Producto no encontrado" });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({
       error: "No se pudo recuperar la infomación"
     });
@@ -44,9 +43,10 @@ export const createProduct = async (req, res) => {
       thumbnail
     };
     newProduct = await productsModel.save(newProduct);
+    logger.info(`Producto creado con éxito con id ${newProduct.id}`);
     res.json({ result: "ok", newProduct });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({
       error: "No se pudo agregar el producto"
     });
@@ -69,11 +69,15 @@ export const updateProduct = async (req, res) => {
       thumbnail
     };
     updateProduct = await productsModel.updateById(id, updateProduct);
-    updateProduct !== null
-      ? res.json({ result: "ok", updateProduct })
-      : res.json({ error: "Producto no encontrado" });
+    if (updateProduct !== null) {
+      logger.info(`Producto con id ${id} actualizado con éxito`);
+      res.json({ result: "ok", updateProduct });
+    } else {
+      logger.warn(`Producto con id ${id} no encontrado`);
+      res.json({ error: "Producto no encontrado" });
+    }
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({
       error: "No se pudo actualizar el producto"
     });
@@ -83,11 +87,15 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
   try {
     const deletedId = await productsModel.deleteById(req.params.id);
-    deletedId !== null
-      ? res.json({ result: "ok", deletedId })
-      : res.json({ error: "Producto no encontrado" });
+    if (deletedId !== null) {
+      logger.info(`Producto con id ${req.params.id} borrado con éxito`);
+      res.json({ result: "ok", deletedId });
+    } else {
+      logger.warn(`Producto con id ${req.params.id} no encontrado`);
+      res.json({ error: "Producto no encontrado" });
+    }
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({
       error: "No se pudo eliminar el producto"
     });

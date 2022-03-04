@@ -3,6 +3,6 @@ import buildProdLogger from "./prod-logger.js";
 import config from "../config.js";
 
 const logger =
-  config.NODE_ENV !== "production" ? buildProdLogger() : buildDevLogger();
+  config.NODE_ENV === "production" ? buildProdLogger() : buildDevLogger();
 
 export { logger };

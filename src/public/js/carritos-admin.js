@@ -42,7 +42,7 @@ function deleteCart() {
         updateCartsList();
       }
     })
-    .catch(console.log);
+    .catch(console.error);
 }
 
 function deleteProductFromCart(id, id_prod) {
@@ -55,7 +55,7 @@ function deleteProductFromCart(id, id_prod) {
           updateCartTable();
         }
       })
-      .catch(console.log);
+      .catch(console.error);
   }
 }
 
@@ -188,7 +188,7 @@ function updateCartTable() {
           $("#cartProducts").slideDown(300);
         }
       })
-      .catch(console.log);
+      .catch(console.error);
   } else {
     $cartProducts.innerHTML = "";
   }

@@ -32,7 +32,7 @@ async function cargaInicial() {
     const all = await productos.getAll();
     console.log("Listado de todos los productos: \n", all);
   } catch (error) {
-    console.log("Error durante la carga: ", error);
+    console.error("Error durante la carga: ", error);
   }
 }
 

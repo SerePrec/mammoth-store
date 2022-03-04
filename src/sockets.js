@@ -1,5 +1,6 @@
 import { messagesModel } from "./models/index.js";
 import { escapeHtml } from "./utils/dataTools.js";
+import { logger } from "./logger/index.js";
 
 //Configuración de sockets
 export default io => {
@@ -7,8 +8,8 @@ export default io => {
     const socketId = socket.id;
 
     // Muestro la cantidad de usuarios conectados a una instancia del servidor con cada conexión
-    console.log(
-      `Cliente socket conectado con el id: ${socketId}\n** Conexiones websocket activas: ${io.engine.clientsCount} **`
+    logger.debug(
+      `Cliente socket conectado con el id: ${socketId} ** Conexiones websocket activas: ${io.engine.clientsCount} **`
     );
 
     //Obtiene listado de mensajes con cada conexión entrante y lo envía al socket
@@ -16,7 +17,7 @@ export default io => {
       const messages = await messagesModel.getAll();
       socket.emit("allMessages", messages);
     } catch (error) {
-      console.log(error);
+      logger.error(error);
       socket.emit("messageErrors", "No se pudo recuperar archivo de mensajes");
     }
 
@@ -33,7 +34,7 @@ export default io => {
         const messages = await messagesModel.getAll();
         io.sockets.emit("allMessages", messages);
       } catch (error) {
-        console.log(error);
+        logger.error(error);
         socket.emit("messageErrors", "Error al procesar el mensaje enviado");
       }
     });
@@ -50,14 +51,14 @@ export default io => {
         const messages = await messagesModel.getAll();
         io.sockets.emit("allMessages", messages);
       } catch (error) {
-        console.log(error);
+        logger.error(error);
         socket.emit("messageErrors", "Error al procesar el mensaje enviado");
       }
     });
 
     // Actualizo la cantidad de usuarios conectados a una instancia del servidor con cada desconexión
     socket.on("disconnect", () => {
-      console.log(
+      logger.debug(
         `** Conexiones websocket activas: ${io.engine.clientsCount} **`
       );
     });

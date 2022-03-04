@@ -402,7 +402,7 @@ function mostrarProductos(vectorProductos) {
       .getProduct(id)
       .then(processResponse(`Se cargó la infomación para actualizar`))
       .then(formForUpdate)
-      .catch(console.log);
+      .catch(console.error);
   });
 
   $("#contenedorProductos .btnDelete").click(function (e) {
@@ -424,7 +424,7 @@ function mostrarProductos(vectorProductos) {
         .deleteProduct(id)
         .then(processResponse(`Producto eliminado con éxito`))
         .then(formForSave)
-        .catch(console.log);
+        .catch(console.error);
     }
   });
 }
@@ -469,7 +469,7 @@ function loadError(error) {
     <p>Intenta recargar la página o regresa más tarde.</p>
     <p>Disculpe las molestias.</p>`;
 
-  console.log(error);
+  console.error(error);
 }
 
 function cargaInicialOk() {
@@ -807,7 +807,7 @@ document.getElementById("formBtnSave").addEventListener("click", e => {
       .saveProduct(formData)
       .then(processResponse(`Producto cargado con éxito`))
       .then(formForSave)
-      .catch(console.log);
+      .catch(console.error);
   }
 });
 
@@ -823,7 +823,7 @@ document.getElementById("formBtnUpdate").addEventListener("click", e => {
     .updateProduct(id, formData)
     .then(processResponse(`Producto actualizado con éxito`))
     .then(formForSave)
-    .catch(console.log);
+    .catch(console.error);
 });
 
 // Inicio

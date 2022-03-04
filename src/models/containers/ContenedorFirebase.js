@@ -1,12 +1,12 @@
 import { initializeApp, cert } from "firebase-admin/app";
 import { getFirestore, Timestamp } from "firebase-admin/firestore";
 import config from "../../config.js";
+import { logger } from "../../logger/index.js";
 
 const serviceAccount = config.firebase;
 initializeApp({
   credential: cert(serviceAccount)
 });
-console.log("Conectado a Firebase");
 
 const db = getFirestore();
 
@@ -52,7 +52,7 @@ class ContenedorFirebase {
       const timestamp = Timestamp.now();
       data = { ...data, timestamp };
       const saved = await this.collection.add(data);
-      console.log("Elemento guardado con éxito");
+      logger.debug("Elemento guardado con éxito");
       return { id: saved.id, ...data, timestamp: timestamp.toDate() };
     } catch (error) {
       throw new Error(`Error al guardar el elemento: ${error}`);
@@ -68,7 +68,7 @@ class ContenedorFirebase {
           dataToUpdate[key] = data[key];
       }
       await this.collection.doc(`${id}`).update(dataToUpdate);
-      console.log(`El elemento con id: ${id} se actualizó con éxito`);
+      logger.debug(`El elemento con id: ${id} se actualizó con éxito`);
       // lo consulto para obtener los datos completos del elemento actualizado
       return await this.getById(id);
     } catch (error) {
@@ -76,7 +76,7 @@ class ContenedorFirebase {
       // Manejo esta opción para mantener el formato de respuesta
       //similar al resto de contenedores
       if (error.code === 5) {
-        console.log(`No se encontró el elemento con el id: ${id}`);
+        logger.debug(`No se encontró el elemento con el id: ${id}`);
         return null;
       }
       throw new Error(
@@ -116,7 +116,7 @@ class ContenedorFirebase {
 
     try {
       await deleteQueryBatch(db, query);
-      console.log("Todos los elementos borrados con éxito");
+      logger.debug("Todos los elementos borrados con éxito");
       return true;
     } catch (error) {
       throw new Error(`Error al borrar todos los elementos: ${error}`);
@@ -131,11 +131,11 @@ class ContenedorFirebase {
       // porque en la res del delete no obtengo infomación si existía o no
       const doc = this.getById(id);
       if (!doc) {
-        console.log(`No se encontró el elemento con el id: ${id}`);
+        logger.debug(`No se encontró el elemento con el id: ${id}`);
         return null;
       }
       await this.collection.doc(`${id}`).delete();
-      console.log(`El elemento con id: ${id} se eliminó con éxito`);
+      logger.debug(`El elemento con id: ${id} se eliminó con éxito`);
       return id;
     } catch (error) {
       throw new Error(`Error al borrar el elemento con id '${id}': ${error}`);

@@ -1,3 +1,5 @@
+import { logger } from "../../logger/index.js";
+
 class ContenedorMem {
   constructor() {
     this.elements = [];
@@ -23,7 +25,7 @@ class ContenedorMem {
     const elemento = { id, timestamp, ...data };
     this.elements.push(elemento);
     this.nextId++;
-    console.log("Elemento guardado con éxito");
+    logger.debug("Elemento guardado con éxito");
     return elemento;
   }
 
@@ -40,16 +42,17 @@ class ContenedorMem {
         elem.id !== id ? elem : newElement
       );
       this.elements = newContent;
-      console.log(`El elemento con id: ${id} se actualizó con éxito`);
+      logger.debug(`El elemento con id: ${id} se actualizó con éxito`);
       return newElement;
     } else {
-      console.log(`No se encontró el elemento con el id: ${id}`);
+      logger.debug(`No se encontró el elemento con el id: ${id}`);
       return null;
     }
   }
 
   //borro todos los elementos
   deleteAll() {
+    logger.debug("Todos los elementos borrados con éxito");
     this.elements = [];
   }
 
@@ -60,10 +63,10 @@ class ContenedorMem {
     if (match) {
       const newContent = this.elements.filter(elem => elem.id !== id);
       this.elements = newContent;
-      console.log(`El elemento con id: ${id} se eliminó con éxito`);
+      logger.debug(`El elemento con id: ${id} se eliminó con éxito`);
       return id;
     } else {
-      console.log(`No se encontró el elemento con el id: ${id}`);
+      logger.debug(`No se encontró el elemento con el id: ${id}`);
       return null;
     }
   }

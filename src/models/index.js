@@ -1,4 +1,5 @@
 import config from "../config.js";
+import { logger } from "../logger/index.js";
 
 let productsModel;
 let cartsModel;
@@ -25,8 +26,9 @@ switch (config.PERS) {
       await cartsModel.init();
       await messagesModel.init();
       await usersModel.init();
+      logger.info("Persistencia [File System] inicializada");
     } catch (error) {
-      console.log(error);
+      logger.error(error);
       process.exit(1);
     }
     break;
@@ -49,6 +51,7 @@ switch (config.PERS) {
     cartsModel = new CartsDaoMariaDb();
     messagesModel = new MessagesDaoMariaDb();
     usersModel = new UsersDaoMariaDb();
+    logger.info("Persistencia [MariaDB] inicializada");
     break;
   }
 
@@ -69,6 +72,7 @@ switch (config.PERS) {
     cartsModel = new CartsDaoClearDb();
     messagesModel = new MessagesDaoClearDb();
     usersModel = new UsersDaoClearDb();
+    logger.info("Persistencia [ClearDB] inicializada");
     break;
   }
 
@@ -89,6 +93,7 @@ switch (config.PERS) {
     cartsModel = new CartsDaoSQLite3();
     messagesModel = new MessagesDaoSQLite3();
     usersModel = new UsersDaoSQLite3();
+    logger.info("Persistencia [SQLite3] inicializada");
     break;
   }
 
@@ -110,6 +115,7 @@ switch (config.PERS) {
     cartsModel = new CartsDaoMongoDB();
     messagesModel = new MessagesDaoMongoDB();
     usersModel = new UsersDaoMongoDB();
+    logger.info("Persistencia [MongoDB] inicializada");
     break;
   }
 
@@ -130,6 +136,7 @@ switch (config.PERS) {
     cartsModel = new CartsDaoFirebase();
     messagesModel = new MessagesDaoFirebase();
     usersModel = new UsersDaoFirebase();
+    logger.info("Persistencia [Firebase] inicializada");
     break;
   }
 
@@ -151,6 +158,7 @@ switch (config.PERS) {
     cartsModel = new CartsDaoMem();
     messagesModel = new MessagesDaoMem();
     usersModel = new UsersDaoMem();
+    logger.info("Persistencia [Memoria] inicializada");
     break;
   }
 }

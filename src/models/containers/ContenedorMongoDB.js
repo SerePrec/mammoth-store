@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import config from "../../config.js";
 import { deepClone, renameField, removeField } from "../../utils/dataTools.js";
+import { logger } from "../../logger/index.js";
 
 try {
   switch (config.PERS) {
@@ -9,7 +10,7 @@ try {
         config.mongoDbAtlas.connectionString,
         config.mongoDbAtlas.options
       );
-      console.log("Conectado con MongoDB Atlas");
+      logger.info("Conectado con MongoDB Atlas");
       break;
 
     case "mongodb":
@@ -18,14 +19,14 @@ try {
         config.mongoDb.connectionString,
         config.mongoDb.options
       );
-      console.log("Conectado con MongoDB (localhost)");
+      logger.info("Conectado con MongoDB (localhost)");
       break;
   }
   mongoose.connection.on("disconnected", () =>
-    console.error("MongoDB perdió conexión")
+    logger.error("MongoDB perdió conexión")
   );
 } catch (error) {
-  console.error(`Error al conectar con MongoDb: ${error}`);
+  logger.error(`Error al conectar con MongoDb: ${error}`);
   process.exit(1);
 }
 
@@ -65,7 +66,7 @@ class ContenedorMongoDB {
     try {
       // El manejo del id y el timestamp se maneja internamente desde base de datos
       let element = await this.CollModel.create(data);
-      console.log("Elemento guardado con éxito");
+      logger.debug("Elemento guardado con éxito");
       element = deepClone(element);
       renameField(element, "_id", "id");
       removeField(element, "__v");
@@ -91,10 +92,10 @@ class ContenedorMongoDB {
       );
       if (updateElement) {
         updateElement = renameField(updateElement, "_id", "id");
-        console.log(`El elemento con id: ${id} se actualizó con éxito`);
+        logger.debug(`El elemento con id: ${id} se actualizó con éxito`);
         return deepClone(updateElement);
       } else {
-        console.log(`No se encontró el elemento con el id: ${id}`);
+        logger.debug(`No se encontró el elemento con el id: ${id}`);
         return null;
       }
     } catch (error) {
@@ -108,7 +109,7 @@ class ContenedorMongoDB {
   async deleteAll() {
     try {
       await this.CollModel.deleteMany({});
-      console.log("Todos los elementos borrados con éxito");
+      logger.debug("Todos los elementos borrados con éxito");
       return true;
     } catch (error) {
       throw new Error(`Error al borrar todos los elementos: ${error}`);
@@ -121,10 +122,10 @@ class ContenedorMongoDB {
       // mongoose parsea el id internamente en la consulta.
       const deleted = await this.CollModel.findOneAndDelete({ _id: id });
       if (deleted) {
-        console.log(`El elemento con id: ${id} se eliminó con éxito`);
+        logger.debug(`El elemento con id: ${id} se eliminó con éxito`);
         return id;
       } else {
-        console.log(`No se encontró el elemento con el id: ${id}`);
+        logger.debug(`No se encontró el elemento con el id: ${id}`);
         return null;
       }
     } catch (error) {

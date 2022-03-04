@@ -29,7 +29,7 @@ async function startServer() {
       logger.info(
         `Servidor http con websockets escuchando en el puerto ${
           httpServer.address().port
-        } - PID ${process.pid}`
+        }`
       )
     )
     .on("error", error => {
@@ -47,7 +47,7 @@ cluster.isPrimary &&
 
 MODE !== "CLUSTER" &&
   process.on("exit", code => {
-    logger.info("Salida del proceso con código de error: " + code);
+    logger.info(`Salida del proceso con código de error: ${code}`);
   });
 
 if (MODE === "CLUSTER" && cluster.isPrimary) {

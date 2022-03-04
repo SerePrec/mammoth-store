@@ -1,4 +1,5 @@
 import { cartsModel, productsModel } from "../models/index.js";
+import { logger } from "../logger/index.js";
 
 export const getCarts = async (req, res) => {
   try {
@@ -9,7 +10,7 @@ export const getCarts = async (req, res) => {
     }));
     res.json(cartsIds);
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({
       error: "No se pudo recuperar la infomación"
     });
@@ -28,7 +29,7 @@ export const getUserCart = async (req, res) => {
       res.json({ error: "Carrito no encontrado" });
     }
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({
       error: "No se pudo recuperar la infomación"
     });
@@ -42,7 +43,7 @@ export const getProductsFromCart = async (req, res) => {
       ? res.json(cart.products)
       : res.json({ error: "Carrito no encontrado" });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({
       error: "No se pudo recuperar la infomación"
     });
@@ -56,9 +57,10 @@ export const createCart = async (req, res) => {
     const cart = { username, products: [] };
     const { id } = await cartsModel.save(cart);
     req.session ? (req.session.cartId = id) : null;
+    logger.debug(`Carrito de usuario '${username}' creado con id ${id}`);
     res.json({ result: "ok", cartId: id });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({
       error: "No se pudo crear el carrito"
     });
@@ -88,9 +90,10 @@ export const addProductToCart = async (req, res) => {
       });
     }
     await cartsModel.updateById(id, { products });
+    logger.debug(`Producto con id ${id_prod} x${quantity}u añadido a carrito`);
     res.json({ result: "ok", addedProdId: id_prod, quantity });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({
       error: `No se pudo agregar el producto al carrito`
     });
@@ -119,9 +122,12 @@ export const updateProductFromCart = async (req, res) => {
       products[index].quantity = quantity;
     }
     await cartsModel.updateById(id, { products });
+    logger.debug(
+      `Producto con id ${id_prod} x${quantity}u actualizado en carrito`
+    );
     res.json({ result: "ok", updatedProdId: id_prod, quantity });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({
       error: `No se pudo modificar la cantidad del producto en el carrito`
     });
@@ -132,11 +138,14 @@ export const deleteCart = async (req, res) => {
   try {
     const deletedId = await cartsModel.deleteById(req.params.id);
     req.session ? (req.session.cartId = null) : null;
-    deletedId !== null
-      ? res.json({ result: "ok", deletedId })
-      : res.json({ error: "Carrito no encontrado" });
+    if (deletedId !== null) {
+      logger.debug(`Carrito con id ${req.params.id}} eliminado`);
+      res.json({ result: "ok", deletedId });
+    } else {
+      res.json({ error: "Carrito no encontrado" });
+    }
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({
       error: "No se pudo eliminar el carrito"
     });
@@ -156,9 +165,10 @@ export const deleteProductFromCart = async (req, res) => {
       products.splice(index, 1);
     }
     await cartsModel.updateById(id, { products });
+    logger.debug(`Producto con id ${id_prod} eliminado del carrito`);
     res.json({ result: "ok", deletedProdId: id_prod });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     res.status(500).json({
       error: `No se pudo eliminar el producto del carrito`
     });

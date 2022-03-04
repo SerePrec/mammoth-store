@@ -11,6 +11,7 @@ import authRouter from "./routes/authRouter.js";
 import productsRouter from "./routes/apiProductsRouter.js";
 import cartsRouter from "./routes/apiCartsRouter.js";
 import webServerRouter from "./routes/webServerRouter.js";
+import { logger } from "./logger/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -40,7 +41,7 @@ app.use(
 
 //FIXME:FIXME:
 app.use((req, res, next) => {
-  console.log(req.session);
+  // console.log(req.session);
   next();
 });
 
@@ -56,9 +57,9 @@ app.use("/api/carrito", isAuthApi, cartsRouter);
 
 // error 404 API
 app.use("/api", (req, res, next) => {
-  // logger.warn(
-  //   `ruta '${req.baseUrl + req.path}' método '${req.method}' no implementada`
-  // );
+  logger.warn(
+    `ruta '${req.baseUrl + req.path}' método '${req.method}' no implementada`
+  );
   res.status(404).json({
     error: -2,
     descripcion: `ruta '${req.baseUrl + req.path}' método '${
@@ -69,9 +70,9 @@ app.use("/api", (req, res, next) => {
 
 // error 404 WEB
 app.use((req, res, next) => {
-  // logger.warn(
-  //   `ruta '${req.baseUrl + req.path}' método '${req.method}' no implementada`
-  // );
+  logger.warn(
+    `ruta '${req.baseUrl + req.path}' método '${req.method}' no implementada`
+  );
   res.sendFile("404.html", {
     root: path.join(__dirname, "views")
   });
