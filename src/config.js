@@ -32,6 +32,7 @@ const config = {
     messagesFile: "mensajes.json",
     productsFile: "productos.json",
     cartsFile: "carritos.json",
+    ordersFile: "ordenes.json",
     usersFile: "usuarios.json"
   },
   mariaDb: {
