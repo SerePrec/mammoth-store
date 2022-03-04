@@ -26,7 +26,19 @@
   {
     "id": 3,
     "timestamp": "2022-02-26T21:23:26.082Z",
-    "username": "admin@admin.com",
+    "username": "admin@mammoth.com",
+    "password": "$2b$10$UQMuNJPkJ7pNe37lNu10m.VZ8kMPy2x4fmOQAiPV6Chvj7U5HaD7y",
+    "name": "Sergio Emanuel Prellezo",
+    "address": "33 #922",
+    "age": 43,
+    "phone": "+5492215737971",
+    "avatar": "/img/avatars/admin_avatar.svg",
+    "role": "admin"
+  },
+  {
+    "id": 4,
+    "timestamp": "2022-03-03T18:00:00.082Z",
+    "username": "adm.mammoth@gmail.com",
     "password": "$2b$10$UQMuNJPkJ7pNe37lNu10m.VZ8kMPy2x4fmOQAiPV6Chvj7U5HaD7y",
     "name": "Sergio Emanuel Prellezo",
     "address": "33 #922",
