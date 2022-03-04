@@ -98,7 +98,7 @@ function deleteCart() {
         cargar();
       }
     })
-    .catch(console.log);
+    .catch(console.error);
 }
 
 function updateProductFromCart(id, id_prod, quantity) {
@@ -111,7 +111,7 @@ function updateProductFromCart(id, id_prod, quantity) {
           updateCartTable();
         }
       })
-      .catch(console.log);
+      .catch(console.error);
   }
 }
 
@@ -125,7 +125,7 @@ function deleteProductFromCart(id, id_prod) {
           updateCartTable();
         }
       })
-      .catch(console.log);
+      .catch(console.error);
   }
 }
 
@@ -248,7 +248,7 @@ function updateCartTable() {
           $("#cartProducts").slideDown(300);
         }
       })
-      .catch(console.log);
+      .catch(console.error);
   } else {
     $cartProducts.innerHTML = "";
   }
