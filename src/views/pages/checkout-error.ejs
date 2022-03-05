@@ -50,96 +50,14 @@
       <p></p>
     </div>
   </header>
-  <main class="checkout mh-70">
-    <div class="container-xl">
 
-      <h2 class="text-center py-2">CHECKOUT</h2>
-
-      <!---------------------- Checkout - inicio ------------------------>
-      <div id="checkOutCompra" class="row mx-0 mr-md-n3">
-
-        <!----------------- Columna de resumen de compra ------------------->
-        <div class="col-md-5 mb-4 resumenCompra">
-          <h3>Resumen de compra</h3>
-          <table class="table">
-            <tbody id="contenedorResumenCompra">
-            </tbody>
-          </table>
-          <div class="importe">
-            <p></p>
-          </div>
-          <div class="help">
-            <p><b>¿Necesitas ayuda? </b>Llamanos al <span>0800-888-1234</span></p>
-          </div>
-        </div>
-
-        <!----------------- Columna de formulario ------------------->
-        <div class="col-md-7">
-          <form id="formularioCompra">
-            <div class="row mb-3">
-              <label for="inputNombre" class="col-sm-2 col-form-label">Nombre y Apellido</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputNombre" placeholder="Ingresa tu nombre y apellido"
-                  value="<%= name %>" name="name" maxlength="50" required>
-                <small class="form-text">Con estos datos se hará la facturación.</small>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputTelefono" class="col-sm-2 col-form-label">Teléfono</label>
-              <div class="col-sm-10">
-                <input type="tel" class="form-control" id="inputTelefono" placeholder="Ej: +5491231234567"
-                  pattern="[+][0-9]{8,20}" value="<%= phone %>" name="phone" maxlength="20" required>
-                <small class="form-text">Puede que necesitemos contactarnos por tu compra.</small>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-              <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail" placeholder="ejemplo@ejemplo.com"
-                  value="<%= username %>" name="username" maxlength="50" required disabled>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputDireccion" class="col-sm-2 col-form-label">Dirección</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputDireccion" placeholder="Ingresa tu dirección COMPLETA"
-                  value="<%= address %>" name="address" maxlength="80" required>
-                <small class="form-text">Es la dirección a la que enviaremos tu pedido</small>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputCP" class="col-form-label col-sm-2">Código Postal</label>
-              <div class="col-5">
-                <input placeholder="Ingresa el CP" type="text" id="inputCP" class="form-control" name="cp"
-                  maxlength="10" required>
-                <small class="form-text">CP de la dirección de
-                  envío</small>
-              </div>
-            </div>
-
-            <!----------------- cuotas ------------------->
-            <fieldset class="form-group py-3 cuotas">
-              <div class="row" style="display:none">
-                <legend class="col-form-label col-sm-2 pt-0 pr-0">Cuotas</legend>
-                <div id="contenedorCuotas" class="col-sm-10 pl-1">
-                </div>
-              </div>
-            </fieldset>
-
-            <div class="form-group row">
-              <div class="col-sm-12 d-flex justify-content-evenly mb-4">
-                <a href="/" class="btn btn-dark">Volver a ShowRoom</a>
-                <button id="btnAceptaCompra" type="submit" class="btn btn-danger">
-                  Aceptar la compra
-                  <img src="/img/check.svg" alt="">
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-
-      </div>
-      <!---------------------- Checkout - Fin ------------------------>
+  <main>
+    <div class="checkout-error">
+      <h3>Algo salió mal durante el procesamiento de tu pedido</h3>
+      <p>Te pedimos disculpas y que vuelvas a intentarlo</p>
+      <p>Si continúa el problema, por favor, reintenta más tarde</p>
+      <p>Muchas gracias</p>
+      <a class="btn btn-light" href="/">IR A HOME</a>
     </div>
   </main>
 
@@ -300,26 +218,10 @@
   </div>
   <!------------------- Modal Terminos y Condiciones - Fin ------------------->
 
-  <!---------------- Modal para mensajes - inicio ---------------->
-  <div id="modalMensajes" class="modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content loader">
-        <div class="modal-body p-0 pt-1">
-          <div>
-            <h4 class="text-center p-5">Texto a mostrar</h4>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="modalMensajesFondo" class="modal-backdrop"></div>
-  <!---------------- Modal para mensajes - Fin ---------------->
 
-  <!-- jQuery y Bootstrap JS -->
-  <%- include("../partials/jQueryScripts.ejs")  %>
-  <%- include("../partials/bootstrapScripts.ejs")  %>
-  <!-- Mi JS -->
-  <script src="/js/checkout.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

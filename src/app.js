@@ -10,6 +10,7 @@ import { isAuthApi } from "./middlewares/auth.js";
 import authRouter from "./routes/authRouter.js";
 import productsRouter from "./routes/apiProductsRouter.js";
 import cartsRouter from "./routes/apiCartsRouter.js";
+import ordersRouter from "./routes/apiOrdersRouter.js";
 import webServerRouter from "./routes/webServerRouter.js";
 import { logger } from "./logger/index.js";
 
@@ -41,7 +42,7 @@ app.use(
 
 //FIXME:FIXME:
 app.use((req, res, next) => {
-  // console.log(req.session);
+  //console.log(req.session);
   next();
 });
 
@@ -54,6 +55,7 @@ app.use(authRouter);
 app.use(webServerRouter);
 app.use("/api/productos", isAuthApi, productsRouter);
 app.use("/api/carrito", isAuthApi, cartsRouter);
+app.use("/api/ordenes", isAuthApi, ordersRouter);
 
 // error 404 API
 app.use("/api", (req, res, next) => {

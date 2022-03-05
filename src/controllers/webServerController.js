@@ -82,6 +82,24 @@ export const getCheckout = (req, res) => {
   });
 };
 
+export const getCheckoutOk = (req, res) => {
+  const { user } = req;
+  res.render("pages/checkout-ok", {
+    title: "Mammoth Bike Store | Compra exitosa!",
+    username: user.provider ? user.emails[0].value : user.username,
+    avatar: user.provider ? user.photos[0].value : user.avatar
+  });
+};
+
+export const getCheckoutError = (req, res) => {
+  const { user } = req;
+  res.render("pages/checkout-error", {
+    title: "Mammoth Bike Store | Error de checkout",
+    username: user.provider ? user.emails[0].value : user.username,
+    avatar: user.provider ? user.photos[0].value : user.avatar
+  });
+};
+
 export const getUsersChat = (req, res) => {
   const { email } = req.params;
   const { user } = req;

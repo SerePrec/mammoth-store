@@ -15,22 +15,34 @@ const interes12Cuotas = 20;
 const interes18Cuotas = 30;
 
 //DOM *********************************
+const $checkoutForm = document.getElementById("formularioCompra");
 const $contenedorCuotas = $("#contenedorCuotas");
 const $contenedorResumenCompra = $("#contenedorResumenCompra");
 const $importe = $(".importe p");
-$(document).ready(function () {
-  $inputRadios = $("[name='numCuotas']");
-});
+const $divModalMensajes = $("#modalMensajes");
+const $divModalMensajesFondo = $("#modalMensajesFondo");
 
 // **************************************************************************//
 // *********************** Definiciones de funciones ************************//
 // **************************************************************************//
 
-// Funciones para inetractuar con la api de carritos *************************
+// Funciones para inetractuar con la api de carritos y órdenes ***************
 // ***************************************************************************
 const cartsApi = {
   getUserCart: async () => {
     return fetch(`/api/carrito/usuario`).then(data => data.json());
+  }
+};
+
+const ordersApi = {
+  createOrder: async orderData => {
+    return fetch(`/api/ordenes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(orderData)
+    }).then(data => data.json());
   }
 };
 
@@ -205,6 +217,30 @@ function updateCartWidget(prevQty, finalQty) {
 // Accion botón logout
 document.getElementById("btn-logout").addEventListener("click", e => {
   location.assign("/logout");
+});
+
+$checkoutForm.addEventListener("submit", async e => {
+  e.preventDefault();
+  $divModalMensajes.addClass("show");
+  $divModalMensajesFondo.addClass("show");
+  $divModalMensajes.find(".modal-body h4").text("Procesando tu pedido...");
+
+  const data = {
+    id: userCartId,
+    name: $checkoutForm[0].value.trim(),
+    phone: $checkoutForm[1].value.trim(),
+    address: $checkoutForm[3].value.trim(),
+    cp: $checkoutForm[4].value.trim()
+  };
+  const res = await ordersApi.createOrder(data);
+  if (res?.result === "ok") {
+    sessionStorage.setItem("order", res.orderNumber);
+    location.assign("/checkout/ok");
+  } else if (res.error === "No autenticado") {
+    location.assign("/");
+  } else {
+    location.assign("/checkout/error");
+  }
 });
 
 // Funciones de carga de Carrito ************************************

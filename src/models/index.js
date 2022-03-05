@@ -31,6 +31,7 @@ switch (config.PERS) {
       await cartsModel.init();
       await messagesModel.init();
       await usersModel.init();
+      await ordersModel.init();
       logger.info("Persistencia [File System] inicializada");
     } catch (error) {
       logger.error(error);

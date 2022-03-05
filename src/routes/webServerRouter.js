@@ -8,6 +8,8 @@ import {
   getCart,
   getAdminCarts,
   getCheckout,
+  getCheckoutOk,
+  getCheckoutError,
   getUsersChat,
   getAdminChat
 } from "../controllers/webServerController.js";
@@ -27,6 +29,10 @@ router.get("/carrito", isAuthWeb, isNotAdminWeb, getCart);
 router.get("/carritos/admin", isAuthWeb, isAdminWeb, getAdminCarts);
 
 router.get("/checkout", isAuthWeb, isNotAdminWeb, getCheckout);
+
+router.get("/checkout/ok", isAuthWeb, isNotAdminWeb, getCheckoutOk);
+
+router.get("/checkout/error", isAuthWeb, isNotAdminWeb, getCheckoutError);
 
 router.get("/chat/admin", isAuthWeb, isAdminWeb, getAdminChat);
 

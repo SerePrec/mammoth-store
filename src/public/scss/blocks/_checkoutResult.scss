@@ -1,0 +1,109 @@
+.checkout-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 70vh;
+  width: 95%;
+  max-width: 55rem;
+  margin: auto;
+  padding: 3rem;
+  h3 {
+    font-size: 2.5rem;
+    font-style: italic;
+    font-weight: 300;
+    color: #b30404;
+    margin-bottom: 2rem;
+  }
+  p {
+    font-size: 1.5rem;
+    margin: 1rem auto;
+    &:last-of-type {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.checkout-ok {
+  color: black;
+  background-color: #dedede;
+  border-radius: 0.25rem;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  min-height: 33rem;
+  max-width: 60rem;
+  width: 95%;
+  padding: 2rem;
+
+  img {
+    display: block;
+    width: 6rem;
+    margin-bottom: 2rem;
+  }
+
+  h2,
+  h4,
+  p {
+    width: 100%;
+  }
+
+  h2 {
+    letter-spacing: 0.2em;
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  h4 {
+    margin-top: 2.5rem;
+    font-size: 1.2rem;
+  }
+  p,
+  i {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  div:last-child {
+    width: 50%;
+    height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/img/cyclist_shadow.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    a {
+      color: white;
+      text-decoration: none;
+      background-color: rgba($tonoOscuro, 0.85);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      &:hover {
+        background-color: rgba($tonoOscuro, 1);
+      }
+    }
+  }
+
+  &.animate__fadeIn {
+    animation-duration: 2s;
+  }
+
+  @media (max-width: $md) {
+    img {
+      width: 5rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+    h4 {
+      font-size: 1rem;
+    }
+  }
+}

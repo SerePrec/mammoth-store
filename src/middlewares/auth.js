@@ -34,7 +34,11 @@ const isNotAuthWeb = (req, res, next) => {
 };
 
 const isUserCart = (req, res, next) => {
-  if (req.session?.cartId == req.params.id || req.user.role === "admin") {
+  if (
+    req.session?.cartId == req.params.id ||
+    req.session?.cartId == req.body.id ||
+    req.user.role === "admin"
+  ) {
     return next();
   }
   logger.warn(

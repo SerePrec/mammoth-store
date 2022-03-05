@@ -6,6 +6,7 @@ import {
   isInteger,
   isPositiveInteger,
   isAlphanumeric,
+  isValidPhone,
   isURL
 } from "../utils/validations.js";
 import { escapeHtml } from "../utils/dataTools.js";
@@ -121,10 +122,29 @@ const validateCartProductBody = (req, res, next) => {
   }
 };
 
+// Valida que sea un formato de datos válido generar una órden
+const validateOrderPost = (req, res, next) => {
+  const { id, name, address, phone, cp } = req.body;
+  if (
+    !idValidator(id) ||
+    !isTextRequired(name) ||
+    !isTextRequired(address) ||
+    !isValidPhone(phone) ||
+    !isAlphanumeric(cp)
+  ) {
+    res.status(400).json({ error: "Los valores enviados no son válidos" });
+  } else {
+    req.body.name = escapeHtml(name.trim());
+    req.body.address = escapeHtml(address.trim());
+    next();
+  }
+};
+
 export {
   validateId,
   validateIdId_prod,
   validateProductPostBody,
   validateProductPutBody,
-  validateCartProductBody
+  validateCartProductBody,
+  validateOrderPost
 };

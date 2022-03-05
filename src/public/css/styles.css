@@ -1202,6 +1202,91 @@ main.checkout {
     main.checkout #checkOutCompra form #contenedorCuotas i {
       display: block; } }
 
+.checkout-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 70vh;
+  width: 95%;
+  max-width: 55rem;
+  margin: auto;
+  padding: 3rem; }
+  .checkout-error h3 {
+    font-size: 2.5rem;
+    font-style: italic;
+    font-weight: 300;
+    color: #b30404;
+    margin-bottom: 2rem; }
+  .checkout-error p {
+    font-size: 1.5rem;
+    margin: 1rem auto; }
+    .checkout-error p:last-of-type {
+      margin-bottom: 2rem; }
+
+.checkout-ok {
+  color: black;
+  background-color: #dedede;
+  border-radius: 0.25rem;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  min-height: 33rem;
+  max-width: 60rem;
+  width: 95%;
+  padding: 2rem; }
+  .checkout-ok img {
+    display: block;
+    width: 6rem;
+    margin-bottom: 2rem; }
+  .checkout-ok h2,
+  .checkout-ok h4,
+  .checkout-ok p {
+    width: 100%; }
+  .checkout-ok h2 {
+    letter-spacing: 0.2em;
+    font-weight: 800;
+    margin-bottom: 1rem; }
+  .checkout-ok h4 {
+    margin-top: 2.5rem;
+    font-size: 1.2rem; }
+  .checkout-ok p,
+  .checkout-ok i {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem; }
+  .checkout-ok div:last-child {
+    width: 50%;
+    height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/img/cyclist_shadow.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; }
+    .checkout-ok div:last-child a {
+      color: white;
+      text-decoration: none;
+      background-color: rgba(33, 33, 33, 0.85);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: bold; }
+      .checkout-ok div:last-child a:hover {
+        background-color: #212121; }
+  .checkout-ok.animate__fadeIn {
+    animation-duration: 2s; }
+  @media (max-width: 767px) {
+    .checkout-ok img {
+      width: 5rem; }
+    .checkout-ok h2 {
+      font-size: 1.5rem; }
+    .checkout-ok h4 {
+      font-size: 1rem; } }
+
 /***************************************************************/
 /************************ Footer - Inicio  *********************/
 /********************* Flexbox anidados row ********************/
@@ -1713,7 +1798,7 @@ header.admin .navbar .typicBtn {
 
 .emptyCart {
   color: black;
-  background-color: #dbdbdb;
+  background-color: #dedede;
   border-radius: 0.25rem;
   text-align: center;
   margin: auto;
@@ -1798,6 +1883,46 @@ header.admin .navbar .typicBtn {
   #modalTerminos .modal-content .modal-body article.terminos {
     width: 100%;
     padding: 0.5vh 1vw; } }
+
+#modalMensajes {
+  color: black;
+  display: block;
+  transition: opacity 1s;
+  opacity: 0;
+  z-index: -1000; }
+  #modalMensajes .modal-content {
+    min-height: 12rem; }
+    #modalMensajes .modal-content h4 {
+      font-size: 1.5rem; }
+    #modalMensajes .modal-content.info {
+      background-color: #70806fd1;
+      color: white;
+      text-shadow: 1px 1px #212121; }
+      #modalMensajes .modal-content.info .modal-header {
+        padding: 0.25rem 1rem;
+        border-bottom-color: transparent; }
+        #modalMensajes .modal-content.info .modal-header button {
+          color: white; }
+      #modalMensajes .modal-content.info .modal-footer {
+        border-top-color: transparent; }
+  #modalMensajes.show {
+    opacity: 1;
+    z-index: 1050; }
+  #modalMensajes .modal-content.loader {
+    background-image: url("/img/puff.svg");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center; }
+    #modalMensajes .modal-content.loader .modal-body {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+
+#modalMensajesFondo {
+  display: none; }
+  #modalMensajesFondo.show {
+    display: block;
+    opacity: 0.6; }
 
 .newsletter {
   width: 50%; }

@@ -3,7 +3,26 @@ import config from "../../../config.js";
 
 class OrdersDaoFS extends ContenedorFS {
   constructor() {
-    super(config.fileSystemDb.cartsFile);
+    super(config.fileSystemDb.ordersFile);
+  }
+  async save(order) {
+    try {
+      const number = (await this.getCount()) + 1;
+      const newOrder = { ...order, number };
+      return super.save(newOrder);
+    } catch (error) {
+      throw new Error(`Error guardar la orden: ${error}`);
+    }
+  }
+
+  //Obtengo el número de ódenes
+  async getCount() {
+    try {
+      const orders = await this.getAll();
+      return orders.length;
+    } catch (error) {
+      throw new Error(`Error al obtener el conteo de órdenes: ${error}`);
+    }
   }
 
   //Obtengo todas las órdenes por username

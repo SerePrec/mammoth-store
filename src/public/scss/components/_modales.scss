@@ -53,3 +53,64 @@
     }
   }
 }
+
+// Modal parar mensajes info y confirm
+#modalMensajes {
+  color: black;
+  display: block;
+  transition: opacity 1s;
+  opacity: 0;
+  z-index: -1000;
+
+  .modal-content {
+    min-height: 12rem;
+    h4 {
+      font-size: 1.5rem;
+    }
+
+    &.info {
+      background-color: #70806fd1;
+      color: white;
+      text-shadow: 1px 1px #212121;
+
+      .modal-header {
+        padding: 0.25rem 1rem;
+        border-bottom-color: transparent;
+
+        button {
+          color: white;
+        }
+      }
+
+      .modal-footer {
+        border-top-color: transparent;
+      }
+    }
+  }
+
+  &.show {
+    opacity: 1;
+    z-index: 1050;
+  }
+
+  .modal-content.loader {
+    background-image: url("/img/puff.svg");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    .modal-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+#modalMensajesFondo {
+  display: none;
+
+  &.show {
+    display: block;
+    opacity: 0.6;
+  }
+}
