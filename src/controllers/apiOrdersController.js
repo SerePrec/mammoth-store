@@ -17,24 +17,19 @@ import { logger } from "../logger/index.js";
 //   }
 // };
 
-// export const getUserCart = async (req, res) => {
-//   try {
-//     const { user } = req;
-//     const username = user.provider ? user.emails[0].value : user.username;
-//     const userCart = await cartsModel.getByUsername(username);
-//     if (userCart) {
-//       req.session ? (req.session.cartId = userCart.id) : null;
-//       res.json({ cartId: userCart.id, products: userCart.products });
-//     } else {
-//       res.json({ error: "Carrito no encontrado" });
-//     }
-//   } catch (error) {
-//     logger.error(error);
-//     res.status(500).json({
-//       error: "No se pudo recuperar la infomación"
-//     });
-//   }
-// };
+export const getUserOrders = async (req, res) => {
+  try {
+    const { user } = req;
+    const username = user.provider ? user.emails[0].value : user.username;
+    const userOrders = await ordersModel.getByUsername(username);
+    res.json(userOrders);
+  } catch (error) {
+    logger.error(error);
+    res.status(500).json({
+      error: "No se pudo recuperar la infomación"
+    });
+  }
+};
 
 export const createOrder = async (req, res) => {
   try {
@@ -42,13 +37,18 @@ export const createOrder = async (req, res) => {
     const username = user.provider ? user.emails[0].value : user.username;
     const { id: cartId, name, address, phone, cp } = req.body;
     const { products } = await cartsModel.getById(cartId);
+    const total = products.reduce(
+      (total, item) => (total += item.product.price * item.quantity),
+      0
+    );
     const newOrder = {
       username,
       name,
       address,
       phone,
       cp,
-      products
+      products,
+      total
     };
     const { number, id } = await ordersModel.save(newOrder);
     await cartsModel.deleteById(cartId);
@@ -62,21 +62,3 @@ export const createOrder = async (req, res) => {
     });
   }
 };
-
-// export const deleteCart = async (req, res) => {
-//   try {
-//     const deletedId = await cartsModel.deleteById(req.params.id);
-//     req.session ? (req.session.cartId = null) : null;
-//     if (deletedId !== null) {
-//       logger.debug(`Carrito con id ${req.params.id}} eliminado`);
-//       res.json({ result: "ok", deletedId });
-//     } else {
-//       res.json({ error: "Carrito no encontrado" });
-//     }
-//   } catch (error) {
-//     logger.error(error);
-//     res.status(500).json({
-//       error: "No se pudo eliminar el carrito"
-//     });
-//   }
-// };

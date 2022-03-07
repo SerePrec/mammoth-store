@@ -1,0 +1,53 @@
+.summaryOrderModal {
+  .modal-content {
+    font-family: $fuente-principal;
+    .modal-title {
+      color: $rojoMarca;
+    }
+    .modal-body {
+      .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 15rem;
+        h4 {
+          margin-right: 1rem;
+        }
+      }
+      .summaryTable {
+        animation: none;
+      }
+      .detail {
+        & > p {
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
+        }
+        .subTot {
+          text-align: left;
+          p {
+            border-top: 1px solid #dee2e6;
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+          }
+          p:nth-child(2) {
+            padding-bottom: 0;
+          }
+          i {
+            text-align: left;
+            font-size: 0.8rem;
+          }
+        }
+
+        .total {
+          border-top: 1px solid #dee2e6;
+          font-size: 1.8rem;
+          font-weight: bold;
+          padding-top: 1rem;
+        }
+      }
+    }
+  }
+}

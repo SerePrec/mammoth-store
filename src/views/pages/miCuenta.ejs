@@ -21,8 +21,8 @@
       </a>
       <div class="navbar-collapse collapse" id="navbar-myAccount">
         <img src="<%= avatar %>" alt="avatar" referrerpolicy="no-referrer" class="avatar">
-        <a href="/micuenta" class="nav-link">
-          MI CUENTA
+        <a href="/" class="products">
+          <img src="/img/icon_package_w.svg" alt="Catálogo productos" referrerpolicy="no-referrer">
         </a>
         <a href="/chat" class="chat-link">
           <img src="/img/chat_icon.svg" alt="avatar" referrerpolicy="no-referrer" class="avatar">
@@ -50,13 +50,64 @@
       <p></p>
     </div>
   </header>
-  <main class="userCart mh-70">
-    <div class="cartManage">
-      <h2>MI CARRITO</h2>
-      <button id="btnDeleteCart" class="btn btn-secondary hidden">ELIMINAR CARRITO</button>
+
+  <main class="myAccount">
+    <nav aria-label="breadcrumb" class="container-xl mt-3 mb-0 p-0">
+      <ol class="breadcrumb">
+        <h4>MI CUENTA - <%= username %></h4>
+      </ol>
+    </nav>
+    <div class="container-xl userStuffContainer mh-70">
+      <div class="userStuff animate__zoomIn">
+        <div role="alert" class="fade myAccountAlert w-100 alert alert-info show">
+          <div class="alert-heading h4">HOLA, <span><%= name %></span></div>
+          <p>Nos alegra tenerte de vuelta por nuestra tienda.</p>
+        </div>
+        <div class="row no-gutters">
+          <div class="userTools col-md-4">
+            <div id="myInfo">MIS DATOS<img src="/img/account_profile_icon.svg" alt=""></div>
+            <div id="myOrders">MIS ORDENES<img src="/img/clipboard-list.svg" alt=""></div>
+          </div>
+          <div class="userToolsData col-md-8">
+            <div class="image"><img src="/img/logo.svg" alt=""></div>
+            <div class="myInfoTable hidden">
+              <table class="infoTable table table-striped">
+                <thead class="table-dark">
+                  <tr>
+                    <th colspan="2">MIS DATOS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>CUENTA:</td>
+                    <td><%= username %></td>
+                  </tr>
+                  <tr>
+                    <td>NOMBRE:</td>
+                    <td><%= name %></td>
+                  </tr>
+                  <tr>
+                    <td>EDAD:</td>
+                    <td><%= age %></td>
+                  </tr>
+                  <tr>
+                    <td>DIRECCIÓN:</td>
+                    <td><%= address %></td>
+                  </tr>
+                  <tr>
+                    <td>TELÉFONO:</td>
+                    <td><%= phone %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="myOrdersTable hidden">
+              <div class="loader dots"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="cartProducts"></div>
-    <div id="cartInfoMessages"></div>
   </main>
 
   <!--------- Footer - inicio ----------->
@@ -216,11 +267,25 @@
   </div>
   <!------------------- Modal Terminos y Condiciones - Fin ------------------->
 
-  <!-- jQuery y Bootstrap JS -->
-  <%- include("../partials/jQueryScripts.ejs")  %>
-  <%- include("../partials/bootstrapScripts.ejs")  %>
-  <!-- Mi JS -->
-  <script src="/js/carrito.js"></script>
+  <div id="modalOrden" class="modal fade" tabindex="-1">
+    <div class="modal-dialog summaryOrderModal modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="justify-content-center modal-header">
+          <div class="modal-title h4">Resúmen de orden</div>
+        </div>
+        <div class="text-center modal-body">
+        </div>
+        <div class="modal-footer"><button type="button" class="btn btn-dark">Seguir</button></div>
+      </div>
+    </div>
+  </div>
+  <div id="modalMensajesFondo" class="modal-backdrop"></div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="/js/miCuenta.js"></script>
 </body>
 
 </html>

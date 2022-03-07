@@ -1287,6 +1287,135 @@ main.checkout {
     .checkout-ok h4 {
       font-size: 1rem; } }
 
+.myAccount .breadcrumb {
+  color: #fff;
+  background-color: #545454;
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem; }
+  .myAccount .breadcrumb h4 {
+    margin: 0;
+    padding-left: 1rem;
+    font-weight: 500;
+    font-size: 1.2rem; }
+
+.userStuffContainer {
+  background-color: #545454;
+  border: 0.5rem solid #b30404;
+  border-radius: 1rem;
+  color: black;
+  padding: 1rem;
+  margin: 1rem auto 2rem auto; }
+  .userStuffContainer .userStuff {
+    position: relative;
+    background-color: #fff;
+    background-image: url("/img/store.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    overflow: hidden; }
+    .userStuffContainer .userStuff::before {
+      z-index: 0;
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.6); }
+    .userStuffContainer .userStuff .userTools {
+      z-index: 1;
+      min-height: 40vh; }
+      .userStuffContainer .userStuff .userTools div {
+        font-family: "Montserrat", Helvetica, sans-serif;
+        font-weight: bold;
+        background-color: #e9ecef;
+        border-radius: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: all 0.25s ease-in; }
+        .userStuffContainer .userStuff .userTools div img {
+          width: 2rem;
+          height: 5rem;
+          margin-left: 1rem; }
+        .userStuffContainer .userStuff .userTools div:hover {
+          background-color: rgba(179, 4, 4, 0.7);
+          padding-left: 1rem; }
+    .userStuffContainer .userStuff .userToolsData {
+      z-index: 1;
+      padding-left: 1rem;
+      max-height: 42rem;
+      overflow-y: auto; }
+      .userStuffContainer .userStuff .userToolsData .image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        min-height: 20rem; }
+        .userStuffContainer .userStuff .userToolsData .image img {
+          opacity: 0.6;
+          height: 8rem; }
+      .userStuffContainer .userStuff .userToolsData .loader {
+        background-color: transparent;
+        height: 20rem; }
+      .userStuffContainer .userStuff .userToolsData .emptyResults {
+        background-color: transparent;
+        border-radius: 0.25rem;
+        margin: 1.5rem 0;
+        text-align: center;
+        margin: auto;
+        flex: 0 0 80%;
+        height: 20rem;
+        max-width: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        text-shadow: 2px 2px 3px #fff; }
+        .userStuffContainer .userStuff .userToolsData .emptyResults img {
+          display: block;
+          width: 5rem;
+          margin-bottom: 1rem; }
+        .userStuffContainer .userStuff .userToolsData .emptyResults h2,
+        .userStuffContainer .userStuff .userToolsData .emptyResults h3,
+        .userStuffContainer .userStuff .userToolsData .emptyResults p {
+          width: 100%; }
+      .userStuffContainer .userStuff .userToolsData .hidden {
+        display: none; }
+      .userStuffContainer .userStuff .userToolsData::-webkit-scrollbar {
+        -webkit-appearance: none; }
+      .userStuffContainer .userStuff .userToolsData::-webkit-scrollbar:vertical {
+        width: 0.5rem; }
+      .userStuffContainer .userStuff .userToolsData::-webkit-scrollbar-button:increment, .userStuffContainer .userStuff .userToolsData::-webkit-scrollbar-button {
+        display: none; }
+      .userStuffContainer .userStuff .userToolsData::-webkit-scrollbar-thumb {
+        background-color: #b9b8b8;
+        border-radius: 20px; }
+      .userStuffContainer .userStuff .userToolsData::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: #212121; }
+  @media (max-width: 767px) {
+    .userStuffContainer .userStuff .userToolsData {
+      padding-left: 0;
+      padding-right: 0; } }
+  @media (max-width: 575px) {
+    .userStuffContainer .userStuff {
+      padding: 0;
+      background-position: 80% center; } }
+
+.myAccountAlert .alert-heading span {
+  font-size: 1.3rem; }
+
+.myAccountAlert p .typicBtn {
+  display: inline-flex;
+  border-radius: 1rem;
+  margin-left: 0.25rem; }
+  .myAccountAlert p .typicBtn img {
+    margin-left: 0.5rem; }
+
 /***************************************************************/
 /************************ Footer - Inicio  *********************/
 /********************* Flexbox anidados row ********************/
@@ -1480,6 +1609,9 @@ footer address {
         justify-content: center;
         align-items: center;
         font-family: "Montserrat", Helvetica, sans-serif; }
+    .navbar #navbar-myAccount .products img {
+      margin: 0 3rem;
+      width: 3rem; }
     .navbar #navbar-myAccount .chat-link img {
       background-color: transparent;
       border-radius: 0;
@@ -1924,6 +2056,49 @@ header.admin .navbar .typicBtn {
     display: block;
     opacity: 0.6; }
 
+#modalOrden {
+  color: black;
+  display: block;
+  opacity: 0;
+  z-index: -1000; }
+  #modalOrden.show {
+    transition: opacity 1s;
+    opacity: 1;
+    z-index: 1050; }
+  #modalOrden .summaryOrderModal .modal-content {
+    font-family: "Montserrat", Helvetica, sans-serif; }
+    #modalOrden .summaryOrderModal .modal-content .modal-title {
+      color: #b30404; }
+    #modalOrden .summaryOrderModal .modal-content .modal-body .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 15rem; }
+      #modalOrden .summaryOrderModal .modal-content .modal-body .loading h4 {
+        margin-right: 1rem; }
+    #modalOrden .summaryOrderModal .modal-content .modal-body .summaryTable {
+      border-top: 1px solid #dee2e6;
+      animation: none; }
+      #modalOrden .summaryOrderModal .modal-content .modal-body .summaryTable tr td {
+        background-color: white;
+        padding: 0.25rem;
+        vertical-align: middle; }
+        #modalOrden .summaryOrderModal .modal-content .modal-body .summaryTable tr td:nth-child(1) {
+          width: 22%; }
+        #modalOrden .summaryOrderModal .modal-content .modal-body .summaryTable tr td:nth-child(2) {
+          width: 50%; }
+        #modalOrden .summaryOrderModal .modal-content .modal-body .summaryTable tr td:nth-child(3) {
+          width: 10%; }
+        #modalOrden .summaryOrderModal .modal-content .modal-body .summaryTable tr td:nth-child(4) {
+          width: 18%; }
+    #modalOrden .summaryOrderModal .modal-content .modal-body .detail > p {
+      font-size: 1.2rem;
+      margin-bottom: 1rem; }
+    #modalOrden .summaryOrderModal .modal-content .modal-body .detail .total {
+      font-size: 1.8rem;
+      font-weight: bold;
+      padding-top: 1rem; }
+
 .newsletter {
   width: 50%; }
   .newsletter form {
@@ -1985,3 +2160,68 @@ header.admin .navbar .typicBtn {
 
 /************************* Redes - Fin *************************/
 /***************************************************************/
+.infoTable {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 1rem;
+  border-color: transparent;
+  text-align: center; }
+  .infoTable thead th {
+    border: none; }
+  .infoTable thead th:first-child {
+    border-top-left-radius: 0.75rem; }
+  .infoTable thead th:last-child {
+    border-top-right-radius: 0.75rem; }
+  .infoTable tbody tr {
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s; }
+    .infoTable tbody tr:hover {
+      background-color: rgba(179, 4, 4, 0.75);
+      color: #fff; }
+
+.myOrdersTable .loader {
+  height: 26rem;
+  background-image: url("/img/puff.svg");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #e9ecef;
+  border-radius: 0.25rem;
+  margin: 1.5rem 0;
+  padding: 2rem;
+  text-align: center;
+  margin: auto;
+  flex: 0 0 80%;
+  max-width: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  font-size: 2rem; }
+  .myOrdersTable .loader.dots {
+    background-image: url("/img/three-dots.svg");
+    width: 50%; }
+  @media (max-width: 575px) {
+    .myOrdersTable .loader {
+      height: 15rem;
+      background-size: 80%; } }
+
+.myOrdersTable .ordersTable {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 1rem;
+  border-color: transparent;
+  text-align: center; }
+  .myOrdersTable .ordersTable thead th {
+    border: none; }
+  .myOrdersTable .ordersTable thead th:first-child {
+    border-top-left-radius: 0.75rem; }
+  .myOrdersTable .ordersTable thead th:last-child {
+    border-top-right-radius: 0.75rem; }
+  .myOrdersTable .ordersTable tbody tr {
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s; }
+    .myOrdersTable .ordersTable tbody tr:hover {
+      background-color: rgba(179, 4, 4, 0.75);
+      color: #fff; }

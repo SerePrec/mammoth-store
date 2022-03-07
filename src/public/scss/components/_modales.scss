@@ -114,3 +114,72 @@
     opacity: 0.6;
   }
 }
+
+#modalOrden {
+  color: black;
+  display: block;
+  opacity: 0;
+  z-index: -1000;
+  &.show {
+    transition: opacity 1s;
+    opacity: 1;
+    z-index: 1050;
+  }
+  .summaryOrderModal {
+    .modal-content {
+      font-family: $fuente-principal;
+      .modal-title {
+        color: $rojoMarca;
+      }
+      .modal-body {
+        .loading {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 15rem;
+          h4 {
+            margin-right: 1rem;
+          }
+        }
+        .summaryTable {
+          border-top: 1px solid #dee2e6;
+          animation: none;
+          tr {
+            td {
+              background-color: white;
+              padding: 0.25rem;
+              vertical-align: middle;
+
+              &:nth-child(1) {
+                width: 22%;
+              }
+
+              &:nth-child(2) {
+                width: 50%;
+              }
+
+              &:nth-child(3) {
+                width: 10%;
+              }
+
+              &:nth-child(4) {
+                width: 18%;
+              }
+            }
+          }
+        }
+        .detail {
+          & > p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+          }
+          .total {
+            font-size: 1.8rem;
+            font-weight: bold;
+            padding-top: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

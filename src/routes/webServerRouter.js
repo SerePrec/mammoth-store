@@ -7,11 +7,12 @@ import {
   getAdminProducts,
   getCart,
   getAdminCarts,
+  getMyAccount,
+  getUsersChat,
+  getAdminChat,
   getCheckout,
   getCheckoutOk,
-  getCheckoutError,
-  getUsersChat,
-  getAdminChat
+  getCheckoutError
 } from "../controllers/webServerController.js";
 
 const router = Router();
@@ -28,14 +29,16 @@ router.get("/carrito", isAuthWeb, isNotAdminWeb, getCart);
 
 router.get("/carritos/admin", isAuthWeb, isAdminWeb, getAdminCarts);
 
+router.get("/micuenta", isAuthWeb, isNotAdminWeb, getMyAccount);
+
+router.get("/chat/admin", isAuthWeb, isAdminWeb, getAdminChat);
+
+router.get("/chat/:email?", isAuthWeb, isNotAdminWeb, getUsersChat);
+
 router.get("/checkout", isAuthWeb, isNotAdminWeb, getCheckout);
 
 router.get("/checkout/ok", isAuthWeb, isNotAdminWeb, getCheckoutOk);
 
 router.get("/checkout/error", isAuthWeb, isNotAdminWeb, getCheckoutError);
-
-router.get("/chat/admin", isAuthWeb, isAdminWeb, getAdminChat);
-
-router.get("/chat/:email?", isAuthWeb, isNotAdminWeb, getUsersChat);
 
 export default router;

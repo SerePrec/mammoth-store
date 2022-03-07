@@ -1,0 +1,89 @@
+.infoTable {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 1rem;
+  border-color: transparent;
+  text-align: center;
+  thead {
+    th {
+      border: none;
+    }
+    th:first-child {
+      border-top-left-radius: 0.75rem;
+    }
+    th:last-child {
+      border-top-right-radius: 0.75rem;
+    }
+  }
+  tbody {
+    tr {
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        background-color: rgba(179, 4, 4, 0.75);
+        color: #fff;
+      }
+    }
+  }
+}
+
+.myOrdersTable {
+  .loader {
+    height: 26rem;
+    background-image: url("/img/puff.svg");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+    margin: 1.5rem 0;
+    padding: 2rem;
+    text-align: center;
+    margin: auto;
+    flex: 0 0 80%;
+    max-width: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    font-size: 2rem;
+    &.dots {
+      background-image: url("/img/three-dots.svg");
+      width: 50%;
+    }
+    @media (max-width: $sm) {
+      height: 15rem;
+      background-size: 80%;
+    }
+  }
+
+  .ordersTable {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 1rem;
+    border-color: transparent;
+    text-align: center;
+    thead {
+      th {
+        border: none;
+      }
+      th:first-child {
+        border-top-left-radius: 0.75rem;
+      }
+      th:last-child {
+        border-top-right-radius: 0.75rem;
+      }
+    }
+    tbody {
+      tr {
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+          background-color: rgba(179, 4, 4, 0.75);
+          color: #fff;
+        }
+      }
+    }
+  }
+}

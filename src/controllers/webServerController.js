@@ -70,32 +70,15 @@ export const getAdminCarts = (req, res) => {
   res.sendFile("carritos-admin.html", { root: viewsPath });
 };
 
-export const getCheckout = (req, res) => {
+export const getMyAccount = (req, res) => {
   const { user } = req;
-  res.render("pages/checkout", {
-    title: "Mammoth Bike Store | Checkout",
+  res.render("pages/miCuenta", {
+    title: "Mammoth Bike Store | Mi Cuenta",
     username: user.provider ? user.emails[0].value : user.username,
     name: user.provider ? user.displayName : user.name,
-    address: user.provider ? "" : user.address,
-    phone: user.provider ? "" : user.phone,
-    avatar: user.provider ? user.photos[0].value : user.avatar
-  });
-};
-
-export const getCheckoutOk = (req, res) => {
-  const { user } = req;
-  res.render("pages/checkout-ok", {
-    title: "Mammoth Bike Store | Compra exitosa!",
-    username: user.provider ? user.emails[0].value : user.username,
-    avatar: user.provider ? user.photos[0].value : user.avatar
-  });
-};
-
-export const getCheckoutError = (req, res) => {
-  const { user } = req;
-  res.render("pages/checkout-error", {
-    title: "Mammoth Bike Store | Error de checkout",
-    username: user.provider ? user.emails[0].value : user.username,
+    address: user.provider ? "N/D" : user.address,
+    phone: user.provider ? "N/D" : user.phone,
+    age: user.provider ? "N/D" : user.age,
     avatar: user.provider ? user.photos[0].value : user.avatar
   });
 };
@@ -117,4 +100,34 @@ export const getUsersChat = (req, res) => {
 
 export const getAdminChat = (req, res) => {
   res.render("pages/chat-admin", { title: "Administrador de mensajes" });
+};
+
+export const getCheckout = (req, res) => {
+  const { user } = req;
+  res.render("pages/checkout", {
+    title: "Mammoth Bike Store | Checkout",
+    username: user.provider ? user.emails[0].value : user.username,
+    name: user.provider ? user.displayName : user.name,
+    address: user.provider ? "" : user.address,
+    phone: user.provider ? "" : user.phone,
+    avatar: user.provider ? user.photos[0].value : user.avatar
+  });
+};
+
+export const getCheckoutOk = (req, res) => {
+  const { user } = req;
+  res.render("pages/checkout-ok", {
+    title: "Mammoth Bike Store | Compra Exitosa",
+    username: user.provider ? user.emails[0].value : user.username,
+    avatar: user.provider ? user.photos[0].value : user.avatar
+  });
+};
+
+export const getCheckoutError = (req, res) => {
+  const { user } = req;
+  res.render("pages/checkout-error", {
+    title: "Mammoth Bike Store | Error de checkout",
+    username: user.provider ? user.emails[0].value : user.username,
+    avatar: user.provider ? user.photos[0].value : user.avatar
+  });
 };

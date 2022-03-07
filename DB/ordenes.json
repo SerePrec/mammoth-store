@@ -39,11 +39,12 @@
         "quantity": 1
       }
     ],
+    "total": 4875,
     "number": 1
   },
   {
     "id": 2,
-    "timestamp": "2022-03-05T23:11:02.776Z",
+    "timestamp": "2022-03-06T23:12:05.466Z",
     "username": "prellezose@yahoo.com.ar",
     "name": "Sergio Emanuel Prellezo",
     "address": "33 #922",
@@ -52,35 +53,36 @@
     "products": [
       {
         "product": {
-          "id": 3,
-          "timestamp": "2021-12-08T15:15:07.528Z",
-          "category": "equipamiento",
-          "code": "N-CA-CI-50",
-          "brand": "NUTRISPORT",
-          "title": "Gel Energizante Nutrisport Con Cafeína 50g. Express.",
+          "id": 1,
+          "timestamp": "2021-12-08T15:15:07.527Z",
+          "category": "accesorios",
+          "code": "00001-B3",
+          "brand": "PODIUM",
+          "title": "Caramagnola Plástica Podium 0.5L. Versión Eco. Color A Granel.",
           "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-          "price": 125,
-          "stock": 200,
-          "thumbnail": "/img/productos/1639157975529-producto3.jpg"
+          "price": 450,
+          "stock": 50,
+          "thumbnail": "/img/productos/1639157946700-producto1.jpg"
         },
-        "quantity": 1
+        "quantity": 2
       },
       {
         "product": {
-          "id": 2,
+          "id": 4,
           "timestamp": "2021-12-08T15:15:07.528Z",
-          "category": "componentes",
-          "code": "M-MTB-0345",
-          "brand": "MAXXIS",
-          "title": "Cubierta De Kevlar Maxxis Race King 29 X 2,15.",
-          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-          "price": 4750,
-          "stock": 15,
-          "thumbnail": "/img/productos/1639157959863-producto2.jpg"
+          "category": "equipamiento",
+          "code": "S-H-PREV.075-BC/RED/SM",
+          "brand": "SPECIALIZED",
+          "title": "Casco Specialized Echelon II Ruta. Verde FL / Small.",
+          "detail": "Casco de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+          "price": 15480,
+          "stock": 5,
+          "thumbnail": "/img/productos/1639157991226-producto4.jpg"
         },
         "quantity": 1
       }
     ],
+    "total": 16380,
     "number": 2
   }
 ]

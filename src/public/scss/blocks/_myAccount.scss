@@ -1,0 +1,177 @@
+.myAccount {
+  .breadcrumb {
+    color: #fff;
+    background-color: $tonoMedio;
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    h4 {
+      margin: 0;
+      padding-left: 1rem;
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.userStuffContainer {
+  background-color: $tonoMedio;
+  border: 0.5rem solid $rojoMarca;
+  border-radius: 1rem;
+  color: black;
+  padding: 1rem;
+  margin: 1rem auto 2rem auto;
+  .userStuff {
+    position: relative;
+    background-color: #fff;
+    background-image: url("/img/store.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    overflow: hidden;
+
+    &::before {
+      z-index: 0;
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .userTools {
+      z-index: 1;
+      min-height: 40vh;
+      div {
+        font-family: $fuente-principal;
+        font-weight: bold;
+        background-color: #e9ecef;
+        border-radius: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: all 0.25s ease-in;
+        img {
+          width: 2rem;
+          height: 5rem;
+          margin-left: 1rem;
+        }
+        &:hover {
+          background-color: rgba($rojoMarca, 0.7);
+          padding-left: 1rem;
+        }
+      }
+    }
+
+    .userToolsData {
+      z-index: 1;
+      padding-left: 1rem;
+      max-height: 42rem;
+      overflow-y: auto;
+
+      .image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        min-height: 20rem;
+        img {
+          opacity: 0.6;
+          height: 8rem;
+        }
+      }
+
+      .loader {
+        background-color: transparent;
+        height: 20rem;
+      }
+
+      .emptyResults {
+        background-color: transparent;
+        border-radius: 0.25rem;
+        margin: 1.5rem 0;
+        text-align: center;
+        margin: auto;
+        flex: 0 0 80%;
+        height: 20rem;
+        max-width: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        text-shadow: 2px 2px 3px #fff;
+
+        img {
+          display: block;
+          width: 5rem;
+          margin-bottom: 1rem;
+        }
+
+        h2,
+        h3,
+        p {
+          width: 100%;
+        }
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      &::-webkit-scrollbar {
+        -webkit-appearance: none;
+      }
+
+      &::-webkit-scrollbar:vertical {
+        width: 0.5rem;
+      }
+
+      &::-webkit-scrollbar-button:increment,
+      &::-webkit-scrollbar-button {
+        display: none;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $tonoClaro;
+        border-radius: 20px;
+      }
+
+      &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: $tonoOscuro;
+      }
+    }
+  }
+  @media (max-width: $md) {
+    .userStuff {
+      .userToolsData {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+  @media (max-width: $sm) {
+    .userStuff {
+      padding: 0;
+      background-position: 80% center;
+    }
+  }
+}
+
+.myAccountAlert {
+  .alert-heading span {
+    font-size: 1.3rem;
+  }
+  p .typicBtn {
+    display: inline-flex;
+    border-radius: 1rem;
+    margin-left: 0.25rem;
+    img {
+      margin-left: 0.5rem;
+    }
+  }
+}
