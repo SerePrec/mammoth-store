@@ -131,9 +131,14 @@ const config = {
     },
     adminEmail: process.env.GMAIL_ADMIN
   },
+  twilio: {
+    accountSid: process.env.TWILIO_ACCOUNT_SID,
+    authToken: process.env.TWILIO_AUTH_TOKEN,
+    smsPhoneNumber: process.env.TWILIO_SMS_PHONE_NUMBER,
+    wspPhoneNumber: process.env.TWILIO_WSP_PHONE_NUMBER,
+    adminWsp: process.env.WSP_ADMIN
+  },
   logsFolder: path.join(__dirname, "logs")
 };
 
 export default config;
-
-console.dir(config, { depth: 10 });

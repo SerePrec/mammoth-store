@@ -1,5 +1,6 @@
-import { cartsModel, ordersModel, productsModel } from "../models/index.js";
+import { cartsModel, ordersModel } from "../models/index.js";
 import { sendEmail, renderOrderTable } from "../email/nodemailer-gmail.js";
+import { sendSMS, sendWSP } from "../messaging/twilio-sms.js";
 import config from "../config.js";
 import { logger } from "../logger/index.js";
 
@@ -58,7 +59,7 @@ export const createOrder = async (req, res) => {
     req.session ? (req.session.cartId = null) : null;
     logger.info(`Orden de usuario '${username}' creada con id ${id}`);
 
-    // Envío de mails asíncrono en paralelo y segundo plano (sin await)
+    // Envío de mails,sms y wsp asíncrono en paralelo y segundo plano (sin await)
     const adminSubject = `Nuevo pedido de ${name} <${username}>`;
     const userSubject = `Mammoth Bike Store - Recibimos tu pedido`;
     sendEmail(
@@ -71,6 +72,11 @@ export const createOrder = async (req, res) => {
       userSubject,
       renderOrderTable({ ...newOrder, number, timestamp }, "user")
     );
+    sendSMS(
+      phone,
+      `Tu pedido fue recibido y se encuentra en proceso - Mammoth Bike Store`
+    );
+    sendWSP(config.twilio.adminWsp, adminSubject);
 
     res.json({ result: "ok", orderId: id, orderNumber: number });
   } catch (error) {
