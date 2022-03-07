@@ -46,5 +46,17 @@
     "phone": "+5492215737971",
     "avatar": "/img/avatars/admin_avatar.svg",
     "role": "admin"
+  },
+  {
+    "id": 5,
+    "timestamp": "2022-03-07T13:23:28.278Z",
+    "username": "andrespipo@gmail.com",
+    "password": "$2b$10$5z9GWqjmAJeKbuwrzFqSQOQiYJ7u2AiAiN.gppDUnBjs/5gYJKPs.",
+    "name": "Andrés Pipo",
+    "address": "40 #22",
+    "age": 20,
+    "phone": "+5492211234444",
+    "avatar": "/img/avatars/default_avatar.svg",
+    "role": "user"
   }
 ]

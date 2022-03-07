@@ -120,7 +120,20 @@ const config = {
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: process.env.GOOGLE_CB_URL || "/auth/google/callback"
   },
+  email: {
+    nodemailer: {
+      service: "gmail",
+      port: 587,
+      auth: {
+        user: process.env.GMAIL_MAMMOOTH,
+        pass: process.env.GMAIL_MAMMOTH_PASS
+      }
+    },
+    adminEmail: process.env.GMAIL_ADMIN
+  },
   logsFolder: path.join(__dirname, "logs")
 };
 
 export default config;
+
+console.dir(config, { depth: 10 });

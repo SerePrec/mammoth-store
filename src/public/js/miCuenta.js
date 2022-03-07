@@ -50,11 +50,16 @@ function renderMyOrders(orders) {
 }
 
 function renderModalOrder(order) {
-  const { number, timestamp, total, products } = order;
+  const { number, timestamp, address, cp, phone, status, total, products } =
+    order;
   let html = `
     <div class="detail">
       <p><b>N°: ${number.toString().padStart(6, "0")}</b></p>
       <p><b>Fecha: </b>${new Date(timestamp).toLocaleString()}</p>
+      <p><b>Domicilio: </b>${address}</p>
+      <p><b>C.P.: </b>${cp}</p>
+      <p><b>Teléfono: </b>${phone}</p>
+      <p><i><b>ESTADO: </b>${status}</i></p>
       <table class="summaryTable animate__slideInUp table">
         <tbody>`;
   for (const item of products) {

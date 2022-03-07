@@ -190,62 +190,15 @@
     ]
   },
   {
-    "id": 11,
-    "timestamp": "2022-02-24T00:20:04.091Z",
+    "id": 14,
+    "timestamp": "2022-03-07T18:17:59.076Z",
     "username": "prellezose@yahoo.com.ar",
-    "products": [
-      {
-        "product": {
-          "id": 3,
-          "timestamp": "2021-12-08T15:15:07.528Z",
-          "category": "equipamiento",
-          "code": "N-CA-CI-50",
-          "brand": "NUTRISPORT",
-          "title": "Gel Energizante Nutrisport Con Cafeína 50g. Express.",
-          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-          "price": 125,
-          "stock": 200,
-          "thumbnail": "/img/productos/1639157975529-producto3.jpg"
-        },
-        "quantity": 1
-      },
-      {
-        "product": {
-          "id": 2,
-          "timestamp": "2021-12-08T15:15:07.528Z",
-          "category": "componentes",
-          "code": "M-MTB-0345",
-          "brand": "MAXXIS",
-          "title": "Cubierta De Kevlar Maxxis Race King 29 X 2,15.",
-          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-          "price": 4750,
-          "stock": 15,
-          "thumbnail": "/img/productos/1639157959863-producto2.jpg"
-        },
-        "quantity": 1
-      }
-    ]
+    "products": []
   },
   {
-    "id": 12,
-    "timestamp": "2022-02-24T21:52:37.618Z",
+    "id": 15,
+    "timestamp": "2022-03-07T18:25:44.419Z",
     "username": "prellezose@gmail.com",
-    "products": [
-      {
-        "product": {
-          "id": 7,
-          "timestamp": "2021-12-08T15:15:07.530Z",
-          "category": "indumentaria",
-          "code": "S-S-SWOR.018-WT/42",
-          "brand": "SPECIALIZED",
-          "title": "Zapatillas Specialized S-Works De Ruta. Blanco. Talle: 42.",
-          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-          "price": 14910,
-          "stock": 3,
-          "thumbnail": "/img/productos/1639158031547-producto7.jpg"
-        },
-        "quantity": 1
-      }
-    ]
+    "products": []
   }
 ]

@@ -4,6 +4,7 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import config from "../config.js";
 import { usersModel } from "../models/index.js";
 import { createHash, isValidPassword } from "../utils/crypt.js";
+import { sendEmail, renderRegisterTable } from "../email/nodemailer-gmail.js";
 import { logger } from "../logger/index.js";
 
 passport.use(
@@ -32,6 +33,13 @@ passport.use(
         const newUserAdded = await usersModel.save(newUser);
         logger.info(
           `Usuario '${username}' registrado con éxito con id ${newUserAdded.id}`
+        );
+        // Envío email asíncronicamente en paralelo (No espero para continuar ni lanzo al catch en caso de error).
+        // Solo se manda al logger el error en caso de haberlo, para no afectar el registro por un error de envío de email.
+        sendEmail(
+          config.email.adminEmail,
+          "Nuevo Registro",
+          renderRegisterTable(newUser)
         );
         return done(null, newUserAdded);
       } catch (error) {

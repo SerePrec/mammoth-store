@@ -1,4 +1,6 @@
 import { cartsModel, ordersModel, productsModel } from "../models/index.js";
+import { sendEmail, renderOrderTable } from "../email/nodemailer-gmail.js";
+import config from "../config.js";
 import { logger } from "../logger/index.js";
 
 // export const getCarts = async (req, res) => {
@@ -48,12 +50,28 @@ export const createOrder = async (req, res) => {
       phone,
       cp,
       products,
-      total
+      total,
+      status: "generada"
     };
-    const { number, id } = await ordersModel.save(newOrder);
+    const { number, id, timestamp } = await ordersModel.save(newOrder);
     await cartsModel.deleteById(cartId);
     req.session ? (req.session.cartId = null) : null;
     logger.info(`Orden de usuario '${username}' creada con id ${id}`);
+
+    // Envío de mails asíncrono en paralelo y segundo plano (sin await)
+    const adminSubject = `Nuevo pedido de ${name} <${username}>`;
+    const userSubject = `Mammoth Bike Store - Recibimos tu pedido`;
+    sendEmail(
+      config.email.adminEmail,
+      adminSubject,
+      renderOrderTable({ ...newOrder, number, timestamp }, "admin")
+    );
+    sendEmail(
+      username,
+      userSubject,
+      renderOrderTable({ ...newOrder, number, timestamp }, "user")
+    );
+
     res.json({ result: "ok", orderId: id, orderNumber: number });
   } catch (error) {
     logger.error(error);
