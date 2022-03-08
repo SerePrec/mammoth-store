@@ -7,7 +7,7 @@ class UsersDaoMem extends ContenedorMem {
       {
         id: 1,
         timestamp: "2022-02-26T21:23:26.082Z",
-        username: "admin@admin.com",
+        username: "admin@mammoth.com",
         password:
           "$2b$10$UQMuNJPkJ7pNe37lNu10m.VZ8kMPy2x4fmOQAiPV6Chvj7U5HaD7y",
         name: "Sergio Emanuel Prellezo",

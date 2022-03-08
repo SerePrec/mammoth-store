@@ -4,21 +4,9 @@ import { sendSMS, sendWSP } from "../messaging/twilio-sms.js";
 import config from "../config.js";
 import { logger } from "../logger/index.js";
 
-// export const getCarts = async (req, res) => {
-//   try {
-//     const cartsIds = (await cartsModel.getAll()).map(cart => ({
-//       cartId: cart.id,
-//       cartUser: cart.username,
-//       timestamp: cart.timestamp
-//     }));
-//     res.json(cartsIds);
-//   } catch (error) {
-//     logger.error(error);
-//     res.status(500).json({
-//       error: "No se pudo recuperar la infomación"
-//     });
-//   }
-// };
+// export const getOrders = async (req, res) => {};
+
+// export const getOrdersByNumber = async (req, res) => {};
 
 export const getUserOrders = async (req, res) => {
   try {

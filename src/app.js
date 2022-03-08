@@ -40,12 +40,6 @@ app.use(
   })
 );
 
-//FIXME:FIXME:
-app.use((req, res, next) => {
-  //console.log(req.session);
-  next();
-});
-
 // passport
 app.use(passport.initialize());
 app.use(passport.session());

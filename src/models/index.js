@@ -160,10 +160,14 @@ switch (config.PERS) {
     const { default: UsersDaoMem } = await import(
       "./daos/users/UsersDaoMem.js"
     );
+    const { default: OrdersDaoMem } = await import(
+      "./daos/orders/OrdersDaoMem.js"
+    );
     productsModel = new ProductsDaoMem();
     cartsModel = new CartsDaoMem();
     messagesModel = new MessagesDaoMem();
     usersModel = new UsersDaoMem();
+    ordersModel = new OrdersDaoMem();
     logger.info("Persistencia [Memoria] inicializada");
     break;
   }

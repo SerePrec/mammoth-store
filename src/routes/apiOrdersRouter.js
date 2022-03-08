@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validateId, validateOrderPost } from "../middlewares/validateData.js";
+import { validateOrderPost } from "../middlewares/validateData.js";
 import { isUserCart, isAdminApi } from "../middlewares/auth.js";
 import {
   createOrder,
@@ -8,7 +8,10 @@ import {
 
 const router = Router();
 
-//router.get("/", isAdminApi, getCarts);
+// TODO:
+//router.get("/", isAdminApi, getOrders);
+
+//router.get("/", isAdminApi, getOrderByNumber);
 
 router.get("/usuario", getUserOrders);
 
