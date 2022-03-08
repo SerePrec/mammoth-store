@@ -1,9 +1,8 @@
-import ContenedorFS from "../../containers/ContenedorFS.js";
-import config from "../../../config.js";
+import ContenedorFirebase from "../../containers/ContenedorFirebase.js";
 
-class OrdersDaoFS extends ContenedorFS {
+class OrdersDaoFirebase extends ContenedorFirebase {
   constructor() {
-    super(config.fileSystemDb.ordersFile);
+    super("orders");
   }
 
   async save(order) {
@@ -19,8 +18,9 @@ class OrdersDaoFS extends ContenedorFS {
   //Obtengo el número de ódenes
   async getCount() {
     try {
-      const orders = await this.getAll();
-      return orders.length;
+      const snapshot = await this.collection.get();
+      const ordersQty = snapshot.size;
+      return ordersQty;
     } catch (error) {
       throw new Error(`Error al obtener el conteo de órdenes: ${error}`);
     }
@@ -29,11 +29,20 @@ class OrdersDaoFS extends ContenedorFS {
   //Obtengo todas las órdenes por username
   async getByUsername(username) {
     try {
-      const orders = await this.getAll();
-      const userOrders = orders
-        .reverse()
-        .filter(order => order.username === username);
-      return userOrders;
+      const snapshot = await this.collection
+        .where("username", "==", username)
+        .orderBy("timestamp", "desc")
+        .get();
+
+      let orders = [];
+      snapshot.forEach(doc =>
+        orders.push({
+          id: doc.id,
+          ...doc.data(),
+          timestamp: doc.data().timestamp.toDate()
+        })
+      );
+      return orders;
     } catch (error) {
       throw new Error(
         `Error al obtener las órdenes con username:'${username}': ${error}`
@@ -42,4 +51,4 @@ class OrdersDaoFS extends ContenedorFS {
   }
 }
 
-export default OrdersDaoFS;
+export default OrdersDaoFirebase;

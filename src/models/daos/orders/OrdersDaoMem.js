@@ -15,7 +15,9 @@ class OrdersDaoMem extends ContenedorMem {
   //Obtengo todas las órdenes por username
   getByUsername(username) {
     const orders = this.getAll();
-    const userOrders = orders.filter(order => order.username === username);
+    const userOrders = orders
+      .reverse()
+      .filter(order => order.username === username);
     return userOrders;
   }
 }

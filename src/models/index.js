@@ -138,10 +138,14 @@ switch (config.PERS) {
     const { default: UsersDaoFirebase } = await import(
       "./daos/users/UsersDaoFirebase.js"
     );
+    const { default: OrdersDaoFirebase } = await import(
+      "./daos/orders/OrdersDaoFirebase.js"
+    );
     productsModel = new ProductsDaoFirebase();
     cartsModel = new CartsDaoFirebase();
     messagesModel = new MessagesDaoFirebase();
     usersModel = new UsersDaoFirebase();
+    ordersModel = new OrdersDaoFirebase();
     logger.info("Persistencia [Firebase] inicializada");
     break;
   }

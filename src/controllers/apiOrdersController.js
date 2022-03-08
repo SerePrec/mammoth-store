@@ -50,21 +50,21 @@ export const createOrder = async (req, res) => {
     // Envío de mails,sms y wsp asíncrono en paralelo y segundo plano (sin await)
     const adminSubject = `Nuevo pedido de ${name} <${username}>`;
     const userSubject = `Mammoth Bike Store - Recibimos tu pedido`;
-    sendEmail(
-      config.email.adminEmail,
-      adminSubject,
-      renderOrderTable({ ...newOrder, number, timestamp }, "admin")
-    );
-    sendEmail(
-      username,
-      userSubject,
-      renderOrderTable({ ...newOrder, number, timestamp }, "user")
-    );
-    sendSMS(
-      phone,
-      `Tu pedido fue recibido y se encuentra en proceso - Mammoth Bike Store`
-    );
-    sendWSP(config.twilio.adminWsp, adminSubject);
+    // sendEmail(
+    //   config.email.adminEmail,
+    //   adminSubject,
+    //   renderOrderTable({ ...newOrder, number, timestamp }, "admin")
+    // );
+    // sendEmail(
+    //   username,
+    //   userSubject,
+    //   renderOrderTable({ ...newOrder, number, timestamp }, "user")
+    // );
+    // sendSMS(
+    //   phone,
+    //   `Tu pedido fue recibido y se encuentra en proceso - Mammoth Bike Store`
+    // );
+    // sendWSP(config.twilio.adminWsp, adminSubject);
 
     res.json({ result: "ok", orderId: id, orderNumber: number });
   } catch (error) {
