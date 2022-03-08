@@ -117,10 +117,14 @@ switch (config.PERS) {
     const { default: UsersDaoMongoDB } = await import(
       "./daos/users/UsersDaoMongoDB.js"
     );
+    const { default: OrdersDaoMongoDB } = await import(
+      "./daos/orders/OrdersDaoMongoDB.js"
+    );
     productsModel = new ProductsDaoMongoDB();
     cartsModel = new CartsDaoMongoDB();
     messagesModel = new MessagesDaoMongoDB();
     usersModel = new UsersDaoMongoDB();
+    ordersModel = new OrdersDaoMongoDB();
     logger.info("Persistencia [MongoDB] inicializada");
     break;
   }

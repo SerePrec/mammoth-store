@@ -18,19 +18,21 @@ const cartProductSchema = new Schema({
   _id: false
 });
 
-const cartItemSchema = new Schema({
+export const cartItemSchema = new Schema({
   product: cartProductSchema,
   quantity: { type: Number, min: 0, required: true },
   _id: false
 });
 
+const cartSchema = new Schema({
+  username: { type: String, required: true, unique: true },
+  products: { type: [cartItemSchema], required: true }, //implicitly default value [] (empty array)
+  timestamp: { type: Date, default: Date.now }
+});
+
 class CartsDaoMongoDB extends ContenedorMongoDB {
   constructor() {
-    super("Cart", {
-      username: { type: String, required: true, unique: true },
-      products: { type: [cartItemSchema], required: true }, //implicitly default value [] (empty array)
-      timestamp: { type: Date, default: Date.now }
-    });
+    super("Cart", cartSchema);
   }
   async save(cart = { products: [] }) {
     return super.save(cart);
