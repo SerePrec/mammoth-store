@@ -6,7 +6,7 @@ import { logger } from "../logger/index.js";
 
 // export const getOrders = async (req, res) => {};
 
-// export const getOrdersByNumber = async (req, res) => {};
+// export const getOrdersById = async (req, res) => {};
 
 export const getUserOrders = async (req, res) => {
   try {

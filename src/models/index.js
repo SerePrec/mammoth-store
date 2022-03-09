@@ -53,10 +53,14 @@ switch (config.PERS) {
     const { default: UsersDaoMariaDb } = await import(
       "./daos/users/UsersDaoMariaDb.js"
     );
+    const { default: OrdersDaoMariaDb } = await import(
+      "./daos/orders/OrdersDaoMariaDb.js"
+    );
     productsModel = new ProductsDaoMariaDb();
     cartsModel = new CartsDaoMariaDb();
     messagesModel = new MessagesDaoMariaDb();
     usersModel = new UsersDaoMariaDb();
+    ordersModel = new OrdersDaoMariaDb();
     logger.info("Persistencia [MariaDB] inicializada");
     break;
   }
@@ -74,10 +78,14 @@ switch (config.PERS) {
     const { default: UsersDaoClearDb } = await import(
       "./daos/users/UsersDaoClearDb.js"
     );
+    const { default: OrdersDaoClearDb } = await import(
+      "./daos/orders/OrdersDaoClearDb.js"
+    );
     productsModel = new ProductsDaoClearDb();
     cartsModel = new CartsDaoClearDb();
     messagesModel = new MessagesDaoClearDb();
     usersModel = new UsersDaoClearDb();
+    ordersModel = new OrdersDaoClearDb();
     logger.info("Persistencia [ClearDB] inicializada");
     break;
   }
@@ -95,10 +103,14 @@ switch (config.PERS) {
     const { default: UsersDaoSQLite3 } = await import(
       "./daos/users/UsersDaoSQLite3.js"
     );
+    const { default: OrdersDaoSQLite3 } = await import(
+      "./daos/orders/OrdersDaoSQLite3.js"
+    );
     productsModel = new ProductsDaoSQLite3();
     cartsModel = new CartsDaoSQLite3();
     messagesModel = new MessagesDaoSQLite3();
     usersModel = new UsersDaoSQLite3();
+    ordersModel = new OrdersDaoSQLite3();
     logger.info("Persistencia [SQLite3] inicializada");
     break;
   }

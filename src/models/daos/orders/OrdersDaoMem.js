@@ -7,7 +7,7 @@ class OrdersDaoMem extends ContenedorMem {
     return super.save(newOrder);
   }
 
-  //Obtengo el número de ódenes
+  //Obtengo el número de órdenes
   getCount() {
     return this.elements.length;
   }

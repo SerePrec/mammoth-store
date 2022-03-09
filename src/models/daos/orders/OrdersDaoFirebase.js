@@ -15,7 +15,7 @@ class OrdersDaoFirebase extends ContenedorFirebase {
     }
   }
 
-  //Obtengo el número de ódenes
+  //Obtengo el número de órdenes
   async getCount() {
     try {
       const snapshot = await this.collection.get();

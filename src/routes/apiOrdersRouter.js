@@ -11,7 +11,7 @@ const router = Router();
 // TODO:
 //router.get("/", isAdminApi, getOrders);
 
-//router.get("/", isAdminApi, getOrderByNumber);
+//router.get("/", isAdminApi, getOrderById);
 
 router.get("/usuario", getUserOrders);
 

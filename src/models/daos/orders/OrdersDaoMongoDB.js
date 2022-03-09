@@ -33,7 +33,7 @@ class OrdersDaoMongoDB extends ContenedorMongoDB {
     }
   }
 
-  //Obtengo el número de ódenes
+  //Obtengo el número de órdenes
   async getCount() {
     try {
       const ordersQty = await this.CollModel.estimatedDocumentCount();

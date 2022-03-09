@@ -16,7 +16,7 @@ class OrdersDaoFS extends ContenedorFS {
     }
   }
 
-  //Obtengo el número de ódenes
+  //Obtengo el número de órdenes
   async getCount() {
     try {
       const orders = await this.getAll();
