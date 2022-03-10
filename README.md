@@ -300,8 +300,12 @@ Se hace un registro de tipo "warn" al pedir rutas no implementadas, no autorizad
 
 ### Análisis de performance
 
-Se realizó un test de stress sobre el enpoint **/api/productos** que nos devuelve el listado de todos los productos, comparando su comportamiento en modo "FORK" vs modo "CLUSTER".  
-El test se realizó con **Artillery** con 200 usuarios virtuales concurrentes y cada uno realizando 50 peticiones consecutivas.
+Se realizó un test de stress sobre el enpoint **/api/productos** que nos devuelve el listado de todos los productos, comparando su comportamiento en modo "FORK" vs modo "CLUSTER". Se eligió como persistencia a **MongoDB local**.
+
+El test se realizó con:
+
+- **Artillery** con 100 usuarios virtuales concurrentes y cada uno realizando 200 peticiones consecutivas.
+- **Autocannon** con 100 usuarios concurrentes realizando peticiones consecutivas durante 20 segundos
 
 Los resultados se encuentran dentro de la carpeta `docs`.
 
@@ -312,6 +316,9 @@ Se visualiza claramente como en modo "CLUSTER" el rendimiento es sustancialmente
 - menor tiempo medio de sesión por usuario virtual
 
 Esto es dado que se utilizan todos los núcleos del procesador para ejecutar instancias del mismo servidor que pueden atender más peticiones en paralelo al hacer un mejor uso de los recursos del computador.
+
+También si hizo un análisis de performance en el mismo endpoint y modo fork con **0x** y **Node inspect**. Del análisis de ambos puede evidenciarse el comportamiento asíncrono del servidor lo que favorece a un mayor rendimiento de la app.
+En la carpeta `docs` se encuentra el gráfico de flama de **0x** junto a la tabla y gráfica de **Node inspect**. En el gráfico de flama no se aprecian importantes "focos calientes". Los más calientes pertenecen a la serialización y des-serialización asociada a MongoDB, pero puede comprobarse en conjunto con los datos de **Node inspect** que el tiempo propio de dichas funciones (permanencia en la cima del stack) no es tan importante. En la gráfica del proceso de **Node inspect** se aprecian los típicos picos de las funciones asíncronas.
 
 ## Notas varias
 
@@ -332,15 +339,21 @@ Esto es dado que se utilizan todos los núcleos del procesador para ejecutar ins
 
 ## Videos demo
 
-- [Circuito de compra 1/..](https://drive.google.com/file/.......) TODO:
+- [Login Dual](https://drive.google.com/file/d/1qiG_WicyyyEcFRxl8yKzWreqWiUUK5dO/view)
 
-- [Circuito de compra 2/..](https://drive.google.com/file/.......) TODO:
+- [Registro de usuario](https://drive.google.com/file/d/1nnesG4NctFhEjQs5bT3bFtm90kuaCPOp/view)
 
-- [Mi Cuenta](https://drive.google.com/file/.......) TODO:
+- [Circuito de compra 1/2](https://drive.google.com/file/d/1Am4Ufv0icYbyaURYL8EzfaoT9HD3vXvJ/view)
+
+- [Circuito de compra 2/2](https://drive.google.com/file/d/1LgkKlMWo-lYuXyWNKozUQLGpVQ1YqnIr/view)
+
+- [Filtros de productos](https://drive.google.com/file/d/1EN85D5kBydCJ6p4ty0Z2A2HQrPuVE-W8/view)
+
+- [Mi Cuenta](https://drive.google.com/file/d/1eHF7m2gGP5d-SLNXDolOBJfazYzkyCBJ/view)
 
 - [Administrando productos](https://drive.google.com/file/d/1Doq09PCSIOYAJkUAQB6Nx3eRucIqIazm/view)
 
-- [Manejando carritos](https://drive.google.com/file/d/12nTy6DGwEsbV7JIcJZzSCrtHCKq-Ltfu/view) FIXME:
+- [Administrando carritos](https://drive.google.com/file/d/1tHQm4zccrI2pyRlaHevfwqTOSsCdOX2D/view)
 
 - [Chat - Administrador y 2 usuarios](https://drive.google.com/file/d/1xjfIOB7aln4uUZBxEzTEFZzIS4Fw3Oca/view)
 
