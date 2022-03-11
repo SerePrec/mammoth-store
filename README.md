@@ -224,7 +224,8 @@ Se aplicaron estrategias de autenticación tanto al **login** como al **registro
 
 En caso de estar logueado, evito poder acceder directamente a la vista de login o registro, redirigiendo a la vista principal para sugerir realizar el **logout** previo a ello.
 
-El formulario de registro incluye el ingreso de la contraseña por segunda vez, para su verificación.
+El formulario de registro incluye la posibilidad de seleccionar y subir una imagen a modo de avatar. El **tamaño máximo** que impuse es de **1MB**, para evitar la sobrecarga del servidor y posibles ataques de **denegación de acceso**. Existen validaciones tanto en el front como en el back respecto al tamaño y un correspondiente manejo de errores de `multer` a tal fin. También elimino dicha imagen si luego ocurre un error en el flujo del proceso asociado.  
+El formulario también incluye el ingreso de la contraseña por segunda vez, para su verificación.
 
 Aparte de las validaciones en el front previo a enviar los datos al servidor del formulario de registro, se produce una segunda validación del lado del servidor mediante un **middleware** `validateRegisterPost` a fin de asegurarse guardar en la BD los datos de manera correcta.
 

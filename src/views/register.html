@@ -45,8 +45,12 @@
           </div>
         </div>
         <div class="mb-3">
-          <label for="inputFile" class="form-label">Avatar</label>
-          <input type="file" class="form-control" id="inputFile" name="imageFile">
+          <label for="inputFile" class="form-label">Avatar <small>(opcional)</small></label>
+          <input type="file" class="form-control" id="inputFile" name="imageFile" accept="image/*">
+          <div class="form-text">Tamaño máximo del archivo 1MB</div>
+          <div class="invalid-feedback">
+            El tamaño del archivo no debe superar 1MB
+          </div>
         </div>
         <div class="mb-3">
           <label for="inputAddress" class="form-label">Dirección</label>

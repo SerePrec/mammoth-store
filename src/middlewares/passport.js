@@ -4,6 +4,7 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import config from "../config.js";
 import { usersModel } from "../models/index.js";
 import { createHash, isValidPassword } from "../utils/crypt.js";
+import { deleteAvatar } from "../utils/dataTools.js";
 import { sendEmail, renderRegisterTable } from "../email/nodemailer-gmail.js";
 import { logger } from "../logger/index.js";
 
@@ -15,6 +16,7 @@ passport.use(
       try {
         const user = await usersModel.getByUsername(username);
         if (user) {
+          deleteAvatar(req.file?.filename);
           return done(null, false, {
             message: "El nombre de usuario ya existe"
           });
@@ -43,6 +45,7 @@ passport.use(
         );
         return done(null, newUserAdded);
       } catch (error) {
+        deleteAvatar(req.file?.filename);
         logger.error(`Error al registrar usuario: ${error}`);
         done(error);
       }

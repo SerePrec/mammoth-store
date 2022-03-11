@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 import config from "./config.js";
 import { passport } from "./middlewares/passport.js";
 import { isAuthApi } from "./middlewares/auth.js";
+import { multerErrorHandler } from "./middlewares/multer.js";
 import authRouter from "./routes/authRouter.js";
 import productsRouter from "./routes/apiProductsRouter.js";
 import cartsRouter from "./routes/apiCartsRouter.js";
@@ -73,5 +74,8 @@ app.use((req, res, next) => {
     root: path.join(__dirname, "views")
   });
 });
+
+// error handler Multer
+app.use(multerErrorHandler);
 
 export default app;

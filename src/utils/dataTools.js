@@ -1,3 +1,8 @@
+import fs from "fs";
+import path from "path";
+import { logger } from "../logger/index.js";
+import config from "../config.js";
+
 // También util como asPOJO (plain old javascript object) para quedarse solo con un objetos con valores sinmétodos ni estados
 export const deepClone = obj => JSON.parse(JSON.stringify(obj));
 
@@ -57,4 +62,24 @@ export const formatoPrecio = num => {
   enteroFormateado = entero.slice(0, entero.length % 3) + enteroFormateado;
   num = enteroFormateado.concat(decimales);
   return num;
+};
+
+export const deleteAvatar = filename => {
+  filename
+    ? fs.unlink(path.join(config.uploadsImg.avatarsPath, filename), error =>
+        error
+          ? logger.error(error)
+          : logger.debug("Avatar eliminado por registro fallido")
+      )
+    : null;
+};
+
+export const deleteThumbnail = filename => {
+  filename
+    ? fs.unlink(path.join(config.uploadsImg.productsPath, filename), error =>
+        error
+          ? logger.error(error)
+          : logger.debug("Thumbnail eliminado por datos fallidos")
+      )
+    : null;
 };

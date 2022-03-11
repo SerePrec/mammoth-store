@@ -58,5 +58,17 @@
     "phone": "+5492211234444",
     "avatar": "/img/avatars/default_avatar.svg",
     "role": "user"
+  },
+  {
+    "id": 6,
+    "timestamp": "2022-03-11T12:22:43.401Z",
+    "username": "isabel@gmail.com",
+    "password": "$2b$10$r5e1kp4OnwgDvyeahgGXQO7W.ZsUmM.rCfh9voOMoA/FsUx5g7JNS",
+    "name": "Isabel Prellezo",
+    "address": "Calle 33, La Plata",
+    "age": 18,
+    "phone": "+5495663339",
+    "avatar": "/img/avatars/1647001363352-Bici.jpg",
+    "role": "user"
   }
 ]

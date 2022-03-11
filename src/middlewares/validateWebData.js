@@ -5,7 +5,7 @@ import {
   isValidUsername,
   isValidPwd
 } from "../utils/validations.js";
-import { escapeHtml } from "../utils/dataTools.js";
+import { deleteAvatar, escapeHtml } from "../utils/dataTools.js";
 
 // Valida que sea un formato de usuario válido para guardar en la BD
 const validateRegisterPost = (req, res, next) => {
@@ -22,6 +22,7 @@ const validateRegisterPost = (req, res, next) => {
     !isValidUsername(username) ||
     !isValidPwd(password)
   ) {
+    deleteAvatar(filename);
     res.redirect("/register");
   } else {
     req.body.name = escapeHtml(name.trim());

@@ -9,7 +9,7 @@ import {
   isValidPhone,
   isURL
 } from "../utils/validations.js";
-import { escapeHtml } from "../utils/dataTools.js";
+import { deleteThumbnail, escapeHtml } from "../utils/dataTools.js";
 
 let idValidator;
 (function assignIdValidator() {
@@ -44,6 +44,9 @@ const validateIdId_prod = (req, res, next) => {
 const validateProductPostBody = (req, res, next) => {
   let { title, detail, code, brand, category, price, stock, thumbnail } =
     req.body;
+  thumbnail = thumbnail?.trim()
+    ? thumbnail?.trim()
+    : `/img/productos/generic_product.svg`;
   const filename = req.file?.filename;
   thumbnail = filename ? `/img/productos/${filename}` : thumbnail;
   if (
@@ -55,9 +58,10 @@ const validateProductPostBody = (req, res, next) => {
     !isPrice(price) ||
     !isInteger(stock) ||
     !isURL(thumbnail)
-  )
+  ) {
+    deleteThumbnail(filename);
     res.status(400).json({ error: "Los valores enviados no son válidos" });
-  else {
+  } else {
     req.body.title = escapeHtml(title.trim());
     req.body.detail = escapeHtml(detail.trim());
     req.body.code = escapeHtml(code.trim());
@@ -96,9 +100,10 @@ const validateProductPutBody = (req, res, next) => {
     !price &&
     !stock &&
     !thumbnail
-  )
+  ) {
+    deleteThumbnail(filename);
     res.status(400).json({ error: "No hay campos válidos para actualizar" });
-  else {
+  } else {
     req.body.title = escapeHtml(title?.trim());
     req.body.detail = escapeHtml(detail?.trim());
     req.body.code = escapeHtml(code?.trim());

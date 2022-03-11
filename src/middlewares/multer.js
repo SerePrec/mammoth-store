@@ -1,5 +1,8 @@
 import multer from "multer";
 import config from "../config.js";
+import { logger } from "../logger/index.js";
+
+const maxFileSize = 1000000;
 
 const productStorage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -25,6 +28,18 @@ const avatarStorage = multer.diskStorage({
     cb(null, prefix + "-" + filenameNoSpaces);
   }
 });
-const avatarUpload = multer({ storage: avatarStorage });
+const avatarUpload = multer({
+  storage: avatarStorage,
+  limits: { fileSize: maxFileSize }
+});
 
 export const uploadAvatarImage = avatarUpload.single("imageFile");
+
+export const multerErrorHandler = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    logger.error(err);
+    res.redirect("back");
+  } else {
+    next(err);
+  }
+};
