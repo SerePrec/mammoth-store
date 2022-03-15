@@ -287,6 +287,8 @@ Se producen los siguientes envíos:
 - WSP al **administrador** al generarse una nueva orden de compra con una referencia al usuario propietario
 - SMS al **usuario** al generarse una nueva orden de compra indicándole que fue recibida y se encuentra en preparación.
 
+En la carpeta `docs` se encuentran 5 capturas de pantalla a modo de ejemplo de los casos anteriores.
+
 ### Logs
 
 Se utilizó la librería `winston` para generar logs eficientes por consola y archivos. Evitándose el uso del console.log que por su naturaleza síncrona trae problemas de rendimiento.
