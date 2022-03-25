@@ -15,6 +15,9 @@ class ContenedorFirebase {
     this.collection = db.collection(collectionName);
   }
 
+  //No tiene funcionalidad pero es para mantener las mismas interfaces
+  async init() {}
+
   //Obtengo todos los elementos
   async getAll() {
     try {
@@ -53,7 +56,7 @@ class ContenedorFirebase {
       data = { ...data, timestamp };
       const saved = await this.collection.add(data);
       logger.debug("Elemento guardado con éxito");
-      return { id: saved.id, ...data, timestamp: timestamp.toDate() };
+      return { ...data, id: saved.id, timestamp: timestamp.toDate() };
     } catch (error) {
       throw new Error(`Error al guardar el elemento: ${error}`);
     }

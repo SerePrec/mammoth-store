@@ -67,7 +67,7 @@ class ContenedorFS {
     try {
       const id = this.nextId;
       const timestamp = new Date().toISOString();
-      const elemento = { id, timestamp, ...data };
+      const elemento = { ...data, id, timestamp };
       const content = await this.getAll();
       content.push(elemento);
       await fs.writeFile(this.path, JSON.stringify(content, null, 2));

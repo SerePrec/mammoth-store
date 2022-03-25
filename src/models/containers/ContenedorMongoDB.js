@@ -35,6 +35,9 @@ class ContenedorMongoDB {
     this.CollModel = mongoose.model(collection, schema);
   }
 
+  //No tiene funcionalidad pero es para mantener las mismas interfaces
+  async init() {}
+
   //Obtengo todos los elementos
   async getAll() {
     try {

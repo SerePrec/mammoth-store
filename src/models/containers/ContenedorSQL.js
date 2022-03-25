@@ -8,6 +8,9 @@ class ContenedorSQL {
     this.table = table;
   }
 
+  //No tiene funcionalidad pero es para mantener las mismas interfaces
+  async init() {}
+
   //Obtengo todos los elementos
   async getAll(conditions = {}) {
     try {
