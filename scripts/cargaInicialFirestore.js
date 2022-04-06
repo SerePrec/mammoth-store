@@ -1,7 +1,7 @@
 import * as fs from "fs/promises";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import ContenedorFirebase from "../src/models/containers/ContenedorFirebase.js";
+import BaseDAOFirebase from "../src/models/baseDAOs/baseDAOFirebase.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BK_FILENAME = "productsBk.json";
@@ -11,7 +11,7 @@ const COLLECTION = "products";
 async function cargaInicial() {
   try {
     // Instancio e inicializo el contenedor productos
-    const productosModel = new ContenedorFirebase(COLLECTION);
+    const productosModel = new BaseDAOFirebase(COLLECTION);
 
     // Obtengo los datos de un archivo de datos
     const content = await fs.readFile(

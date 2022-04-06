@@ -9,22 +9,22 @@ let ordersModel;
 
 switch (config.PERS) {
   case "fs": {
-    const { default: ProductsDaoFS } = await import(
-      "./daos/products/ProductsDaoFS.js"
+    const { default: ProductsDAOFS } = await import(
+      "./DAOs/products/productsDAOFS.js"
     );
-    const { default: CartsDaoFS } = await import("./daos/carts/CartsDaoFS.js");
-    const { default: MessagesDaoFS } = await import(
-      "./daos/messages/MessagesDaoFS.js"
+    const { default: CartsDAOFS } = await import("./DAOs/carts/cartsDAOFS.js");
+    const { default: MessagesDAOFS } = await import(
+      "./DAOs/messages/messagesDAOFS.js"
     );
-    const { default: UsersDaoFS } = await import("./daos/users/UsersDaoFS.js");
-    const { default: OrdersDaoFS } = await import(
-      "./daos/orders/OrdersDaoFS.js"
+    const { default: UsersDAOFS } = await import("./DAOs/users/usersDAOFS.js");
+    const { default: OrdersDAOFS } = await import(
+      "./DAOs/orders/ordersDAOFS.js"
     );
-    productsModel = new ProductsDaoFS();
-    cartsModel = new CartsDaoFS();
-    messagesModel = new MessagesDaoFS();
-    usersModel = new UsersDaoFS();
-    ordersModel = new OrdersDaoFS();
+    productsModel = new ProductsDAOFS();
+    cartsModel = new CartsDAOFS();
+    messagesModel = new MessagesDAOFS();
+    usersModel = new UsersDAOFS();
+    ordersModel = new OrdersDAOFS();
     //Inicializo mi "storage"
     try {
       await productsModel.init();
@@ -41,153 +41,153 @@ switch (config.PERS) {
   }
 
   case "mariadb": {
-    const { default: ProductsDaoMariaDb } = await import(
-      "./daos/products/ProductsDaoMariaDb.js"
+    const { default: ProductsDAOMariaDb } = await import(
+      "./DAOs/products/productsDAOMariaDb.js"
     );
-    const { default: CartsDaoMariaDb } = await import(
-      "./daos/carts/CartsDaoMariaDb.js"
+    const { default: CartsDAOMariaDb } = await import(
+      "./DAOs/carts/cartsDAOMariaDb.js"
     );
-    const { default: MessagesDaoMariaDb } = await import(
-      "./daos/messages/MessagesDaoMariaDb.js"
+    const { default: MessagesDAOMariaDb } = await import(
+      "./DAOs/messages/messagesDAOMariaDb.js"
     );
-    const { default: UsersDaoMariaDb } = await import(
-      "./daos/users/UsersDaoMariaDb.js"
+    const { default: UsersDAOMariaDb } = await import(
+      "./DAOs/users/usersDAOMariaDb.js"
     );
-    const { default: OrdersDaoMariaDb } = await import(
-      "./daos/orders/OrdersDaoMariaDb.js"
+    const { default: OrdersDAOMariaDb } = await import(
+      "./DAOs/orders/ordersDAOMariaDb.js"
     );
-    productsModel = new ProductsDaoMariaDb();
-    cartsModel = new CartsDaoMariaDb();
-    messagesModel = new MessagesDaoMariaDb();
-    usersModel = new UsersDaoMariaDb();
-    ordersModel = new OrdersDaoMariaDb();
+    productsModel = new ProductsDAOMariaDb();
+    cartsModel = new CartsDAOMariaDb();
+    messagesModel = new MessagesDAOMariaDb();
+    usersModel = new UsersDAOMariaDb();
+    ordersModel = new OrdersDAOMariaDb();
     logger.info("Persistencia [MariaDB] inicializada");
     break;
   }
 
   case "cleardb": {
-    const { default: ProductsDaoClearDb } = await import(
-      "./daos/products/ProductsDaoClearDb.js"
+    const { default: ProductsDAOClearDb } = await import(
+      "./DAOs/products/productsDAOClearDb.js"
     );
-    const { default: CartsDaoClearDb } = await import(
-      "./daos/carts/CartsDaoClearDb.js"
+    const { default: CartsDAOClearDb } = await import(
+      "./DAOs/carts/cartsDAOClearDb.js"
     );
-    const { default: MessagesDaoClearDb } = await import(
-      "./daos/messages/MessagesDaoClearDb.js"
+    const { default: MessagesDAOClearDb } = await import(
+      "./DAOs/messages/messagesDAOClearDb.js"
     );
-    const { default: UsersDaoClearDb } = await import(
-      "./daos/users/UsersDaoClearDb.js"
+    const { default: UsersDAOClearDb } = await import(
+      "./DAOs/users/usersDAOClearDb.js"
     );
-    const { default: OrdersDaoClearDb } = await import(
-      "./daos/orders/OrdersDaoClearDb.js"
+    const { default: OrdersDAOClearDb } = await import(
+      "./DAOs/orders/ordersDAOClearDb.js"
     );
-    productsModel = new ProductsDaoClearDb();
-    cartsModel = new CartsDaoClearDb();
-    messagesModel = new MessagesDaoClearDb();
-    usersModel = new UsersDaoClearDb();
-    ordersModel = new OrdersDaoClearDb();
+    productsModel = new ProductsDAOClearDb();
+    cartsModel = new CartsDAOClearDb();
+    messagesModel = new MessagesDAOClearDb();
+    usersModel = new UsersDAOClearDb();
+    ordersModel = new OrdersDAOClearDb();
     logger.info("Persistencia [ClearDB] inicializada");
     break;
   }
 
   case "sqlite3": {
-    const { default: ProductsDaoSQLite3 } = await import(
-      "./daos/products/ProductsDaoSQLite3.js"
+    const { default: ProductsDAOSQLite3 } = await import(
+      "./DAOs/products/productsDAOSQLite3.js"
     );
-    const { default: CartsDaoSQLite3 } = await import(
-      "./daos/carts/CartsDaoSQLite3.js"
+    const { default: CartsDAOSQLite3 } = await import(
+      "./DAOs/carts/cartsDAOSQLite3.js"
     );
-    const { default: MessagesDaoSQLite3 } = await import(
-      "./daos/messages/MessagesDaoSQLite3.js"
+    const { default: MessagesDAOSQLite3 } = await import(
+      "./DAOs/messages/messagesDAOSQLite3.js"
     );
-    const { default: UsersDaoSQLite3 } = await import(
-      "./daos/users/UsersDaoSQLite3.js"
+    const { default: UsersDAOSQLite3 } = await import(
+      "./DAOs/users/usersDAOSQLite3.js"
     );
-    const { default: OrdersDaoSQLite3 } = await import(
-      "./daos/orders/OrdersDaoSQLite3.js"
+    const { default: OrdersDAOSQLite3 } = await import(
+      "./DAOs/orders/ordersDAOSQLite3.js"
     );
-    productsModel = new ProductsDaoSQLite3();
-    cartsModel = new CartsDaoSQLite3();
-    messagesModel = new MessagesDaoSQLite3();
-    usersModel = new UsersDaoSQLite3();
-    ordersModel = new OrdersDaoSQLite3();
+    productsModel = new ProductsDAOSQLite3();
+    cartsModel = new CartsDAOSQLite3();
+    messagesModel = new MessagesDAOSQLite3();
+    usersModel = new UsersDAOSQLite3();
+    ordersModel = new OrdersDAOSQLite3();
     logger.info("Persistencia [SQLite3] inicializada");
     break;
   }
 
   case "mongodb":
   case "mongodb_atlas": {
-    const { default: ProductsDaoMongoDB } = await import(
-      "./daos/products/ProductsDaoMongoDB.js"
+    const { default: ProductsDAOMongoDB } = await import(
+      "./DAOs/products/productsDAOMongoDB.js"
     );
-    const { default: CartsDaoMongoDB } = await import(
-      "./daos/carts/CartsDaoMongoDB.js"
+    const { default: CartsDAOMongoDB } = await import(
+      "./DAOs/carts/cartsDAOMongoDB.js"
     );
-    const { default: MessagesDaoMongoDB } = await import(
-      "./daos/messages/MessagesDaoMongoDB.js"
+    const { default: MessagesDAOMongoDB } = await import(
+      "./DAOs/messages/messagesDAOMongoDB.js"
     );
-    const { default: UsersDaoMongoDB } = await import(
-      "./daos/users/UsersDaoMongoDB.js"
+    const { default: UsersDAOMongoDB } = await import(
+      "./DAOs/users/usersDAOMongoDB.js"
     );
-    const { default: OrdersDaoMongoDB } = await import(
-      "./daos/orders/OrdersDaoMongoDB.js"
+    const { default: OrdersDAOMongoDB } = await import(
+      "./DAOs/orders/ordersDAOMongoDB.js"
     );
-    productsModel = new ProductsDaoMongoDB();
-    cartsModel = new CartsDaoMongoDB();
-    messagesModel = new MessagesDaoMongoDB();
-    usersModel = new UsersDaoMongoDB();
-    ordersModel = new OrdersDaoMongoDB();
+    productsModel = new ProductsDAOMongoDB();
+    cartsModel = new CartsDAOMongoDB();
+    messagesModel = new MessagesDAOMongoDB();
+    usersModel = new UsersDAOMongoDB();
+    ordersModel = new OrdersDAOMongoDB();
     logger.info("Persistencia [MongoDB] inicializada");
     break;
   }
 
   case "firebase": {
-    const { default: ProductsDaoFirebase } = await import(
-      "./daos/products/ProductsDaoFirebase.js"
+    const { default: ProductsDAOFirebase } = await import(
+      "./DAOs/products/productsDAOFirebase.js"
     );
-    const { default: CartsDaoFirebase } = await import(
-      "./daos/carts/CartsDaoFirebase.js"
+    const { default: CartsDAOFirebase } = await import(
+      "./DAOs/carts/cartsDAOFirebase.js"
     );
-    const { default: MessagesDaoFirebase } = await import(
-      "./daos/messages/MessagesDaoFirebase.js"
+    const { default: MessagesDAOFirebase } = await import(
+      "./DAOs/messages/messagesDAOFirebase.js"
     );
-    const { default: UsersDaoFirebase } = await import(
-      "./daos/users/UsersDaoFirebase.js"
+    const { default: UsersDAOFirebase } = await import(
+      "./DAOs/users/usersDAOFirebase.js"
     );
-    const { default: OrdersDaoFirebase } = await import(
-      "./daos/orders/OrdersDaoFirebase.js"
+    const { default: OrdersDAOFirebase } = await import(
+      "./DAOs/orders/ordersDAOFirebase.js"
     );
-    productsModel = new ProductsDaoFirebase();
-    cartsModel = new CartsDaoFirebase();
-    messagesModel = new MessagesDaoFirebase();
-    usersModel = new UsersDaoFirebase();
-    ordersModel = new OrdersDaoFirebase();
+    productsModel = new ProductsDAOFirebase();
+    cartsModel = new CartsDAOFirebase();
+    messagesModel = new MessagesDAOFirebase();
+    usersModel = new UsersDAOFirebase();
+    ordersModel = new OrdersDAOFirebase();
     logger.info("Persistencia [Firebase] inicializada");
     break;
   }
 
   case "mem":
   default: {
-    const { default: ProductsDaoMem } = await import(
-      "./daos/products/ProductsDaoMem.js"
+    const { default: ProductsDAOMem } = await import(
+      "./DAOs/products/productsDAOMem.js"
     );
-    const { default: CartsDaoMem } = await import(
-      "./daos/carts/CartsDaoMem.js"
+    const { default: CartsDAOMem } = await import(
+      "./DAOs/carts/cartsDAOMem.js"
     );
-    const { default: MessagesDaoMem } = await import(
-      "./daos/messages/MessagesDaoMem.js"
+    const { default: MessagesDAOMem } = await import(
+      "./DAOs/messages/messagesDAOMem.js"
     );
-    const { default: UsersDaoMem } = await import(
-      "./daos/users/UsersDaoMem.js"
+    const { default: UsersDAOMem } = await import(
+      "./DAOs/users/usersDAOMem.js"
     );
-    const { default: OrdersDaoMem } = await import(
-      "./daos/orders/OrdersDaoMem.js"
+    const { default: OrdersDAOMem } = await import(
+      "./DAOs/orders/ordersDAOMem.js"
     );
-    productsModel = new ProductsDaoMem();
-    cartsModel = new CartsDaoMem();
-    messagesModel = new MessagesDaoMem();
-    usersModel = new UsersDaoMem();
-    ordersModel = new OrdersDaoMem();
+    productsModel = new ProductsDAOMem();
+    cartsModel = new CartsDAOMem();
+    messagesModel = new MessagesDAOMem();
+    usersModel = new UsersDAOMem();
+    ordersModel = new OrdersDAOMem();
     logger.info("Persistencia [Memoria] inicializada");
     break;
   }

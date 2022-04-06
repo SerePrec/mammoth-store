@@ -330,7 +330,7 @@ En la carpeta `docs` se encuentra el gráfico de flama de **0x** junto a la tabl
 
 - Se utilizó la librería **minimist** para procesar los argumentos de entrada, junto a las opciones de "alias" y "default" para el puerto y modo de operación.
 
-- Cada clase "Contenedor" asociada al tipo de persistencia posee los mismos métodos para poder independizarlas del resto de la lógica propia de la API.  
+- Cada clase "DAO" asociada al tipo de persistencia posee los mismos métodos para poder independizarlas del resto de la lógica propia de la API.  
   Estos métodos están estructurados para devolver el mismo formato de datos y contemplar los mismos tipos de respuestas en todos los casos. Así no se generan riesgos de romper el código por manejar respuestas diferentes entre estos diferentes casos de persistencia.
 
 - En el panel de administración de productos, incorporé la posibilidad de subir una imagen desde el formulario. Entonces puedo elegir entre colocar una url para el thumbnail, o tomar una imagen existente y asociar su ruta desde la carpeta en donde se sube. Si subo el archivo le da prioridad a esta ruta, por más que haya colocado una url a mano.

@@ -1,7 +1,7 @@
 import * as fs from "fs/promises";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import ContenedorFS from "../src/models/containers/ContenedorFS.js";
+import BaseDAOFS from "../src/models/baseDAOs/baseDAOFS.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BK_FILENAME = "productsBk.json";
@@ -11,7 +11,7 @@ const OUTPUT_FILENAME = "productos.json";
 async function cargaInicial() {
   try {
     // Instancio e inicializo el contenedor productos
-    const productos = new ContenedorFS(OUTPUT_FILENAME);
+    const productos = new BaseDAOFS(OUTPUT_FILENAME);
     await productos.init();
 
     // Obtengo los datos de un archivo de datos

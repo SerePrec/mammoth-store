@@ -2,8 +2,8 @@ import * as fs from "fs/promises";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
-import ContenedorMongoDB from "../src/models/containers/ContenedorMongoDB.js";
-import { productSchema } from "../src/models/daos/products/ProductsDaoMongoDB.js";
+import BaseDAOMongoDB from "../src/models/baseDAOs/baseDAOMongoDB.js";
+import { productSchema } from "../src/models/DAOs/products/productsDAOMongoDB.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BK_FILENAME = "productsBk.json";
@@ -13,7 +13,7 @@ const COLLECTION = "productos";
 async function cargaInicial() {
   try {
     // Instancio e inicializo el contenedor productos
-    const productosModel = new ContenedorMongoDB(COLLECTION, productSchema);
+    const productosModel = new BaseDAOMongoDB(COLLECTION, productSchema);
 
     // Obtengo los datos de un archivo de datos
     const content = await fs.readFile(
