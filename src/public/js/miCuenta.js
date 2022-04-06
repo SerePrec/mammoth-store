@@ -139,7 +139,6 @@ $btnMyOrders.addEventListener("click", async () => {
     const res = await ordersApi.getUserOrders();
     myOrders = res;
   }
-  console.log(myOrders);
   $myOrdersTable.innerHTML = renderMyOrders(myOrders);
   assignEventsToOrderTable();
 });

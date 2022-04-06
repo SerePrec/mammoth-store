@@ -6,14 +6,15 @@ import { logger } from "../../logger/index.js";
 const dbDir = config.fileSystemDb.path;
 
 class BaseDAOFS {
-  constructor(filename = "testDB.json") {
+  constructor(filename = "testDB.json", DTO) {
     this.path = path.join(dbDir, filename);
     this.nextId = null;
+    this.DTO = DTO;
   }
 
   //Inicializo el contenedor con archivo preexistente o nuevo
   async init() {
-    logger.debug("Inicializando contenedor...");
+    logger.debug("Inicializando DAO...");
     try {
       if (this.nextId) return; // evita se inicialice más de una vez
       try {
@@ -42,7 +43,8 @@ class BaseDAOFS {
   async getAll() {
     try {
       const content = await fs.readFile(this.path, "utf-8");
-      return JSON.parse(content);
+      const elements = JSON.parse(content);
+      return elements.map(element => new this.DTO(element));
     } catch (error) {
       throw new Error(`No se pudo recuperar archivo de datos: ${error}`);
     }
@@ -54,7 +56,7 @@ class BaseDAOFS {
       id = parseInt(id);
       const content = await this.getAll();
       const match = content.find(elem => elem.id === id);
-      return match ? match : null;
+      return match ? new this.DTO(match) : null;
     } catch (error) {
       throw new Error(`Error al obtener el elemento con id '${id}': ${error}`);
     }
@@ -65,13 +67,13 @@ class BaseDAOFS {
     try {
       const id = this.nextId;
       const timestamp = new Date().toISOString();
-      const elemento = { ...data, id, timestamp };
+      const element = { ...data, id, timestamp };
       const content = await this.getAll();
-      content.push(elemento);
+      content.push(element);
       await fs.writeFile(this.path, JSON.stringify(content, null, 2));
       this.nextId++;
       logger.debug("Elemento guardado con éxito");
-      return elemento;
+      return new this.DTO(element);
     } catch (error) {
       throw new Error(`Error al guardar el elemento: ${error}`);
     }
@@ -94,7 +96,7 @@ class BaseDAOFS {
         );
         await fs.writeFile(this.path, JSON.stringify(newContent, null, 2));
         logger.debug(`El elemento con id: ${id} se actualizó con éxito`);
-        return newElement;
+        return new this.DTO(newElement);
       } else {
         logger.debug(`No se encontró el elemento con el id: ${id}`);
         return null;

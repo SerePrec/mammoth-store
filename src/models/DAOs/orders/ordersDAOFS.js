@@ -1,9 +1,16 @@
 import BaseDAOFS from "../../baseDAOs/baseDAOFS.js";
+import { OrderDTO } from "../../DTOs/orderDTO.js";
 import config from "../../../config.js";
 
 class OrdersDAOFS extends BaseDAOFS {
+  static #instance;
+
   constructor() {
-    super(config.fileSystemDb.ordersFile);
+    if (OrdersDAOFS.#instance) {
+      return OrdersDAOFS.#instance;
+    }
+    super(config.fileSystemDb.ordersFile, OrderDTO);
+    OrdersDAOFS.#instance = this;
   }
 
   async save(order) {
@@ -33,7 +40,7 @@ class OrdersDAOFS extends BaseDAOFS {
       const userOrders = orders
         .reverse()
         .filter(order => order.username === username);
-      return userOrders;
+      return userOrders.map(order => new this.DTO(order));
     } catch (error) {
       throw new Error(
         `Error al obtener las órdenes con username:'${username}': ${error}`

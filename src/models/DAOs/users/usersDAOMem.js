@@ -1,8 +1,14 @@
 import BaseDAOMem from "../../baseDAOs/baseDAOMem.js";
+import { UserDTO } from "../../DTOs/userDTO.js";
 
 class UsersDAOMem extends BaseDAOMem {
+  static #instance;
+
   constructor() {
-    super();
+    if (UsersDAOMem.#instance) {
+      return UsersDAOMem.#instance;
+    }
+    super(UserDTO);
     this.elements = [
       {
         id: 1,
@@ -19,10 +25,19 @@ class UsersDAOMem extends BaseDAOMem {
       }
     ];
     this.nextId = 2;
+
+    UsersDAOMem.#instance = this;
   }
+
   getByUsername(username) {
-    const match = this.elements.find(user => user.username === username);
-    return match ? match : null;
+    try {
+      const match = this.elements.find(user => user.username === username);
+      return match ? new this.DTO(match) : null;
+    } catch (error) {
+      throw new Error(
+        `Error al obtener el usuario con username:'${username}': ${error}`
+      );
+    }
   }
 }
 
