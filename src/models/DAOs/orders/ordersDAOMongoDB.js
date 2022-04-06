@@ -1,26 +1,16 @@
-import mongoose from "mongoose";
 import BaseDAOMongoDB from "../../baseDAOs/baseDAOMongoDB.js";
-import { cartItemSchema } from "../carts/cartsDAOMongoDB.js";
-import { deepClone, renameField } from "../../../utils/dataTools.js";
-
-const { Schema } = mongoose;
-
-const orderSchema = new Schema({
-  number: { type: Number, required: true, min: 0, unique: true },
-  username: { type: String, required: true },
-  name: { type: String, required: true },
-  address: { type: String, required: true },
-  cp: { type: String, required: true },
-  phone: { type: String, required: true },
-  products: { type: [cartItemSchema], required: true }, //implicitly default value [] (empty array)
-  total: { type: Number, required: true, min: 0 },
-  status: { type: String, required: true },
-  timestamp: { type: Date, default: Date.now }
-});
+import { orderSchema } from "../../schemas/orderSchemaMongoDB.js";
+import { OrderDTO } from "../../DTOs/orderDTO.js";
 
 class OrdersDAOMongoDB extends BaseDAOMongoDB {
+  static #instance;
+
   constructor() {
-    super("Order", orderSchema);
+    if (OrdersDAOMongoDB.#instance) {
+      return OrdersDAOMongoDB.#instance;
+    }
+    super("Order", orderSchema, OrderDTO);
+    OrdersDAOMongoDB.#instance = this;
   }
 
   async save(order) {
@@ -49,9 +39,7 @@ class OrdersDAOMongoDB extends BaseDAOMongoDB {
       let userOrders = await this.CollModel.find({ username }, { __v: 0 })
         .sort({ timestamp: -1 })
         .lean();
-      userOrders = deepClone(userOrders);
-      userOrders.forEach(order => renameField(order, "_id", "id"));
-      return userOrders;
+      return userOrders.map(order => new this.DTO(order));
     } catch (error) {
       throw new Error(
         `Error al obtener las órdenes con username:'${username}': ${error}`

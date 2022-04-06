@@ -1,30 +1,22 @@
-import mongoose from "mongoose";
 import BaseDAOMongoDB from "../../baseDAOs/baseDAOMongoDB.js";
-import { deepClone, renameField } from "../../../utils/dataTools.js";
-
-const { Schema } = mongoose;
-
-const userSchema = new Schema({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  name: { type: String, required: true },
-  address: { type: String, required: true },
-  age: { type: Number, required: true, min: 18, max: 120 },
-  phone: { type: String, required: true },
-  avatar: { type: String, required: true },
-  role: { type: String, required: true },
-  timestamp: { type: Date, default: Date.now }
-});
+import { UserDTO } from "../../DTOs/userDTO.js";
+import { userSchema } from "../../schemas/userSchemaMongoDB.js";
 
 class UsersDAOMongoDB extends BaseDAOMongoDB {
+  static #instance;
+
   constructor() {
-    super("User", userSchema);
+    if (UsersDAOMongoDB.#instance) {
+      return UsersDAOMongoDB.#instance;
+    }
+    super("User", userSchema, UserDTO);
+    UsersDAOMongoDB.#instance = this;
   }
 
   async getByUsername(username) {
     try {
       let user = await this.CollModel.findOne({ username }, { __v: 0 });
-      return user ? renameField(deepClone(user), "_id", "id") : null;
+      return user ? new this.DTO(user) : null;
     } catch (error) {
       throw new Error(
         `Error al obtener el usuario con username '${username}': ${error}`

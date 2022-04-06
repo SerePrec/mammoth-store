@@ -1,23 +1,16 @@
-import mongoose from "mongoose";
 import BaseDAOMongoDB from "../../baseDAOs/baseDAOMongoDB.js";
-
-const { Schema } = mongoose;
-
-export const productSchema = new Schema({
-  title: { type: String, required: true },
-  detail: { type: String },
-  brand: { type: String, uppercase: true, required: true },
-  code: { type: String },
-  category: { type: String, required: true },
-  price: { type: Number, required: true, min: 0 },
-  stock: { type: Number, required: true },
-  thumbnail: { type: String },
-  timestamp: { type: Date, default: Date.now }
-});
+import { productSchema } from "../../schemas/productSchemaMongoDB.js";
+import { ProductDTO } from "../../DTOs/productDTO.js";
 
 class ProductsDAOMongoDB extends BaseDAOMongoDB {
+  static #instance;
+
   constructor() {
-    super("Product", productSchema);
+    if (ProductsDAOMongoDB.#instance) {
+      return ProductsDAOMongoDB.#instance;
+    }
+    super("Product", productSchema, ProductDTO);
+    ProductsDAOMongoDB.#instance = this;
   }
 }
 

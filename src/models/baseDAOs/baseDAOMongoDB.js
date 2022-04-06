@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import config from "../../config.js";
-import { deepClone, renameField, removeField } from "../../utils/dataTools.js";
 import { logger } from "../../logger/index.js";
 
+// CONEXIÓN A BASE DE DATOS. PERSISTENCIA MONGODB
 try {
   switch (config.PERS) {
     case "mongodb_atlas":
@@ -31,8 +31,9 @@ try {
 }
 
 class BaseDAOMongoDB {
-  constructor(collection, schema) {
+  constructor(collection, schema, DTO) {
     this.CollModel = mongoose.model(collection, schema);
+    this.DTO = DTO;
   }
 
   //No tiene funcionalidad pero es para mantener las mismas interfaces
@@ -45,9 +46,7 @@ class BaseDAOMongoDB {
       let elements = await this.CollModel.find({}, { __v: 0 })
         .sort({ _id: 1 })
         .lean();
-      elements = deepClone(elements);
-      elements.forEach(element => renameField(element, "_id", "id"));
-      return elements;
+      return elements.map(element => new this.DTO(element));
     } catch (error) {
       throw new Error(`No se pudo recuperar los datos: ${error}`);
     }
@@ -58,7 +57,7 @@ class BaseDAOMongoDB {
     // mongoose parsea el id internamente en la consulta. Puede recibirlo tipo string y lo pasa a ObjectId.  No es necesario transformar
     try {
       let element = await this.CollModel.findOne({ _id: id }, { __v: 0 });
-      return element ? renameField(deepClone(element), "_id", "id") : null;
+      return element ? new this.DTO(element) : null;
     } catch (error) {
       throw new Error(`Error al obtener el elemento con id '${id}': ${error}`);
     }
@@ -70,10 +69,7 @@ class BaseDAOMongoDB {
       // El manejo del id y el timestamp se maneja internamente desde base de datos
       let element = await this.CollModel.create(data);
       logger.debug("Elemento guardado con éxito");
-      element = deepClone(element);
-      renameField(element, "_id", "id");
-      removeField(element, "__v");
-      return element;
+      return new this.DTO(element);
     } catch (error) {
       throw new Error(`Error al guardar el elemento: ${error}`);
     }
@@ -94,9 +90,8 @@ class BaseDAOMongoDB {
         { returnOriginal: false, projection: { __v: 0 } }
       );
       if (updateElement) {
-        updateElement = renameField(updateElement, "_id", "id");
         logger.debug(`El elemento con id: ${id} se actualizó con éxito`);
-        return deepClone(updateElement);
+        return new this.DTO(updateElement);
       } else {
         logger.debug(`No se encontró el elemento con el id: ${id}`);
         return null;
