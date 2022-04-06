@@ -3,6 +3,7 @@ import { getFirestore, Timestamp } from "firebase-admin/firestore";
 import config from "../../config.js";
 import { logger } from "../../logger/index.js";
 
+// CONEXIÓN A BASE DE DATOS. PERSISTENCIA FIRESTORE
 const serviceAccount = config.firebase;
 initializeApp({
   credential: cert(serviceAccount)
@@ -11,8 +12,9 @@ initializeApp({
 const db = getFirestore();
 
 class BaseDAOFirebase {
-  constructor(collectionName) {
+  constructor(collectionName, DTO) {
     this.collection = db.collection(collectionName);
+    this.DTO = DTO;
   }
 
   //No tiene funcionalidad pero es para mantener las mismas interfaces
@@ -31,7 +33,7 @@ class BaseDAOFirebase {
           timestamp: doc.data().timestamp.toDate()
         })
       );
-      return elements;
+      return elements.map(element => new this.DTO(element));
     } catch (error) {
       throw new Error(`No se pudo recuperar los datos: ${error}`);
     }
@@ -42,7 +44,11 @@ class BaseDAOFirebase {
     try {
       const doc = await this.collection.doc(`${id}`).get();
       return doc.exists
-        ? { id, ...doc.data(), timestamp: doc.data().timestamp.toDate() }
+        ? new this.DTO({
+            id,
+            ...doc.data(),
+            timestamp: doc.data().timestamp.toDate()
+          })
         : null;
     } catch (error) {
       throw new Error(`Error al obtener el elemento con id '${id}': ${error}`);
@@ -56,7 +62,11 @@ class BaseDAOFirebase {
       data = { ...data, timestamp };
       const saved = await this.collection.add(data);
       logger.debug("Elemento guardado con éxito");
-      return { ...data, id: saved.id, timestamp: timestamp.toDate() };
+      return new this.DTO({
+        ...data,
+        id: saved.id,
+        timestamp: timestamp.toDate()
+      });
     } catch (error) {
       throw new Error(`Error al guardar el elemento: ${error}`);
     }

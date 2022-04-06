@@ -1,8 +1,15 @@
 import BaseDAOFirebase from "../../baseDAOs/baseDAOFirebase.js";
+import { OrderDTO } from "../../DTOs/orderDTO.js";
 
 class OrdersDAOFirebase extends BaseDAOFirebase {
+  static #instance;
+
   constructor() {
-    super("orders");
+    if (OrdersDAOFirebase.#instance) {
+      return OrdersDAOFirebase.#instance;
+    }
+    super("orders", OrderDTO);
+    OrdersDAOFirebase.#instance = this;
   }
 
   async save(order) {
@@ -42,7 +49,7 @@ class OrdersDAOFirebase extends BaseDAOFirebase {
           timestamp: doc.data().timestamp.toDate()
         })
       );
-      return orders;
+      return orders.map(order => new this.DTO(order));
     } catch (error) {
       throw new Error(
         `Error al obtener las órdenes con username:'${username}': ${error}`

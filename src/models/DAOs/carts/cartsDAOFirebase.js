@@ -1,8 +1,15 @@
 import BaseDAOFirebase from "../../baseDAOs/baseDAOFirebase.js";
+import { CartDTO } from "../../DTOs/cartDTO.js";
 
 class CartsDAOFirebase extends BaseDAOFirebase {
+  static #instance;
+
   constructor() {
-    super("carts");
+    if (CartsDAOFirebase.#instance) {
+      return CartsDAOFirebase.#instance;
+    }
+    super("carts", CartDTO);
+    CartsDAOFirebase.#instance = this;
   }
 
   async save(cart = { products: [] }) {
@@ -29,7 +36,7 @@ class CartsDAOFirebase extends BaseDAOFirebase {
             timestamp: doc.data().timestamp.toDate()
           })
         );
-        return docs[0];
+        return new this.DTO(docs[0]);
       }
     } catch (error) {
       throw new Error(

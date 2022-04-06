@@ -1,6 +1,8 @@
 import { cartsModel, productsModel } from "../models/index.js";
 import { logger } from "../logger/index.js";
 
+import { CartUpdateDTO } from "../models/DTOs/cartDTO.js"; //FIXME:
+
 export const getCarts = async (req, res) => {
   try {
     const cartsIds = (await cartsModel.getAll()).map(cart => ({
@@ -89,7 +91,7 @@ export const addProductToCart = async (req, res) => {
         stock
       });
     }
-    await cartsModel.updateById(id, { products });
+    await cartsModel.updateById(id, new CartUpdateDTO({ products })); //FIXME: tema CartUpdateDTO
     logger.debug(`Producto con id ${id_prod} x${quantity}u añadido a carrito`);
     res.json({ result: "ok", addedProdId: id_prod, quantity });
   } catch (error) {

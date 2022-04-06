@@ -1,8 +1,15 @@
 import BaseDAOFirebase from "../../baseDAOs/baseDAOFirebase.js";
+import { MessageDTO } from "../../DTOs/messageDTO.js";
 
 class MessagesDAOFirebase extends BaseDAOFirebase {
+  static #instance;
+
   constructor() {
-    super("messages");
+    if (MessagesDAOFirebase.#instance) {
+      return MessagesDAOFirebase.#instance;
+    }
+    super("messages", MessageDTO);
+    MessagesDAOFirebase.#instance = this;
   }
 }
 

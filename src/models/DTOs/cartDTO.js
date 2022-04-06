@@ -15,4 +15,10 @@ class CartDTO {
   }
 }
 
-export { CartDTO };
+class CartUpdateDTO {
+  constructor(data) {
+    this.products = deepClone(data.products);
+  }
+}
+
+export { CartDTO, CartUpdateDTO };

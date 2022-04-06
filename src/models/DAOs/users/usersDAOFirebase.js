@@ -1,8 +1,15 @@
 import BaseDAOFirebase from "../../baseDAOs/baseDAOFirebase.js";
+import { UserDTO } from "../../DTOs/userDTO.js";
 
 class UsersDAOFirebase extends BaseDAOFirebase {
+  static #instance;
+
   constructor() {
-    super("users");
+    if (UsersDAOFirebase.#instance) {
+      return UsersDAOFirebase.#instance;
+    }
+    super("users", UserDTO);
+    UsersDAOFirebase.#instance = this;
   }
 
   async getByUsername(username) {
@@ -23,7 +30,7 @@ class UsersDAOFirebase extends BaseDAOFirebase {
             timestamp: doc.data().timestamp.toDate()
           })
         );
-        return docs[0];
+        return new this.DTO(docs[0]);
       }
     } catch (error) {
       throw new Error(
