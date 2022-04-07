@@ -1,9 +1,16 @@
 import BaseDAOSQL from "../../baseDAOs/baseDAOSQL.js";
+import { MessageDTO } from "../../DTOs/messageDTO.js";
 import config from "../../../config.js";
 
 class MessagesDAOSQLite3 extends BaseDAOSQL {
+  static #instance;
+
   constructor() {
-    super(config.sqlite3, "messages");
+    if (MessagesDAOSQLite3.#instance) {
+      return MessagesDAOSQLite3.#instance;
+    }
+    super(config.sqlite3, "messages", MessageDTO);
+    MessagesDAOSQLite3.#instance = this;
   }
 }
 

@@ -1,9 +1,16 @@
 import CartsDAOSQL from "./cartsDAOSQL.js";
+import { CartDTO } from "../../DTOs/cartDTO.js";
 import config from "../../../config.js";
 
 class CartsDAOClearDb extends CartsDAOSQL {
+  static #instance;
+
   constructor() {
-    super(config.clearDb);
+    if (CartsDAOClearDb.#instance) {
+      return CartsDAOClearDb.#instance;
+    }
+    super(config.clearDb, CartDTO);
+    CartsDAOClearDb.#instance = this;
   }
 }
 

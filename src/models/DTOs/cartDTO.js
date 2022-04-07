@@ -15,10 +15,18 @@ class CartDTO {
   }
 }
 
-class CartUpdateDTO {
+class SQLCartDTO {
   constructor(data) {
-    this.products = deepClone(data.products);
+    this.username = data.username;
+
+    data.id ? (this.id = data.id) : null;
+    data.timestamp
+      ? (this.timestamp =
+          typeof data.timestamp === "object"
+            ? data.timestamp.toISOString()
+            : data.timestamp.toString())
+      : null;
   }
 }
 
-export { CartDTO, CartUpdateDTO };
+export { CartDTO, SQLCartDTO };

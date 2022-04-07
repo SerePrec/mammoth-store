@@ -1,16 +1,22 @@
 import BaseDAOSQL from "../../baseDAOs/baseDAOSQL.js";
-import {
-  deepClone,
-  removeField,
-  verifyTimestamp
-} from "../../../utils/dataTools.js";
+import { removeField, verifyTimestamp } from "../../../utils/dataTools.js";
+import { SQLOrderDTO } from "../../DTOs/orderDTO.js";
+import { SQLProductInOrderDTO } from "../../DTOs/productDTO.js";
 import { logger } from "../../../logger/index.js";
 
 class OrdersDAOSQL {
-  constructor(config) {
-    this.orders = new BaseDAOSQL(config, "orders");
-    this.productsInOrders = new BaseDAOSQL(config, "products_in_orders");
+  constructor(config, DTO) {
+    this.orders = new BaseDAOSQL(config, "orders", SQLOrderDTO);
+    this.productsInOrders = new BaseDAOSQL(
+      config,
+      "products_in_orders",
+      SQLProductInOrderDTO
+    );
+    this.DTO = DTO;
   }
+
+  //No tiene funcionalidad pero es para mantener las mismas interfaces
+  async init() {}
 
   //Obtengo el número de órdenes
   async getCount() {
@@ -41,7 +47,7 @@ class OrdersDAOSQL {
         total,
         status
       };
-      const newOrder = await this.orders.save(orderData);
+      const newOrder = await this.orders.save(new SQLOrderDTO(orderData));
       const dataToSave = [];
       for (const prod of products) {
         removeField(prod.product, "timestamp");
@@ -50,12 +56,14 @@ class OrdersDAOSQL {
           ...prod.product,
           quantity: prod.quantity
         };
-        dataToSave.push(productInOrder);
+        dataToSave.push(new SQLProductInOrderDTO(productInOrder));
       }
+      // utilizo la funcionalidad dual de éste método DAOSQL para pasar array
+      // en lugar de iterar por cada elemento y guardar individual
       await this.productsInOrders.save(dataToSave);
       newOrder.products = products;
       logger.debug("Orden guardada con éxito");
-      return newOrder;
+      return new this.DTO(newOrder);
     } catch (error) {
       throw new Error(`Error al guardar la orden: ${error}`);
     }
@@ -84,7 +92,7 @@ class OrdersDAOSQL {
         const cartItem = { product, quantity };
         ordersDic[idOrder].products.push(cartItem);
       });
-      return Object.values(ordersDic);
+      return Object.values(ordersDic).map(order => new this.DTO(order));
     } catch (error) {
       throw new Error(`No se pudo recuperar las órdenes: ${error}`);
     }
@@ -113,7 +121,7 @@ class OrdersDAOSQL {
           const cartItem = { product, quantity };
           order.products.push(cartItem);
         });
-        return order;
+        return new this.DTO(order);
       } else {
         return null;
       }
@@ -140,14 +148,15 @@ class OrdersDAOSQL {
           .whereIn("id_order", orderIds)
           .select("*");
         productsInOrders.forEach(product => verifyTimestamp(product));
-        productsInOrders = deepClone(productsInOrders);
         productsInOrders.forEach(product => {
           const idOrder = removeField(product, "id_order");
           const quantity = removeField(product, "quantity");
           const cartItem = { product, quantity };
           ordersDic[idOrder].products.push(cartItem);
         });
-        return Object.values(ordersDic).sort((a, b) => b.number - a.number);
+        return Object.values(ordersDic)
+          .sort((a, b) => b.number - a.number)
+          .map(order => new this.DTO(order));
       } else {
         return [];
       }
@@ -157,6 +166,17 @@ class OrdersDAOSQL {
       );
     }
   }
+
+  // actualizo una orden por su id (no utilizado)
+  // eslint-disable-next-line no-unused-vars
+  async updateById(id_order, data) {}
+
+  // borro todas las ordenes (no utilizado)
+  async deleteAll() {}
+
+  // borro una orden por su id (no utilizado)
+  // eslint-disable-next-line no-unused-vars
+  async deleteById(id_order) {}
 }
 
 export default OrdersDAOSQL;

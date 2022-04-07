@@ -23,4 +23,25 @@ class OrderDTO {
   }
 }
 
-export { OrderDTO };
+class SQLOrderDTO {
+  constructor(data) {
+    this.username = data.username;
+    this.name = data.name;
+    this.address = data.address;
+    this.phone = data.phone;
+    this.cp = data.cp;
+    this.total = data.total;
+    this.status = data.status;
+    this.number = data.number;
+
+    data.id ? (this.id = data.id) : null;
+    data.timestamp
+      ? (this.timestamp =
+          typeof data.timestamp === "object"
+            ? data.timestamp.toISOString()
+            : data.timestamp.toString())
+      : null;
+  }
+}
+
+export { OrderDTO, SQLOrderDTO };

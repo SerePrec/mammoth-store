@@ -1,11 +1,12 @@
 import Knex from "knex";
-import { deepClone, verifyTimestamp } from "../../utils/dataTools.js";
+import { verifyTimestamp } from "../../utils/dataTools.js";
 import { logger } from "../../logger/index.js";
 
 class BaseDAOSQL {
-  constructor(config, table) {
+  constructor(config, table, DTO) {
     this.knex = Knex(config);
     this.table = table;
+    this.DTO = DTO;
   }
 
   //No tiene funcionalidad pero es para mantener las mismas interfaces
@@ -18,7 +19,7 @@ class BaseDAOSQL {
         .where(conditions)
         .select("*");
       elements.forEach(element => verifyTimestamp(element));
-      return deepClone(elements);
+      return elements.map(element => new this.DTO(element));
     } catch (error) {
       throw new Error(`No se pudo recuperar los datos: ${error}`);
     }
@@ -29,7 +30,7 @@ class BaseDAOSQL {
     try {
       id = parseInt(id);
       const [element] = await this.knex(this.table).where({ id }).select("*");
-      return element ? deepClone(verifyTimestamp(element)) : null;
+      return element ? new this.DTO(verifyTimestamp(element)) : null;
     } catch (error) {
       throw new Error(`Error al obtener el elemento con id '${id}': ${error}`);
     }
@@ -42,13 +43,9 @@ class BaseDAOSQL {
       // data puede ser un objeto o array (usado en productsInCarts)
       const [newId] = await this.knex(this.table).insert(data);
       logger.debug("Elemento guardado con éxito");
-      // Pido el elemento por si hay campos que se generan al insertar y no dispongo de ellos para devolver. Ej timestamp
+      // Pido el elemento por si hay campos que se generan al insertar y no dispongo de ellos para devolver. Ej timestamp. Ya viene como DTO
       // si inserté un array no tiene sentido pedir 1 elemento. esta funcionalidad se usa internamente en instancia carrito (updateById). No se expone a la api por eso ese faltante de datos no es relevante
-      let newElement;
-      Array.isArray(data)
-        ? (newElement = data)
-        : (newElement = await this.getById(newId));
-      return deepClone(newElement);
+      return Array.isArray(data) ? data : await this.getById(newId);
     } catch (error) {
       throw new Error(`Error al guardar el elemento: ${error}`);
     }
@@ -67,9 +64,11 @@ class BaseDAOSQL {
         .where({ id })
         .update(dataToUpdate);
       if (updated) {
+        // lo consulto para obtener los datos completos del elemento actualizado
+        // ya viene como DTO
         const updateElement = await this.getById(id);
         logger.debug(`El elemento con id: ${id} se actualizó con éxito`);
-        return deepClone(verifyTimestamp(updateElement));
+        return updateElement;
       } else {
         logger.debug(`No se encontró el elemento con el id: ${id}`);
         return null;

@@ -83,6 +83,7 @@ class BaseDAOFirebase {
       await this.collection.doc(`${id}`).update(dataToUpdate);
       logger.debug(`El elemento con id: ${id} se actualizó con éxito`);
       // lo consulto para obtener los datos completos del elemento actualizado
+      // ya viene como DTO
       return await this.getById(id);
     } catch (error) {
       // firestore arroja un error de código 5 si no encuentra el documento para actualizar

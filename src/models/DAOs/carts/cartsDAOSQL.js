@@ -1,12 +1,22 @@
 import BaseDAOSQL from "../../baseDAOs/baseDAOSQL.js";
 import { removeField } from "../../../utils/dataTools.js";
+import { SQLCartDTO } from "../../DTOs/cartDTO.js";
+import { SQLProductInCartDTO } from "../../DTOs/productDTO.js";
 import { logger } from "../../../logger/index.js";
 
 class CartsDAOSQL {
-  constructor(config) {
-    this.carts = new BaseDAOSQL(config, "carts");
-    this.productsInCarts = new BaseDAOSQL(config, "products_in_carts");
+  constructor(config, DTO) {
+    this.carts = new BaseDAOSQL(config, "carts", SQLCartDTO);
+    this.productsInCarts = new BaseDAOSQL(
+      config,
+      "products_in_carts",
+      SQLProductInCartDTO
+    );
+    this.DTO = DTO;
   }
+
+  //No tiene funcionalidad pero es para mantener las mismas interfaces
+  async init() {}
 
   //Guardo el carrito
   async save(cart = {}) {
@@ -14,10 +24,10 @@ class CartsDAOSQL {
       // El manejo del id y el timestamp se maneja internamente desde base de datos
       const { username } = cart;
       const cartData = { username };
-      const newCart = await this.carts.save(cartData);
+      const newCart = await this.carts.save(new SQLCartDTO(cartData));
       logger.debug("Carrito guardado con éxito");
       newCart.products = [];
-      return newCart;
+      return new this.DTO(newCart);
     } catch (error) {
       throw new Error(`Error al guardar el carrito: ${error}`);
     }
@@ -47,7 +57,7 @@ class CartsDAOSQL {
         const cartItem = { product, quantity };
         cartsDic[idCart].products.push(cartItem);
       });
-      return Object.values(cartsDic);
+      return Object.values(cartsDic).map(cart => new this.DTO(cart));
     } catch (error) {
       throw new Error(`No se pudo recuperar los carritos: ${error}`);
     }
@@ -76,7 +86,7 @@ class CartsDAOSQL {
           const cartItem = { product, quantity };
           cart.products.push(cartItem);
         });
-        return cart;
+        return new this.DTO(cart);
       } else {
         return null;
       }
@@ -101,7 +111,7 @@ class CartsDAOSQL {
           const cartItem = { product, quantity };
           cart.products.push(cartItem);
         });
-        return cart;
+        return new this.DTO(cart);
       } else {
         return null;
       }
@@ -125,11 +135,14 @@ class CartsDAOSQL {
           ...prod.product,
           quantity: prod.quantity
         };
-        dataToSave.push(productInCart);
+        dataToSave.push(new SQLProductInCartDTO(productInCart));
       }
+      // utilizo la funcionalidad dual de éste método DAOSQL para pasar array
+      // en lugar de iterar por cada elemento y guardar individual
       dataToSave.length > 0 && (await this.productsInCarts.save(dataToSave));
       const updateCart = await this.getById(id_cart);
       logger.debug(`El carrito con id: ${id_cart} se actualizó con éxito`);
+      // ya viene como DTO
       return updateCart;
     } catch (error) {
       throw new Error(
