@@ -10,7 +10,7 @@ const argv = parseArgs(process.argv.slice(2), {
   default: { p: 8080, m: "FORK" }
 });
 
-const NODE_ENV = process.env.NODE_ENV;
+const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || "development";
 
 if (NODE_ENV !== "production") {
   const { config } = await import("dotenv");
@@ -22,7 +22,7 @@ const config = {
   PORT: process.env.PORT || Number(argv.PORT) || 8080,
   MODE: process.env.MODE || argv.MODE || "FORK",
   numCPUs: os.cpus().length,
-  PERS: process.env.PERS || "mem",
+  PERS: process.env.PERS?.toLowerCase() || "mem",
   uploadsImg: {
     productsPath: path.join(__dirname, "public", "img", "productos"),
     avatarsPath: path.join(__dirname, "public", "img", "avatars")
