@@ -7,6 +7,12 @@ class CartsDAOFactory {
         );
         return new CartsDAOClearDb();
       }
+      case "firebase": {
+        const { default: CartsDAOFirebase } = await import(
+          "./cartsDAOFirebase.js"
+        );
+        return new CartsDAOFirebase();
+      }
       case "fs": {
         const { default: CartsDAOFS } = await import("./cartsDAOFS.js");
         return new CartsDAOFS();

@@ -7,6 +7,12 @@ class UsersDAOFactory {
         );
         return new UsersDAOClearDb();
       }
+      case "firebase": {
+        const { default: UsersDAOFirebase } = await import(
+          "./usersDAOFirebase.js"
+        );
+        return new UsersDAOFirebase();
+      }
       case "fs": {
         const { default: UsersDAOFS } = await import("./usersDAOFS.js");
         return new UsersDAOFS();

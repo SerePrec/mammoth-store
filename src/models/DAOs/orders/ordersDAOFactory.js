@@ -7,6 +7,12 @@ class OrdersDAOFactory {
         );
         return new OrdersDAOClearDb();
       }
+      case "firebase": {
+        const { default: OrdersDAOFirebase } = await import(
+          "./ordersDAOFirebase.js"
+        );
+        return new OrdersDAOFirebase();
+      }
       case "fs": {
         const { default: OrdersDAOFS } = await import("./ordersDAOFS.js");
         return new OrdersDAOFS();

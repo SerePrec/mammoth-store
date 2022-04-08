@@ -7,6 +7,12 @@ class ProductsDAOFactory {
         );
         return new ProductsDAOClearDb();
       }
+      case "firebase": {
+        const { default: ProductsDAOFirebase } = await import(
+          "./productsDAOFirebase.js"
+        );
+        return new ProductsDAOFirebase();
+      }
       case "fs": {
         const { default: ProductsDAOFS } = await import("./productsDAOFS.js");
         return new ProductsDAOFS();

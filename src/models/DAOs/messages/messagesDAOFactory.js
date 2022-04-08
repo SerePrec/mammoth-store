@@ -7,6 +7,12 @@ class MessagesDAOFactory {
         );
         return new MessagesDAOClearDb();
       }
+      case "firebase": {
+        const { default: MessagesDAOFirebase } = await import(
+          "./messagesDAOFirebase.js"
+        );
+        return new MessagesDAOFirebase();
+      }
       case "fs": {
         const { default: MessagesDAOFS } = await import("./messagesDAOFS.js");
         return new MessagesDAOFS();
