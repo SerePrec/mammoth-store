@@ -1,5 +1,6 @@
 import Joi from "joi";
 import { Message } from "../models/entities/Message.js";
+import { Order } from "../models/entities/Order.js";
 import { Product } from "../models/entities/Product.js";
 import { User } from "../models/entities/User.js";
 import { escapeHtml } from "../utils/dataTools.js";
@@ -99,6 +100,23 @@ class ValidateDataService {
       return { error: "Los valores enviados no son válidos" };
     }
     return value;
+  };
+
+  // Valida que sea un formato de datos válido generar una órden
+  validateOrderPost = data => {
+    const validatedId = this.validateId(data.id);
+    if (validatedId && validatedId.error) return validatedId;
+    delete data["id"];
+    const validOrder = Order.validateInput(data, true);
+    if (validOrder) {
+      validOrder.id = validatedId;
+      validOrder.name = escapeHtml(validOrder.name);
+      validOrder.address = escapeHtml(validOrder.address);
+      return validOrder;
+    }
+    return {
+      error: "El formato de datos o los valores enviados no son válidos"
+    };
   };
 
   // Valida que sea un formato de mensaje válido para guardar en la BD

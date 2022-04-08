@@ -59,7 +59,9 @@ export class Order {
       address: isRequired
         ? Joi.string().trim().required()
         : Joi.string().trim(),
-      cp: isRequired ? Joi.string().trim().required() : Joi.string().trim(),
+      cp: isRequired
+        ? Joi.string().alphanum().trim().required()
+        : Joi.string().alphanum().trim(),
       phone: isRequired
         ? Joi.string().pattern(User.phonePattern).required()
         : Joi.string().pattern(User.phonePattern)
