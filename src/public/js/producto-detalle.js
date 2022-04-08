@@ -267,9 +267,10 @@ document.getElementById("btn-logout").addEventListener("click", e => {
 //*****************************************************************************
 
 function loadError(error) {
+  console.log(error);
   if (
     error == "Producto no encontrado" ||
-    error == "El id no es de un formato válido"
+    error.includes("no es de un formato válido")
   ) {
     $detailLoader.innerHTML = `
     <h3>Producto con id '${productId}' inexistente</h3>

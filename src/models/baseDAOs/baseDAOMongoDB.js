@@ -56,6 +56,8 @@ class BaseDAOMongoDB {
   async getById(id) {
     // mongoose parsea el id internamente en la consulta. Puede recibirlo tipo string y lo pasa a ObjectId.  No es necesario transformar
     try {
+      // Evito el comportamiento de arrojar error si el id no es de formato válido y por ende no exitiría
+      if (!mongoose.isValidObjectId(id)) return null;
       let element = await this.CollModel.findOne({ _id: id }, { __v: 0 });
       return element ? new this.DTO(element) : null;
     } catch (error) {
@@ -78,6 +80,8 @@ class BaseDAOMongoDB {
   //actualizo un elemento por su id
   async updateById(id, data) {
     try {
+      // Evito el comportamiento de arrojar error si el id no es de formato válido y por ende no exitiría
+      if (!mongoose.isValidObjectId(id)) return null;
       // mongoose parsea el id internamente en la consulta.
       const dataToUpdate = {};
       for (const key in data) {
@@ -117,6 +121,8 @@ class BaseDAOMongoDB {
   //borro un elemento por su id
   async deleteById(id) {
     try {
+      // Evito el comportamiento de arrojar error si el id no es de formato válido y por ende no exitiría
+      if (!mongoose.isValidObjectId(id)) return null;
       // mongoose parsea el id internamente en la consulta.
       const deleted = await this.CollModel.findOneAndDelete({ _id: id });
       if (deleted) {
