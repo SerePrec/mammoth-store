@@ -1,133 +1,126 @@
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
+import config from "../config.js";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const viewsPath = path.join(__dirname, "..", "views");
-const categories = [
-  "bicicletas",
-  "componentes",
-  "accesorios",
-  "equipamiento",
-  "indumentaria"
-];
-
-export const getProducts = (req, res) => {
-  const { user } = req;
-  const { messages } = req.session;
-  let message;
-  if (messages) {
-    req.session.messages = [];
-    message = messages[messages.length - 1];
-  }
-  res.render("pages/productos", {
-    title: "Mammoth Bike Store | Productos",
-    username: user.provider ? user.emails[0].value : user.username,
-    avatar: user.provider ? user.photos[0].value : user.avatar,
-    successRegister: message
-  });
-};
-
-export const getProductDetail = (req, res) => {
-  const { id } = req.params;
-  const { user } = req;
-  res.render("pages/producto-detalle", {
-    title: "Mammoth Bike Store | Detalle Del Producto",
-    username: user.provider ? user.emails[0].value : user.username,
-    avatar: user.provider ? user.photos[0].value : user.avatar,
-    id
-  });
-};
-
-export const getProductsByCategory = (req, res, next) => {
-  const { user } = req;
-  const { cat } = req.params;
-  if (categories.includes(cat)) {
-    res.render("pages/productos-categoria", {
+class WebServerController {
+  getProducts = (req, res) => {
+    const { user } = req;
+    const { messages } = req.session;
+    let message;
+    if (messages) {
+      req.session.messages = [];
+      message = messages[messages.length - 1];
+    }
+    res.render("pages/productos", {
       title: "Mammoth Bike Store | Productos",
       username: user.provider ? user.emails[0].value : user.username,
       avatar: user.provider ? user.photos[0].value : user.avatar,
-      category: cat
+      successRegister: message
     });
-  } else {
-    next();
-  }
-};
-
-export const getAdminProducts = (req, res) => {
-  res.sendFile("productos-admin.html", { root: viewsPath });
-};
-
-export const getCart = (req, res) => {
-  const { user } = req;
-  res.render("pages/carrito", {
-    title: "Mammoth Bike Store | Carrito",
-    username: user.provider ? user.emails[0].value : user.username,
-    avatar: user.provider ? user.photos[0].value : user.avatar
-  });
-};
-
-export const getAdminCarts = (req, res) => {
-  res.sendFile("carritos-admin.html", { root: viewsPath });
-};
-
-export const getMyAccount = (req, res) => {
-  const { user } = req;
-  res.render("pages/miCuenta", {
-    title: "Mammoth Bike Store | Mi Cuenta",
-    username: user.provider ? user.emails[0].value : user.username,
-    name: user.provider ? user.displayName : user.name,
-    address: user.provider ? "N/D" : user.address,
-    phone: user.provider ? "N/D" : user.phone,
-    age: user.provider ? "N/D" : user.age,
-    avatar: user.provider ? user.photos[0].value : user.avatar
-  });
-};
-
-export const getUsersChat = (req, res) => {
-  const { email } = req.params;
-  const { user } = req;
-  const options = {
-    title: `Mammoth Bike Store | Chat`,
-    username: user.provider ? user.emails[0].value : user.username,
-    avatar: user.provider ? user.photos[0].value : user.avatar
   };
-  if (email) {
-    res.render("pages/chat-user", options);
-  } else {
-    res.render("pages/chat", options);
-  }
-};
 
-export const getAdminChat = (req, res) => {
-  res.render("pages/chat-admin", { title: "Administrador de mensajes" });
-};
+  getProductDetail = (req, res) => {
+    const { id } = req.params;
+    const { user } = req;
+    res.render("pages/producto-detalle", {
+      title: "Mammoth Bike Store | Detalle Del Producto",
+      username: user.provider ? user.emails[0].value : user.username,
+      avatar: user.provider ? user.photos[0].value : user.avatar,
+      id
+    });
+  };
 
-export const getCheckout = (req, res) => {
-  const { user } = req;
-  res.render("pages/checkout", {
-    title: "Mammoth Bike Store | Checkout",
-    username: user.provider ? user.emails[0].value : user.username,
-    name: user.provider ? user.displayName : user.name,
-    address: user.provider ? "" : user.address,
-    phone: user.provider ? "" : user.phone,
-    avatar: user.provider ? user.photos[0].value : user.avatar
-  });
-};
+  getProductsByCategory = (req, res, next) => {
+    const { user } = req;
+    const { cat } = req.params;
+    if (config.shopCategories.includes(cat)) {
+      res.render("pages/productos-categoria", {
+        title: "Mammoth Bike Store | Productos",
+        username: user.provider ? user.emails[0].value : user.username,
+        avatar: user.provider ? user.photos[0].value : user.avatar,
+        category: cat
+      });
+    } else {
+      next();
+    }
+  };
 
-export const getCheckoutOk = (req, res) => {
-  const { user } = req;
-  res.render("pages/checkout-ok", {
-    title: "Mammoth Bike Store | Compra Exitosa",
-    username: user.provider ? user.emails[0].value : user.username,
-    avatar: user.provider ? user.photos[0].value : user.avatar
-  });
-};
+  getAdminProducts = (req, res) => {
+    res.sendFile("productos-admin.html", { root: config.viewsPath });
+  };
 
-export const getCheckoutError = (req, res) => {
-  const { user } = req;
-  res.render("pages/checkout-error", {
-    title: "Mammoth Bike Store | Error de checkout",
-    username: user.provider ? user.emails[0].value : user.username,
-    avatar: user.provider ? user.photos[0].value : user.avatar
-  });
-};
+  getCart = (req, res) => {
+    const { user } = req;
+    res.render("pages/carrito", {
+      title: "Mammoth Bike Store | Carrito",
+      username: user.provider ? user.emails[0].value : user.username,
+      avatar: user.provider ? user.photos[0].value : user.avatar
+    });
+  };
+
+  getAdminCarts = (req, res) => {
+    res.sendFile("carritos-admin.html", { root: config.viewsPath });
+  };
+
+  getMyAccount = (req, res) => {
+    const { user } = req;
+    res.render("pages/miCuenta", {
+      title: "Mammoth Bike Store | Mi Cuenta",
+      username: user.provider ? user.emails[0].value : user.username,
+      name: user.provider ? user.displayName : user.name,
+      address: user.provider ? "N/D" : user.address,
+      phone: user.provider ? "N/D" : user.phone,
+      age: user.provider ? "N/D" : user.age,
+      avatar: user.provider ? user.photos[0].value : user.avatar
+    });
+  };
+
+  getUsersChat = (req, res) => {
+    const { email } = req.params;
+    const { user } = req;
+    const options = {
+      title: `Mammoth Bike Store | Chat`,
+      username: user.provider ? user.emails[0].value : user.username,
+      avatar: user.provider ? user.photos[0].value : user.avatar
+    };
+    if (email) {
+      res.render("pages/chat-user", options);
+    } else {
+      res.render("pages/chat", options);
+    }
+  };
+
+  getAdminChat = (req, res) => {
+    res.render("pages/chat-admin", { title: "Administrador de mensajes" });
+  };
+
+  getCheckout = (req, res) => {
+    const { user } = req;
+    res.render("pages/checkout", {
+      title: "Mammoth Bike Store | Checkout",
+      username: user.provider ? user.emails[0].value : user.username,
+      name: user.provider ? user.displayName : user.name,
+      address: user.provider ? "" : user.address,
+      phone: user.provider ? "" : user.phone,
+      avatar: user.provider ? user.photos[0].value : user.avatar
+    });
+  };
+
+  getCheckoutOk = (req, res) => {
+    const { user } = req;
+    res.render("pages/checkout-ok", {
+      title: "Mammoth Bike Store | Compra Exitosa",
+      username: user.provider ? user.emails[0].value : user.username,
+      avatar: user.provider ? user.photos[0].value : user.avatar
+    });
+  };
+
+  getCheckoutError = (req, res) => {
+    const { user } = req;
+    res.render("pages/checkout-error", {
+      title: "Mammoth Bike Store | Error de checkout",
+      username: user.provider ? user.emails[0].value : user.username,
+      avatar: user.provider ? user.photos[0].value : user.avatar
+    });
+  };
+}
+
+export default WebServerController;

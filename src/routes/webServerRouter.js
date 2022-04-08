@@ -1,44 +1,100 @@
 import { Router } from "express";
 import { isAuthWeb, isAdminWeb, isNotAdminWeb } from "../middlewares/auth.js";
-import {
-  getProducts,
-  getProductDetail,
-  getProductsByCategory,
-  getAdminProducts,
-  getCart,
-  getAdminCarts,
-  getMyAccount,
-  getUsersChat,
-  getAdminChat,
-  getCheckout,
-  getCheckoutOk,
-  getCheckoutError
-} from "../controllers/webServerController.js";
+import WebServerController from "../controllers/webServerController.js";
 
 const router = Router();
 
-router.get("/", isAuthWeb, isNotAdminWeb, getProducts);
+class WebServerRouter {
+  constructor() {
+    this.webServerController = new WebServerController();
+  }
 
-router.get("/producto/:id", isAuthWeb, isNotAdminWeb, getProductDetail);
+  start() {
+    router.get(
+      "/",
+      isAuthWeb,
+      isNotAdminWeb,
+      this.webServerController.getProducts
+    );
 
-router.get("/productos/admin", isAuthWeb, isAdminWeb, getAdminProducts);
+    router.get(
+      "/producto/:id",
+      isAuthWeb,
+      isNotAdminWeb,
+      this.webServerController.getProductDetail
+    );
 
-router.get("/categoria/:cat", isAuthWeb, isNotAdminWeb, getProductsByCategory);
+    router.get(
+      "/productos/admin",
+      isAuthWeb,
+      isAdminWeb,
+      this.webServerController.getAdminProducts
+    );
 
-router.get("/carrito", isAuthWeb, isNotAdminWeb, getCart);
+    router.get(
+      "/categoria/:cat",
+      isAuthWeb,
+      isNotAdminWeb,
+      this.webServerController.getProductsByCategory
+    );
 
-router.get("/carritos/admin", isAuthWeb, isAdminWeb, getAdminCarts);
+    router.get(
+      "/carrito",
+      isAuthWeb,
+      isNotAdminWeb,
+      this.webServerController.getCart
+    );
 
-router.get("/micuenta", isAuthWeb, isNotAdminWeb, getMyAccount);
+    router.get(
+      "/carritos/admin",
+      isAuthWeb,
+      isAdminWeb,
+      this.webServerController.getAdminCarts
+    );
 
-router.get("/chat/admin", isAuthWeb, isAdminWeb, getAdminChat);
+    router.get(
+      "/micuenta",
+      isAuthWeb,
+      isNotAdminWeb,
+      this.webServerController.getMyAccount
+    );
 
-router.get("/chat/:email?", isAuthWeb, isNotAdminWeb, getUsersChat);
+    router.get(
+      "/chat/admin",
+      isAuthWeb,
+      isAdminWeb,
+      this.webServerController.getAdminChat
+    );
 
-router.get("/checkout", isAuthWeb, isNotAdminWeb, getCheckout);
+    router.get(
+      "/chat/:email?",
+      isAuthWeb,
+      isNotAdminWeb,
+      this.webServerController.getUsersChat
+    );
 
-router.get("/checkout/ok", isAuthWeb, isNotAdminWeb, getCheckoutOk);
+    router.get(
+      "/checkout",
+      isAuthWeb,
+      isNotAdminWeb,
+      this.webServerController.getCheckout
+    );
 
-router.get("/checkout/error", isAuthWeb, isNotAdminWeb, getCheckoutError);
+    router.get(
+      "/checkout/ok",
+      isAuthWeb,
+      isNotAdminWeb,
+      this.webServerController.getCheckoutOk
+    );
 
-export default router;
+    router.get(
+      "/checkout/error",
+      isAuthWeb,
+      isNotAdminWeb,
+      this.webServerController.getCheckoutError
+    );
+    return router;
+  }
+}
+
+export default WebServerRouter;

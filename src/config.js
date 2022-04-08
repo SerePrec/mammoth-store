@@ -23,6 +23,8 @@ const config = {
   MODE: process.env.MODE || argv.MODE || "FORK",
   numCPUs: os.cpus().length,
   PERS: process.env.PERS?.toLowerCase() || "mem",
+  viewsPath: path.join(__dirname, "views"),
+  staticsPath: path.join(__dirname, "public"),
   uploadsImg: {
     productsPath: path.join(__dirname, "public", "img", "productos"),
     avatarsPath: path.join(__dirname, "public", "img", "avatars")
@@ -138,7 +140,14 @@ const config = {
     wspPhoneNumber: process.env.TWILIO_WSP_PHONE_NUMBER,
     adminWsp: process.env.WSP_ADMIN
   },
-  logsFolder: path.join(__dirname, "logs")
+  logsFolder: path.join(__dirname, "logs"),
+  shopCategories: [
+    "bicicletas",
+    "componentes",
+    "accesorios",
+    "equipamiento",
+    "indumentaria"
+  ]
 };
 
 export default config;

@@ -2,27 +2,25 @@ import express from "express";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import compression from "compression";
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
 import config from "./config.js";
-import { passport } from "./middlewares/passport.js";
 import { isAuthApi } from "./middlewares/auth.js";
 import { multerErrorHandler } from "./middlewares/multer.js";
+import { passport } from "./middlewares/passport.js";
 import authRouter from "./routes/authRouter.js";
-import productsRouter from "./routes/apiProductsRouter.js";
 import cartsRouter from "./routes/apiCartsRouter.js";
 import ordersRouter from "./routes/apiOrdersRouter.js";
-import webServerRouter from "./routes/webServerRouter.js";
+import productsRouter from "./routes/apiProductsRouter.js";
+import WebServerRouter from "./routes/webServerRouter.js";
 import Error404Controller from "./controllers/error404Controller.js";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const webServerRouter = new WebServerRouter();
 const error404Controller = new Error404Controller();
 
 const app = express();
 
 // configuración motor de plantillas
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", config.viewsPath);
 
 // middlewares para parsear el body del request
 app.use(express.json());
@@ -32,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 
 // servir archivos estáticos
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(config.staticsPath));
 
 // sesiones
 app.use(
@@ -48,7 +46,7 @@ app.use(passport.session());
 
 // routers
 app.use(authRouter);
-app.use(webServerRouter);
+app.use(webServerRouter.start());
 app.use("/api/productos", isAuthApi, productsRouter);
 app.use("/api/carrito", isAuthApi, cartsRouter);
 app.use("/api/ordenes", isAuthApi, ordersRouter);

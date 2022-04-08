@@ -1,6 +1,4 @@
 import MessagesService from "./services/messagesService.js";
-import { messagesModel } from "./models/index.js";
-import { escapeHtml } from "./utils/dataTools.js";
 import { logger } from "./logger/index.js";
 
 const messagesService = new MessagesService();
