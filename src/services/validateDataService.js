@@ -44,11 +44,8 @@ class ValidateDataService {
 
   //Valida que el formato de datos del producto a actualizar sea válido
   validateProductPutBody = (data, filename) => {
-    console.log(data, filename);
     filename ? (data.thumbnail = `/img/productos/${filename}`) : null;
-    console.log(data);
     const validData = Product.validate(data, false);
-    console.log(validData);
     if (!validData)
       return {
         error: "El formato de datos o los valores enviados no son válidos"
@@ -85,6 +82,23 @@ class ValidateDataService {
       return validUser;
     }
     return false;
+  };
+
+  //Valida que el formato de datos del producto a incorporar o modificar al carrito sea válido
+  validateCartProductBody = data => {
+    const validatedId = this.validateId(data.id);
+    if (validatedId && validatedId.error) return validatedId;
+    data.id = validatedId;
+    const bodySchema = Joi.object({
+      id: Joi.required(),
+      quantity: Joi.number().integer().positive().required()
+    });
+    const { error, value } = bodySchema.validate(data);
+    if (error) {
+      logger.error(`Error de validación: ${error.message}`);
+      return { error: "Los valores enviados no son válidos" };
+    }
+    return value;
   };
 
   // Valida que sea un formato de mensaje válido para guardar en la BD

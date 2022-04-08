@@ -51,15 +51,17 @@ const validateProductPutBody = (req, res, next) => {
 };
 
 //Valida que el formato de datos del producto a incorporar o modificar al carrito sea válido
-// const validateCartProductBody = (req, res, next) => {
-//   let { id, quantity } = req.body;
-//   if (!idValidator(id) || !isPositiveInteger(quantity))
-//     res.status(400).json({ error: "Los valores enviados no son válidos" });
-//   else {
-//     req.body.quantity = parseInt(quantity);
-//     next();
-//   }
-// };
+const validateCartProductBody = (req, res, next) => {
+  const data = req.body;
+  const validated = validateDataService.validateCartProductBody(data);
+  if (validated && !validated.error) {
+    req.body = { ...validated };
+    console.log(req.body);
+    next();
+  } else {
+    res.status(400).json({ error: validated.error });
+  }
+};
 
 // Valida que sea un formato de datos válido generar una órden
 // const validateOrderPost = (req, res, next) => {
@@ -79,7 +81,6 @@ const validateProductPutBody = (req, res, next) => {
 //   }
 // };
 
-const validateCartProductBody = () => {};
 const validateOrderPost = () => {};
 export {
   validateId,
