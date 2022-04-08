@@ -16,7 +16,7 @@ const productStorage = multer.diskStorage({
 });
 const productUpload = multer({ storage: productStorage });
 
-export const uploadProductImage = productUpload.single("imageFile");
+const uploadProductImage = productUpload.single("imageFile");
 
 const avatarStorage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -33,9 +33,9 @@ const avatarUpload = multer({
   limits: { fileSize: maxFileSize }
 });
 
-export const uploadAvatarImage = avatarUpload.single("imageFile");
+const uploadAvatarImage = avatarUpload.single("imageFile");
 
-export const multerErrorHandler = (err, req, res, next) => {
+const multerErrorHandler = (err, req, res, next) => {
   if (err instanceof multer.MulterError) {
     logger.error(err);
     res.redirect("back");
@@ -43,3 +43,5 @@ export const multerErrorHandler = (err, req, res, next) => {
     next(err);
   }
 };
+
+export { uploadProductImage, uploadAvatarImage, multerErrorHandler };

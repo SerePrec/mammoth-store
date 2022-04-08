@@ -38,12 +38,7 @@ async function startServer() {
     });
 }
 
-cluster.isPrimary &&
-  logger.info(
-    `>>>> Entorno: ${
-      config.NODE_ENV === "production" ? "Producción" : "Desarrollo"
-    } <<<<`
-  );
+cluster.isPrimary && logger.info(`>>>> Entorno: [${config.NODE_ENV}] <<<<`);
 
 MODE !== "CLUSTER" &&
   process.on("exit", code => {

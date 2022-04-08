@@ -65,7 +65,7 @@ const isAdminApi = (req, res, next) => {
     `ruta '${req.baseUrl + req.path}' método '${req.method}' no autorizada`
   );
   res.status(403).json({
-    error: -1,
+    error: "no autorizado",
     descripcion: `ruta '${req.baseUrl + req.path}' método '${
       req.method
     }' no autorizada`
