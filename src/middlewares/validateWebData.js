@@ -7,11 +7,7 @@ const validateDataService = new ValidateDataService();
 const validateRegisterPost = (req, res, next) => {
   const data = req.body;
   const filename = req.file?.filename;
-  const avatar = filename
-    ? `/img/avatars/${filename}`
-    : `/img/avatars/default_avatar.svg`;
-  data.avatar = avatar;
-  const validated = validateDataService.validateRegisterPost(data);
+  const validated = validateDataService.validateRegisterPost(data, filename);
   if (validated) {
     req.body = { ...validated };
     next();

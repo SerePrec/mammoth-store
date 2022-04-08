@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validateOrderPost } from "../middlewares/validateData.js";
+import { validateOrderPost } from "../middlewares/validateApiData.js";
 import { isUserCart, isAdminApi } from "../middlewares/auth.js";
 import {
   createOrder,

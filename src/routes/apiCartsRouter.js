@@ -3,7 +3,7 @@ import {
   validateId,
   validateIdId_prod,
   validateCartProductBody
-} from "../middlewares/validateData.js";
+} from "../middlewares/validateApiData.js";
 import { isUserCart, isAdminApi } from "../middlewares/auth.js";
 import {
   getCarts,

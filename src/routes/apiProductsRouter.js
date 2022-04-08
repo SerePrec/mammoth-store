@@ -3,7 +3,7 @@ import {
   validateId,
   validateProductPostBody,
   validateProductPutBody
-} from "../middlewares/validateData.js";
+} from "../middlewares/validateApiData.js";
 import { isAdminApi } from "../middlewares/auth.js";
 import { uploadProductImage } from "../middlewares/multer.js";
 import {
