@@ -33,11 +33,13 @@ export const verifyTimestamp = element => {
 
 export const escapeHtml = unsafe =>
   unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    ? unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+    : unsafe;
 
 export const formatoPrecio = num => {
   // Función para dar formato de precio con separadores de miles (.) y decimales (,)

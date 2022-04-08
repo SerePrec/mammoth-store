@@ -1,6 +1,9 @@
+import MessagesService from "./services/messagesService.js";
 import { messagesModel } from "./models/index.js";
 import { escapeHtml } from "./utils/dataTools.js";
 import { logger } from "./logger/index.js";
+
+const messagesService = new MessagesService();
 
 //Configuración de sockets
 export default io => {
@@ -14,7 +17,7 @@ export default io => {
 
     //Obtiene listado de mensajes con cada conexión entrante y lo envía al socket
     try {
-      const messages = await messagesModel.getAll();
+      const messages = await messagesService.getAll();
       socket.emit("allMessages", messages);
     } catch (error) {
       logger.error(error);
@@ -24,14 +27,10 @@ export default io => {
     //Escucha el evento de un nuevo mensaje enviado
     socket.on("newMessage", async message => {
       try {
-        if (!message.user || !message.text.trim())
-          throw new Error("Mensaje inválido");
-        message.text = escapeHtml(message.text);
         message.type = "user";
         message.replyMessage = null;
-        const newMessage = { ...message };
-        await messagesModel.save(newMessage);
-        const messages = await messagesModel.getAll();
+        await messagesService.save(message);
+        const messages = await messagesService.getAll();
         io.sockets.emit("allMessages", messages);
       } catch (error) {
         logger.error(error);
@@ -42,13 +41,9 @@ export default io => {
     //Escucha el evento de un nuevo mensaje del administrador
     socket.on("adminMessage", async message => {
       try {
-        if (!message.user || !message.text.trim())
-          throw new Error("Mensaje inválido");
-        message.text = escapeHtml(message.text);
         message.type = "admin";
-        const newMessage = { ...message };
-        await messagesModel.save(newMessage);
-        const messages = await messagesModel.getAll();
+        await messagesService.save(message);
+        const messages = await messagesService.getAll();
         io.sockets.emit("allMessages", messages);
       } catch (error) {
         logger.error(error);

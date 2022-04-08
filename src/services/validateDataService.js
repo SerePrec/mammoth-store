@@ -4,8 +4,8 @@ import { Order } from "../models/entities/Order.js";
 import { Product } from "../models/entities/Product.js";
 import { User } from "../models/entities/User.js";
 import { escapeHtml } from "../utils/dataTools.js";
-import config from "../config.js";
 import { logger } from "../logger/index.js";
+import config from "../config.js";
 
 class ValidateDataService {
   // Valida que sea id numérico o alfanumérico según el tipo de persistencia
@@ -120,12 +120,17 @@ class ValidateDataService {
   };
 
   // Valida que sea un formato de mensaje válido para guardar en la BD
-  // validateMessage = data => {
-  //   const validMessage = Message.validate(data, true);
-  //   return validMessage
-  //     ? validMessage
-  //     : { error: "El formato de datos o los valores enviados no son válidos" };
-  // };
+  validateMessage = data => {
+    const validMessage = Message.validate(data, true);
+    if (validMessage) {
+      validMessage.text = escapeHtml(validMessage.text);
+      validMessage.replyMessage = escapeHtml(validMessage.replyMessage);
+      return validMessage;
+    }
+    return {
+      error: "El formato de datos o los valores enviados no son válidos"
+    };
+  };
 }
 
 export default ValidateDataService;

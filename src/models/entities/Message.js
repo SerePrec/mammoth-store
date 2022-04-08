@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { User } from "./User.js";
 import { logger } from "../../logger/index.js";
 
 export class Message {
@@ -11,7 +12,14 @@ export class Message {
 
   static getMessageSchema(isRequired) {
     return Joi.object({
-      user: isRequired ? Joi.string().trim().required() : Joi.string().trim(),
+      user: isRequired
+        ? Joi.alternatives()
+            .try(Joi.string().trim().pattern(User.usernamePattern), "all")
+            .required()
+        : Joi.alternatives().try(
+            Joi.string().trim().pattern(User.usernamePattern),
+            "all"
+          ),
       type: isRequired ? Joi.string().trim().required() : Joi.string().trim(),
       text: isRequired ? Joi.string().trim().required() : Joi.string().trim(),
       replyMessage: isRequired
