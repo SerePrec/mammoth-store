@@ -1,15 +1,26 @@
+import Joi from "joi";
 import { Message } from "../models/entities/Message.js";
 import { Product } from "../models/entities/Product.js";
 import { User } from "../models/entities/User.js";
 import { escapeHtml } from "../utils/dataTools.js";
+import config from "../config.js";
+import { logger } from "../logger/index.js";
 
 class ValidateDataService {
-  // Valida que sea un id numérico
-  // validateId = id => {
-  //   if (!((typeof id == "string" || typeof id == "number") && /^\w+$/.test(id)))
-  //     return { error: "El parámetro no es válido" };
-  //   else return true;
-  // };
+  // Valida que sea id numérico o alfanumérico según el tipo de persistencia
+  validateId = id => {
+    const persWithNumId = ["mem", "fs", "mariadb", "sqlite3"];
+    const pers = config.PERS;
+    const idSchema = persWithNumId.includes(pers)
+      ? Joi.number().integer().positive().required()
+      : Joi.string().alphanum().required();
+    const { error, value } = idSchema.validate(id);
+    if (error) {
+      logger.error(`Error de validación: ${error.message}`);
+      return { error: `El id: ${id} no es de un formato válido` };
+    }
+    return value;
+  };
 
   //Valida que el formato de datos a guardar sea válido
   // validatePostProductBody = data => {

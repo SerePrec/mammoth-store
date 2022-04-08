@@ -1,7 +1,6 @@
-import config from "../config.js";
+import ValidateDataService from "../services/validateDataService.js";
 import {
   isTextRequired,
-  isNumericId,
   isPrice,
   isInteger,
   isPositiveInteger,
@@ -11,33 +10,26 @@ import {
 } from "../utils/validations.js";
 import { deleteThumbnail, escapeHtml } from "../utils/dataTools.js";
 
-let idValidator;
-(function assignIdValidator() {
-  const persWithNumId = ["mem", "fs", "mariadb", "sqlite3"];
-  const pers = config.PERS;
-  persWithNumId.includes(pers)
-    ? (idValidator = isNumericId)
-    : (idValidator = isAlphanumeric);
-})();
+const validateDataService = new ValidateDataService();
 
-// Valida que sea id numérico o alfanumérico según el tipo de persistencia
 const validateId = (req, res, next) => {
   const { id } = req.params;
-  if (!idValidator(id))
-    res.status(400).json({ error: "El id no es de un formato válido" });
+  const validated = validateDataService.validateId(id);
+  if (validated && !validated.error) next();
   else {
-    next();
+    res.status(400).json({ error: validated.error });
   }
 };
 
-// Valida que ambos ids sean numéricos o alfanuméricos según el tipo de persistencia
 const validateIdId_prod = (req, res, next) => {
   const { id, id_prod } = req.params;
-  if (!idValidator(id) || !idValidator(id_prod))
-    res.status(400).json({ error: "El id no es de un formato válido" });
-  else {
-    next();
-  }
+  let validated = validateDataService.validateId(id);
+  if (validated && validated.error)
+    return res.status(400).json({ error: validated.error });
+  validated = validateDataService.validateId(id_prod);
+  if (validated && validated.error)
+    return res.status(400).json({ error: validated.error });
+  next();
 };
 
 //Valida que el formato de datos del producto a guardar sea válido
@@ -117,34 +109,36 @@ const validateProductPutBody = (req, res, next) => {
 };
 
 //Valida que el formato de datos del producto a incorporar o modificar al carrito sea válido
-const validateCartProductBody = (req, res, next) => {
-  let { id, quantity } = req.body;
-  if (!idValidator(id) || !isPositiveInteger(quantity))
-    res.status(400).json({ error: "Los valores enviados no son válidos" });
-  else {
-    req.body.quantity = parseInt(quantity);
-    next();
-  }
-};
+// const validateCartProductBody = (req, res, next) => {
+//   let { id, quantity } = req.body;
+//   if (!idValidator(id) || !isPositiveInteger(quantity))
+//     res.status(400).json({ error: "Los valores enviados no son válidos" });
+//   else {
+//     req.body.quantity = parseInt(quantity);
+//     next();
+//   }
+// };
 
 // Valida que sea un formato de datos válido generar una órden
-const validateOrderPost = (req, res, next) => {
-  const { id, name, address, phone, cp } = req.body;
-  if (
-    !idValidator(id) ||
-    !isTextRequired(name) ||
-    !isTextRequired(address) ||
-    !isValidPhone(phone) ||
-    !isAlphanumeric(cp)
-  ) {
-    res.status(400).json({ error: "Los valores enviados no son válidos" });
-  } else {
-    req.body.name = escapeHtml(name.trim());
-    req.body.address = escapeHtml(address.trim());
-    next();
-  }
-};
+// const validateOrderPost = (req, res, next) => {
+//   const { id, name, address, phone, cp } = req.body;
+//   if (
+//     !idValidator(id) ||
+//     !isTextRequired(name) ||
+//     !isTextRequired(address) ||
+//     !isValidPhone(phone) ||
+//     !isAlphanumeric(cp)
+//   ) {
+//     res.status(400).json({ error: "Los valores enviados no son válidos" });
+//   } else {
+//     req.body.name = escapeHtml(name.trim());
+//     req.body.address = escapeHtml(address.trim());
+//     next();
+//   }
+// };
 
+const validateCartProductBody = () => {};
+const validateOrderPost = () => {};
 export {
   validateId,
   validateIdId_prod,
