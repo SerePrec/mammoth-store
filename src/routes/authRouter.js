@@ -1,39 +1,48 @@
 import { Router } from "express";
-import { validateRegisterPost } from "../middlewares/validateWebData.js";
+import { isNotAuthWeb } from "../middlewares/auth.js";
+import { uploadAvatarImage } from "../middlewares/multer.js";
 import {
   passportAuthLogin,
   passportAuthRegister,
   passportAuthGoogle,
   passportAuthGoogleCb
 } from "../middlewares/passport.js";
-import { isNotAuthWeb } from "../middlewares/auth.js";
-import { uploadAvatarImage } from "../middlewares/multer.js";
-import * as controller from "../controllers/authController.js";
+import { validateRegisterPost } from "../middlewares/validateWebData.js";
+import AuthController from "../controllers/authController.js";
 
 const router = Router();
 
-router.get("/login", controller.getLogin);
+class AuthRouter {
+  constructor() {
+    this.authController = new AuthController();
+  }
+  start() {
+    router.get("/login", this.authController.getLogin);
 
-router.post("/login", isNotAuthWeb, passportAuthLogin);
+    router.post("/login", isNotAuthWeb, passportAuthLogin);
 
-router.get("/login-error", controller.getLoginError);
+    router.get("/login-error", this.authController.getLoginError);
 
-router.get("/register", controller.getRegister);
+    router.get("/register", this.authController.getRegister);
 
-router.post(
-  "/register",
-  isNotAuthWeb,
-  uploadAvatarImage,
-  validateRegisterPost,
-  passportAuthRegister
-);
+    router.post(
+      "/register",
+      isNotAuthWeb,
+      uploadAvatarImage,
+      validateRegisterPost,
+      passportAuthRegister
+    );
 
-router.get("/register-error", controller.getRegisterError);
+    router.get("/register-error", this.authController.getRegisterError);
 
-router.get("/auth/google", passportAuthGoogle);
+    router.get("/auth/google", passportAuthGoogle);
 
-router.get("/auth/google/callback", passportAuthGoogleCb);
+    router.get("/auth/google/callback", passportAuthGoogleCb);
 
-router.get("/logout", controller.getLogout);
+    router.get("/logout", this.authController.getLogout);
 
-export default router;
+    return router;
+  }
+}
+
+export default AuthRouter;

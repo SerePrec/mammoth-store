@@ -6,13 +6,14 @@ import config from "./config.js";
 import { isAuthApi } from "./middlewares/auth.js";
 import { multerErrorHandler } from "./middlewares/multer.js";
 import { passport } from "./middlewares/passport.js";
-import authRouter from "./routes/authRouter.js";
+import AuthRouter from "./routes/authRouter.js";
 import cartsRouter from "./routes/apiCartsRouter.js";
 import ordersRouter from "./routes/apiOrdersRouter.js";
 import productsRouter from "./routes/apiProductsRouter.js";
 import WebServerRouter from "./routes/webServerRouter.js";
 import Error404Controller from "./controllers/error404Controller.js";
 
+const authRouter = new AuthRouter();
 const webServerRouter = new WebServerRouter();
 const error404Controller = new Error404Controller();
 
@@ -45,7 +46,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // routers
-app.use(authRouter);
+app.use(authRouter.start());
 app.use(webServerRouter.start());
 app.use("/api/productos", isAuthApi, productsRouter);
 app.use("/api/carrito", isAuthApi, cartsRouter);
