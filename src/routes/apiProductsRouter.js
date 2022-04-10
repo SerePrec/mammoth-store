@@ -1,40 +1,54 @@
 import { Router } from "express";
+import { isAdminApi } from "../middlewares/auth.js";
+import { uploadProductImage } from "../middlewares/multer.js";
 import {
   validateId,
   validateProductPostBody,
   validateProductPutBody
 } from "../middlewares/validateApiData.js";
-import { isAdminApi } from "../middlewares/auth.js";
-import { uploadProductImage } from "../middlewares/multer.js";
-import {
-  getAllProducts,
-  getProduct,
-  createProduct,
-  updateProduct,
-  deleteProduct
-} from "../controllers/apiProductsController.js";
+import ApiProductsController from "../controllers/apiProductsController.js";
 
 const router = Router();
 
-router.get("/:id?", getAllProducts, validateId, getProduct);
+class ApiProductsRouter {
+  constructor() {
+    this.apiProductsController = new ApiProductsController();
+  }
 
-router.post(
-  "/",
-  isAdminApi,
-  uploadProductImage,
-  validateProductPostBody,
-  createProduct
-);
+  start() {
+    router.get(
+      "/:id?",
+      this.apiProductsController.getAllProducts,
+      validateId,
+      this.apiProductsController.getProduct
+    );
 
-router.put(
-  "/:id",
-  isAdminApi,
-  uploadProductImage,
-  validateId,
-  validateProductPutBody,
-  updateProduct
-);
+    router.post(
+      "/",
+      isAdminApi,
+      uploadProductImage,
+      validateProductPostBody,
+      this.apiProductsController.createProduct
+    );
 
-router.delete("/:id", isAdminApi, validateId, deleteProduct);
+    router.put(
+      "/:id",
+      isAdminApi,
+      uploadProductImage,
+      validateId,
+      validateProductPutBody,
+      this.apiProductsController.updateProduct
+    );
 
-export default router;
+    router.delete(
+      "/:id",
+      isAdminApi,
+      validateId,
+      this.apiProductsController.deleteProduct
+    );
+
+    return router;
+  }
+}
+
+export default ApiProductsRouter;
