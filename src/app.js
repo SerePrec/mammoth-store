@@ -7,13 +7,14 @@ import { isAuthApi } from "./middlewares/auth.js";
 import { multerErrorHandler } from "./middlewares/multer.js";
 import { passport } from "./middlewares/passport.js";
 import ApiCartsRouter from "./routes/apiCartsRouter.js";
-import ordersRouter from "./routes/apiOrdersRouter.js";
+import ApiOrdersRouter from "./routes/apiOrdersRouter.js";
 import ApiProductsRouter from "./routes/apiProductsRouter.js";
 import AuthRouter from "./routes/authRouter.js";
 import WebServerRouter from "./routes/webServerRouter.js";
 import Error404Controller from "./controllers/error404Controller.js";
 
 const apiCartsRouter = new ApiCartsRouter();
+const apiOrdersRouter = new ApiOrdersRouter();
 const apiProductsRouter = new ApiProductsRouter();
 const authRouter = new AuthRouter();
 const webServerRouter = new WebServerRouter();
@@ -51,7 +52,7 @@ app.use(passport.session());
 app.use(authRouter.start());
 app.use(webServerRouter.start());
 app.use("/api/carrito", isAuthApi, apiCartsRouter.start());
-app.use("/api/ordenes", isAuthApi, ordersRouter);
+app.use("/api/ordenes", isAuthApi, apiOrdersRouter.start());
 app.use("/api/productos", isAuthApi, apiProductsRouter.start());
 
 // error 404 API

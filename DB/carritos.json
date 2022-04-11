@@ -1,7 +1,5 @@
 [
   {
-    "id": 2,
-    "timestamp": "2021-12-07T22:54:33.765Z",
     "username": "isabel@gmail.com",
     "products": [
       {
@@ -34,17 +32,17 @@
         },
         "quantity": 7
       }
-    ]
+    ],
+    "id": 2,
+    "timestamp": "2021-12-07T22:54:33.765Z"
   },
   {
-    "id": 5,
-    "timestamp": "2021-12-07T22:54:35.344Z",
     "username": "ana@gmail.com",
-    "products": []
+    "products": [],
+    "id": 5,
+    "timestamp": "2021-12-07T22:54:35.344Z"
   },
   {
-    "id": 7,
-    "timestamp": "2021-12-10T23:39:02.127Z",
     "username": "pedrogarcia@gmail.com",
     "products": [
       {
@@ -77,17 +75,17 @@
         },
         "quantity": 2
       }
-    ]
+    ],
+    "id": 7,
+    "timestamp": "2021-12-10T23:39:02.127Z"
   },
   {
-    "id": 8,
-    "timestamp": "2021-12-11T19:19:52.832Z",
     "username": "joseprellezo@gmail.com",
-    "products": []
+    "products": [],
+    "id": 8,
+    "timestamp": "2021-12-11T19:19:52.832Z"
   },
   {
-    "id": 9,
-    "timestamp": "2021-12-11T19:43:42.752Z",
     "username": "nadiaprellezo@gmail.com",
     "products": [
       {
@@ -135,18 +133,20 @@
         },
         "quantity": 1
       }
-    ]
+    ],
+    "id": 9,
+    "timestamp": "2021-12-11T19:43:42.752Z"
   },
   {
-    "id": 14,
-    "timestamp": "2022-03-07T18:17:59.076Z",
-    "username": "prellezose@yahoo.com.ar",
-    "products": []
-  },
-  {
-    "id": 17,
-    "timestamp": "2022-03-07T19:17:29.419Z",
     "username": "prellezose@gmail.com",
-    "products": []
+    "products": [],
+    "id": 17,
+    "timestamp": "2022-03-07T19:17:29.419Z"
+  },
+  {
+    "username": "prellezose@yahoo.com.ar",
+    "products": [],
+    "id": 18,
+    "timestamp": "2022-04-11T14:12:43.013Z"
   }
 ]

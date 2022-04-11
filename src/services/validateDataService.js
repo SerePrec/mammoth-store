@@ -131,6 +131,15 @@ class ValidateDataService {
     };
   };
 
+  // Valida que el formato de datos de la orden a crear o actualizar sea válido
+  validateOrder = (data, isRequired) => {
+    const validatedOrder = Order.validate(data, isRequired);
+    if (validatedOrder) return validatedOrder;
+    return {
+      error: "El formato de datos o los valores no son válidos"
+    };
+  };
+
   // Valida que el formato de datos del mensaje a guardar sea válido
   validateMessage = data => {
     const validMessage = Message.validate(data, true);

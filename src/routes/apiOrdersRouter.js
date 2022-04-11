@@ -1,20 +1,31 @@
 import { Router } from "express";
-import { validateOrderPost } from "../middlewares/validateApiData.js";
 import { isUserCart, isAdminApi } from "../middlewares/auth.js";
-import {
-  createOrder,
-  getUserOrders
-} from "../controllers/apiOrdersController.js";
+import { validateOrderPost } from "../middlewares/validateApiData.js";
+import ApiOrdersController from "../controllers/apiOrdersController.js";
 
 const router = Router();
 
-// TODO:
-//router.get("/", isAdminApi, getOrders);
+class ApiOrdersRouter {
+  constructor() {
+    this.apiOrdersController = new ApiOrdersController();
+  }
 
-//router.get("/:id", isAdminApi, getOrderById);
+  start() {
+    //router.get("/", isAdminApi, getOrders);
 
-router.get("/usuario", getUserOrders);
+    //router.get("/:id", isAdminApi, getOrderById);
 
-router.post("/", isUserCart, validateOrderPost, createOrder);
+    router.get("/usuario", this.apiOrdersController.getUserOrders);
 
-export default router;
+    router.post(
+      "/",
+      isUserCart,
+      validateOrderPost,
+      this.apiOrdersController.createOrder
+    );
+
+    return router;
+  }
+}
+
+export default ApiOrdersRouter;

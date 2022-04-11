@@ -1,7 +1,5 @@
 [
   {
-    "id": 1,
-    "timestamp": "2022-03-05T23:09:39.693Z",
     "username": "prellezose@yahoo.com.ar",
     "name": "Sergio Emanuel Prellezo",
     "address": "33 #922",
@@ -41,11 +39,11 @@
     ],
     "total": 4875,
     "status": "generada",
-    "number": 1
+    "number": 1,
+    "id": 1,
+    "timestamp": "2022-03-05T23:09:39.693Z"
   },
   {
-    "id": 2,
-    "timestamp": "2022-03-06T23:12:05.466Z",
     "username": "prellezose@yahoo.com.ar",
     "name": "Sergio Emanuel Prellezo",
     "address": "33 #922",
@@ -85,11 +83,11 @@
     ],
     "total": 16380,
     "status": "generada",
-    "number": 2
+    "number": 2,
+    "id": 2,
+    "timestamp": "2022-03-06T23:12:05.466Z"
   },
   {
-    "id": 3,
-    "timestamp": "2022-03-07T17:57:26.917Z",
     "username": "prellezose@yahoo.com.ar",
     "name": "Sergio Emanuel Prellezo",
     "address": "33 #922",
@@ -159,11 +157,11 @@
     ],
     "total": 530355,
     "status": "generada",
-    "number": 3
+    "number": 3,
+    "id": 3,
+    "timestamp": "2022-03-07T17:57:26.917Z"
   },
   {
-    "id": 4,
-    "timestamp": "2022-03-07T18:17:54.716Z",
     "username": "prellezose@yahoo.com.ar",
     "name": "Sergio Emanuel Prellezo",
     "address": "33 #922",
@@ -203,11 +201,11 @@
     ],
     "total": 374473,
     "status": "generada",
-    "number": 4
+    "number": 4,
+    "id": 4,
+    "timestamp": "2022-03-07T18:17:54.716Z"
   },
   {
-    "id": 5,
-    "timestamp": "2022-03-07T18:25:39.737Z",
     "username": "prellezose@gmail.com",
     "name": "Sergio Emanuel Prellezo",
     "address": "33 #922",
@@ -247,11 +245,11 @@
     ],
     "total": 15856,
     "status": "generada",
-    "number": 5
+    "number": 5,
+    "id": 5,
+    "timestamp": "2022-03-07T18:25:39.737Z"
   },
   {
-    "id": 6,
-    "timestamp": "2022-03-07T19:03:27.887Z",
     "username": "prellezose@gmail.com",
     "name": "Sergio Emanuel Prellezo",
     "address": "33 #922",
@@ -291,11 +289,11 @@
     ],
     "total": 825,
     "status": "generada",
-    "number": 6
+    "number": 6,
+    "id": 6,
+    "timestamp": "2022-03-07T19:03:27.887Z"
   },
   {
-    "id": 7,
-    "timestamp": "2022-03-07T19:07:29.351Z",
     "username": "prellezose@gmail.com",
     "name": "Sergio Emanuel Prellezo",
     "address": "33 #922",
@@ -320,11 +318,11 @@
     ],
     "total": 900,
     "status": "generada",
-    "number": 7
+    "number": 7,
+    "id": 7,
+    "timestamp": "2022-03-07T19:07:29.351Z"
   },
   {
-    "id": 8,
-    "timestamp": "2022-03-07T19:17:23.924Z",
     "username": "prellezose@gmail.com",
     "name": "Sergio Emanuel Prellezo",
     "address": "33 #922",
@@ -349,11 +347,11 @@
     ],
     "total": 15480,
     "status": "generada",
-    "number": 8
+    "number": 8,
+    "id": 8,
+    "timestamp": "2022-03-07T19:17:23.924Z"
   },
   {
-    "id": 9,
-    "timestamp": "2022-03-07T19:28:12.311Z",
     "username": "andrespipo@gmail.com",
     "name": "Andrés Pipo",
     "address": "40 #22",
@@ -393,6 +391,67 @@
     ],
     "total": 510946,
     "status": "generada",
-    "number": 9
+    "number": 9,
+    "id": 9,
+    "timestamp": "2022-03-07T19:28:12.311Z"
+  },
+  {
+    "username": "prellezose@yahoo.com.ar",
+    "name": "Sergio Emanuel Prellezo",
+    "address": "33 #922",
+    "phone": "+5492215737971",
+    "cp": "1900",
+    "products": [
+      {
+        "product": {
+          "title": "Bicicleta Ruta Liv Envi Advanced Pro 1 Disc 2021",
+          "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+          "code": "CODIGO",
+          "brand": "LIV",
+          "category": "bicicletas",
+          "price": 437000,
+          "stock": 3,
+          "thumbnail": "/img/productos/1639175527746-producto11.jpg",
+          "id": 11,
+          "timestamp": "2021-12-10T13:58:36.501Z"
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "title": "Gel Energizante Nutrisport Con Cafeína 50g. Express.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "code": "N-CA-CI-50",
+          "brand": "NUTRISPORT",
+          "category": "equipamiento",
+          "price": 125,
+          "stock": 200,
+          "thumbnail": "/img/productos/1639157975529-producto3.jpg",
+          "id": 3,
+          "timestamp": "2021-12-08T15:15:07.528Z"
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "title": "Cubierta De Kevlar Maxxis Race King 29 X 2,15.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "code": "M-MTB-0345",
+          "brand": "MAXXIS",
+          "category": "componentes",
+          "price": 4750,
+          "stock": 15,
+          "thumbnail": "/img/productos/1639157959863-producto2.jpg",
+          "id": 2,
+          "timestamp": "2021-12-08T15:15:07.528Z"
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 441875,
+    "status": "generada",
+    "number": 10,
+    "id": 10,
+    "timestamp": "2022-04-11T14:12:33.274Z"
   }
 ]
