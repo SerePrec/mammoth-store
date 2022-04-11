@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { Cart } from "../models/entities/Cart.js";
 import { Message } from "../models/entities/Message.js";
 import { Order } from "../models/entities/Order.js";
 import { Product } from "../models/entities/Product.js";
@@ -85,7 +86,7 @@ class ValidateDataService {
     return false;
   };
 
-  //Valida que el formato de datos del producto a incorporar o modificar al carrito sea válido
+  //Valida que el formato de datos recibidos del producto a incorporar o modificar al carrito sea válido
   validateCartProductBody = data => {
     const validatedId = this.validateId(data.id);
     if (validatedId && validatedId.error) return validatedId;
@@ -102,7 +103,14 @@ class ValidateDataService {
     return value;
   };
 
-  // Valida que sea un formato de datos válido generar una órden
+  //Valida que el formato de datos del carrito a crear o actualizar sea válido
+  validateCart = (data, isRequired) => {
+    const validatedCart = Cart.validate(data, isRequired);
+    if (validatedCart) return validatedCart;
+    throw new Error("El formato de datos o los valores no son válidos");
+  };
+
+  // Valida que el formato de datos recibidos sea válido para generar una órden
   validateOrderPost = data => {
     const validatedId = this.validateId(data.id);
     if (validatedId && validatedId.error) return validatedId;

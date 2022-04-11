@@ -1,54 +1,65 @@
 import { Router } from "express";
+import { isUserCart, isAdminApi } from "../middlewares/auth.js";
 import {
   validateId,
   validateIdId_prod,
   validateCartProductBody
 } from "../middlewares/validateApiData.js";
-import { isUserCart, isAdminApi } from "../middlewares/auth.js";
-import {
-  getCarts,
-  getUserCart,
-  createCart,
-  deleteCart,
-  getProductsFromCart,
-  addProductToCart,
-  updateProductFromCart,
-  deleteProductFromCart
-} from "../controllers/apiCartsController.js";
+import ApiCartsController from "../controllers/apiCartsController.js";
 
 const router = Router();
 
-router.get("/", isAdminApi, getCarts);
+class ApiCartsRouter {
+  constructor() {
+    this.apiCartsController = new ApiCartsController();
+  }
 
-router.get("/usuario", getUserCart);
+  start() {
+    router.get("/", isAdminApi, this.apiCartsController.getCarts);
 
-router.get("/:id/productos", validateId, isUserCart, getProductsFromCart);
+    router.get("/usuario", this.apiCartsController.getUserCart);
 
-router.post("/", createCart);
+    router.get(
+      "/:id/productos",
+      validateId,
+      isUserCart,
+      this.apiCartsController.getProductsFromCart
+    );
 
-router.post(
-  "/:id/productos",
-  validateId,
-  isUserCart,
-  validateCartProductBody,
-  addProductToCart
-);
+    router.post("/", this.apiCartsController.createCart);
 
-router.put(
-  "/:id/productos",
-  validateId,
-  isUserCart,
-  validateCartProductBody,
-  updateProductFromCart
-);
+    router.post(
+      "/:id/productos",
+      validateId,
+      isUserCart,
+      validateCartProductBody,
+      this.apiCartsController.addProductToCart
+    );
 
-router.delete("/:id", validateId, isUserCart, deleteCart);
+    router.put(
+      "/:id/productos",
+      validateId,
+      isUserCart,
+      validateCartProductBody,
+      this.apiCartsController.updateProductFromCart
+    );
 
-router.delete(
-  "/:id/productos/:id_prod",
-  validateIdId_prod,
-  isUserCart,
-  deleteProductFromCart
-);
+    router.delete(
+      "/:id",
+      validateId,
+      isUserCart,
+      this.apiCartsController.deleteCart
+    );
 
-export default router;
+    router.delete(
+      "/:id/productos/:id_prod",
+      validateIdId_prod,
+      isUserCart,
+      this.apiCartsController.deleteProductFromCart
+    );
+
+    return router;
+  }
+}
+
+export default ApiCartsRouter;

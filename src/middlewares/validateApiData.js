@@ -56,7 +56,6 @@ const validateCartProductBody = (req, res, next) => {
   const validated = validateDataService.validateCartProductBody(data);
   if (validated && !validated.error) {
     req.body = { ...validated };
-    console.log(req.body);
     next();
   } else {
     res.status(400).json({ error: validated.error });
