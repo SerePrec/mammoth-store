@@ -5,7 +5,7 @@ const cartProductSchema = new Schema({
   id: { type: mongoose.Types.ObjectId, required: true },
   title: { type: String, required: true },
   detail: { type: String },
-  brand: { type: String, uppercase: true, required: true },
+  brand: { type: String, required: true },
   code: { type: String },
   category: { type: String, required: true },
   price: { type: Number, required: true, min: 0 },
