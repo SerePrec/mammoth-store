@@ -44,7 +44,7 @@ class ValidateDataService {
     };
   };
 
-  //Valida que el formato de datos del producto a actualizar sea válido
+  // Valida que el formato de datos del producto a actualizar sea válido
   validateProductPutBody = (data, filename) => {
     filename ? (data.thumbnail = `/img/productos/${filename}`) : null;
     const validData = Product.validate(data, false);
@@ -70,7 +70,7 @@ class ValidateDataService {
     }
   };
 
-  // Valida que sea un formato de usuario válido para guardar en la BD
+  // Valida que el formato de datos del usuario a guardar sea válido
   validateRegisterPost = (data, filename) => {
     const avatar = filename
       ? `/img/avatars/${filename}`
@@ -83,10 +83,12 @@ class ValidateDataService {
       validUser.address = escapeHtml(validUser.address);
       return validUser;
     }
-    return false;
+    return {
+      error: "El formato de datos o los valores enviados no son válidos"
+    };
   };
 
-  //Valida que el formato de datos recibidos del producto a incorporar o modificar al carrito sea válido
+  // Valida que el formato de datos recibidos del producto a incorporar o actualizar en el carrito sea válido
   validateCartProductBody = data => {
     const validatedId = this.validateId(data.id);
     if (validatedId && validatedId.error) return validatedId;
@@ -103,11 +105,13 @@ class ValidateDataService {
     return value;
   };
 
-  //Valida que el formato de datos del carrito a crear o actualizar sea válido
+  // Valida que el formato de datos del carrito a crear o actualizar sea válido
   validateCart = (data, isRequired) => {
     const validatedCart = Cart.validate(data, isRequired);
     if (validatedCart) return validatedCart;
-    throw new Error("El formato de datos o los valores no son válidos");
+    return {
+      error: "El formato de datos o los valores no son válidos"
+    };
   };
 
   // Valida que el formato de datos recibidos sea válido para generar una órden
@@ -127,7 +131,7 @@ class ValidateDataService {
     };
   };
 
-  // Valida que sea un formato de mensaje válido para guardar en la BD
+  // Valida que el formato de datos del mensaje a guardar sea válido
   validateMessage = data => {
     const validMessage = Message.validate(data, true);
     if (validMessage) {

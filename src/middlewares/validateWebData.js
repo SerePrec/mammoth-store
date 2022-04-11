@@ -8,7 +8,7 @@ const validateRegisterPost = (req, res, next) => {
   const data = req.body;
   const filename = req.file?.filename;
   const validated = validateDataService.validateRegisterPost(data, filename);
-  if (validated) {
+  if (validated && !validated.error) {
     req.body = { ...validated };
     next();
   } else {

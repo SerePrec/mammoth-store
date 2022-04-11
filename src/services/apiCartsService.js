@@ -34,7 +34,9 @@ class ApiCartsService {
     const username = user.provider ? user.emails[0].value : user.username;
     const newCart = { username, products: [] };
     const validatedCart = validateDataService.validateCart(newCart, true);
-    return await this.cartsModel.save(new CartDTO(validatedCart));
+    if (validatedCart && !validatedCart.error)
+      return await this.cartsModel.save(new CartDTO(validatedCart));
+    throw new Error(validatedCart.error);
   };
 
   addProductToCart = async (id, id_prod, quantity) => {
@@ -60,7 +62,9 @@ class ApiCartsService {
     }
     const dataToUpdate = { products };
     const validatedData = validateDataService.validateCart(dataToUpdate, false);
-    return await this.cartsModel.updateById(id, new CartDTO(validatedData));
+    if (validatedData && !validatedData.error)
+      return await this.cartsModel.updateById(id, new CartDTO(validatedData));
+    throw new Error(validatedData.error);
   };
 
   updateProductFromCart = async (id, id_prod, quantity) => {
@@ -84,7 +88,9 @@ class ApiCartsService {
     }
     const dataToUpdate = { products };
     const validatedData = validateDataService.validateCart(dataToUpdate, false);
-    return await this.cartsModel.updateById(id, new CartDTO(validatedData));
+    if (validatedData && !validatedData.error)
+      return await this.cartsModel.updateById(id, new CartDTO(validatedData));
+    throw new Error(validatedData.error);
   };
 
   deleteCart = async id => await this.cartsModel.deleteById(id);
@@ -101,7 +107,9 @@ class ApiCartsService {
     }
     const dataToUpdate = { products };
     const validatedData = validateDataService.validateCart(dataToUpdate, false);
-    return await this.cartsModel.updateById(id, new CartDTO(validatedData));
+    if (validatedData && !validatedData.error)
+      return await this.cartsModel.updateById(id, new CartDTO(validatedData));
+    throw new Error(validatedData.error);
   };
 }
 
