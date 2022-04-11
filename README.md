@@ -1,66 +1,42 @@
-# Tercer entrega proyecto final - Programación Backend
+# Proyecto final - Programación Backend
 
 ### CoderHouse
 
 ## Consigna
 
-### Se debe entregar:
+Para culminar con el proyecto final, vamos a realizar las últimas reformas al desarrollo backend e-Commerce para que quede estructurado de acuerdo a los criterios y mecanismos que fuimos aprendiendo en este último trayecto del curso.
 
-- Un menú de registro y autenticación de usuarios basado en passport local, guardando en la base de datos las credenciales y el resto de los datos ingresados al momento del registro.
+- En primer lugar la aplicación de servidor debe tener sus capas MVC bien definidas y en archivos separados. Debe existir la capa de ruteo, el controlador, la capa de lógica de negocio con los casos de uso y las validaciones y la capa de persistencia con los DAOs/DTOs o Repositories necesarios para soportar el o los sistemas de persistencia elegidos.  
+  En caso de ser más de uno, utilizar una factory para que podamos elegir el sistema de almacenamiento al inicio del servidor.
 
-  - El registro de usuario consiste en crear una cuenta en el servidor almacenada en la base de datos, que contenga el email y password de usuario, además de su nombre, dirección, edad, número de teléfono (debe contener todos los prefijos internacionales) y foto ó avatar. La contraseña se almacenará encriptada en la base de datos.
+- El servidor debe disponer de configuraciones mediante variables de entorno, que permitan crear un ambiente para desarrollo y otro para producción, elegibles desde la variable de environment NODE_ENV al desplegar la aplicación. Como variables de configuración deberían estar el puerto de escucha del servidor, la persistencia elegida, el string de conexión a la base de datos (si hubiera varios sistemas de persistencia en base de datos considerar todos los casos y sus diferencias), API keys y todo lo que sea necesario que esté en un archivo protegido fuera del código del servidor. Pensar en utilizar bases de datos y servidores locales para la configuración de desarrollo.
 
-  - La imagen se podrá subir al servidor y se guardará en una carpeta pública del mismo a la cual se tenga acceso por url.
+- Se debe analizar que el hecho de incorporar un caso más de uso en la lógica del servidor, sea un proceso de agregar código y no de modificar el existente.
 
-- Un formulario post de registro y uno de login. De modo que, luego de concretarse cualquiera de estas operaciones en forma exitosa, el usuario accederá a su home.
+- Si agregamos un sistema más de persistencia, deberíamos agregar sólo el módulo nuevo y reformar la factory, mientras que resto del proyecto: router, controlador, lógica de negocio, validaciones y otros sistemas de persistencia no deberían sufrir modificaciones para soportar la nueva función.
 
-  - El usuario se logueará al sistema con email y password y tendrá acceso a un menú en su vista, a modo de barra de navegación. Esto le permitirá ver los productos totales con los filtros que se hayan implementado y su propio carrito de compras e información propia (datos de registro con la foto). Además, dispondrá de una opción para desloguearse del sistema.
+- El código debe quedar bien tabulado, legible, ordenado y comentado ni por exceso ni por defecto.
 
-  - Ante la incorporación de un usuario, el servidor enviará un email al administrador con todos los datos de registro y asunto 'nuevo registro', a una dirección que se encuentre por el momento almacenada en una constante global.
+- Las funciones o clases que se por sí solas expliquen su misión, no necesitan ser explicadas (salvo que amerite por complejidad).
 
-- Envío de un email y un mensaje de whatsapp al administrador desde el servidor, a un número de contacto almacenado en una constante global.
-
-  - El usuario iniciará la acción de pedido en la vista del carrito.
-
-  - Será enviado una vez finalizada la elección para la realizar la compra de productos.
-
-  - El email contendrá en su cuerpo la lista completa de productos a comprar y en el asunto la frase 'nuevo pedido de ' y el nombre y email del usuario que los solicitó. En el mensaje de whatsapp se debe enviar la misma información del asunto del email.
-
-  - El usuario recibirá un mensaje de texto al número que haya registrado, indicando que su pedido ha sido recibido y se encuentra en proceso.
-
-### Aspectos a incluir:
-
-- El servidor trabajará con una base de datos DBaaS (Ej. MongoDB Atlas) y estará preparado para trabajar en forma local o en la nube a través de la plataforma PaaS Heroku.
-
-- Habilitar el modo cluster para el servidor, como opcional a través de una constante global.
-
-- Utilizar alguno de los loggers ya vistos y así reemplazar todos los mensajes a consola por logs eficientes hacia la misma consola. En el caso de errores moderados ó graves el log tendrá además como destino un archivo elegido.
-
-- Realizar una prueba de performance en modo local, con y sin cluster, utilizando Artillery en el endpoint del listado de productos (con el usuario vez logueado). Verificar los resultados.
+- Para concluir, subir el desarrollo completo a Heroku o algún PASS de preferencia, seleccionando la configuración a producción de modo de utilizar los parámetros adecuados de funcionamiento y la persistencia en la nube a través de bases de datos como servicio (DBaaS).
 
 ## Introducción
 
 Esta entrega forma parte del trabajo final correspondiente al curso de **Programación Backend** dictado por **CoderHouse**.  
 Se trata del desarrollo de una tienda virtual para una bicicletería (Mammoth).
 
-Por un lado se encuentra el desarrollo de la **API REST FULL** del ecommerce y por otro el desarrollo de un **servidor web** que provee las vistas de frontend necesarias para simular el proceso de compra y probar la funcionalidad de la API.
+Por un lado se encuentra el desarrollo de la **API REST** del ecommerce y por otro el desarrollo de un **servidor web** que provee las vistas de frontend necesarias para simular el proceso de compra y probar la funcionalidad de la API.
 
-Esta tercer entrega parte de las mismas funcionalidades que la primera, pero con varios cambios principales:
+Esta entrega final parte de las mismas funcionalidades que las anteriores, pero con los siguientes cambios principales:
 
-- Refactorizado del código con división por funcionalidades (routes, middlewares, controllers, models, etc)
-- Nuevas funcionalidades de la API y middlewares de validaciones
-- Compresión Gzip (librería `compression`)
-- Sistema de autenticación **dual** usando usuario y contraseña o la cuenta de **Google**
-- Nuevo conjuntos de vistas tanto para el usuario estándar como para el administrador
-- Generación de órdenes de pedidos
-- Envío de mensajería ante distintos eventos del flujo de la aplicación (email,sms, wsp)
-- Posibilidad de pasar parámetros por línea de comando al script principal
-- Opción de funcionamiento en modo **CLUSTER**
-- Sistema de logs por consola y archivo según el nivel y entorno
+- Refactorizado del código con división por capas (ruteo, controlador, lógica de negocio y persistencia)
+- Tests de endpoints y funcionales
+- Documentación con **Swagger**
 
 ### Deploy en Heroku (Temporal):
 
-https://entrega3-prellezose.herokuapp.com
+https://mammoth-store.herokuapp.com
 
 ## Ejecución
 
@@ -121,6 +97,65 @@ $ PERS=firebase node .
 **NOTA**: Las credenciales y valores de configuración de las bases de datos se encuentran en el archivo `config.js` y se toman desde variables de entorno.
 El archivo `.env` con dichos valores será enviado de manera privada al tutor o profesor encargado de la corrección.
 
+### Arquitectura en capas
+
+Tomando como base la estructura de carpetas de la anterior entrega, refactoricé el código para dividir el proyecto en capas, dando lugar a la siguiente estructura de carpetas **principales**:
+
+```
+src/
+├── controllers/
+├── middlewares/
+├── models/
+│   ├── baseDAOs/
+│   ├── DAOs/
+|   |   ├── carts/
+|   |   ├── messages/
+|   |   ├── orders/
+|   |   ├── products/
+|   |   ├── users/
+│   ├── DTOs/
+│   ├── entities/
+│   ├── schemas/
+├── routes/
+├── services/
+├── views/
+|...
+```
+
+- routers: definición de las rutas de la app (tanto rutas de la API como del Webserver). Se dividen de acuerdo a las funcionalidades. En estas se llaman a los respectivos controladores y middlewares.
+- middlewares: intermedian en las peticiones hacia el servidor y realizan diferentes tipos de acciones según su funcionalidad (autenticación, subida de archivos, login y registro de usuarios, validaciones de datos recibidos, etc)
+- controllers: reciben las peticiones y manejan el flujo de las respuestas, pasando los datos a la capa de servicio y esperando por una respuesta de la misma, para luego devolver una respuesta a la capa de presentación.
+- services: Es donde se encuentra la lógica de negocio de la app y se llevan a cabo las validaciones que puede solicitar algún middleware o la misma capa. Se comunica con la capa de persistencia pasándole los datos y esperando por una respuesta de la misma. Una vez procesados los datos, son devueltos a la capa de ruteo (controllers).
+- models: Aqui está toda la lógica relacionada a la interacción con la base de datos o sistema de persistencia. Se encarga de guardar y recuperar información de la BD.
+- views: Lugar donde residen las vistas que forman la capa de presentación.
+
+Toda la lógica de negocio fue trasladada desde los controladores (en donde residía hasta ahora) a la capa de servicio. Se dividieron en archivos según la funcionalidad que se encuentran dentro de la carpeta `services`.  
+También la lógica de negocios asociada a las validaciones que ofrecen los middlewares fue traslada allí.  
+Es está capa la que se comunica con el modelo, evitando el salto de capas. Cada capa realiza su tarea y se la comunica a la capa adyacente ya sea hacía arriba o abajo de la arquitectura.
+Tanto controladores como middlewares (que se encuentran en la capa de ruteo), reciben la petición y pasan los datos a la capa de servicio (cuando corresponde) esperando por su respuesta.
+
+Para el caso de los **sockets** ocurre algo similar, donde cada evento tiene asociada una función (controlador). Éste recibe la data y se comunica de ser necesario con la capa de servicio y esta a su vez con el modelo.
+
+Dentro de la carpeta `models`, se encuentran:
+
+- `BaseDAOs`: DAOs para las distintas persistencias, a partir de los cuales se extienden los DAOs particulares
+- `DAOs`: aquí se encuentran los DAOs de las distintas persistencias agrupados por entidades junto a la **Factory** correspondiente.
+- `DTOs`: se ubican los DTOs separados por entidades
+- `entities`: clases que definen las entidades y sus validaciones
+- `schemas`: schemas de **mongoose**
+- `index.js`: archivo de índice que exporta los DAOs. Desde este archivo se importan las distintas **Factories** y se les pide el DAO correspondiente para luego exportarlos.
+
+Cada clase "DAO" asociada a las distintas entidades y variable según el tipo de persistencia, posee los mismos métodos para poder independizarlas del resto de la lógica propia de la API.  
+ Estos métodos están estructurados para devolver el mismo formato de datos y contemplar los mismos tipos de respuestas en todos los casos. Así no se generan riesgos de romper el código por manejar respuestas diferentes entre estos diferentes casos de persistencia.
+
+Cada **Factory** toma como parámetro la persistencia elegida `PERS` y al llamar a su método `get`, nos devuelve el DAO correspondiente a dicha persistencia.
+
+Los DAOs implementan el patrón **singleton** para impedir crear más de una instancia de estos mecanismos de acceso a los datos.
+
+Se refactorizó la lógica de validaciones de datos, usando métodos estáticos respectivos de cada entidad. Para facilitar y mejorar la lógica de dichas validaciones se implementó la librería **Joi**
+
+Finalmente, moví los dos tipos de errores 404 a su respectivo controlador.
+
 ### Vistas
 
 Existe un conjunto de vistas que provee el servidor web. Podemos dividirlas en 3 grupos:
@@ -179,7 +214,7 @@ Solo disponible para **usuarios con permisos de administrador**:
 
   Utiliza **websockets**.
 
-### API
+### API ///TODO:SWAGGER
 
 Independientemente del modo de persistencia elegido, cada endpoint devuelve el mismo formato de datos.
 
@@ -323,15 +358,47 @@ Esto es dado que se utilizan todos los núcleos del procesador para ejecutar ins
 También si hizo un análisis de performance en el mismo endpoint y modo fork con **0x** y **Node inspect**. Del análisis de ambos puede evidenciarse el comportamiento asíncrono del servidor lo que favorece a un mayor rendimiento de la app.
 En la carpeta `docs` se encuentra el gráfico de flama de **0x** junto a la tabla y gráfica de **Node inspect**. En el gráfico de flama no se aprecian importantes "focos calientes". Los más calientes pertenecen a la serialización y des-serialización asociada a MongoDB, pero puede comprobarse en conjunto con los datos de **Node inspect** que el tiempo propio de dichas funciones (permanencia en la cima del stack) no es tan importante. En la gráfica del proceso de **Node inspect** se aprecian los típicos picos de las funciones asíncronas.
 
+### Tests
+
+Se puede ejecutar una suite de tests con **Mocha** de la **API de productos**. Para ello, utilizar el comando `npm test`.
+
+> > > **Nota:** previo a la realización de los tests, deshabilité las validaciones de autenticación y validación de roles de usuarios sobre las respectivas rutas, de lo contrario, los test arrojarán error de autenticación.  
+> > > Esto a modo de facilitar las pruebas, ya que los objetivos de estos tests no se tratan sobre el sistema de validación.
+
+Un ejemplo desde linux para ejecutar los test con **MongoDB** como persistencia, sería:
+
+Ejecución del servidor
+
+```sh
+$ PERS=mongodb npm start
+```
+
+Ejecución del test
+
+```sh
+$ npm test
+```
+
+A fin de generar datos de productos para el test utilicé el módulo de **faker** para construir una función generadora que se importa para los tests.
+
+Realicé una serie de tests con el framework de testeo **Mocha** junto con **supertest** como cliente http y **chai** para escribir las aserciones.  
+Los tests se dividen en dos grupos principales:
+
+- Test a endpoints de la API de productos: Se prueba cada endpoint según los distintos tipos de respuestas en función del estado de la petición.
+- Test funcional de la API de productos: Se hace una simulación encadenada de peticiones, probando la funcionalidad en conjunto de la API. Es similar al recorrido que se hace en el test "manual".
+
+En los test se usan los hooks de **before** y **after** para preparar las condiciones previas a los bloque de pruebas y luego para realizar una limpieza de los datos residuales (Ej: productos creados en BD)
+
+Dentro de la carpeta `tests` se encuentra en un archivo .png donde se muestra una captura de pantalla de los resultados arrojados por consola.
+
+<br/>
+<div align="center">
+  <img src="src/tests/productsApiTest-result.png" alt="Resultados del test"/>
+</div>
+
 ## Notas varias
 
-- Hice una reestructuración del código utilizando los controladores de rutas, para ir ordenando más el proyecto. Ahora cada ruta llama a su controlador o función middleware respectivamente, separando esta lógica de las rutas. A su vez, el controlador llama al modelo respectivo cuando es necesario.
-  También separé las rutas de acuerdo a las funcionalidades: auth, webserver, apiProducts, apiCarts y apiOrders.
-
 - Se utilizó la librería **minimist** para procesar los argumentos de entrada, junto a las opciones de "alias" y "default" para el puerto y modo de operación.
-
-- Cada clase "DAO" asociada al tipo de persistencia posee los mismos métodos para poder independizarlas del resto de la lógica propia de la API.  
-  Estos métodos están estructurados para devolver el mismo formato de datos y contemplar los mismos tipos de respuestas en todos los casos. Así no se generan riesgos de romper el código por manejar respuestas diferentes entre estos diferentes casos de persistencia.
 
 - En el panel de administración de productos, incorporé la posibilidad de subir una imagen desde el formulario. Entonces puedo elegir entre colocar una url para el thumbnail, o tomar una imagen existente y asociar su ruta desde la carpeta en donde se sube. Si subo el archivo le da prioridad a esta ruta, por más que haya colocado una url a mano.
 
