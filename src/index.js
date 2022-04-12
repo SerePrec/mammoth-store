@@ -39,6 +39,8 @@ async function startServer() {
 }
 
 cluster.isPrimary && logger.info(`>>>> Entorno: [${config.NODE_ENV}] <<<<`);
+cluster.isPrimary &&
+  logger.info(`>>>> Documentación API disponible en /api-docs <<<<`);
 
 MODE !== "CLUSTER" &&
   process.on("exit", code => {

@@ -2,6 +2,8 @@ import express from "express";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import compression from "compression";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpecs, swaggerUiOptions } from "./swagger/swagger.js";
 import config from "./config.js";
 import { isAuthApi } from "./middlewares/auth.js";
 import { multerErrorHandler } from "./middlewares/multer.js";
@@ -54,6 +56,13 @@ app.use(webServerRouter.start());
 app.use("/api/carritos", isAuthApi, apiCartsRouter.start());
 app.use("/api/ordenes", isAuthApi, apiOrdersRouter.start());
 app.use("/api/productos", isAuthApi, apiProductsRouter.start());
+
+// swagger API docs
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpecs, swaggerUiOptions)
+);
 
 // error 404 API
 app.use("/api", error404Controller.getError404Api);

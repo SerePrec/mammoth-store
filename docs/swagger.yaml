@@ -1,0 +1,771 @@
+tags:
+  - name: Productos
+    description: Operaciones disponibles para usuarios regulares
+  - name: Productos (Admin)
+    description: Operaciones disponibles sólo para administradores
+  - name: Carritos
+    description: Operaciones disponibles para usuarios regulares
+  - name: Carritos (Admin)
+    description: Operaciones disponibles sólo para administradores
+  - name: Ordenes
+    description: Operaciones disponibles para usuarios regulares
+  - name: Ordenes (Admin)
+    description: Operaciones disponibles sólo para administradores
+paths:
+  /productos:
+    get:
+      summary: Devuelve el listado de todos los productos disponibles
+      tags:
+        - Productos
+      responses:
+        "200":
+          description: Listado de productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "500":
+          description: No se pudo recuperar la infomación
+    post:
+      summary: Crea un nuevo producto
+      tags:
+        - Productos (Admin)
+      requestBody:
+        required: true
+        description: Objeto con la información del producto a crear
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/NewProduct"
+      responses:
+        "201":
+          description: El producto creado
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - result
+                  - newProduct
+                properties:
+                  result:
+                    type: string
+                    default: ok
+                  newProduct:
+                    type: object
+                    $ref: "#/components/schemas/Product"
+        "400":
+          description: El formato de datos o los valores enviados no son válidos
+        "500":
+          description: No se pudo agregar el producto
+  /productos/{id}:
+    get:
+      summary: Devuelve el producto con el id proporcionado
+      tags:
+        - Productos
+      parameters:
+        - name: id
+          in: path
+          description: id del producto buscado
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: El producto con el id dado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "400":
+          description: El formato de datos o los valores enviados no son válidos
+        "404":
+          description: Producto no encontrado
+        "500":
+          description: No se pudo recuperar la infomación
+    put:
+      summary: Actualiza el producto con el id proporcionado
+      tags:
+        - Productos (Admin)
+      parameters:
+        - name: id
+          in: path
+          description: id del producto a actualizar
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        description: Objeto con la información a modificar del producto
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/UpdateProduct"
+      responses:
+        "200":
+          description: El producto actualizado
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - result
+                  - updatedProduct
+                properties:
+                  result:
+                    type: string
+                    default: ok
+                  updatedProduct:
+                    type: object
+                    $ref: "#/components/schemas/Product"
+        "400":
+          description: El formato de datos o los valores enviados no son válidos
+        "404":
+          description: Producto no encontrado
+        "500":
+          description: No se pudo actualizar el producto
+    delete:
+      summary: Elimina el producto con el id proporcionado
+      tags:
+        - Productos (Admin)
+      parameters:
+        - name: id
+          in: path
+          description: el id del producto a eliminar
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: El id del producto eliminado
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - result
+                  - deletedId
+                properties:
+                  result:
+                    type: string
+                    default: ok
+                  deletedId:
+                    type: string
+                    example: 4ughd73658fnsk85dh58skgh
+        "400":
+          description: El formato de datos o los valores enviados no son válidos
+        "404":
+          description: Producto no encontrado
+        "500":
+          description: No se pudo eliminar el producto
+  /ordenes:
+    post:
+      summary: Crea una nueva orden de compra
+      tags:
+        - Ordenes
+      requestBody:
+        required: true
+        description: Objeto con la información de la orden a crear
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/NewOrder"
+      responses:
+        "201":
+          description: La orden creada
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - result
+                  - orderId
+                  - orderNumber
+                properties:
+                  result:
+                    type: string
+                    default: ok
+                  orderId:
+                    type: string
+                    description: id autogenerado de la orden creada
+                    example: 7apjk52347fnsk23bn22qxjk
+                  orderNumber:
+                    type: number
+                    description: número autogenerado de la orden creada
+                    example: 3471
+        "400":
+          description: El formato de datos o los valores enviados no son válidos
+        "403":
+          description: El id del carrito al que se intenta acceder no fue asignado al usuario
+        "500":
+          description: No se pudo crear la orden
+  /ordenes/usuario:
+    get:
+      summary: Devuelve todas las órdenes del usuario logueado
+      tags:
+        - Ordenes
+      responses:
+        "200":
+          description: Listado de las órdenes del usuario
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Order"
+        "500":
+          description: No se pudo recuperar la infomación
+  /carritos:
+    get:
+      summary: Devuelve un listado con un resumen informativo de todos los carritos en existencia
+      tags:
+        - Carritos (Admin)
+      responses:
+        "200":
+          description: Listado resumen de los carritos en existencia
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - id
+                    - username
+                    - timestamp
+                  properties:
+                    id:
+                      type: string
+                      description: id autogenerado
+                      example: 2ljdf68912fnsk58sd01nuty
+                    username:
+                      type: string
+                      description: email del usuario propietario del carrito
+                      example: prellezose@gmail.com
+                    timestamp:
+                      type: string
+                      description: marca de tiempo autogenerada
+                      example: "2021-12-11T19:43:42.752Z"
+        "500":
+          description: No se pudo recuperar la infomación
+    post:
+      summary: Crea un nuevo carrito
+      tags:
+        - Carritos
+      responses:
+        "201":
+          description: El id del carrito creado
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - result
+                  - cartId
+                properties:
+                  result:
+                    type: string
+                    default: ok
+                  cartId:
+                    type: string
+                    description: id autogenerado del carrito creado
+                    example: 2ljdf68912fnsk58sd01nuty
+        "500":
+          description: No se pudo crear el carrito
+  /carritos/usuario:
+    get:
+      summary: Devuelve el carrito del usuario logueado
+      tags:
+        - Carritos
+      responses:
+        "200":
+          description: El carrito del usuario logueado
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - cartId
+                  - products
+                properties:
+                  cartId:
+                    type: string
+                    example: 2ljdf68912fnsk58sd01nuty
+                  products:
+                    type: array
+                    description: listado de items seleccionados
+                    items:
+                      $ref: "#/components/schemas/CartItem"
+        "404":
+          description: Carrito no encontrado
+        "500":
+          description: No se pudo recuperar la infomación
+  /carritos/{id}:
+    delete:
+      summary: Elimina el carrito con el id proporcionado
+      tags:
+        - Carritos
+      parameters:
+        - name: id
+          in: path
+          description: el id del carrito a eliminar
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: El id del carrito eliminado
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - result
+                  - deletedId
+                properties:
+                  result:
+                    type: string
+                    default: ok
+                  deletedId:
+                    type: string
+                    example: 2ljdf68912fnsk58sd01nuty
+        "400":
+          description: El formato de datos o los valores enviados no son válidos
+        "403":
+          description: El id del carrito al que se intenta acceder no fue asignado al usuario
+        "404":
+          description: Carrito no encontrado
+        "500":
+          description: No se pudo eliminar el carrito
+  /carritos/{id}/productos:
+    get:
+      summary: Devuelve el listado de items del carrito con el id proporcionado
+      tags:
+        - Carritos
+      parameters:
+        - name: id
+          in: path
+          description: el id del carrito seleccionado
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Listado de items del carrito seleccionado
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CartItem"
+        "400":
+          description: El formato de datos o los valores enviados no son válidos
+        "403":
+          description: El id del carrito al que se intenta acceder no fue asignado al usuario
+        "404":
+          description: Carrito no encontrado
+        "500":
+          description: No se pudo recuperar la infomación
+    post:
+      summary: Agrega una determinada cantidad de un producto al carrito con el id proporcionado
+      tags:
+        - Carritos
+      parameters:
+        - name: id
+          in: path
+          description: el id del carrito seleccionado
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        description: Objeto con la información del item a agregar al carrito
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/UpdateCartItem"
+      responses:
+        "200":
+          description: El item agregado al carrito seleccionado
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - result
+                  - addedProdId
+                  - quantity
+                properties:
+                  result:
+                    type: string
+                    default: ok
+                  addedProdId:
+                    type: string
+                    example: 4ughd73658fnsk85dh58skgh
+                  quantity:
+                    type: number
+                    example: 3
+        "400":
+          description: El formato de datos o los valores enviados no son válidos / La cantidad total agregada no puede superar al stock
+        "403":
+          description: El id del carrito al que se intenta acceder no fue asignado al usuario
+        "404":
+          description: Carrito no encontrado / Producto no encontrado
+        "500":
+          description: No se pudo agregar el producto al carrito
+    put:
+      summary: Actualiza una determinada cantidad de un producto en el carrito con el id proporcionado
+      tags:
+        - Carritos
+      parameters:
+        - name: id
+          in: path
+          description: el id del carrito seleccionado
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        description: Objeto con la información del item a actualizar en el carrito
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/UpdateCartItem"
+      responses:
+        "200":
+          description: El item actualizado en el carrito seleccionado
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - result
+                  - updatedProdId
+                  - quantity
+                properties:
+                  result:
+                    type: string
+                    default: ok
+                  updatedProdId:
+                    type: string
+                    example: 4ughd73658fnsk85dh58skgh
+                  quantity:
+                    type: number
+                    example: 3
+        "400":
+          description: El formato de datos o los valores enviados no son válidos / La cantidad no puede superar al stock
+        "403":
+          description: El id del carrito al que se intenta acceder no fue asignado al usuario
+        "404":
+          description: Carrito no encontrado / Producto no encontrado
+        "500":
+          description: No se pudo modificar la cantidad del producto en el carrito
+  /carritos/{id}/productos/{id_prod}:
+    delete:
+      summary: Elimina un producto con el id:id_prod del carrito con el id proporcionado
+      tags:
+        - Carritos
+      parameters:
+        - name: id
+          in: path
+          description: el id del carrito seleccionado
+          required: true
+          schema:
+            type: string
+        - name: id_prod
+          in: path
+          description: el id del producto a eliminar del carrito
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: El id del producto eliminado del carrito seleccionado
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - result
+                  - deletedProdId
+                properties:
+                  result:
+                    type: string
+                    default: ok
+                  deletedProdId:
+                    type: string
+                    example: 4ughd73658fnsk85dh58skgh
+        "400":
+          description: El formato de datos o los valores enviados no son válidos
+        "403":
+          description: El id del carrito al que se intenta acceder no fue asignado al usuario
+        "404":
+          description: Carrito no encontrado / Producto no encontrado
+        "500":
+          description: No se pudo eliminar el producto del carrito
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - id
+        - title
+        - detail
+        - brand
+        - code
+        - category
+        - price
+        - stock
+        - thumbnail
+        - timestamp
+      properties:
+        id:
+          type: string
+          description: id autogenerado
+          example: 4ughd73658fnsk85dh58skgh
+        title:
+          type: string
+          description: nombre del producto
+          example: Velocímetro Cateye Inalámbrico ST-12
+        detail:
+          type: string
+          description: descripción del producto
+          example: Velocímetro inalámbrico multifunción digital. Incluye 17 funciones y permite incluir banda de pulsómetro
+        brand:
+          type: string
+          description: marca del fabricante
+          example: cateye
+        code:
+          type: string
+          description: código de fabricante
+          example: Velo.St.12
+        category:
+          type: string
+          description: categoría
+          example: equipamiento
+        price:
+          type: number
+          description: precio unitario
+          example: 3560.75
+        stock:
+          type: number
+          description: stock disponible
+          example: 3
+        thumbnail:
+          type: string
+          description: url de la imagen
+          example: "/img/productos/1639157910158-producto5.jpg"
+        timestamp:
+          type: string
+          description: marca de tiempo autogenerada
+          example: "2021-12-08T15:15:07.529Z"
+    Order:
+      type: object
+      required:
+        - id
+        - number
+        - username
+        - name
+        - phone
+        - address
+        - cp
+        - products
+        - total
+        - status
+        - timestamp
+      properties:
+        id:
+          type: string
+          description: id autogenerado
+          example: 7apjk52347fnsk23bn22qxjk
+        number:
+          type: number
+          description: número de la orden
+          example: 3471
+        username:
+          type: string
+          description: email del usuario propietario de la orden
+          example: prellezose@gmail.com
+        name:
+          type: string
+          description: nombre del usuario
+          example: Sergio Emanuel Prellezo
+        phone:
+          type: string
+          description: número de móvil del usuario
+          example: "+5492215737971"
+        address:
+          type: string
+          description: dirección del usuario
+          example: "33 #922"
+        cp:
+          type: string
+          description: código postal
+          example: "B1902AMA"
+        products:
+          type: array
+          description: listado de items comprados
+          items:
+            $ref: "#/components/schemas/CartItem"
+        total:
+          type: number
+          description: importe total de la orden
+          example: 17423.21
+        status:
+          type: string
+          description: estado de la orden de compra
+          example: generada
+        timestamp:
+          type: string
+          description: marca de tiempo autogenerada
+          example: "2022-03-07T19:07:29.351Z"
+    Cart:
+      type: object
+      required:
+        - id
+        - username
+        - products
+        - timestamp
+      properties:
+        id:
+          type: string
+          description: id autogenerado
+          example: 2ljdf68912fnsk58sd01nuty
+        username:
+          type: string
+          description: email del usuario propietario del carrito
+          example: prellezose@gmail.com
+        products:
+          type: array
+          description: listado de items seleccionados
+          items:
+            $ref: "#/components/schemas/CartItem"
+        timestamp:
+          type: string
+          description: marca de tiempo autogenerada
+          example: "2021-12-11T19:43:42.752Z"
+    CartItem:
+      type: object
+      required:
+        - product
+        - quantity
+      properties:
+        product:
+          $ref: "#/components/schemas/Product"
+        quantity:
+          type: number
+          description: cantidad de unidades del producto seleccionado
+          example: 3
+  requestBodies:
+    NewProduct:
+      type: object
+      required:
+        - title
+        - detail
+        - brand
+        - code
+        - category
+        - price
+        - stock
+      properties:
+        title:
+          type: string
+          example: Velocímetro Cateye Inalámbrico ST-12
+        detail:
+          type: string
+          example: Velocímetro inalámbrico multifunción digital. Incluye 17 funciones y permite incluir banda de pulsómetro
+        brand:
+          type: string
+          example: cateye
+        code:
+          type: string
+          example: Velo.St.12
+        category:
+          type: string
+          example: equipamiento
+        price:
+          type: number
+          example: 3560.75
+        stock:
+          type: number
+          example: 3
+        thumbnail:
+          type: string
+          example: "/img/productos/1639157910158-producto5.jpg"
+    UpdateProduct:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Velocímetro Cateye Inalámbrico ST-12
+        detail:
+          type: string
+          example: Velocímetro inalámbrico multifunción digital. Incluye 17 funciones y permite incluir banda de pulsómetro
+        brand:
+          type: string
+          example: cateye
+        code:
+          type: string
+          example: Velo.St.12
+        category:
+          type: string
+          example: equipamiento
+        price:
+          type: number
+          example: 3560.75
+        stock:
+          type: number
+          example: 3
+        thumbnail:
+          type: string
+          example: "/img/productos/1639157910158-producto5.jpg"
+    UpdateCartItem:
+      type: object
+      required:
+        - id
+        - quantity
+      properties:
+        id:
+          type: string
+          description: id del producto que se desea agregar/actualizar en el carrito
+          example: 4ughd73658fnsk85dh58skgh
+        quantity:
+          type: number
+          description: cantidad de unidades del producto a agregar/actualizar en el carrito
+          example: 3
+    NewOrder:
+      type: object
+      required:
+        - id
+        - name
+        - phone
+        - address
+        - cp
+      properties:
+        id:
+          type: string
+          description: id del carrito que genera la orden
+          example: 2ljdf68912fnsk58sd01nuty
+        name:
+          type: string
+          description: nombre del usuario
+          example: Sergio Emanuel Prellezo
+        phone:
+          type: string
+          description: número de móvil del usuario
+          example: "+5492215737971"
+        address:
+          type: string
+          description: dirección del usuario
+          example: "33 #922"
+        cp:
+          type: string
+          description: código postal
+          example: "B1902AMA"
+  securitySchemes:
+    cookie_session:
+      type: apiKey
+      name: connect.sid
+      in: cookie

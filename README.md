@@ -32,7 +32,7 @@ Esta entrega final parte de las mismas funcionalidades que las anteriores, pero 
 
 - Refactorizado del código con división por capas (ruteo, controlador, lógica de negocio y persistencia)
 - Tests de endpoints y funcionales
-- Documentación con **Swagger**
+- Documentación de la API REST con **Swagger**
 
 ### Deploy en Heroku (Temporal):
 
@@ -214,11 +214,13 @@ Solo disponible para **usuarios con permisos de administrador**:
 
   Utiliza **websockets**.
 
-### API ///TODO:SWAGGER
+### API REST
 
 Independientemente del modo de persistencia elegido, cada endpoint devuelve el mismo formato de datos.
 
 Todas las rutas poseen un middleware de verificación de usuario logueado `isAuthApi`, por lo que no son accesibles sin esta condición.
+
+A continuación, se lista un resúmen de los endpoints de la API REST.
 
 Consiste en las siguientes rutas:
 
@@ -250,6 +252,21 @@ Consiste en las siguientes rutas:
 | ------ | ------------------------ | ------------------------------------------------------------------------------------------------------------------- |
 | POST   | **/api/ordenes/**        | Crea una nueva orden de compra para el usuario logueado en base al contenido de su carrito y los datos del checkout |
 | GET    | **/api/ordenes/usuario** | Obtengo el listado de órdenes del usuario logueado                                                                  |
+
+#### Swagger
+
+Para una mayor comprensión del funcionamiento de los endpoints de la **API REST**, desarrollé la documentación utilizando **Swagger** y sirviendo la misma en la ruta **/api-docs**.
+
+En ella se encuentran detallados cada endpoint junto a su método, esquema de solicitudes y respuestas respectivas. También se ejemplifica cada una de estas situaciones.
+
+Deshabilité las pruebas "try it out", ya que es una API interna del e-commerce con sus respectivas validaciones de roles de usuarios y autenticación. Por lo que considero que no se aplica la posibilidad de pruebas "abiertas".
+
+A continuación se muestra una captura a modo de ejemplo de esta documentación
+
+<div align="center">
+  <img src="docs/swagger-preview.png" alt="Mensajería" style="max-width:750px"/>
+</div>
+<br/>
 
 ### Autenticación y sesiones
 
