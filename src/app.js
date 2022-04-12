@@ -51,7 +51,7 @@ app.use(passport.session());
 // routers
 app.use(authRouter.start());
 app.use(webServerRouter.start());
-app.use("/api/carrito", isAuthApi, apiCartsRouter.start());
+app.use("/api/carritos", isAuthApi, apiCartsRouter.start());
 app.use("/api/ordenes", isAuthApi, apiOrdersRouter.start());
 app.use("/api/productos", isAuthApi, apiProductsRouter.start());
 

@@ -22,10 +22,10 @@ const $pMensajeEmergente = $(".mensajesEmergentes p");
 // Funciones para inetractuar con la api de carritos
 const cartsApi = {
   getUserCart: async () => {
-    return fetch(`/api/carrito/usuario`).then(data => data.json());
+    return fetch(`/api/carritos/usuario`).then(data => data.json());
   },
   addProductToCart: async (id, id_prod, quantity) => {
-    return fetch(`/api/carrito/${id}/productos`, {
+    return fetch(`/api/carritos/${id}/productos`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

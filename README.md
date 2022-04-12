@@ -1,4 +1,4 @@
-# Proyecto final - Programación Backend
+# Proyecto Final - Programación Backend
 
 ### CoderHouse
 
@@ -231,18 +231,18 @@ Consiste en las siguientes rutas:
 | PUT    | **/api/productos/:id**  | Actualiza un producto por su id. Admite actualizaciones parciales **(disponible solo para administradores)** |
 | DELETE | **/api/productos/:id**  | Borra un producto por su id **(disponible solo para administradores)**                                       |
 
-#### Router /api/carrito
+#### Router /api/carritos
 
-| Método | Endpoint                                | Descripción                                                                                                                                                                                                                                                                                                                                                         |
-| ------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| GET    | **/api/carrito/**                       | Obtengo el listado con los ids e infomación de los carritos existentes **Disponible solo para administradores**                                                                                                                                                                                                                                                     |
-| POST   | **/api/carrito/**                       | Crea un carrito y devuelve su id                                                                                                                                                                                                                                                                                                                                    |
-| GET    | **/api/carrito/usuario**                | Obtengo el carrito del usuario logueado en caso de tener uno                                                                                                                                                                                                                                                                                                        |
-| DELETE | **/api/carrito/:id**                    | Vacía un carrito y lo elimina por si id                                                                                                                                                                                                                                                                                                                             |
-| GET    | **/api/carrito/:id/productos**          | Me permite listar todos los productos guardados en el carrito con determinado id                                                                                                                                                                                                                                                                                    |
-| POST   | **/api/carrito/:id/productos**          | Para incorporar productos al carrito por su id de carrito y el id de producto y cantidad (en el cuerpo de la petición)                                                                                                                                                                                                                                              |
-| PUT    | **/api/carrito/:id/productos**          | Para actualizar un producto del carrito por su id de carrito y los datos a actualizar del producto (en el cuerpo de la petición). Aparte de agregar y borrar productos del carrito de manera completa, con esta funcionalidad, puedo subir o bajar la cantidad del mismo desde el carrito, es decir, modificar su cantidad a otro valor dentro del rango permitido. |
-| DELETE | **/api/carrito/:id/productos/:id_prod** | Eliminar un producto del carrito por su id de carrito y de producto                                                                                                                                                                                                                                                                                                 |
+| Método | Endpoint                                 | Descripción                                                                                                                                                                                                                                                                                                                                                         |
+| ------ | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GET    | **/api/carritos/**                       | Obtengo el listado con los ids e infomación de los carritos existentes **Disponible solo para administradores**                                                                                                                                                                                                                                                     |
+| POST   | **/api/carritos/**                       | Crea un carrito y devuelve su id                                                                                                                                                                                                                                                                                                                                    |
+| GET    | **/api/carritos/usuario**                | Obtengo el carrito del usuario logueado en caso de tener uno                                                                                                                                                                                                                                                                                                        |
+| DELETE | **/api/carritos/:id**                    | Vacía un carrito y lo elimina por si id                                                                                                                                                                                                                                                                                                                             |
+| GET    | **/api/carritos/:id/productos**          | Me permite listar todos los productos guardados en el carrito con determinado id                                                                                                                                                                                                                                                                                    |
+| POST   | **/api/carritos/:id/productos**          | Para incorporar productos al carrito por su id de carrito y el id de producto y cantidad (en el cuerpo de la petición)                                                                                                                                                                                                                                              |
+| PUT    | **/api/carritos/:id/productos**          | Para actualizar un producto del carrito por su id de carrito y los datos a actualizar del producto (en el cuerpo de la petición). Aparte de agregar y borrar productos del carrito de manera completa, con esta funcionalidad, puedo subir o bajar la cantidad del mismo desde el carrito, es decir, modificar su cantidad a otro valor dentro del rango permitido. |
+| DELETE | **/api/carritos/:id/productos/:id_prod** | Eliminar un producto del carrito por su id de carrito y de producto                                                                                                                                                                                                                                                                                                 |
 
 #### Router /api/ordenes
 
@@ -324,6 +324,41 @@ Se producen los siguientes envíos:
 
 En la carpeta `docs` se encuentran 5 capturas de pantalla a modo de ejemplo de los casos anteriores.
 
+E-mail nuevo registro (Administrador)
+
+<div>
+  <img src="docs/mail_nuevo_registro-admin.png" alt="Mensajería" style="max-width:550px"/>
+</div>
+<br/>
+
+E-mail nueva orden (Administrador)
+
+<div>
+  <img src="docs/mail_orden-admin.png" alt="Mensajería" style="max-width:550px"/>
+</div>
+<br/>
+
+E-mail nueva orden (Usuario)
+
+<div>
+  <img src="docs/mail_orden-usuario.png" alt="Mensajería" style="max-width:550px"/>
+</div>
+<br/>
+
+SMS al generar pedido (Usuario)
+
+<div>
+  <img src="docs/sms-usuario.png" alt="Mensajería" style="max-width:300px"/>
+</div>
+<br/>
+
+WSP al generar pedido (Administrador)
+
+<div>
+  <img src="docs/wsp-admin.png" alt="Mensajería" style="max-width:300px"/>
+</div>
+<br/>
+
 ### Logs
 
 Se utilizó la librería `winston` para generar logs eficientes por consola y archivos. Evitándose el uso del console.log que por su naturaleza síncrona trae problemas de rendimiento.
@@ -347,6 +382,20 @@ El test se realizó con:
 
 Los resultados se encuentran dentro de la carpeta `docs`.
 
+Autocannon - **Fork**
+
+<div>
+  <img src="docs/autocannon-fork-mongo_local.png" alt="Mensajería" style="max-width:550px"/>
+</div>
+<br/>
+
+Autocannon - **Cluster**
+
+<div>
+  <img src="docs/autocannon-cluster-mongo_local.png" alt="Mensajería" style="max-width:550px"/>
+</div>
+<br/>
+
 Se visualiza claramente como en modo "CLUSTER" el rendimiento es sustancialmente mayor:
 
 - mayor cantidad de peticiones/seg
@@ -356,7 +405,19 @@ Se visualiza claramente como en modo "CLUSTER" el rendimiento es sustancialmente
 Esto es dado que se utilizan todos los núcleos del procesador para ejecutar instancias del mismo servidor que pueden atender más peticiones en paralelo al hacer un mejor uso de los recursos del computador.
 
 También si hizo un análisis de performance en el mismo endpoint y modo fork con **0x** y **Node inspect**. Del análisis de ambos puede evidenciarse el comportamiento asíncrono del servidor lo que favorece a un mayor rendimiento de la app.
-En la carpeta `docs` se encuentra el gráfico de flama de **0x** junto a la tabla y gráfica de **Node inspect**. En el gráfico de flama no se aprecian importantes "focos calientes". Los más calientes pertenecen a la serialización y des-serialización asociada a MongoDB, pero puede comprobarse en conjunto con los datos de **Node inspect** que el tiempo propio de dichas funciones (permanencia en la cima del stack) no es tan importante. En la gráfica del proceso de **Node inspect** se aprecian los típicos picos de las funciones asíncronas.
+En la carpeta `docs` se encuentra el gráfico de flama de **0x** junto a la tabla y gráfica de **Node inspect**. En el gráfico de flama no se aprecian importantes "focos calientes".
+
+<div align="center">
+  <img src="docs/flame-graph.png" alt="Mensajería" style="max-width:550px"/>
+</div>
+<br/>
+
+Los más calientes pertenecen a la serialización y des-serialización asociada a MongoDB, pero puede comprobarse en conjunto con los datos de **Node inspect** que el tiempo propio de dichas funciones (permanencia en la cima del stack) no es tan importante. En la gráfica del proceso de **Node inspect** se aprecian los típicos picos de las funciones asíncronas.
+
+<div align="center">
+  <img src="docs/inspect-graph.png" alt="Mensajería" style="max-width:550px"/>
+</div>
+<br/>
 
 ### Tests
 

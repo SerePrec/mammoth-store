@@ -13,18 +13,18 @@ const $cartProducts = document.getElementById("cartProducts");
 // Funciones para inetractuar con la api de carritos
 const cartsApi = {
   getCarts: async () => {
-    return fetch(`/api/carrito`).then(data => data.json());
+    return fetch(`/api/carritos`).then(data => data.json());
   },
   getCartProducts: async id => {
-    return fetch(`/api/carrito/${id}/productos`).then(data => data.json());
+    return fetch(`/api/carritos/${id}/productos`).then(data => data.json());
   },
   deleteCart: async id => {
-    return fetch(`/api/carrito/${id}`, {
+    return fetch(`/api/carritos/${id}`, {
       method: "DELETE"
     }).then(data => data.json());
   },
   deleteProductFromCart: async (id, id_prod) => {
-    return fetch(`/api/carrito/${id}/productos/${id_prod}`, {
+    return fetch(`/api/carritos/${id}/productos/${id_prod}`, {
       method: "DELETE"
     }).then(data => data.json());
   }

@@ -100,7 +100,9 @@ class ValidateDataService {
     const { error, value } = bodySchema.validate(data);
     if (error) {
       logger.error(`Error de validación: ${error.message}`);
-      return { error: "Los valores enviados no son válidos" };
+      return {
+        error: "El formato de datos o los valores enviados no son válidos"
+      };
     }
     return value;
   };

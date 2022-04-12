@@ -12,7 +12,7 @@
     "test": "mocha src/tests/productsApi.test.js"
   },
   "author": "SEP",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@socket.io/cluster-adapter": "^0.1.0",
     "bcrypt": "^5.0.1",
@@ -35,6 +35,8 @@
     "passport-local": "^1.0.0",
     "socket.io": "^4.4.0",
     "sqlite3": "^5.0.2",
+    "swagger-jsdoc": "^6.2.0",
+    "swagger-ui-express": "^4.3.0",
     "twilio": "^3.75.0",
     "winston": "^3.6.0"
   },

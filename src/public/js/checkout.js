@@ -30,7 +30,7 @@ const $divModalMensajesFondo = $("#modalMensajesFondo");
 // ***************************************************************************
 const cartsApi = {
   getUserCart: async () => {
-    return fetch(`/api/carrito/usuario`).then(data => data.json());
+    return fetch(`/api/carritos/usuario`).then(data => data.json());
   }
 };
 
