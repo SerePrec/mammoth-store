@@ -11,7 +11,7 @@ import config from "../config.js";
 class ValidateDataService {
   // Valida que sea id numérico o alfanumérico según el tipo de persistencia
   validateId = id => {
-    const persWithNumId = ["mem", "fs", "mariadb", "sqlite3"];
+    const persWithNumId = ["mem", "fs", "mariadb", "sqlite3", "cleardb"];
     const pers = config.PERS;
     const idSchema = persWithNumId.includes(pers)
       ? Joi.number().integer().positive().required()
