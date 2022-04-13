@@ -1,8 +1,8 @@
 import { describe, it, before, after } from "mocha";
 import request from "supertest";
 import chai from "chai";
-import ValidateDataService from "../services/validateDataService.js";
-import * as generator from "../utils/generator.js";
+import ValidateDataService from "../src/services/validateDataService.js";
+import * as generator from "../src/utils/generator.js";
 
 const expect = chai.expect;
 const validateDataService = new ValidateDataService();

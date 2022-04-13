@@ -9,7 +9,7 @@
     "dev": "nodemon src/index.js --ignore DB/",
     "build-css": "node-sass --include-path src/public/scss src/public/scss/styles.scss src/public/css/styles.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
-    "test": "mocha src/tests/productsApi.test.js"
+    "test": "mocha tests/productsApi.test.js"
   },
   "author": "SEP",
   "license": "MIT",
