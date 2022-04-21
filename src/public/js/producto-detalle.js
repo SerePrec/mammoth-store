@@ -73,7 +73,9 @@ function mostrarDetalle(product) {
           <p class="price"><b>$${formatoPrecio(product.price)}</b></p>
           <h3>DETALLE</h3>
           <p>${product.detail}</p>
-          <p class="productDetail_stock">Stock: ${product.stock}</p>`;
+          <p class="productDetail_stock">Stock: ${
+            product.stock > 0 ? product.stock : 0
+          }u</p>`;
 
   if (producto.stock > 0) {
     codigoHTML += `

@@ -405,7 +405,9 @@ function mostrarProductos(vectorProductos) {
                       <p class="my-2"><b>Precio: $${formatoPrecio(
                         producto.price
                       )}</b> ${precioSinDescuento}</p>
-                      <p class="my-2">Stock: ${producto.stock}u</p>`;
+                      <p class="my-2">Stock: ${
+                        producto.stock > 0 ? producto.stock : 0
+                      }u</p>`;
 
       if (producto.stock > 0) {
         // Si se puede vender genera los botones de agregar y el input de cantidad
