@@ -322,7 +322,9 @@ function processResponse(okText) {
   return data => {
     if (data.error) {
       $cartInfoMessages.innerText =
-        data.error === -1 ? "No posee los permisos necesarios" : data.error;
+        data.error === "no autorizado"
+          ? "No posee los permisos necesarios"
+          : data.error;
       $cartInfoMessages.classList.add("show", "warning");
       setTimeout(() => {
         $cartInfoMessages.classList.remove("show", "warning");
