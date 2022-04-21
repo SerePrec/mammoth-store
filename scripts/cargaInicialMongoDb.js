@@ -2,18 +2,16 @@ import * as fs from "fs/promises";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
-import BaseDAOMongoDB from "../src/models/baseDAOs/baseDAOMongoDB.js";
-import { productSchema } from "../src/models/DAOs/products/productsDAOMongoDB.js";
+import ProductsDAOMongoDB from "../src/models/DAOs/products/productsDAOMongoDB.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BK_FILENAME = "productsBk.json";
-const COLLECTION = "productos";
 
 // eslint-disable-next-line no-unused-vars
 async function cargaInicial() {
   try {
     // Instancio e inicializo el contenedor productos
-    const productosModel = new BaseDAOMongoDB(COLLECTION, productSchema);
+    const productosModel = new ProductsDAOMongoDB();
 
     // Obtengo los datos de un archivo de datos
     const content = await fs.readFile(
