@@ -28,6 +28,12 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", config.viewsPath);
 
+// middleware morgan (se monta sólo en ambiente de desarrollo)
+if (config.NODE_ENV === "development") {
+  const { morganLogger } = await import("./middlewares/morgan.js");
+  app.use(morganLogger);
+}
+
 // middlewares para parsear el body del request
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
