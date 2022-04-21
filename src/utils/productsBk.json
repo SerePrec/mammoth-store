@@ -1,132 +1,572 @@
 [
   {
-    "category": "accesorios",
-    "code": "00001-B3",
-    "brand": "PODIUM",
-    "title": "Caramagnola Plástica Podium 0.5L. Versión Eco. Color A Granel.",
-    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-    "price": 450,
-    "stock": 50,
-    "thumbnail": "/img/productos/1639157946700-producto1.jpg"
-  },
-  {
-    "category": "componentes",
-    "code": "M-MTB-0345",
-    "brand": "MAXXIS",
-    "title": "Cubierta De Kevlar Maxxis Race King 29 X 2,15.",
-    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-    "price": 4750,
-    "stock": 15,
-    "thumbnail": "/img/productos/1639157959863-producto2.jpg"
-  },
-  {
-    "category": "equipamiento",
-    "code": "N-CA-CI-50",
-    "brand": "NUTRISPORT",
-    "title": "Gel Energizante Nutrisport Con Cafeína 50g. Express.",
-    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-    "price": 125,
-    "stock": 200,
-    "thumbnail": "/img/productos/1639157975529-producto3.jpg"
-  },
-  {
-    "category": "equipamiento",
-    "code": "S-H-PREV.075-BC/RED/SM",
-    "brand": "SPECIALIZED",
-    "title": "Casco Specialized Echelon II Ruta. Verde FL / Small.",
-    "detail": "Casco de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
-    "price": 15480,
-    "stock": 5,
-    "thumbnail": "/img/productos/1639157991226-producto4.jpg"
-  },
-  {
-    "category": "accesorios",
     "code": "Velo.St.12",
-    "brand": "CATEYE",
     "title": "Velocimetro Cateye Inalámbrico ST-12.",
     "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "CATEYE",
+    "category": "accesorios",
     "price": 3560,
     "stock": 0,
     "thumbnail": "/img/productos/1639157910158-producto5.jpg"
   },
   {
-    "category": "componentes",
-    "code": "TUBOLITO.C.29/1.75-SP",
-    "brand": "TUBOLITO",
-    "title": "Cámara Tubolito MTB 29 X 1.75.",
-    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-    "price": 473,
-    "stock": 18,
-    "thumbnail": "/img/productos/1639158012490-producto6.jpg"
-  },
-  {
-    "category": "indumentaria",
-    "code": "S-S-SWOR.018-WT/42",
-    "brand": "SPECIALIZED",
-    "title": "Zapatillas Specialized S-Works De Ruta. Blanco. Talle: 42.",
-    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
-    "price": 14910,
-    "stock": 3,
-    "thumbnail": "/img/productos/1639158031547-producto7.jpg"
-  },
-  {
-    "category": "bicicletas",
     "code": "CODIGO",
-    "brand": "GIANT",
+    "title": "Multiherramienta Crankbrothers M-19",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "CRANKBROTHERS",
+    "category": "accesorios",
+    "price": 2900,
+    "stock": 5,
+    "thumbnail": "producto56.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Portabici Techo Cruz Alu Bike",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "CRUZ",
+    "category": "accesorios",
+    "price": 12800,
+    "stock": 5,
+    "thumbnail": "producto44.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Pulsómetro De Bicicleta Garmin Edge 530 Pack",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "GARMIN",
+    "category": "accesorios",
+    "price": 36700,
+    "stock": 4,
+    "thumbnail": "producto48.jpg"
+  },
+  {
+    "code": "00001-B3",
+    "title": "Caramagnola Plástica Podium 0.5L. Versión Eco. Color A Granel.",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "PODIUM",
+    "category": "accesorios",
+    "price": 450,
+    "stock": 50,
+    "thumbnail": "/img/productos/1639157946700-producto1.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Cadena Sram PCX! 118 Powerlock 11V",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "SRAM",
+    "category": "accesorios",
+    "price": 2850,
+    "stock": 3,
+    "thumbnail": "producto52.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Alforjas Topeak Bolsa Trunkbag DXP Velcro",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "TOPEAK",
+    "category": "accesorios",
+    "price": 9090,
+    "stock": 3,
+    "thumbnail": "producto41.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Bolso Zefal Traveler 80",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "ZEFAL",
+    "category": "accesorios",
+    "price": 5600,
+    "stock": 5,
+    "thumbnail": "producto42.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Bicicleta Urbana BH Ibiza 2021",
+    "detail": "Bicicleta urbana sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "brand": "BH",
+    "category": "bicicletas",
+    "price": 68000,
+    "stock": 2,
+    "thumbnail": "producto22.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Bicicleta MTB Cannondale Scalpel Carbon 3 2021",
+    "detail": "Bicicleta de MTB sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "brand": "CANNONDALE",
+    "category": "bicicletas",
+    "price": 482000,
+    "stock": 2,
+    "thumbnail": "producto15.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Bicicleta MTB Cannondale Trail 7 2021",
+    "detail": "Bicicleta de MTB sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "brand": "CANNONDALE",
+    "category": "bicicletas",
+    "price": 157000,
+    "stock": 4,
+    "thumbnail": "producto18.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Bicicleta Urbana Conor Milano 28'' 2021",
+    "detail": "Bicicleta urbana sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "brand": "CONOR",
+    "category": "bicicletas",
+    "price": 42000,
+    "stock": 3,
+    "thumbnail": "producto20.jpg"
+  },
+  {
+    "code": "CODIGO",
     "title": "Bicicleta Ruta Giant Propel Advanced Sl 0 Disc 2020",
     "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "brand": "GIANT",
+    "category": "bicicletas",
     "price": 510000,
     "stock": 2,
     "thumbnail": "/img/productos/1639158049437-producto8.jpg"
   },
   {
-    "category": "bicicletas",
     "code": "CODIGO",
-    "brand": "ORBEA",
-    "title": "Bicicleta Ruta Orbea Gain M10 2019",
-    "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
-    "price": 374000,
-    "stock": 2,
-    "thumbnail": "/img/productos/1639158067978-producto9.jpg"
-  },
-  {
-    "category": "bicicletas",
-    "code": "CODIGO",
-    "brand": "SPECIALIZED",
-    "title": "Bicicleta Ruta Specialized Creo Sl E5 Comp 2020",
-    "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
-    "price": 412000,
-    "stock": 3,
-    "thumbnail": "/img/productos/1639158096426-producto10.jpg"
-  },
-  {
-    "title": "Bicicleta Ruta Liv Envi Advanced Pro 1 Disc 2021",
-    "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
-    "code": "CODIGO",
-    "brand": "LIV",
-    "category": "bicicletas",
-    "price": 437000,
-    "stock": 3,
-    "thumbnail": "/img/productos/1639175527746-producto11.jpg"
-  },
-  {
-    "title": "Bicicleta Tria Scott Plasma RC 2021",
-    "detail": "Bicicleta de triatlón amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
-    "code": "CODIGO",
-    "brand": "SCOTT",
-    "category": "bicicletas",
-    "price": 628000,
-    "stock": 2,
-    "thumbnail": "/img/productos/1639175575420-producto12.jpg"
-  },
-  {
     "title": "Bicicleta Ruta Giant TCR Advanced SL 1 Disc 2021",
     "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
-    "code": "CODIGO",
     "brand": "GIANT",
     "category": "bicicletas",
     "price": 475000,
     "stock": 2,
     "thumbnail": "/img/productos/1639250150155-producto13.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Bicicleta MTB Merida Big Nine 100 2x 2021",
+    "detail": "Bicicleta de MTB sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "brand": "MERIDA",
+    "category": "bicicletas",
+    "price": 118000,
+    "stock": 4,
+    "thumbnail": "producto17.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Bicicleta MTB Orbea Oiz M30 29'' 2020",
+    "detail": "Bicicleta de MTB sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "brand": "ORBEA",
+    "category": "bicicletas",
+    "price": 342000,
+    "stock": 2,
+    "thumbnail": "producto16.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Bicicleta Urbana Ryme Dubai 28'' 2021",
+    "detail": "Bicicleta urbana sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "brand": "RYME BIKES",
+    "category": "bicicletas",
+    "price": 53000,
+    "stock": 0,
+    "thumbnail": "producto21.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Bicicleta Ruta Specialized Creo Sl E5 Comp 2020",
+    "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "brand": "SPECIALIZED",
+    "category": "bicicletas",
+    "price": 412000,
+    "stock": 3,
+    "thumbnail": "/img/productos/1639158096426-producto10.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Bicicleta Ruta Specialized Turbo Levo Comp 29'' 2021",
+    "detail": "Bicicleta de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "brand": "SPECIALIZED",
+    "category": "bicicletas",
+    "price": 523000,
+    "stock": 2,
+    "thumbnail": "producto14.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Cubierta Continental Gatorskin 700 X 25",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "CONTINENTAL",
+    "category": "componentes",
+    "price": 3590,
+    "stock": 5,
+    "thumbnail": "producto34.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Sillín Fizik Antares R1 Carbon",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "FIZIK",
+    "category": "componentes",
+    "price": 15400,
+    "stock": 5,
+    "thumbnail": "producto37.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Cuadro Triatlón Giant Trinity Advanced Pro Tri 2020",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "GIANT",
+    "category": "componentes",
+    "price": 258000,
+    "stock": 2,
+    "thumbnail": "producto36.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Marzocchi Bomber Z2 E- Bike 29'' Air 130 Rail Boost",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "MARZOCCHI",
+    "category": "componentes",
+    "price": 58000,
+    "stock": 3,
+    "thumbnail": "producto23.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Ruedas MTB Mavic Crossmax Elite Carbon 29 Boost XD Intl.",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "MAVIC",
+    "category": "componentes",
+    "price": 111900,
+    "stock": 3,
+    "thumbnail": "producto40.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Freno Shimano XTR 9000 Trasero Post Resina Carbono X",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "SHIMANO",
+    "category": "componentes",
+    "price": 19200,
+    "stock": 4,
+    "thumbnail": "producto28.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Freno Sram Code RSC A1 Delantero",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "SRAM",
+    "category": "componentes",
+    "price": 25400,
+    "stock": 0,
+    "thumbnail": "producto29.jpg"
+  },
+  {
+    "code": "TUBOLITO.C.29/1.75-SP",
+    "title": "Cámara Tubolito MTB 29 X 1.75.",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "TUBOLITO",
+    "category": "componentes",
+    "price": 473,
+    "stock": 18,
+    "thumbnail": "/img/productos/1639158012490-producto6.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Protector Codera Alpinestars E-Vent",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "ALPINESTARS",
+    "category": "equipamiento",
+    "price": 6420,
+    "stock": 3,
+    "thumbnail": "producto72.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Mochila Camelback Mini Mule 1.5L",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "CAMELBACK",
+    "category": "equipamiento",
+    "price": 4600,
+    "stock": 4,
+    "thumbnail": "producto68.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Lentes Eltin Full Oversize",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "ELTIN",
+    "category": "equipamiento",
+    "price": 3990,
+    "stock": 5,
+    "thumbnail": "producto65.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Mochila Ergon BE2 Enduro",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "ERGON",
+    "category": "equipamiento",
+    "price": 12400,
+    "stock": 4,
+    "thumbnail": "producto69.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Casco Giro Agilis",
+    "detail": "Casco de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "brand": "GIRO",
+    "category": "equipamiento",
+    "price": 6700,
+    "stock": 3,
+    "thumbnail": "producto59.jpg"
+  },
+  {
+    "code": "N-CA-CI-50",
+    "title": "Gel Energizante Nutrisport Con Cafeína 50g. Express.",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "NUTRISPORT",
+    "category": "equipamiento",
+    "price": 125,
+    "stock": 200,
+    "thumbnail": "/img/productos/1639157975529-producto3.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Lentes Oakley Flight Jacket Matte Black",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "OAKLEY",
+    "category": "equipamiento",
+    "price": 14300,
+    "stock": 4,
+    "thumbnail": "producto62.jpg"
+  },
+  {
+    "code": "S-H-PREV.075-BC/RED/SM",
+    "title": "Casco Specialized Echelon II Ruta. Verde FL / Small.",
+    "detail": "Casco de ruta sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+    "brand": "SPECIALIZED",
+    "category": "equipamiento",
+    "price": 15480,
+    "stock": 5,
+    "thumbnail": "/img/productos/1639157991226-producto4.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Lentes Spiuk Jifter Espejo",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "SPIUK",
+    "category": "equipamiento",
+    "price": 4450,
+    "stock": 5,
+    "thumbnail": "producto64.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Remera Ale Movistar 2020 Prime",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "ALE",
+    "category": "indumentaria",
+    "price": 6950,
+    "stock": 5,
+    "thumbnail": "producto76.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Calza Ale Movistar 2020 Prime",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "ALE",
+    "category": "indumentaria",
+    "price": 8090,
+    "stock": 4,
+    "thumbnail": "producto86.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Maillot Castelli Integral Free Sanremo 2",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "CASTELLI",
+    "category": "indumentaria",
+    "price": 17980,
+    "stock": 3,
+    "thumbnail": "producto82.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Campera Chaleco Castelli Aria Vest",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "CASTELLI",
+    "category": "indumentaria",
+    "price": 8495,
+    "stock": 5,
+    "thumbnail": "producto94.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Remera Cube TeamLine L/S",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "CUBE",
+    "category": "indumentaria",
+    "price": 5490,
+    "stock": 5,
+    "thumbnail": "producto75.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Remera Cube WLS TeamLine W",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "CUBE",
+    "category": "indumentaria",
+    "price": 4340,
+    "stock": 3,
+    "thumbnail": "producto80.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Calza Cube WLS TeamLine W",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "CUBE",
+    "category": "indumentaria",
+    "price": 4950,
+    "stock": 4,
+    "thumbnail": "producto88.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Campera Endura FS260-Pro Adenaline Race Cape W",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "ENDURA",
+    "category": "indumentaria",
+    "price": 7200,
+    "stock": 5,
+    "thumbnail": "producto95.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Guantes Endura Windchill W",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "ENDURA",
+    "category": "indumentaria",
+    "price": 2880,
+    "stock": 5,
+    "thumbnail": "producto97.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Remera Giant Ride Like King",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "GIANT",
+    "category": "indumentaria",
+    "price": 5990,
+    "stock": 4,
+    "thumbnail": "producto78.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Zapatillas Giro Cylinder 2 W",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "GIRO",
+    "category": "indumentaria",
+    "price": 12900,
+    "stock": 5,
+    "thumbnail": "producto105.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Campera Gore C5 Gore-Text Active W",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "GORE",
+    "category": "indumentaria",
+    "price": 16800,
+    "stock": 5,
+    "thumbnail": "producto96.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Remera Kimoa Lab 01",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "KIMOA",
+    "category": "indumentaria",
+    "price": 8990,
+    "stock": 0,
+    "thumbnail": "producto77.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Maillot Orbea Skinsuit Lab",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "ORBEA",
+    "category": "indumentaria",
+    "price": 18340,
+    "stock": 3,
+    "thumbnail": "producto81.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Zapatillas Shimano RC500",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "SHIMANO",
+    "category": "indumentaria",
+    "price": 11890,
+    "stock": 6,
+    "thumbnail": "producto103.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Zapatillas Sidi Shot Carbon Matt",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "SIDI",
+    "category": "indumentaria",
+    "price": 24890,
+    "stock": 5,
+    "thumbnail": "producto102.jpg"
+  },
+  {
+    "code": "S-S-SWOR.018-WT/42",
+    "title": "Zapatillas Specialized S-Works De Ruta. Blanco. Talle: 42.",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "SPECIALIZED",
+    "category": "indumentaria",
+    "price": 14910,
+    "stock": 3,
+    "thumbnail": "/img/productos/1639158031547-producto7.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Remera Specialized Roubaix Comp W",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "SPECIALIZED",
+    "category": "indumentaria",
+    "price": 4490,
+    "stock": 3,
+    "thumbnail": "producto79.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Guantes Specialized BG Grail W",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "SPECIALIZED",
+    "category": "indumentaria",
+    "price": 2380,
+    "stock": 5,
+    "thumbnail": "producto98.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Maillot Spiuk Tritraje Universal W",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "SPIUK",
+    "category": "indumentaria",
+    "price": 8000,
+    "stock": 3,
+    "thumbnail": "producto83.jpg"
+  },
+  {
+    "code": "CODIGO",
+    "title": "Campera Sportful Reflex",
+    "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+    "brand": "SPORTFUL",
+    "category": "indumentaria",
+    "price": 3770,
+    "stock": 4,
+    "thumbnail": "producto91.jpg"
   }
 ]

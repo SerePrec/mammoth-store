@@ -1,17 +1,16 @@
 import * as fs from "fs/promises";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import BaseDAOFS from "../src/models/baseDAOs/baseDAOFS.js";
+import ProductsDAOFS from "../src/models/DAOs/products/productsDAOFS.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BK_FILENAME = "productsBk.json";
-const OUTPUT_FILENAME = "productos.json";
 
 // eslint-disable-next-line no-unused-vars
 async function cargaInicial() {
   try {
     // Instancio e inicializo el contenedor productos
-    const productos = new BaseDAOFS(OUTPUT_FILENAME);
+    const productos = new ProductsDAOFS();
     await productos.init();
 
     // Obtengo los datos de un archivo de datos
