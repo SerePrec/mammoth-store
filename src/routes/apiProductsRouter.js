@@ -23,6 +23,11 @@ class ApiProductsRouter {
       this.apiProductsController.getProduct
     );
 
+    router.get(
+      "/categoria/:cat",
+      this.apiProductsController.getProductsByCategory
+    );
+
     router.post(
       "/",
       isAdminApi,

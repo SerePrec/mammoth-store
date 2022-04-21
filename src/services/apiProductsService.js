@@ -10,6 +10,9 @@ class ApiProductsService {
 
   getProduct = async id => await this.productsModel.getById(id);
 
+  getProductsByCategory = async category =>
+    await this.productsModel.getAll({ category });
+
   createProduct = async newProductData => {
     const productDTO = new ProductDTO(newProductData);
     return await this.productsModel.save(productDTO);

@@ -21,11 +21,18 @@ class BaseDAOFirebase {
   async init() {}
 
   //Obtengo todos los elementos
-  async getAll() {
+  async getAll(conditions = {}) {
     try {
       const elements = [];
       //Ordeno por fecha de creación (timestamp) más que nada para los mensajes
-      const snapshot = await this.collection.orderBy("timestamp").get();
+      let queryRef = this.collection.orderBy("timestamp");
+      // adjunto las condiciones de igualdad
+      for (const [key, value] of Object.entries(conditions)) {
+        if (value !== undefined) {
+          queryRef = queryRef.where(key, "==", value);
+        }
+      }
+      const snapshot = await queryRef.get();
       snapshot.forEach(doc =>
         elements.push({
           id: doc.id,

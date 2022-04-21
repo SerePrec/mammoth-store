@@ -40,10 +40,15 @@ class BaseDAOFS {
   }
 
   //Obtengo todos los elementos
-  async getAll() {
+  async getAll(conditions = {}) {
     try {
       const content = await fs.readFile(this.path, "utf-8");
-      const elements = JSON.parse(content);
+      let elements = JSON.parse(content);
+      for (const [key, value] of Object.entries(conditions)) {
+        if (value !== undefined) {
+          elements = elements.filter(element => element[key] == value);
+        }
+      }
       return elements.map(element => new this.DTO(element));
     } catch (error) {
       throw new Error(`No se pudo recuperar archivo de datos: ${error}`);

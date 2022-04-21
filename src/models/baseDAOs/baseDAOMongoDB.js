@@ -40,10 +40,10 @@ class BaseDAOMongoDB {
   async init() {}
 
   //Obtengo todos los elementos
-  async getAll() {
+  async getAll(conditions = {}) {
     try {
       //uso lean para devolver los objetos como POJO y mejorar la velocidad de las consultas
-      let elements = await this.CollModel.find({}, { __v: 0 })
+      let elements = await this.CollModel.find(conditions, { __v: 0 })
         .sort({ _id: 1 })
         .lean();
       return elements.map(element => new this.DTO(element));

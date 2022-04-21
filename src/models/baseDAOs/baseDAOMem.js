@@ -11,9 +11,15 @@ class BaseDAOMem {
   init() {}
 
   //Obtengo todos los elementos
-  getAll() {
+  getAll(conditions = {}) {
     try {
-      return this.elements.map(element => new this.DTO(element));
+      let elements = [...this.elements];
+      for (const [key, value] of Object.entries(conditions)) {
+        if (value !== undefined) {
+          elements = elements.filter(element => element[key] == value);
+        }
+      }
+      return elements.map(element => new this.DTO(element));
     } catch (error) {
       throw new Error(`No se pudo recuperar los datos: ${error}`);
     }

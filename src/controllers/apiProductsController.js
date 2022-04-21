@@ -34,6 +34,19 @@ class ApiProductsController {
     }
   };
 
+  getProductsByCategory = async (req, res) => {
+    try {
+      const { cat } = req.params;
+      const products = await this.apiProductsService.getProductsByCategory(cat);
+      res.json(products);
+    } catch (error) {
+      logger.error(error);
+      res.status(500).json({
+        error: "No se pudo recuperar la infomación"
+      });
+    }
+  };
+
   createProduct = async (req, res) => {
     try {
       const newProductData = req.body;
