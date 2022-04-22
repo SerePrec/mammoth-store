@@ -200,7 +200,6 @@ header {
   width: 95%;
   max-width: 60rem;
   margin: 1rem auto;
-  margin-top: 2rem;
   padding: 2rem;
   background-color: #2c3034;
   border-radius: 1rem; }
@@ -531,6 +530,9 @@ main.productos .showRoom .colProductos #contenedorProductos .card a {
     main.productos .showRoom .colProductos #contenedorProductos .card a .card-img-top:hover {
       transform: scale(1.05, 1.05); }
 
+main.productos-admin {
+  padding-top: 2rem; }
+
 .productDetailContainer {
   background-color: #545454;
   border: 0.5rem solid #b30404;
@@ -755,7 +757,7 @@ main.productDetail .btn-dark {
 .cartManage {
   width: 95%;
   max-width: 60rem;
-  margin: 2rem auto;
+  margin: 0 auto 2rem auto;
   padding: 2rem;
   background-color: #2c3034;
   border-radius: 1rem;
@@ -790,7 +792,7 @@ main.productDetail .btn-dark {
   height: 2rem;
   width: 95%;
   max-width: 30rem;
-  margin: 1rem auto;
+  margin: 1rem auto 0 auto;
   padding: 0.5rem;
   border-radius: 0.25rem;
   opacity: 0;
@@ -891,24 +893,26 @@ main.productDetail .btn-dark {
         width: 1rem;
         padding: 1rem 0; } }
 
-main.userCart #cartProducts .table thead th:first-child {
-  display: none; }
-
-main.userCart #cartProducts .table tbody td:first-child {
-  display: none; }
-
-main.userCart #cartProducts .table tbody td:nth-child(2) .table__image {
-  transition: all 0.25s ease-in-out; }
-  main.userCart #cartProducts .table tbody td:nth-child(2) .table__image:hover {
-    transform: scale(1.05, 1.05); }
-
-main.userCart a.btn {
-  width: fit-content; }
-  main.userCart a.btn img {
-    margin-left: 0.5rem;
-    width: 1.5rem; }
+main.userCart {
+  padding-top: 2rem;
+  padding-bottom: 1rem; }
+  main.userCart #cartProducts .table thead th:first-child {
+    display: none; }
+  main.userCart #cartProducts .table tbody td:first-child {
+    display: none; }
+  main.userCart #cartProducts .table tbody td:nth-child(2) .table__image {
+    transition: all 0.25s ease-in-out; }
+    main.userCart #cartProducts .table tbody td:nth-child(2) .table__image:hover {
+      transform: scale(1.05, 1.05); }
+  main.userCart a.btn {
+    width: fit-content; }
+    main.userCart a.btn img {
+      margin-left: 0.5rem;
+      width: 1.5rem; }
 
 main.adminCarts {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
   min-height: 70vh; }
   main.adminCarts #cartProducts h3 {
     margin-bottom: 0.5rem; }
@@ -1795,7 +1799,7 @@ header.admin .navbar .typicBtn {
   justify-content: center;
   align-items: center;
   opacity: 0;
-  z-index: 1000; }
+  z-index: 1060; }
   .mensajesEmergentes.show {
     opacity: 1;
     display: flex;
@@ -2244,3 +2248,21 @@ header.admin .navbar .typicBtn {
     .myOrdersTable .ordersTable tbody tr:hover {
       background-color: rgba(179, 4, 4, 0.75);
       color: #fff; }
+
+.loaderMask {
+  position: relative; }
+  .loaderMask::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    z-index: 1000;
+    background-color: #54545485;
+    background-image: url("/img/ball-triangle.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 6rem;
+    animation-name: fadeIn;
+    animation-duration: 1s; }

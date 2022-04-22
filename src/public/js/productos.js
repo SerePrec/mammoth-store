@@ -27,6 +27,7 @@ const $inputBuscar = $("#inputBuscar");
 const $inputPrecioMaximo = $("#inputPrecioMax");
 const $inputPrecioMinimo = $("#inputPrecioMin");
 const $listadoFitros = $("#filtros");
+const $maskElement = $("#maskElement");
 const $pMensajeEmergente = $(".mensajesEmergentes p");
 const $rangoPrecioMaximo = $("#rangoPrecioMax");
 const $rangoPrecioMinimo = $("#rangoPrecioMin");
@@ -510,6 +511,7 @@ function quitarDecimales(string) {
 
 function addProductToCart(id, id_prod, quantity, description) {
   if (id) {
+    applyLoaderMask($maskElement);
     cartsApi
       .addProductToCart(id, id_prod, quantity)
       .then(res => {
@@ -528,7 +530,8 @@ function addProductToCart(id, id_prod, quantity, description) {
           return Promise.reject(res);
         }
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => removeLoaderMask($maskElement));
   }
 }
 
@@ -894,6 +897,14 @@ $(window).resize(function () {
     outerWidthPrevio = window.outerWidth;
   }
 });
+
+function applyLoaderMask(elem) {
+  elem.addClass("loaderMask");
+}
+
+function removeLoaderMask(elem) {
+  elem.removeClass("loaderMask");
+}
 
 function getListOfProducts() {
   const path = location.pathname;

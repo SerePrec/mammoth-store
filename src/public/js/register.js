@@ -1,4 +1,5 @@
 (() => {
+  const $btnRegister = document.getElementById("btn-register");
   const $form = document.querySelector(".needs-validation");
   const $inputPwd = document.getElementById("inputPassword");
   const $inputRepeatPwd = document.getElementById("inputRepeatPassword");
@@ -37,6 +38,12 @@
     if (!$form.checkValidity() || !validPwd || !validSize) {
       event.preventDefault();
       event.stopPropagation();
+    } else {
+      $btnRegister.disabled = true;
+      $btnRegister.innerHTML = `
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Registrando...
+      `;
     }
     $form.classList.add("was-validated");
   });

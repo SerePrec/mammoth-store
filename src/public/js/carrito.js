@@ -10,6 +10,7 @@ let userCartId = null;
 const $cartInfoMessages = document.getElementById("cartInfoMessages");
 const $btnDeleteCart = document.getElementById("btnDeleteCart");
 const $cartProducts = document.getElementById("cartProducts");
+const $maskElement = $("main");
 
 // **************************************************************************//
 // *********************** Definiciones de funciones ************************//
@@ -90,6 +91,7 @@ function formatoPrecio(num) {
 //*****************************************************************************
 function deleteCart() {
   const id = userCartId;
+  applyLoaderMask($maskElement);
   cartsApi
     .deleteCart(id)
     .then(processResponse("Carrito eliminado con éxito"))
@@ -103,6 +105,7 @@ function deleteCart() {
 
 function updateProductFromCart(id, id_prod, quantity) {
   if (id) {
+    applyLoaderMask($maskElement);
     cartsApi
       .updateProductFromCart(id, id_prod, quantity)
       .then(processResponse("Cantidad actualizada en el carrito"))
@@ -117,6 +120,7 @@ function updateProductFromCart(id, id_prod, quantity) {
 
 function deleteProductFromCart(id, id_prod) {
   if (id) {
+    applyLoaderMask($maskElement);
     cartsApi
       .deleteProductFromCart(id, id_prod)
       .then(processResponse("Producto eliminado del carrito"))
@@ -238,6 +242,7 @@ function hiddenButton() {
 function updateCartTable() {
   const id = userCartId;
   if (id) {
+    applyLoaderMask($maskElement);
     cartsApi
       .getCartProducts(id)
       .then(processResponse())
@@ -248,7 +253,8 @@ function updateCartTable() {
           $("#cartProducts").slideDown(300);
         }
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => removeLoaderMask($maskElement));
   } else {
     $cartProducts.innerHTML = "";
   }
@@ -401,6 +407,7 @@ function updateCartWidget(prevQty, finalQty) {
 }
 
 function cargar() {
+  applyLoaderMask($maskElement);
   cartAssign()
     .then(() => {
       if (primerCarga) {
@@ -414,6 +421,7 @@ function cargar() {
 }
 
 function loadError(error) {
+  removeLoaderMask($maskElement);
   $cartProducts.innerHTML = `
     <br>
     <h3>Ocurrió Un Error De Carga</h3>
@@ -425,6 +433,14 @@ function loadError(error) {
   $("#cartProducts").slideDown("slow");
 
   console.error(error);
+}
+
+function applyLoaderMask(elem) {
+  elem.addClass("loaderMask");
+}
+
+function removeLoaderMask(elem) {
+  elem.removeClass("loaderMask");
 }
 
 // Inicio

@@ -22,6 +22,7 @@ const $inputBuscar = $("#inputBuscar");
 const $inputPrecioMaximo = $("#inputPrecioMax");
 const $inputPrecioMinimo = $("#inputPrecioMin");
 const $listadoFitros = $("#filtros");
+const $maskElement = $("main");
 const $productForm = document.getElementById("productForm");
 const $productInfoMessages = document.getElementById("productInfoMessages");
 const $rangoPrecioMaximo = $("#rangoPrecioMax");
@@ -399,11 +400,13 @@ function mostrarProductos(vectorProductos) {
     let id = $(this).data("productoId");
     window.scrollTo(0, 0);
     formToUpdate = true;
+    applyLoaderMask($maskElement);
     productsApi
       .getProduct(id)
       .then(processResponse(`Se cargó la infomación para actualizar`))
       .then(formForUpdate)
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => removeLoaderMask($maskElement));
   });
 
   $("#contenedorProductos .btnDelete").click(function (e) {
@@ -421,11 +424,13 @@ function mostrarProductos(vectorProductos) {
 
     if (isOk) {
       formToUpdate = false;
+      applyLoaderMask($maskElement);
       productsApi
         .deleteProduct(id)
         .then(processResponse(`Producto eliminado con éxito`))
         .then(formForSave)
-        .catch(console.error);
+        .catch(console.error)
+        .finally(() => removeLoaderMask($maskElement));
     }
   });
 }
@@ -463,6 +468,11 @@ function quitarDecimales(string) {
 
 // Funciones de lógica de carga inicial y respuestas del servidor  ************
 //*****************************************************************************
+
+function applyLoaderProducts() {
+  document.getElementById("contenedorProductos").innerHTML = `
+    <div class="loader">Cargando ...</div>`;
+}
 
 function loadError(error) {
   $contenedorProductos.innerHTML = `
@@ -767,7 +777,16 @@ function isResponseOk(data) {
   }
 }
 
+function applyLoaderMask(elem) {
+  elem.addClass("loaderMask");
+}
+
+function removeLoaderMask(elem) {
+  elem.removeClass("loaderMask");
+}
+
 function updateTable() {
+  applyLoaderProducts();
   productsApi
     .getProducts()
     .then(isResponseOk)
@@ -810,11 +829,13 @@ document.getElementById("formBtnSave").addEventListener("click", e => {
     const formData = new FormData($productForm);
     formData.delete("id");
     formToUpdate = false;
+    applyLoaderMask($maskElement);
     productsApi
       .saveProduct(formData)
       .then(processResponse(`Producto cargado con éxito`))
       .then(formForSave)
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => removeLoaderMask($maskElement));
   }
 });
 
@@ -826,11 +847,13 @@ document.getElementById("formBtnUpdate").addEventListener("click", e => {
   const id = formData.get("id");
   formData.delete("id");
   formToUpdate = false;
+  applyLoaderMask($maskElement);
   productsApi
     .updateProduct(id, formData)
     .then(processResponse(`Producto actualizado con éxito`))
     .then(formForSave)
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => removeLoaderMask($maskElement));
 });
 
 // Inicio

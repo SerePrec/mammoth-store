@@ -1,7 +1,7 @@
 .cartManage {
   width: 95%;
   max-width: 60rem;
-  margin: 2rem auto;
+  margin: 0 auto 2rem auto;
   padding: 2rem;
   background-color: #2c3034;
   border-radius: 1rem;
@@ -46,7 +46,7 @@
   height: 2rem;
   width: 95%;
   max-width: 30rem;
-  margin: 1rem auto;
+  margin: 1rem auto 0 auto;
   padding: 0.5rem;
   border-radius: 0.25rem;
   opacity: 0;
@@ -207,6 +207,8 @@
 }
 
 main.userCart {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
   #cartProducts {
     .table {
       thead {
@@ -239,6 +241,8 @@ main.userCart {
 }
 
 main.adminCarts {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
   min-height: 70vh;
   #cartProducts {
     h3 {

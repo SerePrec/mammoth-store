@@ -5,6 +5,7 @@ const $cartInfoMessages = document.getElementById("cartInfoMessages");
 const $selectCart = document.getElementById("selectCart");
 const $btnDeleteCart = document.getElementById("btnDeleteCart");
 const $cartProducts = document.getElementById("cartProducts");
+const $maskElement = $("main");
 
 // **************************************************************************//
 // *********************** Definiciones de funciones ************************//
@@ -34,6 +35,7 @@ const cartsApi = {
 //*****************************************************************************
 function deleteCart() {
   const id = $selectCart.value;
+  applyLoaderMask($maskElement);
   cartsApi
     .deleteCart(id)
     .then(processResponse("Carrito eliminado con éxito"))
@@ -42,11 +44,15 @@ function deleteCart() {
         updateCartsList();
       }
     })
-    .catch(console.error);
+    .catch(error => {
+      console.error(error);
+      removeLoaderMask($maskElement);
+    });
 }
 
 function deleteProductFromCart(id, id_prod) {
   if (id) {
+    applyLoaderMask($maskElement);
     cartsApi
       .deleteProductFromCart(id, id_prod)
       .then(processResponse("Producto eliminado del carrito"))
@@ -55,7 +61,10 @@ function deleteProductFromCart(id, id_prod) {
           updateCartTable();
         }
       })
-      .catch(console.error);
+      .catch(error => {
+        console.error(error);
+        removeLoaderMask($maskElement);
+      });
   }
 }
 
@@ -63,6 +72,7 @@ function deleteProductFromCart(id, id_prod) {
 //*****************************************************************************
 
 function updateCartsList() {
+  applyLoaderMask($maskElement);
   cartsApi
     .getCarts()
     .then(data => {
@@ -94,7 +104,8 @@ function updateCartsList() {
       setTimeout(() => {
         $cartInfoMessages.classList.remove("show", "warning");
       }, 4000);
-    });
+    })
+    .finally(() => removeLoaderMask($maskElement));
 }
 
 function hiddenButton() {
@@ -175,6 +186,7 @@ function renderCartTable(id, timestamp, user, data) {
 function updateCartTable() {
   const id = $selectCart.value;
   if (id) {
+    applyLoaderMask($maskElement);
     cartsApi
       .getCartProducts(id)
       .then(processResponse())
@@ -188,10 +200,19 @@ function updateCartTable() {
           $("#cartProducts").slideDown(300);
         }
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => removeLoaderMask($maskElement));
   } else {
     $cartProducts.innerHTML = "";
   }
+}
+
+function applyLoaderMask(elem) {
+  elem.addClass("loaderMask");
+}
+
+function removeLoaderMask(elem) {
+  elem.removeClass("loaderMask");
 }
 
 function formatoPrecio(num) {

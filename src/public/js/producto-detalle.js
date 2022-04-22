@@ -11,6 +11,7 @@ let userCartId = null;
 const $detailContainer = document.querySelector(".productDetailContainer");
 const $detailLoader = document.querySelector(".productDetailContainer .loader");
 const $detailInfo = document.getElementById("detailInfo");
+const $maskElement = $("#maskElement");
 const $btnCerrarMensajeEmergente = $(".mensajesEmergentes button");
 const $divMensajesEmergentes = $(".mensajesEmergentes");
 const $pMensajeEmergente = $(".mensajesEmergentes p");
@@ -167,6 +168,7 @@ function formatoPrecio(num) {
 
 function addProductToCart(id, id_prod, quantity, description) {
   if (id) {
+    applyLoaderMask($maskElement);
     cartsApi
       .addProductToCart(id, id_prod, quantity)
       .then(res => {
@@ -185,7 +187,8 @@ function addProductToCart(id, id_prod, quantity, description) {
           return Promise.reject(res);
         }
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => removeLoaderMask($maskElement));
   }
 }
 
@@ -285,6 +288,14 @@ function loadError(error) {
     <p>Disculpe las molestias.</p>`;
   }
   console.error(error);
+}
+
+function applyLoaderMask(elem) {
+  elem.addClass("loaderMask");
+}
+
+function removeLoaderMask(elem) {
+  elem.removeClass("loaderMask");
 }
 
 function isResponseOk(data) {
