@@ -94,6 +94,11 @@ const cartsApi = {
 const productsApi = {
   getProducts: async () => {
     return fetch(`/api/productos`).then(data => data.json());
+  },
+  getProductsByCategory: async category => {
+    return fetch(`/api/productos/categoria/${category}`).then(data =>
+      data.json()
+    );
   }
 };
 
@@ -885,6 +890,15 @@ $(window).resize(function () {
   }
 });
 
+function getListOfProducts() {
+  const path = location.pathname;
+  if (path.includes("/categoria/")) {
+    const category = path.replace("/categoria/", "");
+    return productsApi.getProductsByCategory(category);
+  }
+  return productsApi.getProducts();
+}
+
 function isResponseOk(data) {
   if (Array.isArray(data)) {
     productos = data;
@@ -896,8 +910,7 @@ function isResponseOk(data) {
 }
 
 function cargar() {
-  productsApi
-    .getProducts()
+  getListOfProducts()
     .then(isResponseOk)
     .then(() => {
       if (primerCarga) {
