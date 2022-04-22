@@ -313,6 +313,27 @@ header {
         margin: auto;
         background-color: #545454;
         color: white; }
+    .showRoom #filtros .row .typicBtn {
+      border: #b30404;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      overflow: hidden;
+      opacity: 1;
+      transition: width 0.5s ease, opacity 1s ease;
+      width: 100%; }
+      .showRoom #filtros .row .typicBtn.soft {
+        background-color: #e9ecef;
+        border-color: #e9ecef;
+        color: #212121; }
+        .showRoom #filtros .row .typicBtn.soft:active {
+          background-color: #b02a37;
+          color: white; }
+      .showRoom #filtros .row .typicBtn img {
+        width: 1.1rem;
+        margin-left: 1rem; }
     .showRoom #filtros #marcas {
       position: absolute;
       top: 0;
@@ -342,8 +363,6 @@ header {
           margin: auto; }
           .showRoom #filtros #contenedorFiltros .form-check label {
             padding-left: 0.5rem; }
-        .showRoom #filtros #contenedorFiltros .btn {
-          width: 70%; }
       .showRoom #filtros #marcas .form-check {
         margin-bottom: 0.5rem; }
         .showRoom #filtros #marcas .form-check label {

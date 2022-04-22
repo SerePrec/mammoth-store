@@ -104,6 +104,32 @@
           color: white;
         }
       }
+
+      .typicBtn {
+        border: $rojoMarca;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        overflow: hidden;
+        opacity: 1;
+        transition: width 0.5s ease, opacity 1s ease;
+        width: 100%;
+        &.soft {
+          background-color: #e9ecef;
+          border-color: #e9ecef;
+          color: $tonoOscuro;
+          &:active {
+            background-color: #b02a37;
+            color: white;
+          }
+        }
+        img {
+          width: 1.1rem;
+          margin-left: 1rem;
+        }
+      }
     }
 
     #marcas {
@@ -146,10 +172,6 @@
           label {
             padding-left: 0.5rem;
           }
-        }
-
-        .btn {
-          width: 70%;
         }
       }
 

@@ -17,6 +17,7 @@ const $contenedorProductos = document.querySelector(
 );
 const $btnBuscar = $("#btnBuscar");
 const $filtroBuscar = $("#filtroBuscar");
+const $filtrosLimpiar = $("#cleanFilters");
 const $inputBuscar = $("#inputBuscar");
 const $inputPrecioMaximo = $("#inputPrecioMax");
 const $inputPrecioMinimo = $("#inputPrecioMin");
@@ -514,6 +515,10 @@ function cargaInicialOk() {
     filtroMarcaAplicado = false;
     $("#verMarcas i").removeClass("fa-toggle-on").addClass("fa-toggle-off");
     $inputBuscar.val("");
+  });
+
+  $filtrosLimpiar.click(function (e) {
+    $filtroBuscar.trigger("click");
   });
 
   $inputBuscar.on("input", function (e) {
