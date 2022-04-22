@@ -226,12 +226,13 @@ Consiste en las siguientes rutas:
 
 #### Router /api/productos
 
-| Método | Endpoint                | Descripción                                                                                                  |
-| ------ | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
-| GET    | **/api/productos/:id?** | Me permite listar todos los productos disponibles ó un producto por su id                                    |
-| POST   | **/api/productos/**     | Para incorporar productos al listado **(disponible solo para administradores)**                              |
-| PUT    | **/api/productos/:id**  | Actualiza un producto por su id. Admite actualizaciones parciales **(disponible solo para administradores)** |
-| DELETE | **/api/productos/:id**  | Borra un producto por su id **(disponible solo para administradores)**                                       |
+| Método | Endpoint                          | Descripción                                                                                                  |
+| ------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| GET    | **/api/productos/:id?**           | Me permite listar todos los productos disponibles ó un producto por su id                                    |
+| GET    | **/api/productos/categoria/:cat** | Devuelve el listado de todos los productos por la categoría proporcionada                                    |
+| POST   | **/api/productos/**               | Para incorporar productos al listado **(disponible solo para administradores)**                              |
+| PUT    | **/api/productos/:id**            | Actualiza un producto por su id. Admite actualizaciones parciales **(disponible solo para administradores)** |
+| DELETE | **/api/productos/:id**            | Borra un producto por su id **(disponible solo para administradores)**                                       |
 
 #### Router /api/carritos
 
@@ -379,8 +380,9 @@ WSP al generar pedido (Administrador)
 ### Logs
 
 Se utilizó la librería `winston` para generar logs eficientes por consola y archivos. Evitándose el uso del console.log que por su naturaleza síncrona trae problemas de rendimiento.
+También se utiliza el middleware `morgan` cuya salida se canaliza a **Winston** mediante el nivel "http".
 
-Generé dos alternativas de logger según el entorno de ejecución (production o development).
+Generé dos alternativas de logger según el entorno de ejecución (`production` o `development`). Los registros de **morgan** solo se utilizan en modo development, por lo que la carga de dicho módulo se hace de manera condicional según el entorno de ejecución.
 
 Cada logger tiene asociados distintos transportes personalizados ya sea por consola o archivo. La personalización del formato de salida varía según el entorno, para adaptarse mejor a las necesidades y rendimiento.
 

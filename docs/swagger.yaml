@@ -160,6 +160,29 @@ paths:
           description: Producto no encontrado
         "500":
           description: No se pudo eliminar el producto
+  /productos/categoria/{cat}:
+    get:
+      summary: Devuelve el listado de todos los productos por la categoría proporcionada
+      tags:
+        - Productos
+      parameters:
+        - name: cat
+          in: path
+          description: categoría de los productos buscados
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Listado de productos por la categoría dada
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "500":
+          description: No se pudo recuperar la infomación
   /ordenes:
     post:
       summary: Crea una nueva orden de compra
