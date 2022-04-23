@@ -37,8 +37,9 @@ class WebServerController {
     const { user } = req;
     const { cat } = req.params;
     if (config.shopCategories.includes(cat)) {
+      const catTitle = cat[0].toUpperCase() + cat.slice(1);
       res.render("pages/productos-categoria", {
-        title: "Mammoth Bike Store | Productos",
+        title: `Mammoth Bike Store | ${catTitle}`,
         username: user.provider ? user.emails[0].value : user.username,
         avatar: user.provider ? user.photos[0].value : user.avatar,
         category: cat
@@ -97,6 +98,10 @@ class WebServerController {
     res.render("pages/chat-admin", { title: "Administrador de mensajes" });
   };
 
+  getAdminOrders = (req, res) => {
+    res.sendFile("ordenes-admin.html", { root: config.viewsPath });
+  };
+
   getCheckout = (req, res) => {
     const { user } = req;
     res.render("pages/checkout", {
@@ -129,7 +134,7 @@ class WebServerController {
 
   getServerConfig = (req, res) => {
     const info = {
-      title: "Server Config",
+      title: "Mammoth Bike Store | Server Config",
       ...this.infoService.getServerInfo()
     };
     res.render("./pages/serverConfig", info);

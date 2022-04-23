@@ -1765,6 +1765,9 @@ footer address {
 header.not-logged .navbar {
   justify-content: center; }
 
+header.admin .navbar #navbar-myAccount > a {
+  text-decoration: none; }
+
 header.admin .navbar #navbar-myAccount .cart-admin img {
   margin: 0 3rem;
   width: 3rem; }
@@ -1773,7 +1776,15 @@ header.admin .navbar #navbar-myAccount .products-admin img {
   margin: 0 3rem;
   width: 3rem; }
 
+header.admin .navbar #navbar-myAccount .orders-link img {
+  border-radius: 0;
+  margin-left: 3rem;
+  margin-right: 0;
+  object-fit: contain;
+  background-color: transparent; }
+
 header.admin .navbar #navbar-myAccount .chat-link img {
+  margin-left: 3rem;
   margin-right: 0; }
 
 header.admin .navbar #navbar-myAccount .typicBtn {

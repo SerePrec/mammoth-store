@@ -226,6 +226,9 @@ header.not-logged .navbar {
 
 header.admin .navbar {
   #navbar-myAccount {
+    & > a {
+      text-decoration: none;
+    }
     .cart-admin {
       img {
         margin: 0 3rem;
@@ -238,8 +241,18 @@ header.admin .navbar {
         width: 3rem;
       }
     }
+    .orders-link {
+      img {
+        border-radius: 0;
+        margin-left: 3rem;
+        margin-right: 0;
+        object-fit: contain;
+        background-color: transparent;
+      }
+    }
     .chat-link {
       img {
+        margin-left: 3rem;
         margin-right: 0;
       }
     }

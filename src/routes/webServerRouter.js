@@ -74,6 +74,13 @@ class WebServerRouter {
     );
 
     router.get(
+      "/ordenes/admin",
+      isAuthWeb,
+      isAdminWeb,
+      this.webServerController.getAdminOrders
+    );
+
+    router.get(
       "/checkout",
       isAuthWeb,
       isNotAdminWeb,
