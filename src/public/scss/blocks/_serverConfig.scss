@@ -1,0 +1,51 @@
+main.serverConfig {
+  width: 95%;
+  max-width: 60rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #2c3034;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  .title {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0;
+      margin-right: 1rem;
+    }
+    svg {
+      width: 2rem;
+      color: #0072ff;
+    }
+  }
+  .table-responsive {
+    width: 100%;
+    .table {
+      text-align: left;
+      td:first-child {
+        width: 33%;
+      }
+    }
+  }
+  @media (max-width: $md) {
+    padding: 1rem;
+    .title {
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+  }
+  @media (max-width: $sm) {
+    .title {
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  }
+}

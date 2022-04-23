@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <%- include("../partials/HeadWithBootstrap.ejs")  %>
+  <!-- Mi CSS -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <header class="admin serverConfig">
+    <nav class="navbar navbar-expand-md navbar-dark">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbar-categories,#navbar-myAccount" aria-controls="navbar-categories navbar-myAccount"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <img src="/img/iconred.png" alt="Icono menú">
+      </button>
+      <a class="navbar-brand" href="/">
+        <img src="/img/logo.svg" height="80" class="d-inline-block align-top animate__flipInX"
+          alt="Logo de Mamooth - Inicio">
+      </a>
+      <div class="navbar-collapse collapse" id="navbar-myAccount">
+        <a href="/productos/admin" class="products-admin">
+          <img src="/img/products_icon.svg" alt="Administrar productos" class="mx-0" referrerpolicy="no-referrer">
+        </a>
+        <a href="/carritos/admin" class="cart-admin">
+          <img src="/img/admin_cart.svg" alt="Administrar carritos" referrerpolicy="no-referrer">
+        </a>
+        <a href="/chat/admin" class="chat-link">
+          <img src="/img/chat_icon.svg" alt="avatar" referrerpolicy="no-referrer" class="avatar">
+        </a>
+        <button id="btn-logout-mobile" type="button" class="typicBtn btn btn-danger">CERRAR SESION<img
+            src="/img/sign-out-alt.svg" alt="Salir">
+        </button>
+      </div>
+      <button id="btn-logout" type="button" class="typicBtn btn btn-danger">CERRAR SESION<img
+          src="/img/sign-out-alt.svg" alt="Salir">
+      </button>
+    </nav>
+    <div class="mensajesEmergentes">
+      <button type="button" class="btn-close" aria-label="Close"></button>
+      <p></p>
+    </div>
+  </header>
+
+  <main class="serverConfig mh-70">
+    <div class="title">
+      <h1>
+        SERVER CONFIG
+      </h1>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi info-fill flex-shrink-0" viewBox="0 0 16 16"
+        role="img" aria-label="Info:">
+        <path
+          d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+      </svg>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-dark table-striped">
+        <tbody>
+          <tr>
+            <td>Sistema operativo</td>
+            <td><%= typeof SO !== "undefined" ? SO.toUpperCase() : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Número de CPUs</td>
+            <td><%= typeof CPUs !== "undefined" ? CPUs : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Versión de Node.js</td>
+            <td><%= typeof nodeVersion !== "undefined" ? nodeVersion : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Path de ejecución</td>
+            <td><%= typeof execPath !== "undefined" ? execPath : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Carpeta del proyecto</td>
+            <td><%= typeof proyectPath !== "undefined" ? proyectPath : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Carpeta de vistas</td>
+            <td><%= typeof viewsPath !== "undefined" ? viewsPath : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Carpeta de archivos estáticos</td>
+            <td><%= typeof staticsPath !== "undefined" ? staticsPath : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Carpeta de imágenes de productos</td>
+            <td><%= typeof productsPath !== "undefined" ? productsPath : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Carpeta de imágenes de avatar</td>
+            <td><%= typeof avatarsPath !== "undefined" ? avatarsPath : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Carpeta de logs</td>
+            <td><%= typeof logsPath !== "undefined" ? logsPath : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Process id</td>
+            <td><%= typeof pid !== "undefined" ? pid : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Memoria total reservada (rss)</td>
+            <td><%= typeof rss !== "undefined" ? rss : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Argumentos de entrada</td>
+            <td><%= typeof args !== "undefined" ? args : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Entorno</td>
+            <td><%= typeof enviroment !== "undefined" ? enviroment.toUpperCase() : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Modo</td>
+            <td><%= typeof mode !== "undefined" ? mode.toUpperCase() : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Puerto de escucha</td>
+            <td><%= typeof port !== "undefined" ? port : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Persistencia</td>
+            <td><%= typeof pers !== "undefined" ? pers.toUpperCase() : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Session Store</td>
+            <td><%= typeof sessionStore !== "undefined" ? sessionStore : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Tiempo de expiración de sesión</td>
+            <td><%= typeof sessionAge !== "undefined" ? sessionAge/1000 : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Session Rolling</td>
+            <td><%= typeof rolling !== "undefined" ? (rolling ? "sí" : "no") : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Admin e-mail</td>
+            <td><%= typeof adminEmail !== "undefined" ? adminEmail : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Admin WSP</td>
+            <td><%= typeof adminWsp !== "undefined" ? adminWsp : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Número para envío de SMS</td>
+            <td><%= typeof smsPhoneNumber !== "undefined" ? smsPhoneNumber : "N/D" %></td>
+          </tr>
+          <tr>
+            <td>Número para envío de WSP</td>
+            <td><%= typeof wspPhoneNumber !== "undefined" ? wspPhoneNumber : "N/D" %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    <div class="contenidoFooter">
+
+      <!---------- Sección info -------------->
+      <section class="info">
+        <p>Vive la bici con Mammoth.</p>
+        <p>Mucho más que tu tienda de bicis.</p>
+        <p>Lunes a viernes de 9hs a 19hs.</p>
+        <p>Sábados de 9hs a 14hs.</p>
+      </section>
+
+      <div class="logo"><img src="/img/logo_M.png" alt="logo"></div>
+
+      <!---------- Sección Social -------------->
+      <section class="social">
+        <div class="social__titulo">SOCIAL</div>
+        <a href="#"><img src="/img/facebook.svg" alt="Facebook"></a>
+        <a href="#"><img src="/img/instagram.svg" alt="Instagram"></a>
+        <a href="#"><img src="/img/twitter.svg" alt="Twitter"></a>
+        <a href="#"><img src="/img/youtube.svg" alt="YouTube"></a>
+      </section>
+
+
+    </div>
+
+    <!---------- Sección de datos del desarrollador  -------------->
+    <address>
+      <!--Etiqueta para datos personales-->
+      <p class="font-italic">Copyright &copy; 2022 SerE PreC </p>
+    </address>
+
+  </footer>
+
+  <%- include("../partials/bootstrapScripts.ejs")  %>
+  <script>
+    // Accion botón logout
+    document.getElementById("btn-logout").addEventListener("click", e => {
+      location.assign("/logout");
+    });
+  </script>
+</body>
+
+</html>

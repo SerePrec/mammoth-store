@@ -93,6 +93,14 @@ class WebServerRouter {
       isNotAdminWeb,
       this.webServerController.getCheckoutError
     );
+
+    router.get(
+      "/server-config",
+      isAuthWeb,
+      isAdminWeb,
+      this.webServerController.getServerConfig
+    );
+
     return router;
   }
 }

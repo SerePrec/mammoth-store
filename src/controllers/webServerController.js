@@ -1,6 +1,11 @@
+import InfoService from "../services/infoService.js";
 import config from "../config.js";
 
 class WebServerController {
+  constructor() {
+    this.infoService = new InfoService();
+  }
+
   getProducts = (req, res) => {
     const { user } = req;
     const { messages } = req.session;
@@ -120,6 +125,14 @@ class WebServerController {
       username: user.provider ? user.emails[0].value : user.username,
       avatar: user.provider ? user.photos[0].value : user.avatar
     });
+  };
+
+  getServerConfig = (req, res) => {
+    const info = {
+      title: "Server Config",
+      ...this.infoService.getServerInfo()
+    };
+    res.render("./pages/serverConfig", info);
   };
 }
 
