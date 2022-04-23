@@ -36,7 +36,6 @@ const validateProductPostBody = (req, res, next) => {
   }
 };
 
-//Valida que el formato de datos del producto a actualizar sea válido
 const validateProductPutBody = (req, res, next) => {
   const data = req.body;
   const filename = req.file?.filename;
@@ -50,7 +49,6 @@ const validateProductPutBody = (req, res, next) => {
   }
 };
 
-//Valida que el formato de datos del producto a incorporar o modificar al carrito sea válido
 const validateCartProductBody = (req, res, next) => {
   const data = req.body;
   const validated = validateDataService.validateCartProductBody(data);
@@ -62,10 +60,20 @@ const validateCartProductBody = (req, res, next) => {
   }
 };
 
-// Valida que sea un formato de datos válido generar una órden
 const validateOrderPost = (req, res, next) => {
   const data = req.body;
   const validated = validateDataService.validateOrderPost(data);
+  if (validated && !validated.error) {
+    req.body = { ...validated };
+    next();
+  } else {
+    res.status(400).json({ error: validated.error });
+  }
+};
+
+const validateOrderStatusPutBody = (req, res, next) => {
+  const data = req.body;
+  const validated = validateDataService.validateOrderStatusPutBody(data);
   if (validated && !validated.error) {
     req.body = { ...validated };
     next();
@@ -80,5 +88,6 @@ export {
   validateProductPostBody,
   validateProductPutBody,
   validateCartProductBody,
-  validateOrderPost
+  validateOrderPost,
+  validateOrderStatusPutBody
 };

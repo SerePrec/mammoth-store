@@ -184,6 +184,53 @@ paths:
         "500":
           description: No se pudo recuperar la infomación
   /ordenes:
+    get:
+      summary: Devuelve un listado con un resumen informativo de todas las órdenes de pedido
+      tags:
+        - Ordenes (Admin)
+      responses:
+        "200":
+          description: Listado resumen de las órdenes de pedido
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - id
+                    - username
+                    - number
+                    - total
+                    - status
+                    - timestamp
+                  properties:
+                    id:
+                      type: string
+                      description: id autogenerado
+                      example: 2ljdf68912fnsk58sd01nuty
+                    username:
+                      type: string
+                      description: email del usuario propietario del carrito
+                      example: prellezose@gmail.com
+                    number:
+                      type: number
+                      description: número de la orden
+                      example: 3471
+                    total:
+                      type: number
+                      description: importe total de la orden
+                      example: 17423.21
+                    status:
+                      type: string
+                      description: estado de la orden de compra
+                      example: generada
+                    timestamp:
+                      type: string
+                      description: marca de tiempo autogenerada
+                      example: "2022-03-07T19:07:29.351Z"
+        "500":
+          description: No se pudo recuperar la infomación
     post:
       summary: Crea una nueva orden de compra
       tags:
@@ -240,6 +287,73 @@ paths:
                   $ref: "#/components/schemas/Order"
         "500":
           description: No se pudo recuperar la infomación
+  /ordenes/{id}:
+    get:
+      summary: Devuelve la orden con el id proporcionado
+      tags:
+        - Ordenes (Admin)
+      parameters:
+        - name: id
+          in: path
+          description: id de la orden buscada
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: La orden con el id dado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "400":
+          description: El formato de datos o los valores enviados no son válidos
+        "404":
+          description: Orden no encontrada
+        "500":
+          description: No se pudo recuperar la infomación
+  /ordenes/{id}/estado:
+    put:
+      summary: Actualiza el estado de la orden con el id proporcionado
+      tags:
+        - Ordenes (Admin)
+      parameters:
+        - name: id
+          in: path
+          description: id de la orden a actualizar
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        description: Objeto con la información del estado a modificar de la orden
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/UpdateOrderStatus"
+      responses:
+        "200":
+          description: La orden actualizada
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - result
+                  - updatedOrder
+                properties:
+                  result:
+                    type: string
+                    default: ok
+                  updatedProduct:
+                    type: object
+                    $ref: "#/components/schemas/Order"
+        "400":
+          description: El formato de datos o los valores enviados no son válidos
+        "404":
+          description: Orden no encontrada
+        "500":
+          description: No se pudo actualizar la orden
   /carritos:
     get:
       summary: Devuelve un listado con un resumen informativo de todos los carritos en existencia
@@ -787,6 +901,20 @@ components:
           type: string
           description: código postal
           example: "B1902AMA"
+    UpdateOrderStatus:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum:
+            - generada
+            - procesando
+            - terminada
+            - cancelada
+          description: estado a actualizar de la orden
+          example: terminada
   securitySchemes:
     cookie_session:
       type: apiKey

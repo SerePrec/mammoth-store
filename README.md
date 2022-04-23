@@ -206,6 +206,8 @@ Solo disponible para **usuarios con permisos de administrador**:
 
 - **/carritos/admin** : Se accede al listado de todos los carritos actualmente almacenados en la BD. Permite recorrer cada carrito, viendo la información de ellos como fecha de creación, usuario propietario y productos seleccionados. Se puede eliminar por completo el carrito, o los productos individuales del mismo.
 
+- **/ordenes/admin** : Se accede al listado de todas las órdenes de pedido. Permite recorrer cada órden viendo la información de la misma como fecha de creación, usuario propietario y productos seleccionados. También se puede cambiar su estado entre: "generada" (defecto), "procesando", "terminada", y "cancelada".
+
 - **/chat/admin** : Esta vista es el panel de administrador del chat. En ella el administrador/empresa puede enviar:
 
   - mensajes generales (selección nula de destinatario).
@@ -251,10 +253,13 @@ Consiste en las siguientes rutas:
 
 #### Router /api/ordenes
 
-| Método | Endpoint                 | Descripción                                                                                                         |
-| ------ | ------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| POST   | **/api/ordenes/**        | Crea una nueva orden de compra para el usuario logueado en base al contenido de su carrito y los datos del checkout |
-| GET    | **/api/ordenes/usuario** | Obtengo el listado de órdenes del usuario logueado                                                                  |
+| Método | Endpoint                    | Descripción                                                                                                         |
+| ------ | --------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| GET    | **/api/ordenes/**           | Obtengo el listado resumen de todas las órdenes existentes **Disponible solo para administradores**                 |
+| POST   | **/api/ordenes/**           | Crea una nueva orden de compra para el usuario logueado en base al contenido de su carrito y los datos del checkout |
+| GET    | **/api/ordenes/usuario**    | Obtengo el listado de órdenes del usuario logueado                                                                  |
+| GET    | **/api/ordenes/:id**        | Obtengo la órden de usuario con el id proporcionado **Disponible solo para administradores**                        |
+| PUT    | **/api/ordenes/:id/estado** | Permite cambiar el estado de la orden de usuario con el id dado **Disponible solo para administradores**            |
 
 #### Swagger
 

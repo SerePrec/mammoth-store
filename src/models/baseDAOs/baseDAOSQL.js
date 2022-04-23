@@ -57,7 +57,11 @@ class BaseDAOSQL {
       id = parseInt(id);
       const dataToUpdate = {};
       for (const key in data) {
-        if (data[key] !== undefined && data[key] !== "")
+        if (
+          data[key] !== undefined &&
+          data[key] !== "" &&
+          (typeof data[key] !== "object" || data[key] === null)
+        )
           dataToUpdate[key] = data[key];
       }
       const updated = await this.knex(this.table)

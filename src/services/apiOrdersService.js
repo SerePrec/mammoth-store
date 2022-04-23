@@ -13,6 +13,18 @@ class ApiOrdersService {
     this.ordersModel = ordersModel;
   }
 
+  getOrdersResume = async () =>
+    (await this.ordersModel.getAll()).map(order => ({
+      id: order.id,
+      number: order.number,
+      username: order.username,
+      total: order.total,
+      status: order.status,
+      timestamp: order.timestamp
+    }));
+
+  getOrder = async id => await this.ordersModel.getById(id);
+
   getUserOrders = async user => {
     const username = user.provider ? user.emails[0].value : user.username;
     return await this.ordersModel.getByUsername(username);
@@ -65,6 +77,10 @@ class ApiOrdersService {
       return { id, number, username };
     }
     throw new Error(validatedOrder.error);
+  };
+
+  updateOrderStatus = async (id, newStatus) => {
+    return await this.ordersModel.updateById(id, new OrderDTO(newStatus));
   };
 }
 

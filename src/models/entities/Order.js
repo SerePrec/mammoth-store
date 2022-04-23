@@ -48,7 +48,14 @@ export class Order {
         total: isRequired
           ? Joi.number().positive().precision(2).required()
           : Joi.number().positive().precision(2),
-        status: Joi.string().trim()
+        status: isRequired
+          ? Joi.string()
+              .trim()
+              .valid("generada", "procesando", "terminada", "cancelada")
+              .required()
+          : Joi.string()
+              .trim()
+              .valid("generada", "procesando", "terminada", "cancelada")
       })
     );
   }
@@ -81,6 +88,21 @@ export class Order {
   static validateInput(InputOrderData, isRequired = true) {
     const InputOrderSchema = Order.getInputOrderSchema(isRequired);
     const { error, value } = InputOrderSchema.validate(InputOrderData);
+    if (error) {
+      logger.error(`Error de validación: ${error.message}`);
+      return false;
+    }
+    return value;
+  }
+
+  static validateStatus(StatusOrderData) {
+    const StatusOrderSchema = Joi.object({
+      status: Joi.string()
+        .trim()
+        .valid("generada", "procesando", "terminada", "cancelada")
+        .required()
+    });
+    const { error, value } = StatusOrderSchema.validate(StatusOrderData);
     if (error) {
       logger.error(`Error de validación: ${error.message}`);
       return false;

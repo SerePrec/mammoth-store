@@ -6,9 +6,32 @@ class ApiOrdersController {
     this.apiOrdersService = new ApiOrdersService();
   }
 
-  // getOrders = async (req, res) => {};
+  getOrders = async (req, res) => {
+    try {
+      const ordersResume = await this.apiOrdersService.getOrdersResume();
+      res.json(ordersResume);
+    } catch (error) {
+      logger.error(error);
+      res.status(500).json({
+        error: "No se pudo recuperar la infomación"
+      });
+    }
+  };
 
-  // getOrdersById = async (req, res) => {};
+  getOrder = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const order = await this.apiOrdersService.getOrder(id);
+      order !== null
+        ? res.json(order)
+        : res.status(404).json({ error: "Orden no encontrada" });
+    } catch (error) {
+      logger.error(error);
+      res.status(500).json({
+        error: "No se pudo recuperar la infomación"
+      });
+    }
+  };
 
   getUserOrders = async (req, res) => {
     try {
@@ -38,6 +61,29 @@ class ApiOrdersController {
       logger.error(error);
       res.status(500).json({
         error: "No se pudo crear la orden"
+      });
+    }
+  };
+
+  updateOrderStatus = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const dataToUpdate = req.body;
+      const updatedOrder = await this.apiOrdersService.updateOrderStatus(
+        id,
+        dataToUpdate
+      );
+      if (updatedOrder !== null) {
+        logger.info(`Orden con id ${id} actualizada con éxito`);
+        res.json({ result: "ok", updatedOrder });
+      } else {
+        logger.warn(`Orden con id ${id} no encontrada`);
+        res.status(404).json({ error: "Orden no encontrada" });
+      }
+    } catch (error) {
+      logger.error(error);
+      res.status(500).json({
+        error: "No se pudo actualizar la orden"
       });
     }
   };

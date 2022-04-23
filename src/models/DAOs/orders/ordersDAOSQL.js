@@ -104,7 +104,7 @@ class OrdersDAOSQL {
       id_order = parseInt(id_order);
       const [orderPromise, productsPromise] = await Promise.allSettled([
         this.orders.getById(id_order),
-        this.productsInCarts.getAll({ id_order })
+        this.productsInOrders.getAll({ id_order })
       ]);
       if (
         orderPromise.status === "rejected" ||
@@ -167,9 +167,12 @@ class OrdersDAOSQL {
     }
   }
 
-  // actualizo una orden por su id (no utilizado)
-  // eslint-disable-next-line no-unused-vars
-  async updateById(id_order, data) {}
+  // actualizo una orden por su id (solo en tabla orders)
+  // No incluye a valores con objetos anidados
+  async updateById(id_order, data) {
+    await this.orders.updateById(id_order, data);
+    return await this.getById(id_order);
+  }
 
   // borro todas las ordenes (no utilizado)
   async deleteAll() {}

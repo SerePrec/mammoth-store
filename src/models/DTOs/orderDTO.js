@@ -7,7 +7,8 @@ class OrderDTO {
     this.address = data.address;
     this.phone = data.phone;
     this.cp = data.cp;
-    this.products = deepClone(data.products);
+    this.products =
+      data.products !== undefined ? deepClone(data.products) : undefined;
     this.total = data.total;
     this.status = data.status;
     this.number = data.number;

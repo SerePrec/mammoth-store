@@ -3,7 +3,8 @@ import { deepClone } from "../../utils/dataTools.js";
 class CartDTO {
   constructor(data) {
     this.username = data.username;
-    this.products = deepClone(data.products);
+    this.products =
+      data.products !== undefined ? deepClone(data.products) : undefined;
 
     data.id || data._id ? (this.id = data.id || data._id.toString()) : null;
     data.timestamp

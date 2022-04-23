@@ -38,7 +38,7 @@
       }
     ],
     "total": 4875,
-    "status": "generada",
+    "status": "terminada",
     "number": 1,
     "id": 1,
     "timestamp": "2022-03-05T23:09:39.693Z"
@@ -82,7 +82,7 @@
       }
     ],
     "total": 16380,
-    "status": "generada",
+    "status": "terminada",
     "number": 2,
     "id": 2,
     "timestamp": "2022-03-06T23:12:05.466Z"
@@ -156,7 +156,7 @@
       }
     ],
     "total": 530355,
-    "status": "generada",
+    "status": "procesando",
     "number": 3,
     "id": 3,
     "timestamp": "2022-03-07T17:57:26.917Z"
