@@ -214,6 +214,8 @@ Solo disponible para **usuarios con permisos de administrador**:
 
   Utiliza **websockets**.
 
+- **/server-config** : Se accede a una tabla que muestra varios parámetros de la configuración del servidor. Algunos de ellos son el SO, número de núcleos, rutas a diferentes recursos, modo, entono, persistencia, puerto, argumentos de línea de comando, etc.
+
 ### API REST
 
 Independientemente del modo de persistencia elegido, cada endpoint devuelve el mismo formato de datos.
