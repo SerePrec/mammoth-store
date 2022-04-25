@@ -173,11 +173,22 @@
             font-size: 1.2rem;
             margin-bottom: 1rem;
           }
+          & > .row {
+            justify-content: center;
+            label {
+              font-size: 1.2rem;
+            }
+          }
           .total {
             font-size: 1.8rem;
             font-weight: bold;
             padding-top: 1rem;
           }
+        }
+      }
+      .modal-footer {
+        .btn.update {
+          transition: opacity 0.3s ease-in-out;
         }
       }
     }

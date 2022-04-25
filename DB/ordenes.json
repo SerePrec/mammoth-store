@@ -200,7 +200,7 @@
       }
     ],
     "total": 374473,
-    "status": "generada",
+    "status": "procesando",
     "number": 4,
     "id": 4,
     "timestamp": "2022-03-07T18:17:54.716Z"
@@ -346,7 +346,7 @@
       }
     ],
     "total": 15480,
-    "status": "generada",
+    "status": "cancelada",
     "number": 8,
     "id": 8,
     "timestamp": "2022-03-07T19:17:23.924Z"

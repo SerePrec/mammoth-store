@@ -99,7 +99,7 @@ function updateCartsList() {
     })
     .catch(error => {
       $cartInfoMessages.innerText =
-        "Error. No se pudo cargar el listado de carritos";
+        "Error: No se pudo cargar el listado de carritos";
       $cartInfoMessages.classList.add("show", "warning");
       setTimeout(() => {
         $cartInfoMessages.classList.remove("show", "warning");

@@ -1,0 +1,78 @@
+main.adminOrders {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  min-height: 70vh;
+  .orderManage {
+    width: 95%;
+    max-width: 60rem;
+    height: 48rem;
+    margin: 0 auto 2rem auto;
+    padding: 2rem;
+    background-color: #2c3034;
+    background-image: url("/img/clipboard-list-w.svg");
+    background-position: center center;
+    background-size: 5rem;
+    background-repeat: no-repeat;
+    border-radius: 1rem;
+    text-align: center;
+    h2 {
+      margin: 1.5rem;
+    }
+    .table-wrapper {
+      display: none;
+      height: 39rem;
+      overflow-y: auto;
+      background-color: #6a6a6a;
+      border-radius: 0.5rem;
+      &::-webkit-scrollbar {
+        -webkit-appearance: none;
+      }
+      &::-webkit-scrollbar:vertical {
+        width: 0.75rem;
+      }
+      &::-webkit-scrollbar-button:increment,
+      &::-webkit-scrollbar-button {
+        display: none;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: gray;
+        border-top-right-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+      }
+      &::-webkit-scrollbar-track {
+        border-top-right-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+        background-color: darkgrey;
+      }
+    }
+  }
+}
+
+#orderList {
+  tr {
+    cursor: pointer;
+  }
+}
+
+#orderInfoMessages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 95%;
+  max-width: 30rem;
+  margin: 1rem auto 0 auto;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  opacity: 0;
+  transition: 0.5s all ease-in-out;
+  &.show {
+    opacity: 1;
+  }
+  &.warning {
+    background-color: rgb(255, 138, 71);
+  }
+  &.info {
+    background-color: #2f5777;
+  }
+}

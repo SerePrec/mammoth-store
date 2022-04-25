@@ -80,8 +80,30 @@
         cursor: pointer;
         transition: all 0.3s;
         &:hover {
-          background-color: rgba(179, 4, 4, 0.75);
-          color: #fff;
+          color: #424242;
+        }
+        &:last-child {
+          border-color: transparent;
+          td:first-child {
+            border-bottom-left-radius: 0.75rem;
+          }
+          td:last-child {
+            border-bottom-right-radius: 0.75rem;
+          }
+        }
+      }
+    }
+    @media (max-width: $sm) {
+      thead {
+        th:last-child {
+          display: none;
+        }
+      }
+      tbody {
+        tr {
+          td:last-child {
+            display: none;
+          }
         }
       }
     }

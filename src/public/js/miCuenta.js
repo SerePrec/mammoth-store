@@ -22,22 +22,24 @@ const ordersApi = {
 function renderMyOrders(orders) {
   if (orders && orders.length > 0) {
     let html = `
-      <table class="ordersTable table table-striped">
+      <table class="ordersTable table table-striped table-hover">
         <thead class="table-dark">
           <tr>
             <th>NÚMERO</th>
             <th>FECHA</th>
             <th>TOTAL</th>
+            <th>ESTADO</th>
           </tr>
         </thead>
         <tbody>`;
     for (const order of orders) {
-      const { number, timestamp, total } = order;
+      const { number, timestamp, total, status } = order;
       html += `
-          <tr data-order="${number}">
+          <tr data-order="${number}" class=${assignClassColor(status)}>
             <td>${number.toString().padStart(6, "0")}</td>
             <td>${new Date(timestamp).toLocaleString()}</td>
             <td>$${formatoPrecio(total)}</td>
+            <td>${status.toUpperCase()}</td>
           </tr>`;
     }
     html += `
@@ -47,6 +49,29 @@ function renderMyOrders(orders) {
   } else {
     return `<div class="emptyResults"><img src="/img/icon_search_r.svg" alt="Lupa"><h3>No hay resultados para mostrar</h3></div>`;
   }
+}
+
+// Asigna una clase para el color de la fila
+function assignClassColor(status) {
+  let colorClass;
+  switch (status) {
+    case "generada":
+      colorClass = "table-light";
+      break;
+    case "procesando":
+      colorClass = "table-info";
+      break;
+    case "terminada":
+      colorClass = "table-success";
+      break;
+    case "cancelada":
+      colorClass = "table-danger";
+      break;
+    default:
+      colorClass = "";
+      break;
+  }
+  return colorClass;
 }
 
 function renderModalOrder(order) {
