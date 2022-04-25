@@ -1,5 +1,6 @@
 main.chat {
   text-align: center;
+  display: flex;
 }
 div.bg-yellow {
   background-color: #ffc107d6;
@@ -33,6 +34,10 @@ div.bg-yellow {
   padding: 2rem 2rem 0.25rem 2rem;
   background-color: #2c3034;
   border-radius: 1rem;
+}
+
+#usersQty {
+  min-height: 1.75rem;
 }
 
 #userForm {

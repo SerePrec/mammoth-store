@@ -1,4 +1,6 @@
 .myAccount {
+  display: flex;
+  flex-direction: column;
   .breadcrumb {
     color: #fff;
     background-color: $tonoMedio;

@@ -62,6 +62,12 @@ main.min-height {
 main.mh-70 {
   min-height: 70vh; }
 
+.bg-cycling {
+  background-image: url("/img/cycling-bw.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center; }
+
 /* para pisar Bootstrap */
 /* ******************** */
 p {
@@ -980,7 +986,8 @@ main.adminOrders {
     background-color: #2f5777; }
 
 main.chat {
-  text-align: center; }
+  text-align: center;
+  display: flex; }
 
 div.bg-yellow {
   background-color: #ffc107d6;
@@ -1014,6 +1021,9 @@ div.bg-yellow {
   padding: 2rem 2rem 0.25rem 2rem;
   background-color: #2c3034;
   border-radius: 1rem; }
+
+#usersQty {
+  min-height: 1.75rem; }
 
 #userForm {
   width: 95%;
@@ -1372,16 +1382,19 @@ main.checkout {
     .checkout-ok h4 {
       font-size: 1rem; } }
 
-.myAccount .breadcrumb {
-  color: #fff;
-  background-color: #545454;
-  padding: 0.75rem 1rem;
-  border-radius: 0.25rem; }
-  .myAccount .breadcrumb h4 {
-    margin: 0;
-    padding-left: 1rem;
-    font-weight: 500;
-    font-size: 1.2rem; }
+.myAccount {
+  display: flex;
+  flex-direction: column; }
+  .myAccount .breadcrumb {
+    color: #fff;
+    background-color: #545454;
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem; }
+    .myAccount .breadcrumb h4 {
+      margin: 0;
+      padding-left: 1rem;
+      font-weight: 500;
+      font-size: 1.2rem; }
 
 .userStuffContainer {
   background-color: #545454;
@@ -1599,7 +1612,7 @@ footer address {
   margin: 1rem auto;
   padding: 2rem;
   border-radius: 1rem;
-  background-color: #334c59; }
+  background-color: #334c59bf; }
   .logout h2 {
     color: white;
     margin-top: 1rem;
@@ -1618,7 +1631,7 @@ footer address {
   max-width: 30rem;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #2c3034;
+  background-color: #2c3034ed;
   border-radius: 1rem;
   text-align: center;
   color: #b30404; }
@@ -1657,7 +1670,7 @@ footer address {
   max-width: 30rem;
   margin: 2rem auto 1rem auto;
   padding: 2rem;
-  background-color: #2c3034;
+  background-color: #2c3034db;
   border-radius: 1rem; }
   .auth-form-wrapper h2 {
     color: white;

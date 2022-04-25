@@ -34,6 +34,13 @@ main.mh-70 {
   min-height: 70vh;
 }
 
+.bg-cycling {
+  background-image: url("/img/cycling-bw.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
 /* para pisar Bootstrap */
 /* ******************** */
 p {

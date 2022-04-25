@@ -40,13 +40,20 @@ https://mammoth-store.herokuapp.com
 
 ## Ejecución
 
-Luego de clonar o descargar el repositorio e instalar todas las dependencias con `npm install`, existen dos comandos para levantar el proyecto.
-Para levantarlo en "modo de desarrollo" junto a nodemon, utilizar `npm run dev`. De lo contrario, para ejecutarlo en "modo producción", utilizar `npm start`.
+Luego de clonar o descargar el repositorio e instalar todas las dependencias con `npm install`, existen dos comandos principales para levantar el proyecto.  
+Para levantarlo en "modo de desarrollo" junto a nodemon, utilizar `npm run dev`. De lo contrario, para ejecutarlo en "modo producción", utilizar `npm start`.  
+También hay un subconjunto de scripts para levantar el servidor en **desarrollo** de manera rápida con los distintos tipos de persistencia posibles, como también en modo `CLUSTER`.
 
 El servidor permite seleccionar entre 8 diferentes modos de persistencia de datos (ver más abajo en **Selección del modo de persistencia de datos**), a través de la variable de entorno `PERS`. También se le puede pasar el tipo de entrono de ejecución a través de la variable de entorno `NODE_ENV`. En modo `NODE_ENV=production`, no carga el modulo **dotenv**, ya que las variables de entorno se configuran desde la plataforma del servidor donde este alojado el deploy (Heroku en nuestro caso). A continuación se muestra un ejemplo (linux) de ejecución en modo **desarrollo** y persistencia **MariaDB**:
 
 ```sh
 $ PERS=mariadb npm run dev
+```
+
+o usando directamente el script personalizado
+
+```sh
+$ npm run dev:mdb
 ```
 
 Adicionalente, se puede pasar por parámetros de argumento dos opciones:
