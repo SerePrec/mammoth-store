@@ -47,6 +47,7 @@ MODE !== "CLUSTER" &&
     logger.info(`Salida del proceso con código de error: ${code}`);
   });
 
+// Inicialización del servidor según modo FORK o CLUSTER
 if (MODE === "CLUSTER" && cluster.isPrimary) {
   logger.info(`Proceso Master iniciado con PID ${process.pid}`);
   logger.info(`Número de procesadores: ${config.numCPUs}`);

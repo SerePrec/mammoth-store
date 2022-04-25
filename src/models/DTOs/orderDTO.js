@@ -24,6 +24,7 @@ class OrderDTO {
   }
 }
 
+// Se usa internamente en el ordersDAOSQL para comunicarse con el sub-DAO de la tabla "orders"
 class SQLOrderDTO {
   constructor(data) {
     this.username = data.username;

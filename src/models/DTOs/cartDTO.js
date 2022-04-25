@@ -16,6 +16,7 @@ class CartDTO {
   }
 }
 
+// Se usa internamente en el cartsDAOSQL para comunicarse con el sub-DAO de la tabla "carts"
 class SQLCartDTO {
   constructor(data) {
     this.username = data.username;

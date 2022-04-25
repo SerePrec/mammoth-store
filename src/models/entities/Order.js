@@ -75,6 +75,7 @@ export class Order {
     });
   }
 
+  // Valida los datos según el esquema Order optando por el requerido de sus campos
   static validate(order, isRequired = true) {
     const OrderSchema = Order.getOrderSchema(isRequired);
     const { error, value } = OrderSchema.validate(order);
@@ -85,6 +86,8 @@ export class Order {
     return value;
   }
 
+  // Valida los datos del esquema InputOrder optando por el requerido de sus campos
+  // útil para validar la recepción parcial de datos en el post para crear una orden
   static validateInput(InputOrderData, isRequired = true) {
     const InputOrderSchema = Order.getInputOrderSchema(isRequired);
     const { error, value } = InputOrderSchema.validate(InputOrderData);
@@ -95,6 +98,8 @@ export class Order {
     return value;
   }
 
+  // Valida los datos del esquema StatusOrder
+  // útil para validar la recepción parcial del status en el put para actualizar una orden
   static validateStatus(StatusOrderData) {
     const StatusOrderSchema = Joi.object({
       status: Joi.string()

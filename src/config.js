@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+// parseo de argumentos de entrada
 const argv = parseArgs(process.argv.slice(2), {
   alias: { p: ["PORT", "port"], m: ["mode", "MODE"] },
   default: { p: 8080, m: "FORK" }
@@ -12,6 +13,8 @@ const argv = parseArgs(process.argv.slice(2), {
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || "development";
 
+// se ejecuta dotenv sólo si no esta en modo producción
+// en producción las variables de entorno se pasan a través del host
 if (NODE_ENV !== "production") {
   const { config } = await import("dotenv");
   config();

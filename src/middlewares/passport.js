@@ -7,6 +7,7 @@ import { logger } from "../logger/index.js";
 
 const authUserService = new AuthUserService();
 
+// estrategia de registro
 passport.use(
   "register",
   new LocalStrategy(
@@ -22,8 +23,10 @@ passport.use(
   )
 );
 
+// estrategia de login
 passport.use("login", new LocalStrategy(authUserService.verifyLogin));
 
+// estrategia de Google
 passport.use(
   new GoogleStrategy(
     config.googleAuth,
@@ -36,10 +39,12 @@ passport.use(
   )
 );
 
+// serialización y des-serialización de usuario
 passport.serializeUser(authUserService.serializeUser);
 
 passport.deserializeUser(authUserService.deserializeUser);
 
+// middlewares respectivos
 const passportAuthLogin = passport.authenticate("login", {
   failureRedirect: "/login-error",
   // connect-flash presenta más problemas de carrera al guardar sesiones en MongoDB y no en la memoria. Por eso los paso por la sesión de manera normal

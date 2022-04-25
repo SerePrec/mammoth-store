@@ -49,6 +49,7 @@ export class User {
     });
   }
 
+  // Valida los datos según el esquema User optando por el requerido de sus campos
   static validate(user, isRequired = true) {
     const UserSchema = User.getUserSchema(isRequired);
     const { error, value } = UserSchema.validate(user);

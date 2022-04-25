@@ -2,8 +2,10 @@ import multer from "multer";
 import config from "../config.js";
 import { logger } from "../logger/index.js";
 
+// Fijo tamaño máximo permitido de archivo en 1mb
 const maxFileSize = 1000000;
 
+// configuro el storage para productos
 const productStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, config.uploadsImg.productsPath);
@@ -18,6 +20,7 @@ const productUpload = multer({ storage: productStorage });
 
 const uploadProductImage = productUpload.single("imageFile");
 
+// configuro el storage para avatars
 const avatarStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, config.uploadsImg.avatarsPath);
@@ -35,6 +38,7 @@ const avatarUpload = multer({
 
 const uploadAvatarImage = avatarUpload.single("imageFile");
 
+// middleware personalizado para manejo de errores de multer
 const multerErrorHandler = (err, req, res, next) => {
   if (err instanceof multer.MulterError) {
     logger.error(err);

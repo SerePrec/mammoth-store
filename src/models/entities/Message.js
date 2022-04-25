@@ -28,6 +28,7 @@ export class Message {
     });
   }
 
+  // Valida los datos según el esquema Message optando por el requerido de sus campos
   static validate(message, isRequired = true) {
     const MessageSchema = Message.getMessageSchema(isRequired);
     const { error, value } = MessageSchema.validate(message);

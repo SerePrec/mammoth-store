@@ -37,6 +37,7 @@ export class Product {
     });
   }
 
+  // Valida los datos según el esquema Product optando por el requerido de sus campos
   static validate(product, isRequired = true) {
     const ProductSchema = Product.getProductSchema(isRequired);
     const { error, value } = ProductSchema.validate(product);

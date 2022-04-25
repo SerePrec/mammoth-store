@@ -32,6 +32,7 @@ export class Cart {
     });
   }
 
+  // Valida los datos según el esquema Cart optando por el requerido de sus campos
   static validate(cart, isRequired = true) {
     const CartSchema = Cart.getCartSchema(isRequired);
     const { error, value } = CartSchema.validate(cart);

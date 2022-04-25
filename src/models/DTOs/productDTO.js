@@ -19,6 +19,7 @@ class ProductDTO {
   }
 }
 
+// Se usa internamente en el cartsDAOSQL para comunicarse con el sub-DAO de la tabla "products_in_carts"
 class SQLProductInCartDTO {
   constructor(data) {
     this.id_cart = data.id_cart;
@@ -42,6 +43,7 @@ class SQLProductInCartDTO {
   }
 }
 
+// Se usa internamente en el ordersDAOSQL para comunicarse con el sub-DAO de la tabla "products_in_orders"
 class SQLProductInOrderDTO {
   constructor(data) {
     this.id_order = data.id_order;

@@ -29,6 +29,7 @@ const sendEmail = async (to, subject, message, attachment) => {
   }
 };
 
+// renderiza html para los mails de registros de usuarios
 const renderRegisterTable = userData => {
   const { username, name, age, address, phone, avatar } = userData;
   return `
@@ -64,6 +65,8 @@ const renderRegisterTable = userData => {
   </table>`;
 };
 
+// renderiza html para los mails de órdenes de pedidos de usuarios
+// Hace un renderizado condicional según se trate el destino un usuario o Admin
 const renderOrderTable = (orderData, type) => {
   const {
     number,
