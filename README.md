@@ -480,7 +480,7 @@ Dentro de la carpeta `tests` se encuentra en un archivo .png donde se muestra un
 
 <br/>
 <div align="center">
-  <img src="src/tests/productsApiTest-result.png" alt="Resultados del test"/>
+  <img src="tests/productsApiTest-result.png" alt="Resultados del test"/>
 </div>
 
 ## Notas varias

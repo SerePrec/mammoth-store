@@ -6,10 +6,20 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js --ignore DB/",
+    "dev": "nodemon --ignore DB/ src/index.js",
+    "dev:cluster": "nodemon --ignore DB/ src/index.js --mode CLUSTER",
+    "dev:fs": "PERS=fs npm run dev",
+    "dev:mol": "PERS=mongodb npm run dev",
+    "dev:moa": "PERS=mongodb_atlas npm run dev",
+    "dev:mdb": "PERS=mariadb npm run dev",
+    "dev:cdb": "PERS=cleardb npm run dev",
+    "dev:sql3": "PERS=sqlite3 npm run dev",
+    "dev:fb": "PERS=firebase npm run dev",
     "build-css": "node-sass --include-path src/public/scss src/public/scss/styles.scss src/public/css/styles.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
-    "test": "mocha tests/productsApi.test.js"
+    "test": "mocha tests/productsApi.test.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "author": "SEP",
   "license": "MIT",

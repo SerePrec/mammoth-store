@@ -25,6 +25,11 @@ const cartsApi = {
   getUserCart: async () => {
     return fetch(`/api/carritos/usuario`).then(data => data.json());
   },
+  createCart: async () => {
+    return fetch(`/api/carritos`, {
+      method: "POST"
+    }).then(data => data.json());
+  },
   addProductToCart: async (id, id_prod, quantity) => {
     return fetch(`/api/carritos/${id}/productos`, {
       method: "POST",
