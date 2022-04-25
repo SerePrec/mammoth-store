@@ -503,21 +503,23 @@ Dentro de la carpeta `tests` se encuentra en un archivo .png donde se muestra un
 
 ## Videos demo
 
-- [Login Dual](https://drive.google.com/file/d/1qiG_WicyyyEcFRxl8yKzWreqWiUUK5dO/view)
+- [Login Dual](https://drive.google.com/file/d/1Dt58uHVUrnrENhoM1KqlhsVetv10TZkW/view)
 
-- [Registro de usuario](https://drive.google.com/file/d/1nnesG4NctFhEjQs5bT3bFtm90kuaCPOp/view)
+- [Registro de usuario](https://drive.google.com/file/d/1dclH8jpraDuaCm0ixwzl6M535RpSFq2q/view)
 
-- [Circuito de compra 1/2](https://drive.google.com/file/d/1Am4Ufv0icYbyaURYL8EzfaoT9HD3vXvJ/view)
+- [Circuito de compra 1/2](https://drive.google.com/file/d/1Gy2UkCAUsutKxUKTtvzbMaXulRlIrt__/view)
 
-- [Circuito de compra 2/2](https://drive.google.com/file/d/1LgkKlMWo-lYuXyWNKozUQLGpVQ1YqnIr/view)
+- [Circuito de compra 2/2](https://drive.google.com/file/d/1pRarcpczJC7hDM1lRWoxf2ItAFYlmsaV/view)
 
-- [Filtros de productos](https://drive.google.com/file/d/1EN85D5kBydCJ6p4ty0Z2A2HQrPuVE-W8/view)
+- [Filtros de productos](https://drive.google.com/file/d/1wtPEpuP9PPUydyL9FvKsKfeORjfe1ovN/view)
 
-- [Mi Cuenta](https://drive.google.com/file/d/1eHF7m2gGP5d-SLNXDolOBJfazYzkyCBJ/view)
+- [Mi Cuenta](https://drive.google.com/file/d/1XWtbhyBswgLXYT6uBgUbcS2gHUjeIDhT/view)
 
-- [Administrando productos](https://drive.google.com/file/d/1Doq09PCSIOYAJkUAQB6Nx3eRucIqIazm/view)
+- [Administrando productos](https://drive.google.com/file/d/1DxN-qCCEepKqeSF6yT9OsODThfi1A1VR/view)
 
-- [Administrando carritos](https://drive.google.com/file/d/1tHQm4zccrI2pyRlaHevfwqTOSsCdOX2D/view)
+- [Administrando carritos](https://drive.google.com/file/d/1NuD13PW0cuLBSQwlGMOhMtItXp2i8uoS/view)
+
+- [Administrando pedidos](https://drive.google.com/file/d/1wU9kVbshzhWOx1aGRBSZvuHFolc3mAW3/view)
 
 - [Chat - Administrador y 2 usuarios](https://drive.google.com/file/d/1xjfIOB7aln4uUZBxEzTEFZzIS4Fw3Oca/view)
 
