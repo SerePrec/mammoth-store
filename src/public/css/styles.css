@@ -2186,6 +2186,16 @@ header.admin .navbar .typicBtn {
           color: white; }
       #modalMensajes .modal-content.info .modal-footer {
         border-top-color: transparent; }
+    #modalMensajes .modal-content.invalid {
+      background-color: #bd906b; }
+      #modalMensajes .modal-content.invalid .modal-body p {
+        text-align: center;
+        font-size: 1.2rem;
+        margin-bottom: 1rem; }
+        #modalMensajes .modal-content.invalid .modal-body p:last-child {
+          font-size: 1.5rem; }
+      #modalMensajes .modal-content.invalid .modal-footer {
+        justify-content: center; }
   #modalMensajes.show {
     opacity: 1;
     z-index: 1050; }
@@ -2198,6 +2208,12 @@ header.admin .navbar .typicBtn {
       display: flex;
       justify-content: center;
       align-items: center; }
+    #modalMensajes .modal-content.loader.invalid .modal-body {
+      flex-direction: column;
+      background-image: url("/img/alert.svg");
+      background-repeat: no-repeat;
+      background-size: 4rem;
+      background-position: center center; }
 
 #modalMensajesFondo {
   display: none; }

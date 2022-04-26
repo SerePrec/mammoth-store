@@ -86,8 +86,24 @@
         border-top-color: transparent;
       }
     }
-  }
 
+    &.invalid {
+      background-color: #bd906b;
+      .modal-body {
+        p {
+          text-align: center;
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
+          &:last-child {
+            font-size: 1.5rem;
+          }
+        }
+      }
+      .modal-footer {
+        justify-content: center;
+      }
+    }
+  }
   &.show {
     opacity: 1;
     z-index: 1050;
@@ -102,6 +118,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+    &.invalid {
+      .modal-body {
+        flex-direction: column;
+        background-image: url("/img/alert.svg");
+        background-repeat: no-repeat;
+        background-size: 4rem;
+        background-position: center center;
+      }
     }
   }
 }

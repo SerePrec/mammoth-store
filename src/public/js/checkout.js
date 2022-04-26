@@ -210,6 +210,36 @@ function updateCartWidget(prevQty, finalQty) {
   }
 }
 
+function renderInvalidOrderModal(initialCount) {
+  return `
+    <div class="modal-header">
+      <h3 class="modal-title mx-auto">SELECCIÓN INVÁLIDA</h3>
+    </div>
+    <div class="modal-body">
+      <h4 class="my-3 text-center">No se pudo validar su selección</h4>
+      <p>Hemos encontrado que su carrito se encontraba desactualizado.</p>
+      <p>Puede que algunos de los productos no cuenten actualmente con el stock necesario o hayan sufrido actualizaciones de precio.</p>
+      <p>Por ello generamos un nuevo carrito con los productos actualizados y sus cantidades seteadas en nuestra máxima disponibilidad actual, si su cantidad solicitada era superior.</p>
+      <p class="mt-5">Disculpe las molestias</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-dark">Entendido... <span id="counter" class="badge bg-secondary ms-3">${initialCount}</span></button>
+    </div>
+  `;
+}
+
+function updateCounter(initialCount) {
+  document.getElementById("counter").innerText = initialCount;
+
+  const timer = setInterval(() => {
+    document.getElementById("counter").innerText = --initialCount;
+    if (initialCount === 0) {
+      clearInterval(timer);
+      location.assign("/carrito");
+    }
+  }, 1000);
+}
+
 // **************************************************************************//
 // ******************************* Eventos **********************************//
 // **************************************************************************//
@@ -236,12 +266,25 @@ $checkoutForm.addEventListener("submit", async e => {
   if (res?.result === "ok") {
     sessionStorage.setItem("order", res.orderNumber);
     location.assign("/checkout/ok");
-  } else if (res.error === "No autenticado") {
+  } else if (res?.result === "invalid") {
+    $modalContent = $divModalMensajes.find(".modal-content");
+    $modalContent.addClass("invalid");
+    $modalContent.html(renderInvalidOrderModal(15));
+    assignEventsToModal();
+    updateCounter(15);
+  } else if (res?.error === "No autenticado") {
     location.assign("/");
   } else {
     location.assign("/checkout/error");
   }
 });
+
+function assignEventsToModal() {
+  const $modalBtn = $divModalMensajes.find(".modal-content .modal-footer .btn");
+  $modalBtn.on("click", () => {
+    location.assign("/carrito");
+  });
+}
 
 // Funciones de carga de Carrito ************************************
 //*******************************************************************

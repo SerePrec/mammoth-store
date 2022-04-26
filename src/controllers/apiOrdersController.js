@@ -50,13 +50,21 @@ class ApiOrdersController {
     try {
       const { user } = req;
       const data = req.body;
-      const { id, number, username } = await this.apiOrdersService.createOrder(
-        user,
-        data
-      );
-      req.session ? (req.session.cartId = null) : null;
-      logger.info(`Orden de usuario '${username}' creada con id ${id}`);
-      res.status(201).json({ result: "ok", orderId: id, orderNumber: number });
+      const { result, id, number, username, newCartId } =
+        await this.apiOrdersService.createOrder(user, data);
+      if (result === "ok") {
+        req.session ? (req.session.cartId = null) : null;
+        logger.info(`Orden de usuario '${username}' creada con id ${id}`);
+        res
+          .status(201)
+          .json({ result: "ok", orderId: id, orderNumber: number });
+      } else {
+        req.session ? (req.session.cartId = newCartId) : null;
+        logger.info(
+          `No se pudo crear la orden por contener items inválidos o desactualizados`
+        );
+        res.status(200).json({ result: "invalid", newCartId });
+      }
     } catch (error) {
       logger.error(error);
       res.status(500).json({
