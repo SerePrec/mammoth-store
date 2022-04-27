@@ -466,6 +466,17 @@ function quitarDecimales(string) {
   return string;
 }
 
+function revertEscapeHtml(safe) {
+  return safe && typeof safe === "string"
+    ? safe
+        .replace(/&amp;/g, "&")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'")
+    : safe;
+}
+
 // Funciones de lógica de carga inicial y respuestas del servidor  ************
 //*****************************************************************************
 
@@ -803,7 +814,7 @@ function formForUpdate(data) {
   $("#formBtnUpdate").css("display", "block");
   for (const key in data) {
     if (key === "timestamp") continue;
-    $productForm[key].value = data[key];
+    $productForm[key].value = revertEscapeHtml(data[key]);
   }
 }
 

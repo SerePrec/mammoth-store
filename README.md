@@ -515,6 +515,8 @@ Dentro de la carpeta `tests` se encuentra en un archivo .png donde se muestra un
 
 - [Mi Cuenta](https://drive.google.com/file/d/1XWtbhyBswgLXYT6uBgUbcS2gHUjeIDhT/view)
 
+- [Validación de carrito (stock y precios)](https://drive.google.com/file/d/1Z735aOqgYFvAyvIfs4QSiohfMklmxvGD/view)
+
 - [Administrando productos](https://drive.google.com/file/d/1DxN-qCCEepKqeSF6yT9OsODThfi1A1VR/view)
 
 - [Administrando carritos](https://drive.google.com/file/d/1NuD13PW0cuLBSQwlGMOhMtItXp2i8uoS/view)

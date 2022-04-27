@@ -37,15 +37,46 @@
     "timestamp": "2022-04-21T18:44:35.976Z"
   },
   {
-    "username": "prellezose@gmail.com",
-    "products": [],
-    "id": 3,
-    "timestamp": "2022-04-21T18:46:33.071Z"
+    "username": "prellezose@yahoo.com.ar",
+    "products": [
+      {
+        "product": {
+          "title": "Remera Ale Movistar 2020 Prime",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "code": "CODIGO",
+          "brand": "ALE",
+          "category": "indumentaria",
+          "price": 6950,
+          "stock": 5,
+          "thumbnail": "/img/productos/1650565343452-producto76.jpg",
+          "id": 37,
+          "timestamp": "2022-04-21T18:04:21.216Z"
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "title": "Calza Ale Movistar 2020 Prime",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "code": "CODIGO",
+          "brand": "ALE",
+          "category": "indumentaria",
+          "price": 8090,
+          "stock": 4,
+          "thumbnail": "/img/productos/1650564763867-producto86.jpg",
+          "id": 38,
+          "timestamp": "2022-04-21T18:04:21.216Z"
+        },
+        "quantity": 1
+      }
+    ],
+    "id": 19,
+    "timestamp": "2022-04-26T22:42:30.822Z"
   },
   {
-    "username": "prellezose@yahoo.com.ar",
+    "username": "prellezose@gmail.com",
     "products": [],
-    "id": 18,
-    "timestamp": "2022-04-26T21:35:56.681Z"
+    "id": 20,
+    "timestamp": "2022-04-26T22:47:01.689Z"
   }
 ]

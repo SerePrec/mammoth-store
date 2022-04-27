@@ -32,7 +32,7 @@ export const verifyTimestamp = element => {
 };
 
 export const escapeHtml = unsafe =>
-  unsafe
+  unsafe && typeof unsafe === "string"
     ? unsafe
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")

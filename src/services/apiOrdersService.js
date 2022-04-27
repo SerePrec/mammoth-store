@@ -2,12 +2,14 @@ import { ordersModel } from "../models/index.js";
 import { OrderDTO } from "../models/DTOs/orderDTO.js";
 import ValidateDataService from "./validateDataService.js";
 import ApiCartsService from "./apiCartsService.js";
+import ApiProductsService from "./apiProductsService.js";
 import { sendEmail, renderOrderTable } from "../email/nodemailer-gmail.js";
 import { sendSMS, sendWSP } from "../messaging/twilio-sms.js";
 import config from "../config.js";
 
-const validateDataService = new ValidateDataService();
 const apiCartsService = new ApiCartsService();
+const apiProductsService = new ApiProductsService();
+const validateDataService = new ValidateDataService();
 
 class ApiOrdersService {
   constructor() {
@@ -35,9 +37,11 @@ class ApiOrdersService {
     const username = user.provider ? user.emails[0].value : user.username;
     const { id: cartId, name, address, phone, cp } = data;
     const products = await apiCartsService.getProductsFromCart(cartId);
+    // valido los stocks y precios de los productos del carrito
     const { result, validItems } =
       await apiCartsService.validateProductsFromCart(products);
     if (result === "invalid") {
+      // si no son válidos genero un carrito válido en base a la selección original
       await apiCartsService.deleteCart(cartId);
       const { id: newCartId } = await apiCartsService.createCart(user);
       for (const item of validItems) {
@@ -65,6 +69,13 @@ class ApiOrdersService {
       };
       const validatedOrder = validateDataService.validateOrder(newOrder, true);
       if (validatedOrder && !validatedOrder.error) {
+        // antes de generar la orden realizo el descuento del stock para evitar
+        // generarla en caso de ocurrir un error en el proceso
+        for (const item of validItems) {
+          const { product, quantity } = item;
+          await apiProductsService.discountStock(product.id, quantity);
+        }
+        // genero la orden y borro el carrito
         const { number, id, timestamp } = await this.ordersModel.save(
           new OrderDTO(validatedOrder)
         );

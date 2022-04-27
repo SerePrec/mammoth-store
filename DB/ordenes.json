@@ -571,5 +571,93 @@
     "number": 12,
     "id": 12,
     "timestamp": "2022-04-26T21:35:52.112Z"
+  },
+  {
+    "username": "prellezose@yahoo.com.ar",
+    "name": "Sergio Emanuel Prellezo",
+    "address": "33 #922",
+    "phone": "+5492215737971",
+    "cp": "1900",
+    "products": [
+      {
+        "product": {
+          "title": "Cadena Sram PCX! 118 Powerlock 11V",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "code": "CODIGO",
+          "brand": "SRAM",
+          "category": "accesorios",
+          "price": 2850,
+          "stock": 3,
+          "thumbnail": "/img/productos/1650566300084-producto52.jpg",
+          "id": 6,
+          "timestamp": "2022-04-21T18:04:21.203Z"
+        },
+        "quantity": 3
+      }
+    ],
+    "total": 8550,
+    "status": "generada",
+    "number": 13,
+    "id": 13,
+    "timestamp": "2022-04-26T22:42:14.741Z"
+  },
+  {
+    "username": "prellezose@gmail.com",
+    "name": "Sergio Emanuel Prellezo",
+    "address": "33 #922",
+    "phone": "+5492215737971",
+    "cp": "1900",
+    "products": [
+      {
+        "product": {
+          "title": "Bicicleta MTB Merida Big Nine 100 2x 2021",
+          "detail": "Bicicleta de MTB sit amet consectetur adipisicing elit. Harum, id laceat praesentium non perspiciatis velit. Optio cupiditate animi harum vel omnis tenetur temporibus quasi possimus, aut deserunt vitae facere facilis.",
+          "code": "CODIGO",
+          "brand": "MERIDA",
+          "category": "bicicletas",
+          "price": 118000,
+          "stock": 4,
+          "thumbnail": "/img/productos/1650566014627-producto17.jpg",
+          "id": 15,
+          "timestamp": "2022-04-21T18:04:21.207Z"
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "title": "Caramagnola Plástica Podium 0.5L. Versión Eco. Color A Granel.",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "code": "00001-B3",
+          "brand": "PODIUM",
+          "category": "accesorios",
+          "price": 450,
+          "stock": 50,
+          "thumbnail": "/img/productos/1639157946700-producto1.jpg",
+          "id": 5,
+          "timestamp": "2022-04-21T18:04:21.202Z"
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "title": "Bolso Zefal Traveler 80",
+          "detail": "Lorem ipsum doxoxr sit amet coxncztr adzipicg ezlxt. Harum, lacxet prxaenxtium non pzrsxciztis vzlt. Ozyo cupzdtazt anzmi harum vzl omzni tezntur tezpozrbs qzaxz pozsmus, axut dezsernt vxtae fzcre fzilis.",
+          "code": "CODIGO",
+          "brand": "ZEFAL",
+          "category": "accesorios",
+          "price": 5600,
+          "stock": 5,
+          "thumbnail": "/img/productos/1650566490685-producto42.jpg",
+          "id": 8,
+          "timestamp": "2022-04-21T18:04:21.204Z"
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 124500,
+    "status": "generada",
+    "number": 14,
+    "id": 14,
+    "timestamp": "2022-04-26T22:46:37.001Z"
   }
 ]
