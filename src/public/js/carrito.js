@@ -335,6 +335,7 @@ function processResponse(okText) {
       setTimeout(() => {
         $cartInfoMessages.classList.remove("show", "warning");
       }, 4000);
+      removeLoaderMask($maskElement);
       return;
     }
     if (data.result === "ok" || data.id || Array.isArray(data)) {

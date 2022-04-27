@@ -232,7 +232,7 @@ function updateOrderList() {
       }
     })
     .then(ordersData => {
-      $orderList.innerHTML = renderOrderTable(ordersData);
+      $orderList.innerHTML = renderOrderTable(ordersData.reverse());
       assignEventsToOrderTable();
       $(".table-wrapper").slideDown();
     })
