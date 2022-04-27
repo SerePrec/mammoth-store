@@ -1,4 +1,6 @@
-# Proyecto Final - Programación Backend
+# Mammoth Store - Server
+
+## Proyecto Final - Programación Backend
 
 ### CoderHouse
 
@@ -31,6 +33,9 @@ Por un lado se encuentra el desarrollo de la **API REST** del ecommerce y por ot
 Esta entrega final parte de las mismas funcionalidades que las anteriores, pero con los siguientes cambios principales:
 
 - Refactorizado del código con división por capas (ruteo, controlador, lógica de negocio y persistencia)
+- Nuevas rutas: Administrador de órdenes de pedidos e información de la configuración del servidor.
+- Validación de stock y precios previo a generar la orden
+- Descuento del stock de los productos comprados
 - Tests de endpoints y funcionales
 - Documentación de la API REST con **Swagger**
 
@@ -321,6 +326,19 @@ En el grupo de middlewares para validar los datos recibidos, existen un conjunto
 
 También en las entradas críticas, provoco un escape de caracteres especiales a fin de evitar ataques por inyección de código o de secuencia de
 comandos en sitios de origen cruzado (XSS) (**OWASP A1:2017 y A7:2017**).
+
+### Validación de stock y precio
+
+Antes de generar la orden pedido, realizo una validación de los ítems del carrito.
+
+Dicha validación consiste en verificar que la cantidad seleccionada esté disponible y que el precio del producto no haya sufrido cambios.
+
+De ser así, se continúa con el proceso normalmente descontándose las cantidades respectivas de los productos del stock y luego generando la orden si todo ocurre sin problemas.
+
+En caso de que no se cumpla con la validación, se muestra un mensaje modal al cliente informando de la situación.
+
+Opté por proceder de la siguiente manera ante este escenario. Genero un nuevo carrito con el resultado de la validación de los ítems originales. Es decir, este nuevo carrito contendrá solo los productos con disponibilidad y en una cantidad máxima igual al stock en el caso en que la cantidad originalmente seleccionada sea superior a la disponible. A su vez, los precios de cada uno de los ítems del carrito serán llevados a su valor actual.  
+Finalmente el usuario es redirigido a su carrito para que decida como continuar con su compra.
 
 ### Cluster
 
