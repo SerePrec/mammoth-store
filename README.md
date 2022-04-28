@@ -284,7 +284,7 @@ Deshabilité las pruebas "try it out", ya que es una API interna del e-commerce 
 A continuación se muestra una captura a modo de ejemplo de esta documentación
 
 <div align="center">
-  <img src="docs/swagger-preview.png" alt="Mensajería" style="max-width:750px"/>
+  <img src="docs/swagger-preview.png" alt="Mensajería" style="width:750px"/>
 </div>
 <br/>
 
@@ -377,35 +377,35 @@ En la carpeta `docs` se encuentran 5 capturas de pantalla a modo de ejemplo de l
 E-mail nuevo registro (Administrador)
 
 <div>
-  <img src="docs/mail_nuevo_registro-admin.png" alt="Mensajería" style="max-width:550px"/>
+  <img src="docs/mail_nuevo_registro-admin.png" alt="Mensajería" style="width:550px"/>
 </div>
 <br/>
 
 E-mail nueva orden (Administrador)
 
 <div>
-  <img src="docs/mail_orden-admin.png" alt="Mensajería" style="max-width:550px"/>
+  <img src="docs/mail_orden-admin.png" alt="Mensajería" style="width:550px"/>
 </div>
 <br/>
 
 E-mail nueva orden (Usuario)
 
 <div>
-  <img src="docs/mail_orden-usuario.png" alt="Mensajería" style="max-width:550px"/>
+  <img src="docs/mail_orden-usuario.png" alt="Mensajería" style="width:550px"/>
 </div>
 <br/>
 
 SMS al generar pedido (Usuario)
 
 <div>
-  <img src="docs/sms-usuario.png" alt="Mensajería" style="max-width:300px"/>
+  <img src="docs/sms-usuario.png" alt="Mensajería" style="width:300px"/>
 </div>
 <br/>
 
 WSP al generar pedido (Administrador)
 
 <div>
-  <img src="docs/wsp-admin.png" alt="Mensajería" style="max-width:300px"/>
+  <img src="docs/wsp-admin.png" alt="Mensajería" style="width:300px"/>
 </div>
 <br/>
 
@@ -459,14 +459,14 @@ También si hizo un análisis de performance en el mismo endpoint y modo fork co
 En la carpeta `docs` se encuentra el gráfico de flama de **0x** junto a la tabla y gráfica de **Node inspect**. En el gráfico de flama no se aprecian importantes "focos calientes".
 
 <div align="center">
-  <img src="docs/flame-graph.png" alt="Mensajería" style="max-width:550px"/>
+  <img src="docs/flame-graph.png" alt="Mensajería" style="width:550px"/>
 </div>
 <br/>
 
 Los más calientes pertenecen a la serialización y des-serialización asociada a MongoDB, pero puede comprobarse en conjunto con los datos de **Node inspect** que el tiempo propio de dichas funciones (permanencia en la cima del stack) no es tan importante. En la gráfica del proceso de **Node inspect** se aprecian los típicos picos de las funciones asíncronas.
 
 <div align="center">
-  <img src="docs/inspect-graph.png" alt="Mensajería" style="max-width:550px"/>
+  <img src="docs/inspect-graph.png" alt="Mensajería" style="width:550px"/>
 </div>
 <br/>
 
